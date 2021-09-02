@@ -1,1 +1,1 @@
-# Fix Studio Wiki 2
+# Fix Studio Wiki
