@@ -1,6 +1,7 @@
 {
     "require": {
         "google/apiclient": "^2.0",
-        "zordius/lightncandy": "dev-master"
+        "zordius/lightncandy": "dev-master",
+        "guzzlehttp/guzzle": "^7.3"
     }
 }
