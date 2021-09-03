@@ -1,5 +1,5 @@
 <header>
-  <ul id="sidenav-left" class="sidenav sidenav-fixed blue-grey lighten-1">
+  <ul id="sidenav-left" class="sidenav sidenav-fixed light-blue accent-1">
     <li><a href="dashboard.html" class="logo-container">
       <img src="img/logo-black.png">
     </a></li>
@@ -55,11 +55,11 @@
             </ul>
           </div>
         </li>
-        <li class="bold waves-effect active"><a class="collapsible-header">Headers<i
+        <li class="bold waves-effect {{!-- active --}}"><a class="collapsible-header">Headers<i
               class="material-icons chevron">chevron_left</i></a>
           <div class="collapsible-body">
             <ul>
-              <li><a href="header-tabbed.html" class="waves-effect active">Tabbed<i class="material-icons">tab</i></a>
+              <li><a href="header-tabbed.html" class="waves-effect {{!-- active --}}">Tabbed<i class="material-icons">tab</i></a>
               </li>
               <li><a href="header-metrics.html" class="waves-effect">Metrics<i class="material-icons">web</i></a></li>
               <li><a href="header-search.html" class="waves-effect">Search<i class="material-icons">search</i></a></li>
@@ -102,7 +102,7 @@
   <div id="chat-dropdown" class="dropdown-content dropdown-tabbed">
     <ul class="tabs tabs-fixed-width">
       <li class="tab col s3"><a href="#settings">Settings</a></li>
-      <li class="tab col s3"><a href="#friends" class="active">Friends</a></li>
+      <li class="tab col s3"><a href="#friends" {{!-- class="active" --}}>Friends</a></li>
     </ul>
     <div id="settings" class="col s12">
       <div class="settings-group">
