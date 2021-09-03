@@ -33,6 +33,10 @@ class ComposerStaticInit1dcf956b2c5a35e9f1f40a636d512a22
         array (
             'Monolog\\' => 8,
         ),
+        'L' => 
+        array (
+            'LightnCandy\\' => 12,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -76,6 +80,10 @@ class ComposerStaticInit1dcf956b2c5a35e9f1f40a636d512a22
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'LightnCandy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zordius/lightncandy/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
