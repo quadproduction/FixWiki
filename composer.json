@@ -10,7 +10,7 @@
     },
     "extra": {
         "google/apiclient-services": [
-            "Drive"
+            "Drive",
         ]
     },
     "autoload": {

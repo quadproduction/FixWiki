@@ -41,6 +41,9 @@ class Page /* extends Kglobal */ {
        LightnCandy::prepare(LightnCandy::compile($this->layoutGet('toto'), $this->LightCandy))
     */
 
+    # Google
+    private $google = null;
+
     /************************************************************************************************** 
      * Construct
      * 
@@ -53,6 +56,9 @@ class Page /* extends Kglobal */ {
 
         # Init
         $this->lightCandyInit();
+        
+        # Google Init
+        $this->googleInit();
 
         # Auto Construct
         $this->autoConstruct();
@@ -87,14 +93,23 @@ class Page /* extends Kglobal */ {
                     $this->templateGet(
                         ['header']
                     ).
-                    'hello'.
                 '</main>'.
                 $this->tagGenerator(self::SCRIPT, 'script').
             '</body>'.
         '</html>';
 
 
-    }
+    }    
+    
+    /** Google init
+    *  
+    */
+   private function googleInit(){
+
+        # New Google
+        $this->google = new Google();
+
+   }
 
     /** Get tample
      * 
