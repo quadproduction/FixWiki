@@ -29,7 +29,14 @@ class Google {
      * 
     **************************************************************************************************/
 
+    private $google_drive = null;
+
     private $client = null;
+
+    const CLIENT_ID = "343167301592-5tk33vq9l4c05rckbg9ejlotjltha0cd.apps.googleusercontent.com";
+    const CLIENT_SECRET = "RjkxUr8S8uaebc-6zt3s6W5n";
+    const REDIRECT_URI = "https://developers.google.com/oauthplayground";
+    const REFRESH_TOKKEN = "1//04HYXcq30GTocCgYIARAAGAQSNwF-L9IrgNWiKpVgODfztLOoXiRuCkz_imCFWl9As1nYnTAU3Wf9AyEvxrP9CcFNS-_A2ACBvX4";
 
     /************************************************************************************************** 
      * Construct
@@ -38,9 +45,17 @@ class Google {
 
     public function __construct(){
 
-        $this->clientInit();
+        $this->Oauth2ClientInit();
 
-        $this->getFilesAndFolders();
+        $this->googleDriveInit();
+
+        $result = $this->google_drive;
+
+        print_r($result);
+
+        # $this->clientInit();
+
+        # $this->getFilesAndFolders();
 
     }
 
@@ -48,6 +63,50 @@ class Google {
      * Mathods
      * 
     **************************************************************************************************/
+
+    /** Oauth2Client
+     * 
+     */
+    /* private function Oauth2ClientInit(){
+
+        # Auth 2
+        $this->client = new \Google\Auth\OAuth2([
+            self::CLIENT_ID,
+            self::CLIENT_SECRET,
+            self::REDIRECT_URI
+        ]);
+
+        # Set Credentials
+        $this->client->setRefreshToken(self::REFRESH_TOKKEN);
+
+    } */
+
+    /** Oauth2Client
+     * 
+     */
+    private function Oauth2ClientInit(){
+
+        # Auth 2
+        $this->client = new \Google_Client();
+
+        $this->setClientId(self::CLIENT_ID);
+        $this->setClientSecret(self::CLIENT_SECRET);
+        $this->setRedirectUri(self::REDIRECT_URI);
+        $this->refreshToken(self::REFRESH_TOKKEN);
+
+    }
+
+    /** Google Drive Init
+     * 
+     */
+    private function googleDriveInit(){
+
+        $this->google_drive = new \Google\Service\Drive([
+            'version'   =>  'v3',
+            'auth'      =>  $this->client,
+        ]);
+
+    }
 
     /** Client Init
      * 
