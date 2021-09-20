@@ -29,14 +29,19 @@ class Google {
      * 
     **************************************************************************************************/
 
-    private $google_drive = null;
+    // Service
+    private $service = [
+        'drive' => null,
+    ];
 
+    // Client
     private $client = null;
 
-    const CLIENT_ID = "343167301592-5tk33vq9l4c05rckbg9ejlotjltha0cd.apps.googleusercontent.com";
-    const CLIENT_SECRET = "RjkxUr8S8uaebc-6zt3s6W5n";
-    const REDIRECT_URI = "https://developers.google.com/oauthplayground";
-    const REFRESH_TOKKEN = "1//04HYXcq30GTocCgYIARAAGAQSNwF-L9IrgNWiKpVgODfztLOoXiRuCkz_imCFWl9As1nYnTAU3Wf9AyEvxrP9CcFNS-_A2ACBvX4";
+    // Data
+    public $data = [];
+
+    // Data temp
+    private $dataTemp = [];
 
     /************************************************************************************************** 
      * Construct
@@ -45,17 +50,11 @@ class Google {
 
     public function __construct(){
 
-        $this->Oauth2ClientInit();
+        // Get client
+        $this->clientGet();
 
-        $this->googleDriveInit();
-
-        $result = $this->google_drive;
-
-        print_r($result);
-
-        # $this->clientInit();
-
-        # $this->getFilesAndFolders();
+        // Get file of fixstudio_wiki
+        $this->filesList();
 
     }
 
@@ -64,101 +63,162 @@ class Google {
      * 
     **************************************************************************************************/
 
-    /** Oauth2Client
+    /** Get client
      * 
      */
-    /* private function Oauth2ClientInit(){
+    private function clientGet(){
 
-        # Auth 2
-        $this->client = new \Google\Auth\OAuth2([
-            self::CLIENT_ID,
-            self::CLIENT_SECRET,
-            self::REDIRECT_URI
-        ]);
-
-        # Set Credentials
-        $this->client->setRefreshToken(self::REFRESH_TOKKEN);
-
-    } */
-
-    /** Oauth2Client
-     * 
-     */
-    private function Oauth2ClientInit(){
-
-        # Auth 2
+        # Get client
         $this->client = new \Google_Client();
-
-        $this->setClientId(self::CLIENT_ID);
-        $this->setClientSecret(self::CLIENT_SECRET);
-        $this->setRedirectUri(self::REDIRECT_URI);
-        $this->refreshToken(self::REFRESH_TOKKEN);
-
-    }
-
-    /** Google Drive Init
-     * 
-     */
-    private function googleDriveInit(){
-
-        $this->google_drive = new \Google\Service\Drive([
-            'version'   =>  'v3',
-            'auth'      =>  $this->client,
-        ]);
-
-    }
-
-    /** Client Init
-     * 
-     */
-    private function clientInit(){
-
-        /* $this->client = new \Google\Client();
-        $this->client->setApplicationName("FIX-STUDIO-WIKI");
-        $this->client->setDeveloperKey("AIzaSyCqXhPLFuxqCTm-Cm_IjfBwR07REA0_lA4");
-        $this->client->setAuthConfig('json/fix-studio-wiki-9f4d7a01629a.json'); */
-
-        $this->client = new \Google_Client();
-        $this->client->setApplicationName('FIX-STUDIO-WIKI');
+        $this->client->setApplicationName('Fix Studio Wiki');
         $this->client->setScopes(\Google_Service_Drive::DRIVE_METADATA_READONLY);
-        $this->client->setAuthConfig('json/client_secret_465549178856-nche96mvcvom9taaqp4pfadslg365j9c.apps.googleusercontent.com.json');
+        $this->client->setAuthConfig('php/google/credentials.json');
         $this->client->setAccessType('offline');
         $this->client->setPrompt('select_account consent');
-    
 
+        # Load previously authorized token from a file, if it exists. The file token.json stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
+        $tokenPath = 'token.json';
+        if (file_exists($tokenPath)) {
+            $accessToken = json_decode(file_get_contents($tokenPath), true);
+            $this->client->setAccessToken($accessToken);
+        }
+
+        // If there is no previous token or it's expired.
+        if ($this->client->isAccessTokenExpired()) {
+            // Refresh the token if possible, else fetch a new one.
+            if ($this->client->getRefreshToken()) {
+                $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
+            } else {
+                // Request authorization from the user.
+                $authUrl = $this->client->createAuthUrl();
+                printf("Open the following link in your browser:\n%s\n", $authUrl);
+                print 'Enter verification code: ';
+                $authCode = trim(fgets(STDIN));
+    
+                // Exchange authorization code for an access token.
+                $accessToken = $this->client->fetchAccessTokenWithAuthCode($authCode);
+                $this->client->setAccessToken($accessToken);
+    
+                // Check to see if there was an error.
+                if (array_key_exists('error', $accessToken)) {
+                    throw new \Exception(join(', ', $accessToken));
+                }
+            }
+            // Save the token to a file.
+            if (!file_exists(dirname($tokenPath))) {
+                mkdir(dirname($tokenPath), 0700, true);
+            }
+            file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
+        }
 
     }
 
-    /** Get files and folders
+    /** Get all file
      * 
      */
-    private function getFilesAndFolders(){
-        $service = new \Google\Service\Drive($this->client);
-    
-        $parameters['q'] = "mimeType='application/vnd.google-apps.folder' and 'root' in parents and trashed=false";
-        $files = $service->files->listFiles($parameters);
-        
-/*         echo "<ul>";
-        foreach( $files as $k => $file ){
-            echo "<li> 
-            
-                {$file['name']} - {$file['id']} ---- ".$file['mimeType'];
-    
-                try {
-                    // subfiles
-                    $sub_files = $service->files->listFiles(array('q' => "'{$file['id']}' in parents"));
-                    echo "<ul>";
-                    foreach( $sub_files as $kk => $sub_file ) {
-                        echo "<li&gt {$sub_file['name']} - {$sub_file['id']}  ---- ". $sub_file['mimeType'] ." </li>";
-                    }
-                    echo "</ul>";
-                } catch (\Throwable $th) {
-                    // dd($th);
-                }
-            
-            echo "</li>";
+    private function filesList(){
+
+        // Check service
+        if($this->service['drive'] == null)
+
+            // New google drive service
+            $this->service['drive'] = new \Google_Service_Drive($this->client);
+
+        // Print the names and IDs for up to 10 files.
+        $optParams = array(
+            'includeItemsFromAllDrives' => true,
+            'fields'      => 'nextPageToken, files(id, name, mimeType, parents)',
+            'supportsAllDrives'         => true,
+            'driveId'                   => '0AKnhm_EZNuVfUk9PVA',
+            'corpora'                   => 'drive',
+        );
+
+        // Get result
+        $results = $this->service['drive']->files->listFiles($optParams);
+
+        // Check result
+        if(count($results->getFiles())){
+
+            // Clear data temp
+            $this->dataTemp = [];
+
+            // Iteration des fichiers
+            foreach($results->getFiles() as $file){
+
+                // Push file in data temps
+                $this->dataTemp[] = [
+                    'id'        =>  $file['id'],
+                    'name'      =>  $file->getName(),
+                    'parent'    =>  $file['parents'][0],
+                    'mimeType'  =>  $file->getMimeType(),
+                ];
+
+            }
+
         }
-        echo "</ul>"; */
+
+        $this->dataTemp = $this->unflattenArray($this->dataTemp);
+
+        echo json_encode($this->dataTemp);
+
+        /* if (count($results->getFiles()) == 0) {
+            echo "No files found.\n";
+        } else {
+            echo "Files:<br />";
+            foreach ($results->getFiles() as $file) {
+                echo PHP_EOL.'['.$file->getName().'|'.$file->getMimeType().'|'.json_encode($file['parents']).'|'.json_encode($file['id']).']'.'<br />';
+            }
+        } */
+
     }
+
+    function unflattenArray($flatArray){
+
+        $refs = array(); //for setting children without having to search the parents in the result tree.
+            $result = array();
+        
+            //process all elements until nohting could be resolved.
+            //then add remaining elements to the root one by one. 
+            while(count($flatArray) > 0){
+                for ($i=count($flatArray)-1; $i>=0; $i--){
+                    if ($flatArray[$i]["parent"]==0){
+                        //root element: set in result and ref!
+                        $result[$flatArray[$i]["id"]] = $flatArray[$i]; 
+                        $refs[$flatArray[$i]["id"]] = &$result[$flatArray[$i]["id"]];
+                        unset($flatArray[$i]);
+                $flatArray = array_values($flatArray);
+                    }
+        
+                    else if ($flatArray[$i]["parent"] != 0){
+                        //no root element. Push to the referenced parent, and add to references as well. 
+                        if (array_key_exists($flatArray[$i]["parent"], $refs)){
+                            //parent found
+                            $o = $flatArray[$i];
+                            $refs[$flatArray[$i]["id"]] = $o;
+                $refs[$flatArray[$i]["parent"]]["children"][] = &$refs[$flatArray[$i]["id"]];
+                            unset($flatArray[$i]);
+                $flatArray = array_values($flatArray);
+                        }
+                    }
+                }
+        }
+        return $result;
+
+    }
+    
+    /** Filter array by key value
+	 * 
+	 */
+	private function filterArrayByKeyValue($array, $key, $keyValue){
+		return array_filter($array, function ($var) use ($keyValue, $key) {
+			return ($var[$key] == $keyValue);
+		});
+	}
+  
+
+    /************************************************************************************************** 
+     * Constants
+     * 
+    **************************************************************************************************/
 
 }
