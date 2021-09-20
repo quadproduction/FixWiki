@@ -53,9 +53,6 @@ class Google {
         // Get client
         $this->clientGet();
 
-        // Get file of fixstudio_wiki
-        $this->filesList();
-
     }
 
     /************************************************************************************************** 
@@ -116,7 +113,7 @@ class Google {
     /** Get all file
      * 
      */
-    private function filesList(){
+    public function navigationInit(){
 
         // Check service
         if($this->service['drive'] == null)
@@ -131,6 +128,7 @@ class Google {
             'supportsAllDrives'         => true,
             'driveId'                   => '0AKnhm_EZNuVfUk9PVA',
             'corpora'                   => 'drive',
+            'q'                         => 'trashed=false',
         );
 
         // Get result
@@ -157,18 +155,11 @@ class Google {
 
         }
 
-        $this->dataTemp = $this->unflattenArray($this->dataTemp);
+        # Push navigation in data
+        $this->data['navigation'] = $this->unflattenArray($this->dataTemp);
 
-        echo json_encode($this->dataTemp);
-
-        /* if (count($results->getFiles()) == 0) {
-            echo "No files found.\n";
-        } else {
-            echo "Files:<br />";
-            foreach ($results->getFiles() as $file) {
-                echo PHP_EOL.'['.$file->getName().'|'.$file->getMimeType().'|'.json_encode($file['parents']).'|'.json_encode($file['id']).']'.'<br />';
-            }
-        } */
+        # Return data
+        return $this->data['navigation'];
 
     }
 

@@ -44,6 +44,9 @@ class Page /* extends Kglobal */ {
     # Google
     private $google = null;
 
+    # Data
+    private $data = [];
+
     /************************************************************************************************** 
      * Construct
      * 
@@ -88,7 +91,7 @@ class Page /* extends Kglobal */ {
             '</head>'.
             # Body
             '<body class="has-fixed-sidenav">'.
-                $this->templateGet('sidenav').
+                $this->templateGet('sidenav', $this->data).
                 '<main>'.
                     $this->templateGet(
                         ['header']
@@ -109,6 +112,9 @@ class Page /* extends Kglobal */ {
         # New Google
         $this->google = new Google();
 
+        # Get navigation
+        $this->data['navigation'] = $this->google->navigationInit();
+
    }
 
     /** Get tample
@@ -116,6 +122,7 @@ class Page /* extends Kglobal */ {
      */
     private function templateGet($template, $data = []){
 
+        # Return template
         return $template ? 
             LightnCandy::prepare(LightnCandy::compile($this->layoutGet($template), $this->LightCandy))($data) :
                 '';
