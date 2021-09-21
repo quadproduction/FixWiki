@@ -93,7 +93,7 @@ class Google {
                 // we redirect back to this same page
 
 
-                $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
+                $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
                 $this->client->setRedirectUri($redirect_uri);
 
                 $authUrl = $this->client->createAuthUrl();
