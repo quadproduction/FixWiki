@@ -89,27 +89,32 @@ class Google {
                 $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
             } else {
 
-                // Your redirect URI can be any registered URI, but in this example
-                // we redirect back to this same page
+                # If not set get
+                if(!isset($_GET) || !isset($_GET['code'])){
 
 
-                $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
-                $this->client->setRedirectUri($redirect_uri);
+                    $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
+                    $this->client->setRedirectUri($redirect_uri);
 
-                $authUrl = $this->client->createAuthUrl();
+                    $authUrl = $this->client->createAuthUrl();
 
-                // Request authorization from the user.
-                header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
-    
-                // Exchange authorization code for an access token.
-                $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
+                    // Request authorization from the user.
+                    header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
 
-                $this->client->setAccessToken($accessToken);
-    
-                // Check to see if there was an error.
-                if (array_key_exists('error', $accessToken)) {
-                    throw new \Exception(join(', ', $accessToken));
+                }else
+        
+                    // Exchange authorization code for an access token.
+                    $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
+
+                    $this->client->setAccessToken($accessToken);
+        
+                    // Check to see if there was an error.
+                    if (array_key_exists('error', $accessToken)) {
+                        throw new \Exception(join(', ', $accessToken));
+                    }
+
                 }
+
             }
 
             // Save the token to a file.
