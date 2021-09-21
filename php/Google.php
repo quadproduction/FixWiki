@@ -101,7 +101,7 @@ class Google {
                     // Request authorization from the user.
                     header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
 
-                }else
+                }else{
         
                     // Exchange authorization code for an access token.
                     $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
