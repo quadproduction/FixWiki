@@ -345,6 +345,10 @@ class Page /* extends Kglobal */ {
             "type"  =>  "text/javascript",
         ],
         [
+            "src"   =>  "https://apis.google.com/js/api.js",
+            "type"  =>  "text/javascript",
+        ],
+        [
             "src"   =>  "js/materialize.min.js",
             "type"  =>  "text/javascript",
         ],

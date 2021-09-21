@@ -74,7 +74,8 @@ class Google {
         $this->client->setPrompt('select_account consent');
 
         # Load previously authorized token from a file, if it exists. The file token.json stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
-        $tokenPath = 'token.json';
+        $tokenPath = 'json/token/token-'.base64_encode($this->IpUserGet()).'.json';
+        #$tokenPath = 'token.json';
         if (file_exists($tokenPath)) {
             $accessToken = json_decode(file_get_contents($tokenPath), true);
             $this->client->setAccessToken($accessToken);
@@ -82,14 +83,26 @@ class Google {
 
         // If there is no previous token or it's expired.
         if ($this->client->isAccessTokenExpired()) {
+
             // Refresh the token if possible, else fetch a new one.
             if ($this->client->getRefreshToken()) {
                 $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
             } else {
+
+                // Your redirect URI can be any registered URI, but in this example
+                // we redirect back to this same page
+                $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+                $this->client->setRedirectUri($redirect_uri);
+
                 // Request authorization from the user.
                 $authUrl = $this->client->createAuthUrl();
-                printf("Open the following link in your browser:\n%s\n", $authUrl);
-                print 'Enter verification code: ';
+                
+                // Redirect
+                /* Ceci produira une erreur. Notez la sortie ci-dessus,
+                * qui se trouve avant l'appel à la fonction header() */
+                header('Location: '.$authUrl);
+
+
                 $authCode = trim(fgets(STDIN));
     
                 // Exchange authorization code for an access token.
@@ -101,10 +114,12 @@ class Google {
                     throw new \Exception(join(', ', $accessToken));
                 }
             }
+
             // Save the token to a file.
             if (!file_exists(dirname($tokenPath))) {
                 mkdir(dirname($tokenPath), 0700, true);
             }
+
             file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
         }
 
@@ -205,6 +220,37 @@ class Google {
 			return ($var[$key] == $keyValue);
 		});
 	}
+
+    /** Get ip of user
+     * 
+     * https://stackoverflow.com/questions/13646690/how-to-get-real-ip-from-visitor
+     */
+    private function IpUserGet(){
+
+        // Get real visitor IP behind CloudFlare network
+        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+                  $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+                  $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        }
+        $client  = @$_SERVER['HTTP_CLIENT_IP'];
+        $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+        $remote  = $_SERVER['REMOTE_ADDR'];
+    
+        if(filter_var($client, FILTER_VALIDATE_IP))
+        {
+            $ip = $client;
+        }
+        elseif(filter_var($forward, FILTER_VALIDATE_IP))
+        {
+            $ip = $forward;
+        }
+        else
+        {
+            $ip = $remote;
+        }
+        return $ip;
+
+    }
   
 
     /************************************************************************************************** 
