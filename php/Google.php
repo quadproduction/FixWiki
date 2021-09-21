@@ -91,22 +91,19 @@ class Google {
 
                 // Your redirect URI can be any registered URI, but in this example
                 // we redirect back to this same page
+
+
                 $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
                 $this->client->setRedirectUri($redirect_uri);
 
-                // Request authorization from the user.
                 $authUrl = $this->client->createAuthUrl();
-                
-                // Redirect
-                /* Ceci produira une erreur. Notez la sortie ci-dessus,
-                * qui se trouve avant l'appel à la fonction header() */
-                header('Location: '.$authUrl);
 
-
-                $authCode = trim(fgets(STDIN));
+                // Request authorization from the user.
+                header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
     
                 // Exchange authorization code for an access token.
-                $accessToken = $this->client->fetchAccessTokenWithAuthCode($authCode);
+                $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
+
                 $this->client->setAccessToken($accessToken);
     
                 // Check to see if there was an error.
