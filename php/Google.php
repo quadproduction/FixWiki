@@ -68,14 +68,17 @@ class Google {
         # Get client
         $this->client = new \Google_Client();
         $this->client->setApplicationName('Fix Studio Wiki');
-        $this->client->setScopes(\Google_Service_Drive::DRIVE_METADATA_READONLY);
+        #$this->client->setScopes(\Google_Service_Drive::DRIVE_METADATA_READONLY);
+        $this->client->setScopes(\Google_Service_Drive::DRIVE_READONLY);
         $this->client->setAuthConfig('php/google/credentials.json');
         $this->client->setAccessType('offline');
         $this->client->setPrompt('select_account consent');
 
         # Load previously authorized token from a file, if it exists. The file token.json stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
-        $tokenPath = 'json/token/token-'.base64_encode($this->IpUserGet()).'.json';
-        #$tokenPath = 'token.json';
+        $tokenPath = $_SERVER['HTTP_HOST'] !== 'localhost' ? 
+            'json/token/token-'.base64_encode($this->IpUserGet()).'.json' : 
+                'token.json';
+
         if (file_exists($tokenPath)) {
             $accessToken = json_decode(file_get_contents($tokenPath), true);
             $this->client->setAccessToken($accessToken);
@@ -175,6 +178,9 @@ class Google {
         # Push navigation in data
         $this->data['navigation'] = $this->unflattenArray($this->dataTemp);
 
+        # Sort order first dimension of array
+        array_multisort( array_column($this->data['navigation'], 'mimeType'), SORT_DESC, $this->data['navigation']);
+
         # Return data
         return $this->data['navigation'];
 
@@ -253,6 +259,55 @@ class Google {
         return $ip;
 
     }
+
+    /**
+     * Print a file's metadata.
+     *
+     * @param string $fileId ID of the file to print metadata for.
+     */
+    private function printFile($fileId) {
+
+        // Get file
+        return $this->service['drive']->files->get(
+            $fileId, 
+            [
+                'supportsAllDrives' => true, 
+                'fields' => 'webContentLink, mimeType',
+                'alt' => 'media',
+            ]
+        );
+    }
+    
+    /**
+     * Download a file's content.
+     *
+     * @param File $file Drive File instance.
+     * @return String The file's content if successful, null otherwise.
+     */
+    private function downloadFile($file) {
+
+        # Check file
+        if($file === null)
+            return null;
+
+        return [
+            'mimeType' => $file->getHeaderLine('Content-Type'),
+            'content' => $file->getBody()->getContents() ?? null,
+        ];
+
+    }
+
+    /** Get file content
+     * 
+     */
+    public function fileGetContent($fileId){
+
+        $file = $this->printFile($fileId);
+
+        return $this->downloadFile($file);
+
+    }
+  
   
 
     /************************************************************************************************** 

@@ -3,14 +3,16 @@
         "google/apiclient": "^2.0",
         "zordius/lightncandy": "dev-master",
         "guzzlehttp/guzzle": "^7.3",
-        "symfony/finder": "^5.3"
+        "symfony/finder": "^5.3",
+        "erusev/parsedown": "^1.7",
+        "erusev/parsedown-extra": "^0.8.1"
     },
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
     },
     "extra": {
         "google/apiclient-services": [
-            "Drive",
+            "Drive"
         ]
     },
     "autoload": {

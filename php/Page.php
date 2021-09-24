@@ -44,6 +44,9 @@ class Page /* extends Kglobal */ {
     # Google
     private $google = null;
 
+    # Parsedown
+    private $parsedown = null;
+
     # Data
     private $data = [];
 
@@ -62,6 +65,9 @@ class Page /* extends Kglobal */ {
         
         # Google Init
         $this->googleInit();
+
+        # Google get current page
+        $this->googleGetCurrentPage();
 
         # Auto Construct
         $this->autoConstruct();
@@ -94,7 +100,8 @@ class Page /* extends Kglobal */ {
                 $this->templateGet('sidenav', $this->data).
                 '<main>'.
                     $this->templateGet(
-                        ['header']
+                        ['header', 'body'],
+                        $this->data
                     ).
                 '</main>'.
                 $this->tagGenerator(self::SCRIPT, 'script').
@@ -203,6 +210,54 @@ class Page /* extends Kglobal */ {
 
         # Return result
         return $result;
+
+    }
+
+    /** google Get Current Page
+     * 
+     */
+    private function googleGetCurrentPage(){
+
+        # Get file id of first page if not get page
+        $fileId = $this->data['navigation'][array_key_first($this->data['navigation'])]['id'];
+
+        # Get content of current page
+        $this->data['currentPage'] = $this->google->fileGetContent($fileId);
+
+        # New parsedown
+        if($this->parsedown == null)
+            $this->parsedown = new \Parsedown();
+
+        $obj = new \ParsedownFilter( 'myFilter' );
+
+        function myFilter( &$el ){
+        
+            switch( $el[ 'name' ] ){
+                case 'a':
+        
+                    $url = $el[ 'attributes' ][ 'href' ];
+                    
+                    /***
+                        If there is no protocol handler, and the link is not an open protocol address, 
+                        the links must be relative so we can return as there is nothing to do.
+                    ***/
+                    
+                    if( strpos( $url, '://' ) === false )
+                        if( ( ( $url[ 0 ] == '/' ) && ( $url[ 1 ] != '/' ) ) || ( $url[ 0 ] != '/' ) ){ return; }
+                            
+                
+                    if( strpos( $url, $_SERVER["SERVER_NAME"] ) === false ){
+                        $el[ 'attributes' ][ 'rel' ] = 'nofollow';
+                        $el[ 'attributes' ][ 'target' ] = '_blank';
+                    }
+                    break;
+                    
+            }
+        }
+
+        # Check if markdown
+        if($this->data['currentPage']['mimeType'] == 'text/markdown')
+            $this->data['currentPage']['content'] = $this->parsedown->text($this->data['currentPage']['content']);
 
     }
 

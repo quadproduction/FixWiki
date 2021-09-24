@@ -6,21 +6,28 @@
     <li class="no-padding">
       <ul class="collapsible collapsible-accordion">
         {{#each navigation}}
-        <li class="bold waves-effect">
-          <a class="collapsible-header">
-            {{name}}
-            <i class="material-icons chevron">chevron_left</i>
-          </a>
-          {{#if children}}
-          <div class="collapsible-body">
-            <ul>
-              {{#each children}}
-              <li><a href="dashboard.html" class="waves-effect">{{name}}<i class="material-icons">web</i></a></li>
-              {{/each}}
-            </ul>
-          </div>
-          {{/if}}
-        </li>
+          {{!-- Type folder --}}
+          {{#ifEquals mimeType 'application/vnd.google-apps.folder'}}
+          <li class="bold waves-effect">
+            <a class="collapsible-header">
+              {{name}}
+              <i class="material-icons chevron">chevron_left</i>
+            </a>
+            {{#if children}}
+            <div class="collapsible-body">
+              <ul>
+                {{#each children}}
+                <li><a href="dashboard.html" class="waves-effect">{{name}}<i class="material-icons">web</i></a></li>
+                {{/each}}
+              </ul>
+            </div>
+            {{/if}}
+          </li>
+          {{/ifEquals}}
+          {{!-- Type markdown --}}
+          {{#ifEquals mimeType 'text/markdown'}}
+          <li><a href="dashboard.html" class="waves-effect">{{name}}<i class="material-icons">web</i></a></li>
+          {{/ifEquals}}
         {{/each}}
       </ul>
     </li>
