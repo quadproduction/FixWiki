@@ -83,11 +83,9 @@ class Google {
 
             $accessToken = json_decode(file_get_contents($tokenPath), true);
 
-            if($accessToken !== null){
+            if($accessToken !== null)
 
                 $this->client->setAccessToken($accessToken);
-
-            }
 
         }
 
@@ -100,8 +98,15 @@ class Google {
             } else {
 
                 # If not set get
-                if((!isset($_GET) && !isset($_GET['code']))&&
-                !file_exists($tokenPath)){
+                if(
+                    (
+                        !isset($_GET) &&
+                        !isset($_GET['code'])
+                    ) && (
+                        !file_exists($tokenPath) ||
+                        $accessToken === null
+                    )
+                ){
 
 
                     $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
