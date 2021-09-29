@@ -228,7 +228,7 @@ class Page /* extends Kglobal */ {
         if($this->parsedown == null)
             $this->parsedown = new \Parsedown();
 
-        $obj = new \ParsedownFilter( 'myFilter' );
+        //$obj = new \ParsedownFilter( 'myFilter' );
 
         function myFilter( &$el ){
         
