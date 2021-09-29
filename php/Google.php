@@ -96,8 +96,7 @@ class Google {
             } else {
 
                 # If not set get
-                if(!isset($_GET['code'])){
-
+                if(!isset($_GET['code']) || empty($accessToken)){
 
                     $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
                     $this->client->setRedirectUri($redirect_uri);
@@ -111,19 +110,6 @@ class Google {
         
                     // Exchange authorization code for an access token.
                     $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
-
-                    // Check error
-                    if(isset($accessToken['error']) || empty($accessToken['error'])){
-
-                        $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
-                        $this->client->setRedirectUri($redirect_uri);
-    
-                        $authUrl = $this->client->createAuthUrl();
-    
-                        // Request authorization from the user.
-                        header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
-
-                    }
 
                     $this->client->setAccessToken($accessToken);
         
