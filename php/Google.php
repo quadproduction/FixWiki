@@ -79,7 +79,7 @@ class Google {
             'json/token/token-'.base64_encode($this->IpUserGet()).'.json' : 
                 'token.json';
 
-        if (file_exists($tokenPath)) {
+        if (file_exists($tokenPath))
 
             if($accessToken = json_decode(file_get_contents($tokenPath), true))
 
