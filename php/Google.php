@@ -93,7 +93,7 @@ class Google {
             } else {
 
                 # If not set get
-                if((!isset($_GET) && !isset($_GET['code']))||
+                if((!isset($_GET) && !isset($_GET['code']))&&
                 !file_exists($tokenPath)){
 
 
