@@ -85,6 +85,8 @@ class Google {
             // Exchange authorization code for an access token.
             $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
 
+            print_r($_GET['code']);
+            print_r('///');
             print_r($accessToken);
 
             $this->client->setAccessToken($accessToken);
