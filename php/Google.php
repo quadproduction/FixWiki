@@ -79,13 +79,9 @@ class Google {
             'json/token/token-'.base64_encode($this->IpUserGet()).'.json' : 
                 'token.json';
 
-        if (file_exists($tokenPath)) {
+        if (file_exists($tokenPath) && $accessToken = json_decode(file_get_contents($tokenPath), true)){
 
-            $accessToken = json_decode(file_get_contents($tokenPath), true);
-
-            if(empty($accessToken))
-
-                $this->client->setAccessToken($accessToken);
+            $this->client->setAccessToken($accessToken);
 
         }
 
@@ -94,7 +90,9 @@ class Google {
 
             // Refresh the token if possible, else fetch a new one.
             if ($this->client->getRefreshToken()) {
+                
                 $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
+                 
             } else {
 
                 # If not set get
@@ -102,9 +100,6 @@ class Google {
                     (
                         !isset($_GET) &&
                         !isset($_GET['code'])
-                    ) && (
-                        !file_exists($tokenPath) ||
-                        empty($accessToken)
                     )
                 ){
 
