@@ -80,8 +80,15 @@ class Google {
                 'token.json';
 
         if (file_exists($tokenPath)) {
+
             $accessToken = json_decode(file_get_contents($tokenPath), true);
-            $this->client->setAccessToken($accessToken);
+
+            if($accessToken !== null){
+
+                $this->client->setAccessToken($accessToken);
+
+            }
+
         }
 
         // If there is no previous token or it's expired.
