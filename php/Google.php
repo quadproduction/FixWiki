@@ -79,6 +79,23 @@ class Google {
             'json/token/token-'.base64_encode($this->IpUserGet()).'.json' : 
                 'token.json';
 
+
+        if(isset($_GET['code']) & $_GET['code']){
+        
+            // Exchange authorization code for an access token.
+            $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
+
+            $this->client->setAccessToken($accessToken);
+
+            // Save the token to a file.
+            if (!file_exists(dirname($tokenPath))) {
+                mkdir(dirname($tokenPath), 0700, true);
+            }
+
+            file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
+
+        }
+
         if (file_exists($tokenPath))
 
             if($accessToken = json_decode(file_get_contents($tokenPath), true))
@@ -93,30 +110,13 @@ class Google {
                 $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
             } else {
 
-                # If not set get
-                if(!isset($_GET['code']) || empty($accessToken)){
+                $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
+                $this->client->setRedirectUri($redirect_uri);
 
-                    $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
-                    $this->client->setRedirectUri($redirect_uri);
+                $authUrl = $this->client->createAuthUrl();
 
-                    $authUrl = $this->client->createAuthUrl();
-
-                    // Request authorization from the user.
-                    header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
-
-                }else{
-        
-                    // Exchange authorization code for an access token.
-                    $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
-
-                    $this->client->setAccessToken($accessToken);
-        
-                    /* // Check to see if there was an error.
-                    if (array_key_exists('error', $accessToken)) {
-                        throw new \Exception(join(', ', $accessToken));
-                    } */
-
-                }
+                // Request authorization from the user.
+                header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
 
             }
 
