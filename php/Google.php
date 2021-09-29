@@ -114,21 +114,22 @@ class Google {
 
                     $this->client->setAccessToken($accessToken);
         
-                    // Check to see if there was an error.
+                    /* // Check to see if there was an error.
                     if (array_key_exists('error', $accessToken)) {
                         throw new \Exception(join(', ', $accessToken));
+                    } */
+
+                    // Save the token to a file.
+                    if (!file_exists(dirname($tokenPath))) {
+                        mkdir(dirname($tokenPath), 0700, true);
                     }
+
+                    //file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
+                    file_put_contents($tokenPath, json_encode($accessToken));
 
                 }
 
             }
-
-            // Save the token to a file.
-            if (!file_exists(dirname($tokenPath))) {
-                mkdir(dirname($tokenPath), 0700, true);
-            }
-
-            file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
         }
 
     }
