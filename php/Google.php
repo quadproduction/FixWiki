@@ -115,10 +115,10 @@ class Google {
                 $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
             } else {
 
-                $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
+                echo $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
                 $this->client->setRedirectUri($redirect_uri);
 
-                echo $authUrl = $this->client->createAuthUrl();
+                $authUrl = $this->client->createAuthUrl();
 
                 // Request authorization from the user.
                 //header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL));
