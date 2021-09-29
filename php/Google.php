@@ -75,22 +75,23 @@ class Google {
         $this->client->setPrompt('select_account consent');
 
         # Load previously authorized token from a file, if it exists. The file token.json stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first time.
-        $tokenPath = $_SERVER['HTTP_HOST'] !== 'localhost' ? 
+        /* $tokenPath = $_SERVER['HTTP_HOST'] !== 'localhost' ? 
             'json/token/token-'.base64_encode($this->IpUserGet()).'.json' : 
-                'token.json';
+                'token.json'; */
+        $tokenPath = 'json/token/token-'.base64_encode($this->IpUserGet()).'.json';
 
 
         if(isset($_GET['code'])){
+
+            $redirect_uri = 'http'.($_SERVER['HTTP_HOST'] !== 'localhost' ? 's' : '').'://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
+            $this->client->setRedirectUri($redirect_uri);
         
             // Exchange authorization code for an access token.
             $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
 
-            print_r('con');
-            print_r($_GET['code']);
-            print_r('///');
-            print_r($accessToken);
-
-            $this->client->setAccessToken($accessToken);
+            // Check not NULL
+            if($accessToken !== null)
+                $this->client->setAccessToken($accessToken);
 
             // Save the token to a file.
             if (!file_exists(dirname($tokenPath))) {
@@ -103,7 +104,9 @@ class Google {
 
             $accessToken = json_decode(file_get_contents($tokenPath), true);
 
-            $this->client->setAccessToken($accessToken);
+            // Check not NULL
+            if($accessToken !== null)
+                $this->client->setAccessToken($accessToken);
 
         }
 
@@ -115,7 +118,7 @@ class Google {
                 $this->client->fetchAccessTokenWithRefreshToken($this->client->getRefreshToken());
             } else {
 
-                $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
+                $redirect_uri = 'http'.($_SERVER['HTTP_HOST'] !== 'localhost' ? 's' : '').'://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
                 $this->client->setRedirectUri($redirect_uri);
 
                 $authUrl = $this->client->createAuthUrl();
@@ -132,6 +135,19 @@ class Google {
 
             file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
         }
+
+        # Redirect to page
+        if(isset($_GET['code'])){
+
+            // Url
+            $url = 'http'.($_SERVER['HTTP_HOST'] !== 'localhost' ? 's' : '').'://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
+            $this->client->setRedirectUri($redirect_uri);
+
+            // Redirect
+            header('Location: ' . filter_var($url, FILTER_SANITIZE_URL));
+
+        }
+
 
     }
 
