@@ -80,14 +80,15 @@ class Google {
                 'token.json';
 
 
-        if(isset($_GET['code']) && $_GET['code']){
+        if(isset($_GET['code'])){
         
             // Exchange authorization code for an access token.
             $accessToken = $this->client->fetchAccessTokenWithAuthCode($_GET['code']);
 
-            /* print_r($_GET['code']);
+            print_r('con');
+            print_r($_GET['code']);
             print_r('///');
-            print_r($accessToken); */
+            print_r($accessToken);
 
             $this->client->setAccessToken($accessToken);
 
