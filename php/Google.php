@@ -83,7 +83,7 @@ class Google {
 
             $accessToken = json_decode(file_get_contents($tokenPath), true);
 
-            if($accessToken !== null)
+            if(empty($accessToken))
 
                 $this->client->setAccessToken($accessToken);
 
@@ -104,7 +104,7 @@ class Google {
                         !isset($_GET['code'])
                     ) && (
                         !file_exists($tokenPath) ||
-                        $accessToken === null
+                        empty($accessToken)
                     )
                 ){
 
