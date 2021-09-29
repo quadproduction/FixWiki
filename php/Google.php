@@ -94,13 +94,13 @@ class Google {
 
             file_put_contents($tokenPath, json_encode($this->client->getAccessToken()));
 
+        }else if (file_exists($tokenPath)){
+
+            $accessToken = json_decode(file_get_contents($tokenPath), true);
+
+            $this->client->setAccessToken($accessToken);
+
         }
-
-        if (file_exists($tokenPath))
-
-            if($accessToken = json_decode(file_get_contents($tokenPath), true))
-
-                $this->client->setAccessToken($accessToken);
 
         // If there is no previous token or it's expired.
         if ($this->client->isAccessTokenExpired()) {
