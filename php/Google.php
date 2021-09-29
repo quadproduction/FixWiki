@@ -96,10 +96,7 @@ class Google {
             } else {
 
                 # If not set get
-                if(
-                    !isset($_GET) &&
-                    !isset($_GET['code'])
-                ){
+                if(!isset($_GET['code'])){
 
 
                     $redirect_uri = 'https://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '',$_SERVER['PHP_SELF']);
