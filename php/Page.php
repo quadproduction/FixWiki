@@ -20,6 +20,7 @@ namespace fixStudioWiki;
 # Lightncandy
 use LightnCandy\LightnCandy;
 use Symfony\Component\Finder\Finder;
+use voku\helper\HtmlDomParser;
 
 /** Page
  * 
@@ -226,7 +227,7 @@ class Page /* extends Kglobal */ {
 
         # New parsedown
         if($this->parsedown == null)
-            $this->parsedown = new \Parsedown();
+            $this->parsedown = new \ParsedownToC();
 
         //$obj = new \ParsedownFilter( 'myFilter' );
 
@@ -256,8 +257,18 @@ class Page /* extends Kglobal */ {
         }
 
         # Check if markdown
-        if($this->data['currentPage']['mimeType'] == 'text/markdown')
+        if($this->data['currentPage']['mimeType'] == 'text/markdown'):
+
+            # Render markdown
             $this->data['currentPage']['content'] = $this->parsedown->text($this->data['currentPage']['content']);
+
+            # Search all h2
+            $this->data['currentPage']['header'] =[
+                'navigation'    =>  $this->getTextsFromTags($this->data['currentPage']['content'], 'h2', true),
+                'title'         =>  $this->getTextsFromTags($this->data['currentPage']['content'], 'h1'),
+            ];
+
+        endif;
 
     }
 
@@ -313,10 +324,71 @@ class Page /* extends Kglobal */ {
 						str_replace(' ', '-text text-', trim($string)) :
 							trim($string).'-text';
 				},
+                'removeExt' =>  function ($string, $ext) {
+
+                    if(!$string || !$ext)
+                        return $string;
+
+                    $length = -1 * (strlen($ext)+1);
+
+                    if(substr($string, $length + 1) == $ext){
+
+                        return substr($string, 0,$length);
+
+                    }else{
+
+                        return $string;
+
+                    }
+
+                },
 			],
 		];
 
 	}
+
+    /**
+     * 
+     */
+    private function getTextsFromTags(string $string = '', string $tagname = '', bool $id = false):array{
+    
+        # Set result
+        $result = [];
+
+        # Check string and tagname
+        if(!$string || !$tagname)
+
+            # Return empty array
+            return $result;
+
+        # Create DOM from string
+        $html = HtmlDomParser::str_get_html($string);
+
+        # Iteration of tags
+        foreach($html->find($tagname) as $element)
+
+            # check plain text
+            if($element->plaintext)
+
+                # Check if id needed
+                if($id):
+
+                    # Push text in h1
+                    $result[] = [
+                        'text'  =>  $element->plaintext,
+                        'id'    =>  $element->id,
+                    ];
+
+                else:
+
+                    # Push text in h1
+                    $result[] = $element->plaintext;
+
+                endif;
+
+        # Return array
+        return $result;
+    }
 
     /************************************************************************************************** 
      * Constant
@@ -378,6 +450,10 @@ class Page /* extends Kglobal */ {
         ],
         [
             "href"  =>  "https://fonts.googleapis.com/icon?family=Material+Icons",
+            "rel"   =>  "stylesheet",
+        ],
+        [
+            "href"  =>  "css/markdown.css",
             "rel"   =>  "stylesheet",
         ],
         # To delete

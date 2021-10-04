@@ -5,7 +5,10 @@
         "guzzlehttp/guzzle": "^7.3",
         "symfony/finder": "^5.3",
         "erusev/parsedown": "^1.7",
-        "erusev/parsedown-extra": "^0.8.1"
+        "erusev/parsedown-extra": "^0.8.1",
+        "keinos/parsedown-toc": "^1.1",
+        "voku/simple_html_dom": "^4.7",
+        "voku/portable-utf8": "^5.4"
     },
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
