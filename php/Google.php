@@ -293,7 +293,7 @@ class Google {
             $fileId, 
             [
                 'supportsAllDrives' => true, 
-                'fields' => 'webContentLink, mimeType',
+                'fields' => 'webContentLink, mimeType, name',
                 'alt' => 'media',
             ]
         );
@@ -312,8 +312,9 @@ class Google {
             return null;
 
         return [
-            'mimeType' => $file->getHeaderLine('Content-Type'),
-            'content' => $file->getBody()->getContents() ?? null,
+            'mimeType'  =>  $file->getHeaderLine('Content-Type'),
+            'content'   =>  $file->getBody()->getContents() ?? null,
+            'query'     =>  $_SERVER['QUERY_STRING'] ?? '#',
         ];
 
     }

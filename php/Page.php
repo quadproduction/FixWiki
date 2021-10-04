@@ -219,8 +219,76 @@ class Page /* extends Kglobal */ {
      */
     private function googleGetCurrentPage(){
 
-        # Get file id of first page if not get page
-        $fileId = $this->data['navigation'][array_key_first($this->data['navigation'])]['id'];
+        # Check page and parent
+        if(
+            empty($_GET) || 
+            (
+                (!isset($_GET['page']) || empty ($_GET['page'])) && 
+                (!isset($_GET['parent']) || empty ($_GET['parent']))
+            )
+        ){
+
+            # Get file id of first page if not get page
+            $fileId = $this->data['navigation'][array_key_first($this->data['navigation'])]['id'];
+
+        }else{
+
+            # Iteration navigation
+            foreach($this->data['navigation'] AS $key => $value){
+
+                # No parent
+                if(!isset($_GET['parent']) || empty ($_GET['parent'])){
+
+                    if(
+                        $value['mimeType'] != 'application/vnd.google-apps.folder' &&
+                        (
+                            $value['name'] == $_GET['page'] || str_replace('.md', '', $value['name']) == $_GET['page']
+                        )
+
+                    ){
+
+                        # Set fileId
+                        $fileId = $value['id'];
+
+                        # Break foreach
+                        break;
+
+                    }
+
+                }else{
+
+                    if(
+                        $value['mimeType'] == 'application/vnd.google-apps.folder' &&
+                        $value['name'] == $_GET['parent']
+                    ){
+
+                        # Iteration value
+                        foreach($value['children'] AS $k => $v){
+
+                            # Check if name is page
+                            if(
+                                $v['mimeType'] != 'application/vnd.google-apps.folder' &&
+                                (
+                                    $v['name'] == $_GET['page'] || str_replace('.md', '', $v['name']) == $_GET['page']
+                                )
+
+                            ){
+
+                                # Set fileId
+                                $fileId = $v['id'];
+
+                            }
+
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
 
         # Get content of current page
         $this->data['currentPage'] = $this->google->fileGetContent($fileId);
@@ -228,33 +296,6 @@ class Page /* extends Kglobal */ {
         # New parsedown
         if($this->parsedown == null)
             $this->parsedown = new \ParsedownToC();
-
-        //$obj = new \ParsedownFilter( 'myFilter' );
-
-        function myFilter( &$el ){
-        
-            switch( $el[ 'name' ] ){
-                case 'a':
-        
-                    $url = $el[ 'attributes' ][ 'href' ];
-                    
-                    /***
-                        If there is no protocol handler, and the link is not an open protocol address, 
-                        the links must be relative so we can return as there is nothing to do.
-                    ***/
-                    
-                    if( strpos( $url, '://' ) === false )
-                        if( ( ( $url[ 0 ] == '/' ) && ( $url[ 1 ] != '/' ) ) || ( $url[ 0 ] != '/' ) ){ return; }
-                            
-                
-                    if( strpos( $url, $_SERVER["SERVER_NAME"] ) === false ){
-                        $el[ 'attributes' ][ 'rel' ] = 'nofollow';
-                        $el[ 'attributes' ][ 'target' ] = '_blank';
-                    }
-                    break;
-                    
-            }
-        }
 
         # Check if markdown
         if($this->data['currentPage']['mimeType'] == 'text/markdown'):

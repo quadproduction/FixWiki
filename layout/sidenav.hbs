@@ -1,6 +1,6 @@
 <header>
   <ul id="sidenav-left" class="sidenav sidenav-fixed light-blue accent-1">
-    <li><a href="/" class="logo-container">
+    <li><a href="?page=Accueil.md" class="logo-container">
       <img src="img/logo-black.png">
     </a></li>
     <li class="no-padding">
@@ -17,7 +17,7 @@
             <div class="collapsible-body">
               <ul>
                 {{#each children}}
-                <li><a href="?parent={{name}}&page={{../name}}" class="waves-effect">{{name}}<i class="material-icons">web</i></a></li>
+                <li><a href="?parent={{../name}}&page={{name}}" class="waves-effect">{{removeExt name 'md'}}<i class="material-icons">web</i></a></li>
                 {{/each}}
               </ul>
             </div>
