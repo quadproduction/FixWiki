@@ -17,7 +17,7 @@
             <div class="collapsible-body">
               <ul>
                 {{#each children}}
-                <li><a href="?parent={{../name}}&page={{name}}" class="waves-effect">{{removeExt name 'md'}}<i class="material-icons">web</i></a></li>
+                <li><a href="?parent={{../name}}&page={{name}}" class="waves-effect">{{removeExt name 'md'}}<i class="material-icons">description</i></a></li>
                 {{/each}}
               </ul>
             </div>
@@ -26,7 +26,7 @@
           {{/ifEquals}}
           {{!-- Type markdown --}}
           {{#ifEquals mimeType 'text/markdown'}}
-          <li><a href="?page={{name}}" class="waves-effect">{{removeExt name 'md'}}<i class="material-icons">web</i></a></li>
+          <li><a href="?page={{name}}" class="waves-effect">{{removeExt name 'md'}}<i class="material-icons">description</i></a></li>
           {{/ifEquals}}
         {{/each}}
       </ul>
