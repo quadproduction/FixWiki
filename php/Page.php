@@ -89,7 +89,7 @@ class Page /* extends Kglobal */ {
         echo
         # First tags
         '<!DOCTYPE html>'.
-        '<html lang="en">'.
+        '<html lang="en" '.(isset($_GET['hide']) ? 'menu="disable" ' : '' ).'>'.
             # Head
             '<head>'.
                 $this->tagGenerator(self::META, 'meta').

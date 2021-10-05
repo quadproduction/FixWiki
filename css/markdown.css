@@ -54,6 +54,20 @@ html{
     scroll-behavior: smooth;
 }
 
+/* Menu disable */
+html[menu="disable"] body{
+    /* Position / dimension */
+    padding-left: 0!important;
+}
+html[menu="disable"] .navbar .sidenav-trigger{
+    /* Display */
+    display: none;
+}
+html[menu="disable"] header{
+    /* Display */
+    display: none!important;
+}
+
 /* Header */
 .navbar{
     /* Position */
