@@ -515,7 +515,7 @@ class Page /* extends Kglobal */ {
             "rel"   =>  "stylesheet",
         ],
         [
-            "href"  =>  "css/markdown.css",
+            "href"  =>  "css/components.css",
             "rel"   =>  "stylesheet",
         ],
         # To delete

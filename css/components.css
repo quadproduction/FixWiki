@@ -129,3 +129,17 @@ main .content .scroll{
     /* Weight */
     /* font-weight: 700; */
 }
+
+/* Pre */
+pre{
+    position: relative;
+    overflow: auto;
+    margin: 30px 0 40px 0;
+    color: #c5c8c6;
+    background-color: #1d1f21;
+    box-shadow: 0 20px 25px -20px rgba(0,0,0,0.7);
+    word-wrap: break-word;
+    line-height: 1.8;
+    padding: 7px 17px;
+    border-radius: 6px;
+}
