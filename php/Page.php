@@ -60,6 +60,9 @@ class Page /* extends Kglobal */ {
         
         # Parent constructor
         /* parent::__construct(); */
+	    
+	# Check https
+	$this->httpsRedirect();
 
         # Init
         $this->lightCandyInit();
@@ -111,6 +114,24 @@ class Page /* extends Kglobal */ {
 
 
     }    
+	
+    /** Https redirect
+    *
+    */
+    protected function httpsRedirect(){
+        #Recupere l'URL
+        $link = $_SERVER['HTTP_HOST'];
+	#Check si la page n'est pas en localhost
+	if ($link!="localhost") {
+	    #Redirige vers la page HTTPS si le site est en HTTP
+	    if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") {
+		$location = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	    	header('HTTP/1.1 301 Moved Permanently');
+		header('Location: ' . $location);
+		exit;
+	    }
+	}
+    }
     
     /** Google init
     *  
