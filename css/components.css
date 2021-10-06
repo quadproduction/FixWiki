@@ -144,3 +144,17 @@ main .content .scroll{
     border-radius: 6px;
     overflow-x: scroll;
 }
+
+#markdown table {
+    border-collapse: collapse;
+    border-radius: 1em;
+    overflow: hidden;
+    width: 100%;
+    margin: 30px 0 40px 0;
+    box-shadow: 0 20px 25px -20px rgba(0,0,0,0.7);
+  }
+#markdown th, #markdown  td {
+    padding: 0.25rem;
+    text-align: left;
+    border: 1px solid #ccc;
+  }
