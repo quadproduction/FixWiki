@@ -131,7 +131,7 @@ main .content .scroll{
 }
 
 /* Pre */
-pre{
+#markdown pre, pre{
     position: relative;
     overflow: auto;
     margin: 30px 0 40px 0;
