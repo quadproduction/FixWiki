@@ -142,4 +142,5 @@ main .content .scroll{
     line-height: 1.8;
     padding: 7px 17px;
     border-radius: 6px;
+    overflow-x: scroll;
 }
