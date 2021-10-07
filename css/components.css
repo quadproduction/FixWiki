@@ -149,7 +149,7 @@ main .content .scroll{
     margin: 10px 0 20px 0;
     color: #c5c8c6;
     background-color: #1d1f21;
-    box-shadow: 0 20px 25px -20px rgba(0,0,0,0.7);
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,0.35);
     word-wrap: break-word;
     white-space: nowrap;
     line-height: 1.8;
