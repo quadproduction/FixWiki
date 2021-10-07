@@ -157,6 +157,7 @@ main .content .scroll{
     border-radius: 6px;
     overflow-x: auto;
     display: block;
+    width: max-content;
 }
 /* Table */
 #markdown table{
