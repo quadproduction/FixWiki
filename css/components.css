@@ -131,7 +131,7 @@ main .content .scroll{
 }
 
 /* Pre */
-#markdown pre code, code{
+#markdown pre, pre{
     position: relative;
     margin: 30px 0 40px 0;
     color: #c5c8c6;
