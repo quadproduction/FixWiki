@@ -143,6 +143,21 @@ main .content .scroll{
     border-radius: 6px;
     overflow-x: auto;
 }
+/* Code */
+#markdown :not(pre) > code {
+    position: relative;
+    margin: 30px 0 40px 0;
+    color: #c5c8c6;
+    background-color: #1d1f21;
+    box-shadow: 0 20px 25px -20px rgba(0,0,0,0.7);
+    word-wrap: break-word;
+    white-space: nowrap;
+    line-height: 1.8;
+    padding: 7px 17px;
+    border-radius: 6px;
+    overflow-x: auto;
+    display: block;
+}
 /* Table */
 #markdown table{
     border-collapse: collapse;
