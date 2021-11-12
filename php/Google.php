@@ -297,7 +297,7 @@ class Google {
                     if(!file_exists('media/'.$file['name'])){
 
                         // New file
-                        $myfile = fopen("newfile.txt", "w");
+                        $myfile = fopen('media/'.$file['name'], "w");
 
                         // Add content to file
                         fwrite($myfile, $this->fileGetContent($file['id']));
@@ -308,7 +308,7 @@ class Google {
                     }
 
         }
-        
+
     }
 
     function unflattenArray($flatArray){
