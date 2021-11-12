@@ -295,7 +295,7 @@ class Google {
                 foreach($filesID as $file)
 
                     // Check if file already exist in /media
-                    if(file_exists('media/'.$file['name'])){
+                    if(!file_exists('media/'.$file['name'])){
 
                         $toto[] = $this->fileGetContent($file['id']);
 
