@@ -593,7 +593,7 @@ var tabLegendCallback = function(chart) {
     });
 
     // Generic card metric interactivity
-    $(document).on('click', '.tab', function() {
+    /* $(document).on('click', '.tab', function() {
       var card = $(this).closest('.card');
       var cardChart = card.find($('.card-chart'));
 
@@ -614,7 +614,7 @@ var tabLegendCallback = function(chart) {
           chart.update();
         }
       }
-    });
+    }); */
 
 
     var tabLegendLine = $("#tab-legend-line-chart");
