@@ -176,7 +176,7 @@ main .content .scroll{
 }
 
 /* Img */
-main .content p img{
+#markdown img{
     /* Dimension */
     width: 50%;
     min-width: 200px;

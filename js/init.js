@@ -66,7 +66,7 @@
       },
     });
 
-    $('main .content p img').materialbox();
+    $('#markdown img').materialbox();
 
 
   }); // end of document ready
