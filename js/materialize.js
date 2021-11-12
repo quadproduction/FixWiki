@@ -4138,14 +4138,14 @@ $jscomp.polyfill = function (e, r, p, m) {
           }
         } else {
           if (this.$content.length) {
-            this.$content[0].style.display = 'block';
+            /* this.$content[0].style.display = 'block'; */
             this.$content.addClass('active');
             if (typeof this.options.onShow === 'function') {
               this.options.onShow.call(this, this.$content[0]);
             }
 
             if ($oldContent.length && !$oldContent.is(this.$content)) {
-              $oldContent[0].style.display = 'none';
+              /* $oldContent[0].style.display = 'none'; */
               $oldContent.removeClass('active');
             }
           }
