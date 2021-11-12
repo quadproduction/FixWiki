@@ -267,7 +267,7 @@ class Google {
                         if(strpos($file['mimeType'], "image/") !== false){
 
                             // Check parents
-                            if(in_array($file['parents'], $parent['id'])){
+                            if(in_array($parent['id'], $file['parents'])){
 
                                 // Push il filesID
                                 $filesID[] = [
