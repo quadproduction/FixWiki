@@ -4283,14 +4283,14 @@ $jscomp.polyfill = function (e, r, p, m) {
       key: "_setupNormalTabs",
       value: function _setupNormalTabs() {
         // Hide Tabs Content
-        this.$tabLinks.not(this.$activeTabLink).each(function (link) {
+        /* this.$tabLinks.not(this.$activeTabLink).each(function (link) {
           if (!!link.hash) {
             var $currContent = $(M.escapeHash(link.hash));
             if ($currContent.length) {
               $currContent[0].style.display = 'none';
             }
           }
-        });
+        }); */
       }
 
       /**
