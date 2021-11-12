@@ -147,9 +147,6 @@ class Page /* extends Kglobal */ {
         # Get navigation
         $this->data['navigation'] = $this->google->navigationInit();
 
-        # Echo
-        echo "<script>console.log(".json_encode($this->data['navigation']).");</script>";
-
    }
 
     /** Get tample

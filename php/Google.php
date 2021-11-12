@@ -165,7 +165,7 @@ class Google {
         // Print the names and IDs for up to 10 files.
         $optParams = array(
             'includeItemsFromAllDrives' => true,
-            'fields'      => 'nextPageToken, files(id, name, mimeType, parents)',
+            'fields'                    => 'nextPageToken, files(id, name, mimeType, parents)',
             'supportsAllDrives'         => true,
             'driveId'                   => '0AKnhm_EZNuVfUk9PVA',
             'corpora'                   => 'drive',
@@ -174,6 +174,9 @@ class Google {
 
         // Get result
         $results = $this->service['drive']->files->listFiles($optParams);
+
+        # Echo
+        echo "<script>console.log(".json_encode($results->getFiles()).");</script>";
 
         // Check result
         if(count($results->getFiles())){
@@ -206,6 +209,51 @@ class Google {
         return $this->data['navigation'];
 
     }
+
+    /** Get all file
+     * 
+     */
+    public function mediaInit(){
+
+        // Check service
+        if($this->service['drive'] == null)
+
+            // New google drive service
+            $this->service['drive'] = new \Google_Service_Drive($this->client);
+
+        // Print the names and IDs for up to 10 files.
+        $optParams = array(
+            'includeItemsFromAllDrives' => true,
+            'fields'                    => 'nextPageToken, files(id, name, mimeType, parents)',
+            'supportsAllDrives'         => true,
+            'driveId'                   => '0AKnhm_EZNuVfUk9PVA',
+            'corpora'                   => 'drive',
+            'q'                         => 'trashed=false',
+        );
+
+        // Get result
+        $results = $this->service['drive']->files->listFiles($optParams);
+
+        // Check result
+        if(count($results->getFiles())){
+
+            // Clear data temp
+            $this->dataTemp = [];
+
+            // Iteration des fichiers
+            foreach($results->getFiles() as $file){
+
+                // Push file in data temps
+                $this->dataTemp[] = [
+                    'id'        =>  $file['id'],
+                    'name'      =>  $file->getName(),
+                    'parent'    =>  $file['parents'][0],
+                    'mimeType'  =>  $file->getMimeType(),
+                ];
+
+            }
+
+        }
 
     function unflattenArray($flatArray){
 
