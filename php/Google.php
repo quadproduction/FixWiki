@@ -256,7 +256,7 @@ class Google {
             if(!empty($parentsID))
 
                 // Iteration des fichiers
-                foreach($parentsID as $parent){
+                foreach($parentsID as $parent)
 
                     // Iteration des fichiers
                     foreach($results->getFiles() as $k => $file){
@@ -347,7 +347,7 @@ class Google {
     /** Filter array by key value
 	 * 
 	 */
-	private function filterArrayByKeyValue($array, $key, $keyValue){
+	public function filterArrayByKeyValue($array, $key, $keyValue){
 		return array_filter($array, function ($var) use ($keyValue, $key) {
 			return ($var[$key] == $keyValue);
 		});
