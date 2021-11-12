@@ -4734,20 +4734,21 @@ button.btn-floating {
   font-size: 0.8rem;
   transform: translateY(-140%);
 }
-.materialboxed {
+/* materialbox */
+#markdown .materialboxed, .materialboxed {
   display: block;
   cursor: zoom-in;
   position: relative;
   transition: opacity 0.4s;
   -webkit-backface-visibility: hidden;
 }
-.materialboxed:hover:not(.active) {
+#markdown .materialboxed:hover:not(.active), .materialboxed:hover:not(.active) {
   opacity: 0.8;
 }
-.materialboxed.active {
+#markdown .materialboxed.active, .materialboxed.active {
   cursor: zoom-out;
 }
-#materialbox-overlay {
+#markdown #materialbox-overlay, #materialbox-overlay {
   position: fixed;
   top: 0;
   right: 0;
@@ -4757,7 +4758,7 @@ button.btn-floating {
   z-index: 1000;
   will-change: opacity;
 }
-.materialbox-caption {
+#markdown .materialbox-caption, .materialbox-caption {
   position: fixed;
   display: none;
   color: #fff;
@@ -4771,6 +4772,7 @@ button.btn-floating {
   z-index: 1000;
   -webkit-font-smoothing: antialiased;
 }
+/* materialbox end */
 select:focus {
   outline: 1px solid #c9f3ef;
 }
