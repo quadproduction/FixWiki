@@ -254,6 +254,8 @@ class Google {
             }
 
         }
+    
+    }
 
     function unflattenArray($flatArray){
 
