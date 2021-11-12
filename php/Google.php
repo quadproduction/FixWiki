@@ -252,6 +252,8 @@ class Google {
                         'parents'   =>  $file['parents']
                     ];
 
+            $toto['parent'] = $parentsID;
+
             // Check parents
             if(!empty($parentsID))
 
@@ -288,6 +290,8 @@ class Google {
 
                     }
 
+            $toto['file'] = $filesID;
+
             // Check file to copy
             if(!empty($filesID))
 
@@ -297,7 +301,7 @@ class Google {
                     // Check if file already exist in /media
                     if(!file_exists('media/'.$file['name'])){
 
-                        $toto[] = $this->fileGetContent($file['id']);
+                        $toto['raw'][] = $this->fileGetContent($file['id']);
 
                     }
 
