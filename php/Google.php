@@ -299,10 +299,8 @@ class Google {
                         // New file
                         $myfile = fopen('media/'.$file['name'], "w");
 
-                        print_r($this->fileGetContent($file['id']));
-
                         // Add content to file
-                        fwrite($myfile, $this->fileGetContent($file['id']));
+                        fwrite($myfile, $this->fileGetContent($file['id'])['content']);
 
                         // Close file
                         fclose($myfile);
