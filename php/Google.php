@@ -212,6 +212,9 @@ class Google {
      */
     public function mediaInit(){
 
+        # Echo
+        echo "<script>console.log('start');</script>";
+
         // Clear data temp
         $parentsID = [];
         $filesID = [];
@@ -311,6 +314,9 @@ class Google {
 
         # Echo
         echo "<script>console.log(".json_encode($toto).");</script>";
+
+        # Echo
+        echo "<script>console.log('end');</script>";
     }
 
     function unflattenArray($flatArray){
