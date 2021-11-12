@@ -304,14 +304,12 @@ class Google {
                         $toto['raw'][] = $this->fileGetContent($file['id']);
 
                     }
-
-            
-
-            # Echo
-            echo "<script>console.log(".json_encode($toto).");</script>";
                         
 
         }
+
+        # Echo
+        echo "<script>console.log(".json_encode($toto).");</script>";
     }
 
     function unflattenArray($flatArray){
