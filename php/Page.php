@@ -51,6 +51,9 @@ class Page /* extends Kglobal */ {
     # Data
     private $data = [];
 
+    # Media to copy
+    private $mediaToCopy = [];
+
     /************************************************************************************************** 
      * Construct
      * 
@@ -144,6 +147,9 @@ class Page /* extends Kglobal */ {
         # Get navigation
         $this->data['navigation'] = $this->google->navigationInit();
 
+        # Echo
+        echo "<script>console.log(".json_encode($this->data['navigation']).");</script>";
+
    }
 
     /** Get tample
@@ -153,7 +159,12 @@ class Page /* extends Kglobal */ {
 
         # Return template
         return $template ? 
-            LightnCandy::prepare(LightnCandy::compile($this->layoutGet($template), $this->LightCandy))($data) :
+            LightnCandy::prepare(
+                LightnCandy::compile(
+                    $this->layoutGet($template), 
+                    $this->LightCandy
+                )
+            )($data) :
                 '';
     }
 
