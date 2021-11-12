@@ -218,8 +218,9 @@ class Google {
         // Clear data temp
         $parentsID = [];
         $filesID = [];
-        $toto = [];
-        $toto['salut'] = 'yo';
+        $toto = [
+            'salut' =>  true
+        ];
 
         // Check service
         if($this->service['drive'] == null)
@@ -256,7 +257,7 @@ class Google {
                         'parents'   =>  $file['parents']
                     ];
 
-            $toto['parent'] = $parentsID;
+            $toto['parent'][] = $parentsID;
 
             // Check parents
             if(!empty($parentsID))
@@ -294,7 +295,7 @@ class Google {
 
                     }
 
-            $toto['file'] = $filesID;
+            $toto['file'][] = $filesID;
 
             // Check file to copy
             if(!empty($filesID))
