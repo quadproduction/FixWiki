@@ -306,7 +306,7 @@ class Google {
                     // Check if file already exist in /media
                     if(!file_exists('media/'.$file['name'])){
 
-                        $toto['raw'][] = $this->fileGetContent($file['id']);
+                        //$toto['raw'][] = $this->fileGetContent($file['id']);
 
                     }
                         
