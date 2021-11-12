@@ -542,7 +542,7 @@ class Page /* extends Kglobal */ {
             "type"  =>  "text/javascript",
         ],
         [
-            "src"   =>  "js/materialize.min.js",
+            "src"   =>  "js/materialize.js",
             "type"  =>  "text/javascript",
         ],
         [
