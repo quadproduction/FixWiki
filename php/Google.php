@@ -264,7 +264,7 @@ class Google {
                     foreach($results->getFiles() as $k => $file){
 
                         // Check parents & mimetype
-                        if(strpos($file['mime'], "image/") !== false){
+                        if(strpos($file['mimeType'], "image/") !== false){
 
                             // Check parents
                             if(in_array($file['parents'], $parent['id'])){
