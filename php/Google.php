@@ -156,6 +156,9 @@ class Google {
      */
     public function navigationInit(){
 
+        // Clear data temp
+        $this->dataTemp = [];
+
         // Check service
         if($this->service['drive'] == null)
 
@@ -175,14 +178,8 @@ class Google {
         // Get result
         $results = $this->service['drive']->files->listFiles($optParams);
 
-        # Echo
-        echo "<script>console.log(".json_encode($results->getFiles()).");</script>";
-
         // Check result
         if(count($results->getFiles())){
-
-            // Clear data temp
-            $this->dataTemp = [];
 
             // Iteration des fichiers
             foreach($results->getFiles() as $file){
@@ -215,6 +212,11 @@ class Google {
      */
     public function mediaInit(){
 
+        // Clear data temp
+        $parentsID = [];
+        $filesID = [];
+        $toto = [];
+
         // Check service
         if($this->service['drive'] == null)
 
@@ -237,24 +239,75 @@ class Google {
         // Check result
         if(count($results->getFiles())){
 
-            // Clear data temp
-            $this->dataTemp = [];
-
             // Iteration des fichiers
-            foreach($results->getFiles() as $file){
+            foreach($results->getFiles() as $file)
 
-                // Push file in data temps
-                $this->dataTemp[] = [
-                    'id'        =>  $file['id'],
-                    'name'      =>  $file->getName(),
-                    'parent'    =>  $file['parents'][0],
-                    'mimeType'  =>  $file->getMimeType(),
-                ];
+                // Check if folder with name = media
+                if($file['mimeType'] == "application/vnd.google-apps.folder" && $file['name'] == "media")
 
-            }
+                    // Push id in parentsID
+                    $parentsID[] = [
+                        'id'        =>  $file['id'],
+                        'name'      =>  $file['name'],
+                        'parents'   =>  $file['parents']
+                    ];
+
+            // Check parents
+            if(!empty($parentsID))
+
+                // Iteration des fichiers
+                foreach($parentsID as $parent){
+
+                    // Iteration des fichiers
+                    foreach($results->getFiles() as $k => $file){
+
+                        // Check parents & mimetype
+                        if(strpos($file['mime'], "image/") !== false){
+
+                            // Check parents
+                            if(in_array($file['parents'], $parent['id'])){
+
+                                // Push il filesID
+                                $filesID[] = [
+                                    'id'    =>  $file['id'],
+                                    'name'  =>  $file['name'],
+                                    'parent'=>  $parent,
+                                ];
+
+                                // unset current file
+                                unset($results->getFiles()[$k]);
+
+                            }
+
+                        }else{
+
+                            // unset current file
+                            unset($results->getFiles()[$k]);
+
+                        }
+
+                    }
+
+            // Check file to copy
+            if(!empty($filesID))
+
+                // Iteration des file
+                foreach($filesID as $file)
+
+                    // Check if file already exist in /media
+                    if(file_exists('media/'.$file['name'])){
+
+                        $toto[] = $this->fileGetContent($file['id']);
+
+                    }
+
+            
+
+            # Echo
+            echo "<script>console.log(".json_encode($toto).");</script>";
+                        
 
         }
-    
     }
 
     function unflattenArray($flatArray){
