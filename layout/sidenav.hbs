@@ -19,7 +19,7 @@
               {{#each children}}
                 {{#ifEquals mimeType 'application/vnd.google-apps.folder'}}{{else}}
                 <li>
-                  <a href="?parent={{../name}}&page={{name}}" class="waves-effect">{{removeExt name 'md'}}<i class="material-icons">description</i></a>
+                  <a href="?parent={{../name}}&page={{name}}" class="waves-effect">{{removeExt name 'md'}}<i class="material-icons">description{{mimeType}}</i></a>
                 </li>
                 {{/ifEquals}}
               {{/each}}
