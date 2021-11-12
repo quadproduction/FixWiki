@@ -212,15 +212,9 @@ class Google {
      */
     public function mediaInit(){
 
-        # Echo
-        echo "<script>console.log('start');</script>";
-
         // Clear data temp
         $parentsID = [];
         $filesID = [];
-        $toto = [
-            'salut' =>  true
-        ];
 
         // Check service
         if($this->service['drive'] == null)
@@ -256,8 +250,6 @@ class Google {
                         'name'      =>  $file['name'],
                         'parents'   =>  $file['parents']
                     ];
-
-            $toto['parent'][] = $parentsID;
 
             // Check parents
             if(!empty($parentsID))
@@ -295,8 +287,6 @@ class Google {
 
                     }
 
-            $toto['file'][] = $filesID;
-
             // Check file to copy
             if(!empty($filesID))
 
@@ -306,18 +296,19 @@ class Google {
                     // Check if file already exist in /media
                     if(!file_exists('media/'.$file['name'])){
 
-                        //$toto['raw'][] = $this->fileGetContent($file['id']);
+                        // New file
+                        $myfile = fopen("newfile.txt", "w");
+
+                        // Add content to file
+                        fwrite($myfile, $this->fileGetContent($file['id']));
+
+                        // Close file
+                        fclose($myfile);
 
                     }
-                        
 
         }
-
-        # Echo
-        echo "<script>console.log(".json_encode($toto).");</script>";
-
-        # Echo
-        echo "<script>console.log('end');</script>";
+        
     }
 
     function unflattenArray($flatArray){
