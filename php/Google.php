@@ -216,6 +216,7 @@ class Google {
         $parentsID = [];
         $filesID = [];
         $toto = [];
+        $toto['salut'] = 'yo';
 
         // Check service
         if($this->service['drive'] == null)
