@@ -147,6 +147,9 @@ class Page /* extends Kglobal */ {
         # Get navigation
         $this->data['navigation'] = $this->google->navigationInit();
 
+        # Get navigation
+        $this->google->mediaInit();
+
    }
 
     /** Get tample
