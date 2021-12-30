@@ -1,0 +1,64 @@
+# Page of the app
+page:
+    head:
+        default: main
+        branches:
+            main:
+                -
+                    tag: meta
+                    attributes:
+                        charset: '{{app.charset}}'
+                -
+                    tag: meta
+                    attributes:
+                        http-equiv: X-UA-Compatible
+                        content: IE=edge
+                -
+                    tag: meta
+                    attributes:
+                        name: viewport
+                        content:
+                            width: device-width
+                            initial-scale: 1.0
+                            user-scalable: 0
+                            minimal-ui: null
+                -
+                    tag: meta
+                    attributes:
+                        name: application-name
+                        content: '{{app.name}}'
+                -
+                    tag: meta
+                    attributes:
+                        name: theme-color
+                        content: '#2196f3'
+                -
+                    tag: meta
+                    attributes:
+                        name: description
+                        content: '{{app.description}}'
+                -
+                    tag: meta
+                    attributes:
+                        name: robots
+                        content: '{{app.indexing}}'
+                -
+                    tag: meta
+                    attributes:
+                        name: googlebot
+                        content: '{{app.indexing}}'
+                -
+                    tag: meta
+                    attributes:
+                        name: google
+                        content: notranslate
+                -
+                    tag: meta
+                    attributes:
+                        name: rating
+                        content: General
+                -
+                    tag: link
+                    attributes:
+                        rel: manifest
+                        href: manifest.json

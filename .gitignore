@@ -1,10 +1,3 @@
-media/*
-.DS_Store
-css/.DS_Store
-js/.DS_Store
-php/.DS_Store
-.DS_Store
-css/.DS_Store
-js/.DS_Store
-sass/.DS_Store
-json/token/*
+# Ignore Vendors
+node_modules/*
+vendor/*

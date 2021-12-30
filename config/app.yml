@@ -1,0 +1,40 @@
+# Configuration of the app
+app:
+    name: fixstudio_wiki
+    description: ''
+    website: ''
+    websiteAlt: ''
+    charset: 'utf-8"'
+    indexing: 'noindex, nofollow'
+    admin:
+        email: ''
+    hosts:
+        allowed:
+            - '*'
+        excluded: {  }
+    css:
+        framework:
+            source: github
+            author: kekefreedog
+            package: Kmaterialize
+            branch: advanced
+            theme: vertical-gradient-menu
+    template:
+        engine:
+            php:
+                source: github
+                author: zordius
+                package: lightncandy
+            js:
+                package: handlebars
+        root: resources/hbs
+        extension: hbs
+    auth:
+        type: Kauth
+    database:
+        engine: pdo
+        name: 'kevinzar_{{app_name}}'
+        user: null
+        password: null
+        host: 127.0.0.1
+        port: '5432'

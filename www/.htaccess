@@ -1,0 +1,16 @@
+# ******************************************************
+#  Copyright (C) 2019-2021 Kévin Zarshenas
+#  kevin.zarshenas@gmail.com
+#  
+#  This file is part of LuckyPHP.
+#  
+#  This code can not be copied and/or distributed without the express
+#  permission of Kévin Zarshenas @kekefreedog
+# ******************************************************
+# Enable rewrite
+RewriteEngine on
+
+# Convert subfolder to root get value and redirect to .index
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?root=$1 [QSA,L]

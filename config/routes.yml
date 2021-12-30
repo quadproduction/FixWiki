@@ -1,0 +1,30 @@
+# Rootes of the app
+routes:
+    -
+        name: Home
+        patterns:
+            - /index/
+        methods:
+            - get
+        response: html
+    -
+        name: Info
+        patterns:
+            - /api/
+        methods:
+            - get
+        response: json
+    -
+        name: 'Page not found'
+        patterns:
+            - '/*/'
+        methods:
+            - '*'
+        response: html
+methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTION
+    - PATCH
