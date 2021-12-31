@@ -55,6 +55,11 @@ page:
                 -
                     tag: meta
                     attributes:
+                        name: google-site-verification
+                        content: Tr4iJ1jgJkXy8p6apd_kKwTxvIBJllokc9EvvrsLbUU
+                -
+                    tag: meta
+                    attributes:
                         name: rating
                         content: General
                 -

@@ -19,12 +19,16 @@ namespace App\Controllers;
  */
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
-use LuckyPHP\Front\Console;
+use App\GoogleDrive;
+use App\Google;
 
 /** Class for manage the workflow of the app
  *
  */
 class HomeAction extends ControllerBase implements ControllerInterface{
+
+    # Google Drive
+    private $google_drive;
 
     /** Constructor
      *
@@ -49,6 +53,11 @@ class HomeAction extends ControllerBase implements ControllerInterface{
 
         # New model
         $this->newModel();
+
+        # New google drive
+        $this->google_drive = new GoogleDrive(
+            new Google
+        );
 
         # Load app config
         $this->model

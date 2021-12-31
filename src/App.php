@@ -20,6 +20,7 @@ require __DIR__.'/../vendor/autoload.php';
 use App\Controller;
 use App\Kernel;
 use App\Viewer;
+use App\Google;
 
 /** Class for manage the workflow of the app
  * 
@@ -58,6 +59,11 @@ class App extends Kernel{
          * 
          */
         $this->configSet();
+
+        /** Connection to google api
+         * 
+         */
+        new Google();
 
         /** Read the application kernel
          * (search cache or generate it)

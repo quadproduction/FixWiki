@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '98699f356b1af26d614bd8caec4e68614d5ea201',
+        'reference' => '54c213bf5fb4ef045590778630a6862676a36e50',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '98699f356b1af26d614bd8caec4e68614d5ea201',
+            'reference' => '54c213bf5fb4ef045590778630a6862676a36e50',
             'dev_requirement' => false,
         ),
         'catfan/medoo' => array(
