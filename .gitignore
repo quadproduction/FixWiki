@@ -1,3 +1,4 @@
 # Ignore Vendors
 node_modules/*
 vendor/*
+resources/json/*

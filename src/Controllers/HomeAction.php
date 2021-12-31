@@ -54,10 +54,14 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         # New model
         $this->newModel();
 
+        # New google client
+        ;
+
         # New google drive
-        $this->google_drive = new GoogleDrive(
-            new Google
-        );
+        $this->google_drive = new GoogleDrive();
+
+        # Get all data
+        $this->google_drive->getAllFileFromSharedDrive();
 
         # Load app config
         $this->model
@@ -78,4 +82,5 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         return $this->name;
 
     }
+
 }

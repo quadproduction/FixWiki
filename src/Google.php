@@ -26,9 +26,9 @@ use Google\Service\Drive;
 class Google{
 
     # Client
-    private $client;
-    private $pathJson = "resources/json/code_secret_client_847121260194-s5i8sg36rph7od7gs7l38kol22lhh7e8.apps.googleusercontent.com.json";
-    private $pathTokken = "resources/json/tokken.json";
+    public $client;
+    private $pathJson = __ROOT_APP__."resources/json/"."client_secret_847121260194-s5i8sg36rph7od7gs7l38kol22lhh7e8.apps.googleusercontent.com.json";
+    private $pathTokken = __ROOT_APP__."resources/json/tokken.json";
 
     /** Constructor
      *  
@@ -41,9 +41,6 @@ class Google{
         # Check tokken
         $this->checkTokken();
 
-        # Return client
-        return $this->client;
-
     }
 
     /** Prepare client
@@ -55,7 +52,7 @@ class Google{
         $this->client = new Client();
         $this->client->setApplicationName('Fixstudio Wiki');
         $this->client->setScopes(Drive::DRIVE_READONLY);
-        $this->client->setAuthConfig(__ROOT_APP__.$this->pathJson);
+        $this->client->setAuthConfig($this->pathJson);
         $this->client->setAccessType('offline');
         $this->client->setPrompt('select_account consent');
 
@@ -64,7 +61,7 @@ class Google{
     private function checkTokken(){
 
         # Set redirect
-        $redirect_uri = $_SERVER['REQUEST_SCHEME'].'://'. $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $redirect_uri = $_SERVER['REQUEST_SCHEME'].'://'. $_SERVER['HTTP_HOST'].explode('?',$_SERVER['REQUEST_URI'])[0];
 
         # Check if code as get content
         if(isset($_GET['code'])){
@@ -134,6 +131,16 @@ class Google{
             header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 
         }
+
+    }
+
+    /** Get client
+     * 
+     */
+    public function get(){
+
+        # Return client
+        return $this->client;
 
     }
 

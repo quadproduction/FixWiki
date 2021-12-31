@@ -12,7 +12,14 @@ composer install
 npm install
 ```
 
-### 3. Add a virtual host
+## 3. Add a virtual host
 - It is better to setup an host link to the projet for help you in developpement
 - You can follow this doc : [Add new virtual hosts](/vendor/kekefreedog/luckyphp/docs/etc/virtual_host.md)
 - Don't forget to restart Apache Server
+
+## 4. Check permission
+- By default mac restricted permission
+- Execute bellow commands for enable permission for read and write on all folders / sub-folders of your app :
+```sh
+chmod -R +rw /Users/kevin/Sites/fixstudio_wiki/
+```
