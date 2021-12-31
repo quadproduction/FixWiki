@@ -56,7 +56,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
             ->setFrameworkExtra();
         ;
 
-        Console::log([$this->model->execute()]);
+        //Console::log([$this->getModelResult()]);
 
     }
 

@@ -1,6 +1,15 @@
 {
     "require": {
-        "kekefreedog\/luckyphp": "dev-main"
+        "kekefreedog\/luckyphp": "dev-main",
+        "google/apiclient": "^2.12"
+    },
+    "scripts": {
+        "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+    },
+    "extra": {
+        "google/apiclient-services": [
+            "Drive"
+        ]
     },
     "autoload": {
         "psr-4": {
