@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '95614db34313e2be8f9ae46ee1594df17754cc4a',
+        'reference' => '9c0135ef74a9bd802778f6736db69ffa7ad34b30',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '95614db34313e2be8f9ae46ee1594df17754cc4a',
+            'reference' => '9c0135ef74a9bd802778f6736db69ffa7ad34b30',
             'dev_requirement' => false,
         ),
         'catfan/medoo' => array(
@@ -36,7 +36,7 @@
             'aliases' => array(
                 0 => '9999999-dev',
             ),
-            'reference' => '647826594b93c06b708aa50f3093256309454587',
+            'reference' => '83d5a4cdc4ea8e8e8a329a527914683289182d73',
             'dev_requirement' => false,
         ),
         'mezon/router' => array(

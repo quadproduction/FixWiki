@@ -17,14 +17,13 @@ namespace App\Controllers;
 /** Dependances
  *
  */
-use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
-use LuckyPHP\Front\Console;
+use LuckyPHP\Interface\Controller as ControllerInterface;
 
 /** Class for manage the workflow of the app
  *
  */
-class HomeAction extends ControllerBase implements ControllerInterface{
+class LoginAction extends ControllerBase implements ControllerInterface{
 
     /** Constructor
      *
@@ -35,28 +34,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="HomeAction";
-
-        # Model action
-        $this->modelAction();
-
-    }
-
-    /** Model action
-     * 
-     */
-    private function modelAction(){
-
-        # New model
-        $this->newModel();
-
-        # Load app config
-        $this->model
-            ->loadConfig('app')
-            ->setFrameworkExtra();
-        ;
-
-        Console::log([$this->model->execute()]);
+        $this->name="Login";
 
     }
 

@@ -8,6 +8,13 @@ routes:
             - get
         response: html
     -
+        name: Login
+        patterns:
+            - /login/
+        methods:
+            - get
+        response: html
+    -
         name: Info
         patterns:
             - /api/
