@@ -66,10 +66,11 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         # Load app config
         $this->model
             ->loadConfig('app')
-            ->setFrameworkExtra();
+            ->setFrameworkExtra()
+            ->pushDataInUserInterface($this->google_drive->getData())
         ;
 
-        //Console::log([$this->getModelResult()]);
+        //\LuckyPHP\Front\Console::log($this->model->execute());
 
     }
 
