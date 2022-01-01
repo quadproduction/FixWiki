@@ -21,10 +21,10 @@ use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
 use LuckyPHP\Server\Exception;
 
-/** Class for manage the workflow of the app
+/** Class for manage logo
  *
  */
-class PageNotFoundAction extends ControllerBase implements ControllerInterface{
+class LogoAction extends ControllerBase implements ControllerInterface{
 
     /** Constructor
      *
@@ -35,13 +35,35 @@ class PageNotFoundAction extends ControllerBase implements ControllerInterface{
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="PageNotFoundAction";
+        $this->name="Logo";
 
-        # New Exception
-        $e = new Exception("The page you are looking for doesn't exist", 404);
+        # Model action
+        $this->modelAction();
 
-        # Display html
-        $e->getHtml();
+    }
+
+    /** Model action
+     * 
+     */
+    private function modelAction(){
+
+        # New model
+        $this->newModel();
+
+        # Get logo name
+        $logoName = $this->parameters['logo_name'];
+
+        try{
+
+            # Search file in "/resources/png/logo/"
+            $this->model->getFile($logoName, __ROOT_APP__."resources/png/logo/", ["png"]);
+
+        }catch(Exception $e){
+
+            # Message html
+            $e->getHtml();
+
+        }
 
     }
 

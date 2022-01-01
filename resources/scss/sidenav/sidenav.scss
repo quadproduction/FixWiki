@@ -1,0 +1,46 @@
+/* Fix Sidenav issue */
+aside {
+	&.sidenav-main {
+		&.nav-collapsed {
+			.brand-logo {
+				img {
+					&:first-child {
+						display: none!important;
+					}
+					&:nth-child(2) {
+						display: unset!important;
+					}
+				}
+			}
+		}
+		&:not(.nav-collapsed) {
+			.brand-logo {
+				img {
+					&:first-child {
+						display: unset!important;
+					}
+					&:nth-child(2) {
+						display: none!important;
+					}
+				}
+			}
+		}
+		.brand-logo {
+			padding: 16px 12px 16px 15px!important;
+			img {
+				height: 30px!important;
+			}
+			.logo-text {
+				vertical-align: 8px;
+				font-weight: bold;
+			}
+		}
+        .brand-sidebar {
+            .navbar-toggler {
+                i {
+                    cursor: pointer;
+                }
+            }
+        }
+	}
+}
