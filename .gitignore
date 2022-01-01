@@ -1,4 +1,9 @@
 # Ignore Vendors
 node_modules/*
 vendor/*
+
+# Ignore sensible files
 resources/json/*
+
+# Ignore log
+logs/*

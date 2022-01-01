@@ -63,7 +63,11 @@ class App extends Kernel{
         /** Connection to google api
          * 
          */
-        new Google();
+        try {
+            new Google();
+        } catch (Exception $e) {
+            Google::exceptionCheck($e);
+        }
 
         /** Read the application kernel
          * (search cache or generate it)

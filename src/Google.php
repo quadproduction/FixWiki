@@ -17,8 +17,9 @@ namespace App;
 /** Dependances
  * 
  */
-use Google\Client;
+use LuckyPHP\Server\Exception;
 use Google\Service\Drive;
+use Google\Client;
 
 /** Class for manage Google client
  * 
@@ -35,11 +36,11 @@ class Google{
      */
     public function __construct(){
 
-        # Prepare Client
-        $this->prepareClient();
+            # Prepare Client
+            $this->prepareClient();
 
-        # Check tokken
-        $this->checkTokken();
+            # Check tokken
+            $this->checkTokken();
 
     }
 
@@ -48,13 +49,13 @@ class Google{
      */
     private function prepareClient(){
 
-        # New client
-        $this->client = new Client();
-        $this->client->setApplicationName('Fixstudio Wiki');
-        $this->client->setScopes(Drive::DRIVE_READONLY);
-        $this->client->setAuthConfig($this->pathJson);
-        $this->client->setAccessType('offline');
-        $this->client->setPrompt('select_account consent');
+            # New client
+            $this->client = new Client();
+            $this->client->setApplicationName('Fixstudio Wiki');
+            $this->client->setScopes(Drive::DRIVE_READONLY);
+            $this->client->setAuthConfig($this->pathJson);
+            $this->client->setAccessType('offline');
+            $this->client->setPrompt('select_account consent');
 
     }
 
@@ -141,6 +142,36 @@ class Google{
 
         # Return client
         return $this->client;
+
+    }
+
+    /** exepction check
+     * 
+     */
+    public static function exceptionCheck($e){
+
+        # Set message
+        $message = $e->getMessage();
+
+        # check if .json" does not exist
+        if(strpos($message, ".json\" does not exist") !== false):
+
+            # New exception
+            $exception = new Exception("Please download oauth json file from https://console.cloud.google.com", 401);
+
+        # Else unkown message
+        else:
+
+            $exception = new Exception($message, 500);
+
+        endif;
+
+        # Print message
+
+            $exception->getHtml();
+
+        # Stop script
+        exit();
 
     }
 
