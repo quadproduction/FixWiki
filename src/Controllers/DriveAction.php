@@ -19,12 +19,14 @@ namespace App\Controllers;
  */
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
+use LuckyPHP\Server\Exception;
+use LuckyPHP\Front\Console;
 use App\GoogleDrive;
 
 /** Class for manage the workflow of the app
  *
  */
-class HomeAction extends ControllerBase implements ControllerInterface{
+class DriveAction extends ControllerBase implements ControllerInterface{
 
     # Google Drive
     private $google_drive;
@@ -38,7 +40,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="HomeAction";
+        $this->name="DriveAction";
 
         # Model action
         $this->modelAction();
@@ -61,6 +63,22 @@ class HomeAction extends ControllerBase implements ControllerInterface{
 
         # Get all data
         $this->google_drive->getAllFileFromSharedDrive();
+
+        # Set Root
+        $root = "/drive/".implode("/", $this->parameters)."/";
+
+        try{
+        
+            # Get value from directory
+            $value = $this->google_drive->getDirectory($root);
+
+        }catch(Exception $e){
+
+            $e->getHtml();
+
+        }
+
+        Console::log($value);
 
         # Load app config
         $this->model

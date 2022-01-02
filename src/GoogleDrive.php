@@ -20,6 +20,8 @@ namespace App;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Front\Console;
+use LuckyPHP\Code\Strings;
+use LuckyPHP\Code\Arrays;
 use Google\Service\Drive;
 use App\Google;
 
@@ -33,6 +35,9 @@ class GoogleDrive{
 
     # Config
     private $config;
+
+    # Directory (annuaire)
+    private $directory = [];
 
     # conditions
     private $conditions = [
@@ -127,7 +132,7 @@ class GoogleDrive{
     /** Stretch array by parents
      * 
      */
-    private function stretchByParents($batch, string $root = ""){
+    private function stretchByParents($batch, string $root = "", string $rootName = "/drive/"){
 
         # Set root
         if(!$root)
@@ -166,17 +171,22 @@ class GoogleDrive{
                             'icon'  =>  [
                                 "class" =>  "material-icons",
                                 "text"  =>  "folder",  
-                            ]
                             ],
+                            'root'  =>  $rootName.Strings::clean(pathinfo($file->getName(), PATHINFO_FILENAME))."/",
+                        ],
                         "entity"    =>  "folder",
                         "relationships" =>  []
                     ];
 
                     # Set resationships
-                    $currentResult["relationships"] = $this->stretchByParents($batch, $file->getId());
+                    $currentResult["relationships"] = $this->stretchByParents(
+                        $batch,
+                        $file->getId(),
+                        $currentResult['_user_interface']['root']
+                    );
 
                     # Push current result in result
-                    $result["folder"][] = $currentResult;                    
+                    $result["folder"][] = $currentResult;    
 
                 }else
                 # If file as root like parent and if mimetype of the file is allow
@@ -198,12 +208,23 @@ class GoogleDrive{
                             "created_time"  =>  $file->getCreatedTime(),
                             "modified_time" =>  $file->getModifiedTime(),
                         ],
-                        "_user_interface"   => $this->conditions['mimeTypeAllow'][$file->getMimeType()],
+                        "_user_interface"   => 
+                            $this->conditions['mimeTypeAllow'][$file->getMimeType()] +
+                            [
+                                'root'  =>  $rootName.Strings::clean(pathinfo($file->getName(), PATHINFO_FILENAME)).'/'
+                            ]
+                        ,
                         "entity"    =>  "file"
                     ];
 
                     # Push current result in result
                     $result["file"][] = $currentResult;
+                    
+                    # Push current result in directory
+                    $this->pushDirectory(
+                        $currentResult['_user_interface']['root'],
+                        $currentResult
+                    );
 
                 }
 
@@ -236,5 +257,69 @@ class GoogleDrive{
         return $this->data;
 
     }
+
+    /**********************************************************************************
+     * Directory
+     */
+
+    /** push directory
+     * 
+     */
+    private function pushDirectory(string $root, array $values):void{
+
+        # Push value in directory
+        $this->directory[] = [
+            'root'  =>  $root,
+            //'values'=>  $values
+        ];
+
+    }
+
+    /** get directory
+     * 
+     */
+    public function getDirectory(string $root){
+
+        # Search root
+        $results = Arrays::filter_by_key_value($this->directory, 'root', $root);
+
+        # Clean root
+        $root = str_replace("/drive", "", $root);
+        $root = rtrim($root, '/');
+
+        # If 1 result
+        if(count($results) === 1)
+
+            # Return first value
+            return $results[array_key_first($results)];
+
+        else
+        # If 0 result
+        if(empty($results))
+
+            # New error
+            throw new Exception("There is no file named \"$root\" in Google... Check the trash", 404);
+
+        # Else multiple response
+        else
+
+            # New error
+            throw new Exception("There are multiple files in Google Drive with the same name and in the same folder \"$root\". Please rename one of them !", 409);
+
+    }
+
+    /** get directory conflict
+     * 
+     */
+    private function hasDirectoryConflict(string $root):bool{
+
+        # Search root
+        $results = Arrays::filter_by_key_value($this->directory, 'root', $root);
+
+        # If more than 1 result
+        return (count($results) > 1) ? true : false;
+
+    }
+
 
 }

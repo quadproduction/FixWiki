@@ -175,7 +175,7 @@
                         {{!-- Iteration des files --}}
                         {{#each this.relationships.file}}            
                         <li class="bold">
-                            <a class="waves-effect waves-cyan " href="">
+                            <a class="waves-effect waves-cyan" href="{{this._user_interface.root}}">
                                 <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                 <span class="menu-title">{{this.attributes.name}}</span>
                             </a>
@@ -200,8 +200,8 @@
                                         {{!-- Iteration des files --}}
                                         {{#each this.relationships.file}}            
                                         <li class="bold">
-                                            <a class="waves-effect waves-cyan " href="">
-                                                <i class="material-icons">description</i>
+                                            <a class="waves-effect waves-cyan"  href="{{this._user_interface.root}}">
+                                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                                 <span class="menu-title">{{this.attributes.name}}</span>
                                             </a>
                                         </li>
@@ -214,7 +214,7 @@
                                         {{#each this.relationships.folder}}
                                         <li class="bold">
                                             <a class="collapsible-header waves-effect waves-cyan">
-                                                <i class="material-icons">folder</i>
+                                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                                 <span class="menu-title">{{this.attributes.name}}</span>
                                             </a>
                                             <div class="collapsible-body">
@@ -225,8 +225,8 @@
                                                         {{!-- Iteration des files --}}
                                                         {{#each this.relationships.file}}            
                                                         <li class="bold">
-                                                            <a class="waves-effect waves-cyan " href="">
-                                                                <i class="material-icons">description</i>
+                                                            <a class="waves-effect waves-cyan" href="{{this._user_interface.root}}">
+                                                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                                                 <span class="menu-title">{{this.attributes.name}}</span>
                                                             </a>
                                                         </li>
@@ -239,19 +239,19 @@
                                                         {{#each this.relationships.folder}}
                                                         <li class="bold">
                                                             <a class="collapsible-header waves-effect waves-cyan">
-                                                                <i class="material-icons">folder</i>
+                                                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                                                 <span class="menu-title">{{this.attributes.name}}</span>
                                                             </a>
                                                             <div class="collapsible-body">
                                                                 <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                                                                    {{!-- Depth 3 --}}
+                                                                    {{!-- Depth 4 --}}
                                                                     {{!-- Check if file --}}
                                                                     {{#if this.relationships.file}}
                                                                         {{!-- Iteration des files --}}
                                                                         {{#each this.relationships.file}}            
                                                                         <li class="bold">
-                                                                            <a class="waves-effect waves-cyan " href="">
-                                                                                <i class="material-icons">description</i>
+                                                                            <a class="waves-effect waves-cyan" href="{{this._user_interface.root}}">
+                                                                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                                                                 <span class="menu-title">{{this.attributes.name}}</span>
                                                                             </a>
                                                                         </li>

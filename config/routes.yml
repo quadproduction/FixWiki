@@ -8,6 +8,16 @@ routes:
             - get
         response: html
     -
+        name: Drive
+        patterns:
+            - /drive/[a:root0]/
+            - /drive/[a:root0]/[a:root1]
+            - /drive/[a:root0]/[a:root2]/[a:root3]
+            - /drive/[a:root0]/[a:root2]/[a:root3]/[a:root4]
+        methods:
+            - get
+        response: html
+    -
         name: Login
         patterns:
             - /login/
