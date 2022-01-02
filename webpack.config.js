@@ -49,7 +49,7 @@ const TerserPlugin = require("terser-webpack-plugin");
              },
              /* Fonts */
              {
-                 test: /\.(woff|woff2)$/,
+                 test: /\.(woff|woff2|eot|ttf)$/,
                  type: 'asset/resource',
                  generator: {
                      filename: './../fonts/[name][ext]',

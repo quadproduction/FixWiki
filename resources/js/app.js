@@ -18,3 +18,6 @@ require("Kmaterialize/src/js/search.js");
 /* Import CSS */
 import './style/framework';
 import './style/style';
+
+/* Icons */
+import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';

@@ -37,7 +37,15 @@ class GoogleDrive{
     # conditions
     private $conditions = [
         "folderNameExclude" =>  ["media"],
-        "mimeTypeAllow"     =>  ["text/markdown"/* , "application/vnd.google-apps.document" */]
+        "mimeTypeAllow"     =>  [
+            "text/markdown"     =>  [
+                'icon'  =>  [
+                    "class" =>  "fab fa-markdown",
+                    "text"  =>  "",
+                ]
+            ]
+            /* , "application/vnd.google-apps.document" */
+        ]
     ];
 
     /** Constructor
@@ -154,6 +162,12 @@ class GoogleDrive{
                             "created_time"  =>  $file->getCreatedTime(),
                             "modified_time" =>  $file->getModifiedTime(),
                         ],
+                        "_user_interface"   =>  [
+                            'icon'  =>  [
+                                "class" =>  "material-icons",
+                                "text"  =>  "folder",  
+                            ]
+                            ],
                         "entity"    =>  "folder",
                         "relationships" =>  []
                     ];
@@ -168,7 +182,7 @@ class GoogleDrive{
                 # If file as root like parent and if mimetype of the file is allow
                 if(
                     in_array($root, $file->getParents()) &&
-                    in_array($file->getMimeType(), $this->conditions['mimeTypeAllow'])
+                    array_key_exists($file->getMimeType(), $this->conditions['mimeTypeAllow'])
                 ){
 
                     # Push file in result
@@ -184,6 +198,7 @@ class GoogleDrive{
                             "created_time"  =>  $file->getCreatedTime(),
                             "modified_time" =>  $file->getModifiedTime(),
                         ],
+                        "_user_interface"   => $this->conditions['mimeTypeAllow'][$file->getMimeType()],
                         "entity"    =>  "file"
                     ];
 

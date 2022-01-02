@@ -44,3 +44,26 @@ aside {
         }
 	}
 }
+/* Icon fontawsome */
+.sidenav {
+	li {
+		>a {
+			>i.fab {
+				margin: 0 20px 0 0;
+				height: 44px;
+				line-height: 44px;
+				width: 24px;
+				font-size: 1.1rem;
+			}
+		}
+		a.collapsible-header {
+			>i.fab {
+				margin: 0 20px 0 0;
+				height: 44px;
+				line-height: 44px;
+				width: 24px;
+				font-size: 1.1rem;
+			}
+		}
+	}
+}

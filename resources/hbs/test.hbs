@@ -176,7 +176,7 @@
                         {{#each this.relationships.file}}            
                         <li class="bold">
                             <a class="waves-effect waves-cyan " href="">
-                                <i class="material-icons">description</i>
+                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                 <span class="menu-title">{{this.attributes.name}}</span>
                             </a>
                         </li>
@@ -189,7 +189,7 @@
                         {{#each this.relationships.folder}}
                         <li class="bold">
                             <a class="collapsible-header waves-effect waves-cyan">
-                                <i class="material-icons">folder</i>
+                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                 <span class="menu-title">{{this.attributes.name}}</span>
                             </a>
                             <div class="collapsible-body">

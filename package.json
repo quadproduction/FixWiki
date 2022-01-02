@@ -1,6 +1,7 @@
 {
     "dependencies": {
-        "Kmaterialize": "github:kekefreedog\/Kmaterialize#advanced"
+        "@fortawesome/fontawesome-free": "^5.15.4",
+        "Kmaterialize": "github:kekefreedog/Kmaterialize#advanced"
     },
     "devDependencies": {
         "css-loader": "^6.5.1",
