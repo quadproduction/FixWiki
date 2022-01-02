@@ -1,7 +1,9 @@
 {
     "require": {
         "kekefreedog\/luckyphp": "dev-main",
-        "google/apiclient": "^2.12"
+        "google/apiclient": "^2.12",
+        "erusev/parsedown": "^1.7",
+        "leblanc-simon/parsedown-checkbox": "*"
     },
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup"

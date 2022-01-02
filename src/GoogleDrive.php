@@ -33,6 +33,9 @@ class GoogleDrive{
     # Drive
     private $drive;
 
+    # Current file
+    private $currentFile = null;
+
     # Config
     private $config;
 
@@ -104,7 +107,7 @@ class GoogleDrive{
         # Parameters
         $parameters = array(
             'includeItemsFromAllDrives' => true,
-            'fields'                    => 'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser)',
+            'fields'                    => 'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser, webContentLink)',
             'supportsAllDrives'         => true,
             'driveId'                   => $this->config['app']['google']['drive']['driveId'],
             'corpora'                   => 'drive',
@@ -223,7 +226,7 @@ class GoogleDrive{
                     # Push current result in directory
                     $this->pushDirectory(
                         $currentResult['_user_interface']['root'],
-                        $currentResult
+                        $file
                     );
 
                 }
@@ -259,18 +262,55 @@ class GoogleDrive{
     }
 
     /**********************************************************************************
+     * Current file
+     */
+
+    /** Set current file
+     * 
+     */
+    public function setCurrentfile(\Google\Service\Drive\DriveFile $file){
+
+        # Set current file
+        $this->currentFile = $file;
+
+    }
+
+    /** Get content of the current file
+     * Depending of the type mime
+     */
+    public function getContentFile(){
+
+        # If markdown
+        if($this->currentFile->getMimeType() == "text/markdown"){
+
+            $ctx = $this->drive->files->get(
+                $this->currentFile->getId(),
+                [
+                    'supportsAllDrives' => true, 
+                    'fields' => 'webContentLink, mimeType, name',
+                    'alt' => 'media',
+                ]
+            );
+
+            //print_r($ctx->getBody()->getContents());
+
+        }
+
+    }
+
+    /**********************************************************************************
      * Directory
      */
 
     /** push directory
      * 
      */
-    private function pushDirectory(string $root, array $values):void{
+    private function pushDirectory(string $root, $file):void{
 
         # Push value in directory
         $this->directory[] = [
             'root'  =>  $root,
-            //'values'=>  $values
+            'file'  =>  $file
         ];
 
     }

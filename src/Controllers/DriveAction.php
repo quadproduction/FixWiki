@@ -70,7 +70,7 @@ class DriveAction extends ControllerBase implements ControllerInterface{
         try{
         
             # Get value from directory
-            $value = $this->google_drive->getDirectory($root);
+            $result = $this->google_drive->getDirectory($root);
 
         }catch(Exception $e){
 
@@ -78,7 +78,11 @@ class DriveAction extends ControllerBase implements ControllerInterface{
 
         }
 
-        Console::log($value);
+        # Set current file in google drive
+        $this->google_drive->setCurrentfile($result['file']);
+
+        # Get content of file
+        $this->google_drive->getContentFile();
 
         # Load app config
         $this->model
