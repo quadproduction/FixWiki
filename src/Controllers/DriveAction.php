@@ -42,8 +42,25 @@ class DriveAction extends ControllerBase implements ControllerInterface{
         # Set name
         $this->name="DriveAction";
 
+        # Setup layouts
+        $this->setupLayouts();
+
         # Model action
         $this->modelAction();
+
+    }
+
+    /** Setup layouts
+     * 
+     */
+    private function setupLayouts(){
+
+        # Set layouts
+        $this->setLayouts([
+            'head',
+            'sidenav',
+            'main',
+        ]);
 
     }
 
@@ -81,14 +98,25 @@ class DriveAction extends ControllerBase implements ControllerInterface{
         # Set current file in google drive
         $this->google_drive->setCurrentfile($result['file']);
 
-        # Get content of file
-        $this->google_drive->getContentFile();
+        # Get html content
+        $htmlContent = $this->google_drive->getContentFile();
+        
 
         # Load app config
         $this->model
             ->loadConfig('app')
             ->setFrameworkExtra()
-            ->pushDataInUserInterface($this->google_drive->getData())
+            ->pushDataInUserInterface(
+                # Navigation
+                $this->google_drive->getData() +
+                # Main 
+                [
+                    "main"  =>  [
+                        # Get content file of current
+                        "<div class=\"col s12 markdown\">$htmlContent</div>"
+                    ]
+                ]
+            )
         ;
 
         //\LuckyPHP\Front\Console::log($this->model->execute());

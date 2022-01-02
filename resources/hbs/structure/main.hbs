@@ -1,0 +1,13 @@
+<div id="main">
+    <div class="row container">
+        {{!-- Check user interface main --}}
+        {{#if _user_interface.main}}
+            {{!-- Iteration des data --}}
+            {{#each _user_interface.main}}
+                {{!-- Display content --}}
+                {{{this}}}
+            {{/each}}
+        {{/if}}
+        <div class="content-overlay"></div>
+    </div>
+</div>

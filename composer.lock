@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92aebe72af0c79d1f608cf9a8b60c340",
+    "content-hash": "a98891959f2b7d81c423ffe7ef895bb2",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -134,20 +134,23 @@
         },
         {
             "name": "erusev/parsedown-extra",
-            "version": "0.7.1",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown-extra.git",
-                "reference": "0db5cce7354e4b76f155d092ab5eb3981c21258c"
+                "reference": "91ac3ff98f0cea243bdccc688df43810f044dcef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/0db5cce7354e4b76f155d092ab5eb3981c21258c",
-                "reference": "0db5cce7354e4b76f155d092ab5eb3981c21258c",
+                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/91ac3ff98f0cea243bdccc688df43810f044dcef",
+                "reference": "91ac3ff98f0cea243bdccc688df43810f044dcef",
                 "shasum": ""
             },
             "require": {
-                "erusev/parsedown": "~1.4"
+                "erusev/parsedown": "^1.7.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35"
             },
             "type": "library",
             "autoload": {
@@ -176,9 +179,9 @@
             ],
             "support": {
                 "issues": "https://github.com/erusev/parsedown-extra/issues",
-                "source": "https://github.com/erusev/parsedown-extra/tree/master"
+                "source": "https://github.com/erusev/parsedown-extra/tree/0.8.x"
             },
-            "time": "2015-11-01T10:19:22+00:00"
+            "time": "2019-12-30T23:20:37+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -737,12 +740,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "5676734ae38b2d8296792f6bf8563b8fb77cb6f1"
+                "reference": "c35aeb2a7d39ee36df6bca94b12caa7ec5e883f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/5676734ae38b2d8296792f6bf8563b8fb77cb6f1",
-                "reference": "5676734ae38b2d8296792f6bf8563b8fb77cb6f1",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/c35aeb2a7d39ee36df6bca94b12caa7ec5e883f9",
+                "reference": "c35aeb2a7d39ee36df6bca94b12caa7ec5e883f9",
                 "shasum": ""
             },
             "require": {
@@ -775,56 +778,7 @@
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
                 "source": "https://github.com/kekefreedog/LuckyPHP/tree/main"
             },
-            "time": "2022-01-01T23:00:21+00:00"
-        },
-        {
-            "name": "leblanc-simon/parsedown-checkbox",
-            "version": "0.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/leblanc-simon/parsedown-checkbox.git",
-                "reference": "9868c4b1f5d59e7a3b2b350d82fa5c92848b3ec1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/leblanc-simon/parsedown-checkbox/zipball/9868c4b1f5d59e7a3b2b350d82fa5c92848b3ec1",
-                "reference": "9868c4b1f5d59e7a3b2b350d82fa5c92848b3ec1",
-                "shasum": ""
-            },
-            "require": {
-                "erusev/parsedown-extra": "^0.7.1"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "ParsedownCheckbox.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Simon Leblanc",
-                    "email": "contact@leblanc-simon.eu",
-                    "homepage": "https://www.leblanc-simon.fr"
-                }
-            ],
-            "description": "An extension of Parsedown and ParsedownExtra that adds support for checkbox",
-            "homepage": "https://github.com/leblanc-simon/parsedown-checkbox",
-            "keywords": [
-                "checkbox",
-                "markdown",
-                "markdown extra",
-                "parsedown",
-                "parser"
-            ],
-            "support": {
-                "issues": "https://github.com/leblanc-simon/parsedown-checkbox/issues",
-                "source": "https://github.com/leblanc-simon/parsedown-checkbox/tree/0.0.4"
-            },
-            "time": "2019-01-31T01:16:58+00:00"
+            "time": "2022-01-02T17:14:15+00:00"
         },
         {
             "name": "mezon/router",

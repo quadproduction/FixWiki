@@ -23,6 +23,7 @@ use LuckyPHP\Front\Console;
 use LuckyPHP\Code\Strings;
 use LuckyPHP\Code\Arrays;
 use Google\Service\Drive;
+use App\Markdown;
 use App\Google;
 
 /** Class for manage Google Drive
@@ -283,6 +284,7 @@ class GoogleDrive{
         # If markdown
         if($this->currentFile->getMimeType() == "text/markdown"){
 
+            # Get content of file
             $ctx = $this->drive->files->get(
                 $this->currentFile->getId(),
                 [
@@ -292,7 +294,11 @@ class GoogleDrive{
                 ]
             );
 
-            //print_r($ctx->getBody()->getContents());
+            # Set result
+            $result = New Markdown($ctx->getBody()->getContents());
+
+            # Return result
+            return $result->execute();
 
         }
 

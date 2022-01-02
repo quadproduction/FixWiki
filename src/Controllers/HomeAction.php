@@ -40,8 +40,25 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         # Set name
         $this->name="HomeAction";
 
+        # Setup layouts
+        $this->setupLayouts();
+
         # Model action
         $this->modelAction();
+
+    }
+
+    /** Setup layouts
+     * 
+     */
+    private function setupLayouts(){
+
+        # Set layouts
+        $this->setLayouts([
+            'head',
+            'sidenav',
+            'main',
+        ]);
 
     }
 

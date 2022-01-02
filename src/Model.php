@@ -35,8 +35,4 @@ class Model extends ModelBase implements ModelInterface {
 
     }
 
-    /** 
-     *  
-     */
-
 }

@@ -1,0 +1,12 @@
+#header {
+    &.page-topbar{
+        .nav-wrapper {
+            display: flex;
+            flex-direction: row;
+            .header-search-wrapper {
+                margin-right: 10px;
+                flex-grow: 1;
+            }
+        }
+    }
+}

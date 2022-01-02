@@ -15,6 +15,9 @@ require('materialize-css/dist/js/materialize.js')
 require('Kmaterialize/src/js/plugins.js');
 require("Kmaterialize/src/js/search.js");
 
+/* Import Prism */
+require('prismjs');
+
 /* Import CSS */
 import './style/framework';
 import './style/style';
