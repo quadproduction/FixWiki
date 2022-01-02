@@ -17,6 +17,7 @@ namespace App;
 /** Dependances
  * 
  */
+use Symfony\Component\Finder\Finder;
 use LuckyPHP\Server\Exception;
 use Google\Service\Drive;
 use Google\Client;
@@ -28,7 +29,7 @@ class Google{
 
     # Client
     public $client;
-    private $pathJson = __ROOT_APP__."resources/json/"."client_secret_847121260194-s5i8sg36rph7od7gs7l38kol22lhh7e8.apps.googleusercontent.com.json";
+    private $pathJson = null;
     private $pathTokken = __ROOT_APP__."resources/json/tokken.json";
 
     /** Constructor
@@ -36,11 +37,47 @@ class Google{
      */
     public function __construct(){
 
-            # Prepare Client
-            $this->prepareClient();
+        # Set pathJson
+        $this->setPathJson();
 
-            # Check tokken
-            $this->checkTokken();
+        # Prepare Client
+        $this->prepareClient();
+
+        # Check tokken
+        $this->checkTokken();
+
+    }
+
+    /** Set path json
+     * 
+     */
+    private function setPathJson(){
+
+        # New finder
+        $finder = new Finder();
+
+        # Search file
+        $finder->files()->name("*.apps.googleusercontent.com.json")->in(__ROOT_APP__."resources/json/");
+
+        # Check finder has result
+        if(!$finder->hasResults())
+        
+            # New exception
+            $exception = new Exception("Please download oauth json file from https://console.cloud.google.com", 401);
+
+        # Iteration of folders
+        foreach($finder as $file):
+
+            # Get path
+            $result = $file->getRealPath();
+
+            # Break loop
+            break;
+
+        endforeach;
+
+        # Push result
+        $this->pathJson = $result;
 
     }
 
@@ -49,13 +86,13 @@ class Google{
      */
     private function prepareClient(){
 
-            # New client
-            $this->client = new Client();
-            $this->client->setApplicationName('Fixstudio Wiki');
-            $this->client->setScopes(Drive::DRIVE_READONLY);
-            $this->client->setAuthConfig($this->pathJson);
-            $this->client->setAccessType('offline');
-            $this->client->setPrompt('select_account consent');
+        # New client
+        $this->client = new Client();
+        $this->client->setApplicationName('Fixstudio Wiki');
+        $this->client->setScopes(Drive::DRIVE_READONLY);
+        $this->client->setAuthConfig($this->pathJson);
+        $this->client->setAccessType('offline');
+        $this->client->setPrompt('select_account consent');
 
     }
 
