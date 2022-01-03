@@ -123,6 +123,16 @@ class Kernel{
 
     }
 
+    /** Set Context of the current request
+     * 
+     */
+    protected function contextSet(){
+
+        # Set context
+        Config::defineContext();
+        
+    }
+
     /** Initialisation of the cache
      * 
      */
