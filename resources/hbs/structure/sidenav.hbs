@@ -146,12 +146,12 @@
 
             {{!-- Connexion --}}
             <li class="bold">
-                <a class="waves-effect waves-cyan" href="/login/"><i class="material-icons">login</i><span class="menu-title">Se connecter</span></a>
+                <a class="waves-effect waves-cyan{{#ifEquals _context.route.current "/login/"}} active{{/ifEquals}}" href="/login/"><i class="material-icons">login</i><span class="menu-title">Se connecter</span></a>
             </li>
 
             {{!-- Tutoriel --}}
             <li class="bold">
-                <a class="waves-effect waves-cyan" href="/tutorial/"><i class="material-icons">help_outline</i><span class="menu-title">Tutoriel</span></a>
+                <a class="waves-effect waves-cyan{{#ifEquals _context.route.current "/tutorial/"}} active{{/ifEquals}}" href="/tutorial/"><i class="material-icons">help_outline</i><span class="menu-title">Tutoriel</span></a>
             </li>
 
         </ul>
