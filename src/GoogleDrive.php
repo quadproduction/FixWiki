@@ -327,19 +327,11 @@ class GoogleDrive{
             $result =
                 '<div id="adobe-dc-view"></div>'.
                 '<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>'.
-                '<script type="text/javascript">'.
-                    'document.addEventListener("adobe_dc_view_sdk.ready", function(){'.
-                        'var adobeDCView = new AdobeDC.View({clientId: "b09dd968daa243ae83cfd63010134ba7", divId: "adobe-dc-view"});'.
-                        'adobeDCView.previewFile({'.
-                            'content:{location: {url: "https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf"}},'.
-                            'metaData:{fileName: "Bodea Brochure.pdf"}'.
-                        '}, {});'.
-                    '});'.
-                '</script>'
+                '<script type="text/javascript">document.addEventListener("adobe_dc_view_sdk.ready", function(){var adobeDCView = new AdobeDC.View({clientId: "5e88a369cf3e447ea27869b6621595d3",divId: "main"});adobeDCView.previewFile({content:{location: {url: "https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf"}},metaData:{fileName: "Bodea Brochure.pdf"}}, {});App.Pdf();});</script>'
             ;
 
             # Return result
-            return $result;
+            return $result ?? "";
 
 
         }

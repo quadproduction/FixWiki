@@ -14,13 +14,13 @@ const TerserPlugin = require("terser-webpack-plugin");
  module.exports = {
      /* Main js file */
      entry: {
-         "app": [
-             './resources/js/app.js'
-         ],
+         "bundle": './resources/js/bundle.js',
+         "app": './resources/js/app.js',
+         "css": './resources/js/css.js',
      },
      /* Output for www */
      output: {
-         filename: 'index.js',
+         filename: '[name].js',
          path: path.resolve(__dirname, 'www/js'),
      },
      module: {
@@ -111,7 +111,11 @@ const TerserPlugin = require("terser-webpack-plugin");
                      './www/fonts',
                  ],
              },
-             after: {}
+             after: {
+                include: [
+                    './www/js/css.js'
+                ]
+            }
          })
      ],
  };

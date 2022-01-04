@@ -1,3 +1,4 @@
+"use strict";
 /*******************************************************
  * Copyright (C) 2019-2021 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
@@ -8,19 +9,31 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
-/* Import JS */
-window.$ = window.jQuery = require('jquery/dist/jquery.js');
-window.PerfectScrollbar = require('perfect-scrollbar').default;
-require('materialize-css/dist/js/materialize.js')
-require('Kmaterialize/src/js/plugins.js');
-require("Kmaterialize/src/js/search.js");
+/** Dependances
+ * 
+ */
+import {Pdf} from "./module/Pdf";
 
-/* Import Prism */
-require('prismjs');
+/** App Class
+ * 
+ */
+class App{
 
-/* Import CSS */
-import './style/framework';
-import './style/style';
+    /** Constructor
+     * 
+     */
+    constructor(){
 
-/* Icons */
-import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+        /** Set modules of the app
+         *  
+         */
+        this.Pdf = (o = {}) => { new Pdf(o); };
+
+    }
+
+}
+
+/** New App
+ * 
+ */
+window.App = new App();
