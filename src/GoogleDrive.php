@@ -52,7 +52,13 @@ class GoogleDrive{
                     "class" =>  "fab fa-markdown",
                     "text"  =>  "",
                 ]
-            ]
+            ],
+            "application/pdf"   =>  [
+                'icon'  =>  [
+                    "class" =>  "fas fa-file-pdf",
+                    "text"  =>  "",
+                ]
+            ]    
             /* , "application/vnd.google-apps.document" */
         ]
     ];
@@ -299,6 +305,42 @@ class GoogleDrive{
 
             # Return result
             return $result->execute();
+
+        }else
+        # Pdf
+        if($this->currentFile->getMimeType() == "application/pdf"){
+
+            # Get content of file
+            $ctx = $this->drive->files->get(
+                $this->currentFile->getId(),
+                [
+                    'supportsAllDrives' => true, 
+                    'fields' => 'webContentLink, mimeType, name, downloadUrl',
+                    'alt' => 'media',
+                ]
+            );
+
+            # Set result
+            $fileUContent = $ctx->getBody()->getContents();
+
+            # Return result
+            $result =
+                '<div id="adobe-dc-view"></div>'.
+                '<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>'.
+                '<script type="text/javascript">'.
+                    'document.addEventListener("adobe_dc_view_sdk.ready", function(){'.
+                        'var adobeDCView = new AdobeDC.View({clientId: "b09dd968daa243ae83cfd63010134ba7", divId: "adobe-dc-view"});'.
+                        'adobeDCView.previewFile({'.
+                            'content:{location: {url: "https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf"}},'.
+                            'metaData:{fileName: "Bodea Brochure.pdf"}'.
+                        '}, {});'.
+                    '});'.
+                '</script>'
+            ;
+
+            # Return result
+            return $result;
+
 
         }
 
