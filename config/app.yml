@@ -41,3 +41,5 @@ app:
     google:
         drive:
             driveId: 0AKnhm_EZNuVfUk9PVA
+    adobe:
+        pdf: 5e88a369cf3e447ea27869b6621595d3

@@ -98,9 +98,17 @@ class DriveAction extends ControllerBase implements ControllerInterface{
         # Set current file in google drive
         $this->google_drive->setCurrentfile($result['file']);
 
-        # Get html content
-        $htmlContent = $this->google_drive->getContentFile();
-        
+        try{
+
+            # Get html content
+            $htmlContent = $this->google_drive->getContentFile();
+
+        }catch(Exception $e){
+
+            # Message html
+            $e->getHtml();
+
+        }
 
         # Load app config
         $this->model

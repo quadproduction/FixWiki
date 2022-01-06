@@ -19,15 +19,14 @@ namespace App\Controllers;
  */
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
+use Symfony\Component\HttpFoundation\Response;
+use LuckyPHP\Server\Exception;
 use App\GoogleDrive;
 
-/** Class for manage the workflow of the app
+/** Class for manage logo
  *
  */
-class HomeAction extends ControllerBase implements ControllerInterface{
-
-    # Google Drive
-    private $google_drive;
+class FileAction extends ControllerBase implements ControllerInterface{
 
     /** Constructor
      *
@@ -38,27 +37,10 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="HomeAction";
-
-        # Setup layouts
-        $this->setupLayouts();
+        $this->name="File";
 
         # Model action
         $this->modelAction();
-
-    }
-
-    /** Setup layouts
-     * 
-     */
-    private function setupLayouts(){
-
-        # Set layouts
-        $this->setLayouts([
-            'head',
-            'sidenav',
-            'main',
-        ]);
 
     }
 
@@ -67,24 +49,38 @@ class HomeAction extends ControllerBase implements ControllerInterface{
      */
     private function modelAction(){
 
-        # New model
-        $this->newModel();
+        # Set id
+        $id = $this->request->data->query->get("id");
 
-        # New google drive
-        $this->google_drive = new GoogleDrive();
+        try{
 
-        # Get all data
-        $this->google_drive->getAllFileFromSharedDrive();
+            # Check if id is set in get query
+            if(!$id)
+                
+                # New Exception
+                throw new Exception("No file found", 404);
 
-        # Load app config
-        $this->model
-            ->loadConfig('app')
-            ->setFrameworkExtra()
-            ->pushDataInUserInterface($this->google_drive->getData())
-            ->pushContext()
-        ;
+            # New google drive
+            $this->google_drive = new GoogleDrive();
 
-        #\LuckyPHP\Front\Console::log($this->model->execute());
+            # Set current file
+            $this->google_drive->setCurrentfileById($id);
+
+            # Set cache
+            $cache = $this->google_drive->createCacheForCurrentFile($id);
+
+            # New model
+            $this->newModel();
+
+            # Set file
+            $this->model->getFile($cache['name'], $cache['path']);
+
+        }catch(Exception $e){
+
+            # Message html
+            $e->getHtml();
+
+        }
 
     }
 
@@ -97,5 +93,4 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         return $this->name;
 
     }
-
 }

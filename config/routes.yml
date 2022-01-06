@@ -39,6 +39,13 @@ routes:
             - get
         response: data
     -
+        name: File
+        patterns:
+            - /media/file/
+        methods:
+            - get
+        response: data
+    -
         name: 'Page not found'
         patterns:
             - '/*/'

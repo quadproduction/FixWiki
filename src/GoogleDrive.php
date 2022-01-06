@@ -282,6 +282,66 @@ class GoogleDrive{
 
     }
 
+    /** Set current file
+     * 
+     */
+    public function setCurrentfileById(string $id = ""){
+        
+        # Check id
+        if(!$id)
+
+            # New error
+            throw new Exception("You can't find file in Google Drive with invalid Id", 500);
+
+        # Set result
+        $result = $this->drive->files->get(
+            $id,
+            [
+                'supportsAllDrives' => true, 
+                'fields' => 'webContentLink, mimeType, name, id',
+                'alt' => 'media',
+            ]
+        );
+
+        # Set current file
+        $this->currentFile = $result;
+
+    }
+
+    /** Create cache file
+     * 
+     */
+    public function createCacheForCurrentFile($id):array{
+        
+
+        # Set path
+        $path = __ROOT_APP__."/cache/drive";
+        #File name
+        $filePath = $path."/".$id;
+
+        # check cache > drive folder exist
+        if(!is_dir($path))
+
+            # Create folder
+            mkdir($path, 0777, true);
+
+        # Create file with cache
+        file_put_contents(
+            $filePath, 
+            $this->currentFile->getBody()->getContents()
+        );
+
+        # Prepare result 
+        $result = [
+            "name"  =>  $id,
+            "path"  =>  $path,
+        ];
+
+        # Return result
+        return $result;
+
+    }
+
     /** Get content of the current file
      * Depending of the type mime
      */
@@ -310,7 +370,7 @@ class GoogleDrive{
         # Pdf
         if($this->currentFile->getMimeType() == "application/pdf"){
 
-            # Get content of file
+            /* # Get content of file
             $ctx = $this->drive->files->get(
                 $this->currentFile->getId(),
                 [
@@ -321,13 +381,28 @@ class GoogleDrive{
             );
 
             # Set result
-            $fileUContent = $ctx->getBody()->getContents();
+            $fileUContent = $ctx->getBody()->getContents(); */
+
+            # Set id
+            $id = $this->currentFile->getId();
+
+            # Set name
+            $name = $this->currentFile->getName();
+
+            # Check config adobe pdf key
+            if(!isset($this->config['app']['adobe']['pdf']) || empty($this->config['app']['adobe']['pdf']))
+
+                # Error
+                throw new Exception("If you want read PDF, please fill pdf key in config", 501);
+
+            # set key
+            $key = $this->config['app']['adobe']['pdf'];
 
             # Return result
             $result =
                 '<div id="adobe-dc-view"></div>'.
                 '<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>'.
-                '<script type="text/javascript">document.addEventListener("adobe_dc_view_sdk.ready", function(){var adobeDCView = new AdobeDC.View({clientId: "5e88a369cf3e447ea27869b6621595d3",divId: "main"});adobeDCView.previewFile({content:{location: {url: "https://documentcloud.adobe.com/view-sdk-demo/PDFs/Bodea Brochure.pdf"}},metaData:{fileName: "Bodea Brochure.pdf"}}, {});App.Pdf();});</script>'
+                '<script type="text/javascript">document.addEventListener("adobe_dc_view_sdk.ready", function(){var adobeDCView = new AdobeDC.View({clientId: "'.$key.'",divId: "main"});adobeDCView.previewFile({content:{location: {url: "/media/file?id='.$id.'"}},metaData:{fileName: "'.$name.'"}}, {});App.Pdf();});</script>'
             ;
 
             # Return result

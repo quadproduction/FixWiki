@@ -7,3 +7,6 @@ resources/json/*
 
 # Ignore log
 logs/*
+
+# Hide cache
+cache/*
