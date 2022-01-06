@@ -402,7 +402,7 @@ class GoogleDrive{
             $result =
                 '<div id="adobe-dc-view"></div>'.
                 '<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>'.
-                '<script type="text/javascript">document.addEventListener("adobe_dc_view_sdk.ready", function(){var adobeDCView = new AdobeDC.View({clientId: "'.$key.'",divId: "main"});adobeDCView.previewFile({content:{location: {url: "/media/file?id='.$id.'"}},metaData:{fileName: "'.$name.'"}}, {});App.Pdf();});</script>'
+                '<script type="text/javascript">document.addEventListener("adobe_dc_view_sdk.ready", function(){var adobeDCView = new AdobeDC.View({clientId: "'.$key.'",divId: "main"});adobeDCView.previewFile({content:{location: {url: "/media/file?id='.$id.'"}},metaData:{fileName: "'.$name.'"}}, {dockPageControls: false});App.Pdf();});</script>'
             ;
 
             # Return result
