@@ -13,6 +13,7 @@
  * 
  */
 import {Pdf} from "./Pdf";
+import {Google} from "./Google";
 
 /** Page functions
  * 
@@ -28,6 +29,7 @@ export class App{
          *  
          */
         this.Pdf = (o = {}) => { new Pdf(o); };
+        this.Google = (o = {}) => { new Google(o); };
 
     }
 

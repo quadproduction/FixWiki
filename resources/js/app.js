@@ -13,6 +13,7 @@
  * 
  */
 import {Pdf} from "./module/Pdf";
+import {Google} from "./module/Google";
 
 /** App Class
  * 
@@ -28,6 +29,7 @@ class App{
          *  
          */
         this.Pdf = (o = {}) => { new Pdf(o); };
+        this.Google = (o = {}) => { new Google(o); };
 
     }
 

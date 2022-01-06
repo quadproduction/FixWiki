@@ -47,19 +47,27 @@ class GoogleDrive{
     private $conditions = [
         "folderNameExclude" =>  ["media"],
         "mimeTypeAllow"     =>  [
+            # Markdown
             "text/markdown"     =>  [
                 'icon'  =>  [
                     "class" =>  "fab fa-markdown",
                     "text"  =>  "",
                 ]
             ],
+            # Pdf
             "application/pdf"   =>  [
                 'icon'  =>  [
                     "class" =>  "fas fa-file-pdf",
                     "text"  =>  "",
                 ]
-            ]    
-            /* , "application/vnd.google-apps.document" */
+            ], 
+            # Google Doc
+            "application/vnd.google-apps.document"  =>  [
+                'icon'  =>  [
+                    "class" =>  "fas fa-file-alt",
+                    "text"  =>  "",
+                ]
+            ]
         ]
     ];
 
@@ -365,6 +373,29 @@ class GoogleDrive{
 
             # Return result
             return $result->execute();
+
+        }else
+        # Pdf
+        if($this->currentFile->getMimeType() == "application/vnd.google-apps.document"){
+
+            # Get content of file
+            $ctx = $this->drive->files->get(
+                $this->currentFile->getId(),
+                [
+                    'supportsAllDrives' => true, 
+                    'fields' => 'webContentLink, webViewLink, mimeType, name'
+                ]
+            );
+
+            # View link
+            $webViewLink = $ctx->getWebViewLink();
+            //$webContentLink = urlencode($ctx->getWebContentLink());
+
+            # Set result
+            $result = "<script type=\"text/javascript\">App.Google({webContentLink:\"$webViewLink\"});</script>";
+
+            # Return result
+            return $result ?? "";
 
         }else
         # Pdf
