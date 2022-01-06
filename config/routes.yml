@@ -1,13 +1,13 @@
 # Rootes of the app
 routes:
-    -
+    -   # Home
         name: Home
         patterns:
             - /index/
         methods:
             - get
         response: html
-    -
+    -   # Google Drive Page
         name: Drive
         patterns:
             - /drive/[a:root0]/
@@ -17,7 +17,7 @@ routes:
         methods:
             - get
         response: html
-    # -
+    # - # Google Drive Page
     #     name: Login
     #     patterns:
     #         - /login/
@@ -25,11 +25,18 @@ routes:
     #         - get
     #     response: html
     -
-        name: Info
+        name: Sidenav
         patterns:
-            - /api/
+            - /api/sidenav/
         methods:
             - get
+        response: json
+    -
+        name: SidenavChange
+        patterns:
+            - /api/sidenav/[a:status]/
+        methods:
+            - post
         response: json
     -
         name: Logo

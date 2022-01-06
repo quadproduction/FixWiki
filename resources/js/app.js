@@ -14,6 +14,7 @@
  */
 import {Pdf} from "./module/Pdf";
 import {Google} from "./module/Google";
+import {Sidenav} from "./module/Sidenav";
 
 /** App Class
  * 
@@ -30,6 +31,17 @@ class App{
          */
         this.Pdf = (o = {}) => { new Pdf(o); };
         this.Google = (o = {}) => { new Google(o); };
+        this.Sidenav = (o = {}) => { new Sidenav(o); };
+
+        /** Hook start on document ready
+         * 
+         */
+        document.addEventListener(
+            "DOMContentLoaded", 
+            () => {
+                this.Sidenav();
+            }
+        );
 
     }
 

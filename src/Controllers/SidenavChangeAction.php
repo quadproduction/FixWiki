@@ -23,7 +23,15 @@ use LuckyPHP\Interface\Controller as ControllerInterface;
 /** Class for manage the workflow of the app
  *
  */
-class InfoAction extends ControllerBase implements ControllerInterface{
+class SidenavChangeAction extends ControllerBase implements ControllerInterface{
+
+    # Conditions
+    private $conditions = [
+        "statusAllowed" =>  [
+            "expanded",
+            "collapse"
+        ]
+    ];
 
     /** Constructor
      *
@@ -34,7 +42,19 @@ class InfoAction extends ControllerBase implements ControllerInterface{
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="InfoAction";
+        $this->name="SidenavAction";
+
+        # Set cookie
+        $this->setCookie();
+
+    }
+
+    /** Set cookie
+     * 
+     */
+    private function setCookie(){
+
+
 
     }
 
