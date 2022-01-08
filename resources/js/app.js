@@ -12,19 +12,69 @@
 /** Dependances
  * 
  */
+import LuckyJs from "./src/Lucky";
 import {Pdf} from "./module/Pdf";
 import {Google} from "./module/Google";
-import {Sidenav} from "./module/Sidenav";
+
+/** Component
+ * 
+ */
+import Sidenav from "./component/Sidenav";
+
+/** Actions
+ * 
+ */
+import HomeAction from "./action/HomeAction";
+
+/** Action route
+ * 
+ */
+let actionRoute = {
+    "Home":  HomeAction
+};
+
+/** Component list
+ * 
+ */
+let componentList = {
+    sidenav: Sidenav
+}
 
 /** App Class
  * 
  */
-class App{
+class App extends LuckyJs{
 
-    /** Constructor
+    /** Config of the app
      * 
      */
-    constructor(){
+    config = {
+
+        /* Dom */
+        dom: {
+
+            /* Scan */
+            scan : {
+                items: {
+                    layouts: {
+                        pattern: "[data-layout]"
+                    }
+                }
+            }
+
+        }
+    };
+
+
+    /** Constructor
+     * @param {object} actionRoute List of action
+     */
+    constructor(o = {}){
+
+        /** LuckyJs constructor
+         * 
+         */
+        super(o);
 
         /** Set modules of the app
          *  
@@ -33,15 +83,9 @@ class App{
         this.Google = (o = {}) => { new Google(o); };
         this.Sidenav = (o = {}) => { new Sidenav(o); };
 
-        /** Hook start on document ready
-         * 
+        /** Execute current action
          */
-        document.addEventListener(
-            "DOMContentLoaded", 
-            () => {
-                this.Sidenav();
-            }
-        );
+        new this.action(this);
 
     }
 
@@ -50,4 +94,7 @@ class App{
 /** New App
  * 
  */
-window.App = new App();
+window.App = new App({
+    actionRoute: actionRoute,
+    componentList: componentList
+});

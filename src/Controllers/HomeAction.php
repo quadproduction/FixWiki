@@ -84,7 +84,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
             ->pushContext()
         ;
 
-        #\LuckyPHP\Front\Console::log($this->model->execute());
+        //\LuckyPHP\Front\Console::log($this->model->execute());
 
     }
 

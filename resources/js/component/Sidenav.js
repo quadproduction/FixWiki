@@ -12,7 +12,7 @@
 /** Page functions
  * 
  */
-export class Sidenav{
+export default class Sidenav{
 
     /** Constructor
      * 

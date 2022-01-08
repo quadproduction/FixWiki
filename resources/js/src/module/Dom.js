@@ -16,6 +16,7 @@ export default class Dom {
 
     /** Check DOM element
      * 
+     * @param {object} o 
      */
     check = (o = {}) => {
 
@@ -23,8 +24,40 @@ export default class Dom {
 
     }
 
+    /** Scan DOM elements
+     * List by :
+     *  - layout
+     *   
+     * @param {object} o 
+     * @return {object}
+     */
+    scan = (o = {}) => {
+
+        // Declare result
+        let result = {};
+        
+        // Check config dom scan items
+        if(o.dom.scan.items !== undefined && Object.keys(o.dom.scan.items).length)
+
+            // Iteration of items
+            for(let item in o.dom.scan.items){
+
+                // Set pattern
+                let pattern = o.dom.scan.items[item].pattern ?? `[data-${item})]`;
+
+                // Set result
+                result[item] = document.querySelectorAll(pattern);
+
+            }
+            
+        // Return result
+        return result;
+        
+    }
+
     /** Create DOM element
      * 
+     * @param {object} o 
      */
     create = (o = {}) => {
 
@@ -34,6 +67,7 @@ export default class Dom {
 
     /** Delete DOM element
      * 
+     * @param {object} o 
      */
     delete = (o = {}) => {
 
@@ -43,6 +77,7 @@ export default class Dom {
 
     /** Clear DOM element
      * 
+     * @param {object} o 
      */
     clear = (o = {}) => {
 
@@ -52,6 +87,7 @@ export default class Dom {
 
     /** Replace DOM element
      * 
+     * @param {object} o 
      */
     replace = (o = {}) => {
 
