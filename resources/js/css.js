@@ -8,6 +8,10 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
+/**
+ * Parallelle with file in /ressources/scss/dev/style.scss
+ */
+
 /* Import CSS */
 import './style/framework';
 import './style/style';

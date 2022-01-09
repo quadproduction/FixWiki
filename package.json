@@ -9,6 +9,7 @@
         "file-loader": "^6.2.0",
         "mini-css-extract-plugin": "^1.5.0",
         "remove-files-webpack-plugin": "^1.5.0",
+        "rimraf": "^3.0.2",
         "sass": "^1.45.1",
         "sass-loader": "^12.4.0",
         "style-loader": "^3.3.1",
@@ -17,8 +18,9 @@
         "webpack-cli": "^4.9.1"
     },
     "scripts": {
-        "webpack-dev": "webpack --mode development",
+        "webpack-dev": "webpack --mode development --open --config webpack.dev.js",
         "webpack-build": "webpack --mode production",
-        "webpack-watch": "webpack --watch --mode=development"
+        "webpack-watch": "webpack --watch --mode=development --config webpack.dev.js",
+        "sass-watch": "rimraf www/css && sass --load-path=resources/scss --watch --style compressed resources/scss/dev/style.scss www/css/css.watch.css"
     }
 }

@@ -22,7 +22,6 @@ module.exports = {
     entry: {
         "bundle": './resources/js/bundle.js',
         "app": './resources/js/app.js',
-        "css": './resources/js/css.js',
     },
     /* Output for www */
     output: {
@@ -31,28 +30,6 @@ module.exports = {
     },
     module: {
         rules: [
-            /* Scss | Css */
-            {
-                test: /\.(sa|sc|c|le)ss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: "css-loader",
-                        options: {
-                            sourceMap: true,
-                        },
-                    },
-                    {
-                        loader: "sass-loader",
-                        options: {
-                            sourceMap: true,
-                            sassOptions: {
-                                outputStyle: "compressed",
-                            },
-                        },
-                    },
-                ],
-            },
             /* Fonts */
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
@@ -95,16 +72,11 @@ module.exports = {
         })],
     },
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: "../css/[name].[contenthash].css",
-            chunkFilename: "../css/[id].[contenthash].css",
-        }),
         /* Clean js with hash */
         new RemovePlugin({
             before: {
                 include: [
                     './www/js',
-                    './www/css',
                     './www/svg',
                     './www/fonts',
                 ],
@@ -112,14 +84,12 @@ module.exports = {
             watch: {
                 include: [
                     './www/js',
-                    './www/css',
                     './www/svg',
                     './www/fonts',
                 ],
             },
             after: {
                 include: [
-                    './www/js/css.js'
                 ]
             }
         })

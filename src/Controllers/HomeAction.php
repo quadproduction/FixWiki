@@ -57,7 +57,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         $this->setLayouts([
             'head',
             'sidenav',
-            'main',
+            'home',
         ]);
 
     }

@@ -14,12 +14,53 @@
  */
 export default class Sidenav{
 
+    // Dom list
+    dom = {
+        navbar : {
+            id: "sidenav",
+            el: null,
+        },
+        navbarToggler: {
+            query: ".navbar-toggler i",
+            el: null
+        },
+    }
+
     /** Constructor
      * 
      */
     constructor(){
 
-        this.sideNavTiggerAction()
+        // Scan the sidenav
+        this.sidenavScan();
+
+        console.log(this.dom);
+
+        this.sideNavTiggerAction();
+
+    }
+
+    /** Scan the sidenav
+     * - Scan all elements in current sidenav and fill the dom list
+     * @returns {void}
+     */
+    scan = () => {
+
+        // Iteration of the dom list
+        for(let el in this.dom)
+
+            // Check parameters of el
+            if(this.dom[el].id !== undefined && this.dom[el].id)
+
+                // Get element
+                this.dom[el].el = [document.getElementById(this.dom[el].id)];
+
+            else
+            // Check if query
+            if(this.dom[el].query !== undefined && this.dom[el].query)
+
+                // Get elements
+                this.dom[el].el = [document.querySelectorAll(this.dom[el].query)];
 
     }
 

@@ -1,0 +1,31 @@
+/*******************************************************
+ * Copyright (C) 2019-2021 Kévin Zarshenas
+ * kevin.zarshenas@gmail.com
+ * 
+ * This file is part of LuckyPHP.
+ * 
+ * This code can not be copied and/or distributed without the express
+ * permission of Kévin Zarshenas @kekefreedog
+ *******************************************************/
+
+/**
+ * Parallelle with file in /ressources/scss/dev/style.scss
+ */
+
+/* Import CSS */
+@import "./../../../node_modules/Kmaterialize/dist/css/vertical-gradient-menu/kmaterial.min";
+@import "./../../css/style";
+
+ /* Import component */
+ @import "./../miscellaneous/error.scss";
+
+ /* Fix */
+ @import "./../sidenav/sidenav.scss";
+ @import "./../header/header.scss";
+
+ /* Markdown Content */
+ @import "./../code/code.scss";
+
+/* Icons */
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
