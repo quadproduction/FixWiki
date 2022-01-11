@@ -9,6 +9,11 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
+/** Dependances
+ * 
+ */
+import Dom from "./../src/module/Dom";
+
 /** Page functions
  * 
  */
@@ -21,10 +26,13 @@ export default class Sidenav{
             el: null,
         },
         navbarToggler: {
-            query: ".navbar-toggler i",
+            query: ".navbar-toggler",
             el: null
         },
-    }
+    };
+
+    // Declare events
+    events = [];
 
     /** Constructor
      * 
@@ -32,11 +40,10 @@ export default class Sidenav{
     constructor(){
 
         // Scan the sidenav
-        this.sidenavScan();
+        this.scan();
 
-        console.log(this.dom);
-
-        this.sideNavTiggerAction();
+        // Init sidenav
+        this.init();
 
     }
 
@@ -60,23 +67,43 @@ export default class Sidenav{
             if(this.dom[el].query !== undefined && this.dom[el].query)
 
                 // Get elements
-                this.dom[el].el = [document.querySelectorAll(this.dom[el].query)];
+                this.dom[el].el = document.querySelectorAll(this.dom[el].query);
+
+    }
+
+    /**********************************************************************************
+     * Init
+     */
+
+    /** Initialize
+     * 
+     * @returns {void}
+     */
+    init = () => {
+
+        // Iteration the dom
+        for(let name in this.dom)
+
+            // Check el is set
+            if(
+                this.dom[name].el !== null &&
+                this.dom[name].el.length &&
+                this[name+'Init'] !== undefined
+            )
+
+                // Execute init
+                this[name+'Init'](this.dom[name]);
+
+        // Execute events
+        Dom.addEvents(this.events);
 
     }
 
     /** Action on sidenav tigger
      * 
+     * @returns {void}
      */
-    sideNavTiggerAction = () => {
-
-        // Get tigger el
-        let tiggerEl = document.querySelector("aside.sidenav-main .navbar-toggler");
-
-        console.log(tiggerEl);
-
-        // Check el exist
-        if(tiggerEl === null)
-            return;
+    navbarTogglerInit = (dom) => {
 
         // Prepare action
         let action = e => {
@@ -109,12 +136,12 @@ export default class Sidenav{
 
         }
 
-        // Push action on event
-        tiggerEl.addEventListener(
-            'click',
-            action
-        );
-
+        // Push action on events
+        this.events.push({
+            el: dom.el,
+            type: 'click',
+            listener: action,
+        });
 
     }
 

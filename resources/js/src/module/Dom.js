@@ -95,4 +95,37 @@ export default class Dom {
 
     }
 
+    /**********************************************************************************
+     * Static function
+     */
+
+
+    /** Add Events
+     * 
+     * @param {*} o Events
+     *  [
+     *      el : list of el
+     *      type: 'click'|...
+     *      listener: action
+     *  ]
+     */
+    static addEvents = (list = []) => {
+
+        // Check list
+        if(list.length)
+
+            // Iteration des items
+            for(let item of list)
+
+                // Iteration des el
+                for(let el of item.el)
+
+                    el.addEventListener(
+                        item.type,
+                        item.listener
+                    );
+
+    }
+
+
 }
