@@ -1,15 +1,198 @@
+{{!-- Main --}}
 <div id="main" data-layout="structure/main">
     <div class="row container">
-        <div class="col s12 m4" id="home" data-layout="page/Home">
-            <div class="card card-hover z-depth-0 card-border-gray">
-                <a href="page-knowledge-licensing.html">
+        {{!-- Divider --}}
+        <div class="col s12">
+            <div class="divider mt-2"></div>
+        </div>
+        {{!-- Section title --}}
+        <div class="col s12 m6 offset-m3 center-align">
+            {{!-- Title --}}
+            <h1 class="header"><i class="fas fa-book mr-1"></i> Fix Studio <b>Wiki</b></h1>
+            {{!-- Description --}}
+            <h4 class="light">Documentation sur les process et<br/>l'organisation du studio</h4>
+        </div>
+        {{!-- Section navigation --}}
+        <div class="col 12">
+        {{#each _user_interface.navigation}}
+            {{!-- Divider --}}
+            <div class="divider mt-2"></div>
+            {{!-- Title --}}
+            <h5 class="header center-align mb-1">
+                {{#ifEquals this.entity "drive"}}
+                <i class="fab fa-google-drive"></i> Google Drive
+                {{else}}
+                {{this.entity}}
+                {{/ifEquals}}
+            </h5>
+            {{!-- Card --}}
+            {{#each this.relationships.folder}}
+            <div class="col s12 m6 l3">
+                <div class="card card-hover z-depth-0 card-border-gray">
                     <div class="card-content center-align">
-                        <h5><b>Support</b></h5>
-                        <i class="material-icons md-48 red-text">favorite_border</i>
-                        <p class="mb-2 black-text">Synonyms for support with free <br> online thesaurus, antonyms.</p>
+                        <h5 class="three-dots">
+                            <b>
+                                {{#if this._user_interface.icon.class}}
+                                <i class="{{this._user_interface.icon.class}}">
+                                    {{this._user_interface.icon.text}}
+                                </i> 
+                                {{/if}}
+                                {{this.attributes.name}}
+                            </b>
+                        </h5>
+                        <br/>
+                        <div class="left-align">
+                        {{!-- Iteration des files --}}
+                        {{#each this.relationships.file}}
+                        <a href="{{this._user_interface.root}}">
+                            <div class="chip waves-effect">
+                                {{#if this._user_interface.icon.class}}
+                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
+                                {{/if}}
+                                {{this.attributes.name}}
+                            </div>
+                        </a>
+                        {{/each}}
+                        {{!-- Iteration folder #1 --}}
+                        {{#each this.relationships.folder}}
+                            {{!-- Iteration des files #1 --}}
+                            {{#each this.relationships.file}}
+                            <a href="{{this._user_interface.root}}">
+                                <div class="chip waves-effect">
+                                    <span class="grey-text">
+                                    {{#if ../this._user_interface.icon.class}}
+                                    <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
+                                    {{/if}}
+                                    {{../this.attributes.name}} > 
+                                    </span>
+                                    {{#if this._user_interface.icon.class}}
+                                    <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
+                                    {{/if}}
+                                    {{this.attributes.name}}
+                                </div>
+                            </a>
+                            {{/each}}
+                            {{!-- Iteration folder #2 --}}
+                            {{#each this.relationships.folder}}
+                                {{!-- Iteration des files #2 --}}
+                                {{#each this.relationships.file}}
+                                <a href="{{this._user_interface.root}}">
+                                    <div class="chip waves-effect">
+                                        <span class="grey-text">
+                                        {{#if ../../this._user_interface.icon.class}}
+                                        <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
+                                        {{/if}}
+                                        {{../../this.attributes.name}} > 
+                                        {{#if ../this._user_interface.icon.class}}
+                                        <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
+                                        {{/if}}
+                                        {{../this.attributes.name}} > 
+                                        </span>
+                                        {{#if this._user_interface.icon.class}}
+                                        <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
+                                        {{/if}}
+                                        {{this.attributes.name}}
+                                    </div>
+                                </a>
+                                {{/each}}
+                                {{!-- Iteration folder #3 --}}
+                                {{#each this.relationships.folder}}
+                                    {{!-- Iteration des files #3 --}}
+                                    {{#each this.relationships.file}}
+                                    <a href="{{this._user_interface.root}}">
+                                        <div class="chip waves-effect">
+                                            <span class="grey-text">
+                                            {{#if ../../../this._user_interface.icon.class}}
+                                            <i class="{{../../../this._user_interface.icon.class}}">{{../../../this._user_interface.icon.text}}</i> 
+                                            {{/if}}
+                                            {{#if ../../this._user_interface.icon.class}}
+                                            <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
+                                            {{/if}}
+                                            {{../../this.attributes.name}} > 
+                                            {{#if ../this._user_interface.icon.class}}
+                                            <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
+                                            {{/if}}
+                                            {{../this.attributes.name}} > 
+                                            </span>
+                                            {{#if this._user_interface.icon.class}}
+                                            <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
+                                            {{/if}}
+                                            {{this.attributes.name}}
+                                        </div>
+                                    </a>
+                                    {{/each}}
+                                    {{!-- Iteration folder #4 --}}
+                                    {{#each this.relationships.folder}}
+                                        {{!-- Iteration des files #4 --}}
+                                        {{#each this.relationships.file}}
+                                        <a href="{{this._user_interface.root}}">
+                                            <div class="chip waves-effect">
+                                                <span class="grey-text">
+                                                {{#if ../../../../this._user_interface.icon.class}}
+                                                <i class="{{../../../../this._user_interface.icon.class}}">{{../../../../this._user_interface.icon.text}}</i> 
+                                                {{/if}}
+                                                {{#if ../../../this._user_interface.icon.class}}
+                                                <i class="{{../../../this._user_interface.icon.class}}">{{../../../this._user_interface.icon.text}}</i> 
+                                                {{/if}}
+                                                {{#if ../../this._user_interface.icon.class}}
+                                                <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
+                                                {{/if}}
+                                                {{../../this.attributes.name}} > 
+                                                {{#if ../this._user_interface.icon.class}}
+                                                <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
+                                                {{/if}}
+                                                {{../this.attributes.name}} > 
+                                                </span>
+                                                {{#if this._user_interface.icon.class}}
+                                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
+                                                {{/if}}
+                                                {{this.attributes.name}}
+                                            </div>
+                                        </a>
+                                        {{/each}}
+                                        {{!-- Iteration folder #5 --}}
+                                        {{#each this.relationships.folder}}
+                                            {{!-- Iteration des files #5 --}}
+                                            {{#each this.relationships.file}}
+                                            <a href="{{this._user_interface.root}}">
+                                                <div class="chip waves-effect">
+                                                    <span class="grey-text">
+                                                    {{#if ../../../../../this._user_interface.icon.class}}
+                                                    <i class="{{../../../../../this._user_interface.icon.class}}">{{../../../../../this._user_interface.icon.text}}</i> 
+                                                    {{/if}}
+                                                    {{#if ../../../../this._user_interface.icon.class}}
+                                                    <i class="{{../../../../this._user_interface.icon.class}}">{{../../../../this._user_interface.icon.text}}</i> 
+                                                    {{/if}}
+                                                    {{#if ../../../this._user_interface.icon.class}}
+                                                    <i class="{{../../../this._user_interface.icon.class}}">{{../../../this._user_interface.icon.text}}</i> 
+                                                    {{/if}}
+                                                    {{#if ../../this._user_interface.icon.class}}
+                                                    <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
+                                                    {{/if}}
+                                                    {{../../this.attributes.name}} > 
+                                                    {{#if ../this._user_interface.icon.class}}
+                                                    <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
+                                                    {{/if}}
+                                                    {{../this.attributes.name}} > 
+                                                    </span>
+                                                    {{#if this._user_interface.icon.class}}
+                                                    <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
+                                                    {{/if}}
+                                                    {{this.attributes.name}}
+                                                </div>
+                                            </a>
+                                            {{/each}}
+                                        {{/each}}
+                                    {{/each}}
+                                {{/each}}
+                            {{/each}}
+                        {{/each}}
+                        </div>
                     </div>
-                </a>
+                </div>
             </div>
+            {{/each}}
+        {{/each}}
         </div>
     </div>
 </div>

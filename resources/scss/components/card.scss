@@ -1,0 +1,31 @@
+.card{
+    &.card-border-gray{
+        border: solid 1px #e0e0e0;
+        border-radius: 8px;
+    }
+}
+
+.card-hover{
+    &:hover{
+        background-color: #e0e0e0;
+        transition: .02s;
+        .chip{
+            background-color: white;
+            transition: 0s;
+            border: solid 1px #c7c7c7;
+            &:hover{
+                transition: 0s;
+                border: solid 1px #9b9b9b;
+                &:active{
+                    transition: 0s;
+                    border: solid 1px #e0e0e0;
+                }
+            }
+        }
+    }
+    .chip{
+        transition: 0s;
+        border: solid 1px transparent;
+    }
+    transition: .1s;
+}

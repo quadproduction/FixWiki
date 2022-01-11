@@ -3,6 +3,7 @@ aside {
 	&.sidenav-main {
 		&.nav-collapsed {
 			.brand-logo {
+				padding: 16px 12px 16px 15px;
 				img {
 					&:first-child {
 						display: none!important;
@@ -89,6 +90,9 @@ aside {
 					font-size: 0.9rem!important;
 				}
 			}
+		}
+		&.open {
+			background: rgba(0, 0, 0, .175);
 		}
 	}
 }

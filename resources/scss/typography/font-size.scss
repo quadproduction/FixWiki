@@ -1,0 +1,28 @@
+
+/* h5 */
+h5 {
+    line-height: 134%;
+    i {
+        &.material-icons {
+            font-size: 1.64rem;
+            vertical-align: -0.225rem;
+        }
+    }
+}
+
+/* three-dots */
+.three-dots {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+/* Chips */
+.chip {
+    i {
+        &.material-icons {
+            font-size: 15px;
+            vertical-align: text-top;
+        }
+    }
+}
