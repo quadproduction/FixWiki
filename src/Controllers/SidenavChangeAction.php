@@ -49,15 +49,6 @@ class SidenavChangeAction extends ControllerBase implements ControllerInterface{
 
     }
 
-    /** Set cookie
-     * 
-     */
-    private function setCookie(){
-
-
-
-    }
-
     /** Response
      *
      */

@@ -126,8 +126,10 @@ export default class Sidenav{
                 {
                     method: 'POST',
                 }
+            // Middleware
             ).then(
                 response => response.json()
+            // Controller
             ).then(
                 data => console.log(data)
             ).catch(

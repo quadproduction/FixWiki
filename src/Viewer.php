@@ -44,6 +44,11 @@ class Viewer extends ViewerBase implements ViewerInterface {
          */
         $this->setResponseContent();
 
+        /** Set global cookie in response
+         * 
+         */
+        $this->setResponseCookies();
+
         /** Send the response to the client
          * 
          */
