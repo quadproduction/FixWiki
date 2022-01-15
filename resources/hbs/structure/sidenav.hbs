@@ -1,4 +1,4 @@
-<aside id="sidenav" data-layout="structure/sidenav" class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark gradient-45deg-deep-purple-blue sidenav-gradient sidenav-active-rounded">
+<aside id="sidenav" data-layout="structure/sidenav" class="sidenav-main nav-collapsible {{#ifEquals _cookies.SIDENAV.STATUS "expanded"}} nav-lock nav-expanded{{else}} nav-collapsed{{/ifEquals}} sidenav-dark gradient-45deg-deep-purple-blue sidenav-gradient sidenav-active-rounded">
     <div class="brand-sidebar">
         <h1 class="logo-wrapper">
             <a class="brand-logo darken-1" href="/">
@@ -7,7 +7,7 @@
                 <span class="logo-text hide-on-med-and-down">Wiki</span>
             </a>
             <a class="navbar-toggler">
-                <i class="material-icons">radio_button_checked</i>
+                <i class="material-icons">{{#ifEquals _cookies.SIDENAV.STATUS "expanded"}}radio_button_checked{{else}}radio_button_unchecked{{/ifEquals}}</i>
             </a>
         </h1>
     </div>

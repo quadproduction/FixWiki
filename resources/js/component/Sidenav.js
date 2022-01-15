@@ -125,6 +125,12 @@ export default class Sidenav{
                 "/api/sidenav/"+request+"/",
                 {
                     method: 'POST',
+                    credentials: 'include',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin':'*',
+                        'Content-Type': 'application/json',
+                    })
                 }
             // Middleware
             ).then(

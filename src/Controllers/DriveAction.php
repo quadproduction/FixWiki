@@ -125,6 +125,7 @@ class DriveAction extends ControllerBase implements ControllerInterface{
                     ]
                 ]
             )
+            ->pushCookies()
             ->pushContext()
         ;
 

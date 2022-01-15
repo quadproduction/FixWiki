@@ -81,6 +81,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
             ->loadConfig('app')
             ->setFrameworkExtra()
             ->pushDataInUserInterface($this->google_drive->getData())
+            ->pushCookies(true)
             ->pushContext()
         ;
 

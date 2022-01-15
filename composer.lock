@@ -313,7 +313,7 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.228.0",
+            "version": "v0.229.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
@@ -351,7 +351,7 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.228.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.229.0"
             },
             "time": "2021-12-21T12:26:12+00:00"
         },
@@ -740,12 +740,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "5d1d63b25690f38a291e9e27cd7da3304b2f29de"
+                "reference": "bb8e13b0bdbb0e64419acfa35cfe9b5d296ad927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/5d1d63b25690f38a291e9e27cd7da3304b2f29de",
-                "reference": "5d1d63b25690f38a291e9e27cd7da3304b2f29de",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/bb8e13b0bdbb0e64419acfa35cfe9b5d296ad927",
+                "reference": "bb8e13b0bdbb0e64419acfa35cfe9b5d296ad927",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
                 "source": "https://github.com/kekefreedog/LuckyPHP/tree/main"
             },
-            "time": "2022-01-12T23:07:45+00:00"
+            "time": "2022-01-15T09:26:25+00:00"
         },
         {
             "name": "mezon/router",

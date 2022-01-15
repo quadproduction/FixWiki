@@ -1,6 +1,6 @@
 <header class="page-topbar" id="header" data-layout="structure/head">
     <div class="navbar navbar-fixed">
-        <nav class="navbar-main navbar-color nav-collapsible sideNav-lock navbar-light">
+        <nav class="navbar-main navbar-color nav-collapsible {{#ifEquals _cookies.SIDENAV.STATUS "expanded"}}sideNav-lock{{/ifEquals}} navbar-light">
             <div class="nav-wrapper">
                 {{!-- Navbar list --}}
                 <ul class="navbar-list">

@@ -44,8 +44,30 @@ class SidenavChangeAction extends ControllerBase implements ControllerInterface{
         # Set name
         $this->name="SidenavAction";
 
+        # Prepare Cookie
+        $this->prepareCookie();
+
         # Set cookie
         $this->setCookie();
+
+    }
+
+    # Prepare Cookie
+    private function prepareCookie(){
+
+        # Check if parameters status is in statusAllowed
+        if(!in_array($this->parameters['status'], $this->conditions["statusAllowed"]))
+            exit();
+
+        # Prepare new cookie
+        $this->setCookie([
+            "name"      =>  "SIDENAV_STATUS",
+            "value"     =>  $this->parameters['status'],
+            "secure"    =>  false,
+        ]);
+
+        $this->pushData($_COOKIE);
+
 
     }
 
