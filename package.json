@@ -2,7 +2,8 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
         "js-yaml": "^4.1.0",
-        "Kmaterialize": "github:kekefreedog/Kmaterialize#advanced"
+        "Kmaterialize": "github:kekefreedog/Kmaterialize#advanced",
+        "tippy.js": "^6.3.7"
     },
     "devDependencies": {
         "css-loader": "^6.5.1",

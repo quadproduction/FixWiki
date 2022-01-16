@@ -20,24 +20,28 @@ import {Google} from "./module/Google";
  * 
  */
 import Sidenav from "./component/Sidenav";
+import Header from "./component/Header";
 
 /** Actions
  * 
  */
 import HomeAction from "./action/HomeAction";
+import DriveAction from "./action/DriveAction";
 
 /** Action route
  * 
  */
 let actionRoute = {
-    "Home":  HomeAction
+    "Home":  HomeAction,
+    "Drive": DriveAction,
 };
 
 /** Component list
  * 
  */
 let componentList = {
-    sidenav: Sidenav
+    sidenav: Sidenav,
+    head: Header
 }
 
 /** App Class
@@ -81,6 +85,7 @@ class App extends LuckyJs{
          */
         this.Pdf = (o = {}) => { new Pdf(o); };
         this.Google = (o = {}) => { new Google(o); };
+        this.Header = (o = {}) => { new Header(o); };
         this.Sidenav = (o = {}) => { new Sidenav(o); };
 
         /** Execute current action

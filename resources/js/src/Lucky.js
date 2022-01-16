@@ -17,6 +17,7 @@ import Http from './module/Http';
 import Event from './module/Event';
 import Popup from './module/Popup';
 import Context from './module/Context';
+import Strings from './module/Strings';
 import Template from './module/Template';
 
 /** LuckyJS
@@ -42,6 +43,7 @@ export default class LuckyJS {
         this.Event = new Event();
         this.Popup = new Popup();
         this.Context = new Context();
+        this.Strings = new Strings();
         this.Template = new Template();
 
         // Ingest input object
