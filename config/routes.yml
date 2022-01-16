@@ -24,35 +24,42 @@ routes:
     #     methods:
     #         - get
     #     response: html
-    -
+    -   # Sidenav Get
         name: Sidenav
         patterns:
             - /api/sidenav/
         methods:
             - get
         response: json
-    -
+    -   # Sidenav change
         name: SidenavChange
         patterns:
             - /api/sidenav/[a:status]/
         methods:
             - post
         response: json
-    -
+    -   # file / info
+        name: FileDrive
+        patterns:
+            - /api/file/drive/[a:id]/
+        methods:
+            - get
+        response: json
+    -   # Read logo
         name: Logo
         patterns:
             - /media/logo/[a:logo_name]/
         methods:
             - get
         response: data
-    -
+    -   # Reade file
         name: File
         patterns:
             - /media/file/
         methods:
             - get
         response: data
-    -
+    -   # All others pages
         name: 'Page not found'
         patterns:
             - '/*/'

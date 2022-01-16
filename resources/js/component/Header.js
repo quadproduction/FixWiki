@@ -14,7 +14,6 @@
  */
 import Dom from "./../src/module/Dom";
 import tippy from 'tippy.js';
-import 'tippy.js/dist/tippy.css';
 
 /** Page functions
  * 
@@ -109,60 +108,46 @@ export default class Header{
      */
     toggleInfoInit = (dom) => {
 
-        console.log(dom);
-
+        // Tippy
         tippy(
             dom.el,
             {
-                content: 'Info',
+                content: 'Chargement...',
+                onShow(instance){
+
+                    // Get url
+                    let url = instance.reference.dataset.url;
+
+                    // Check url
+                    if(url)
+                    
+                        // Xhr
+                        fetch(
+                            url,
+                            {
+                                method: 'GET',
+                                credentials: 'include',
+                                headers: new Headers({
+                                    'Accept': 'application/json',
+                                    'Access-Control-Allow-Origin':'*',
+                                    'Content-Type': 'application/json',
+                                })
+                            }
+                        // Middleware
+                        ).then(
+                            response => response.json()
+                        // Controller
+                        ).then(
+                            
+                            data => console.log(data)
+                            
+                        ).catch(
+                            error => console.error(error)
+                        );
+
+                }
             }
         );
-
-/*         // Prepare action
-        let action = e => {
-
-            // Get aside
-            let aside = document.querySelector("aside.sidenav-main");
-
-            // Check aside
-            if(aside === null)
-                return;
-
-            // Check if nav-lock
-            let request = aside.classList.contains("nav-lock") ?
-                "collapse" :
-                    "expanded";
-
-            // Xhr
-            fetch(
-                "/api/sidenav/"+request+"/",
-                {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: new Headers({
-                        'Accept': 'application/json',
-                        'Access-Control-Allow-Origin':'*',
-                        'Content-Type': 'application/json',
-                    })
-                }
-            // Middleware
-            ).then(
-                response => response.json()
-            // Controller
-            ).then(
-                data => console.log(data)
-            ).catch(
-                error => console.error(error)
-            );
-
-        }
-
-        // Push action on events
-        this.events.push({
-            el: dom.el,
-            type: 'click',
-            listener: action,
-        }); */
 
     }
 

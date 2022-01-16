@@ -444,6 +444,16 @@ class GoogleDrive{
 
     }
 
+    /** Get id of current file
+     * 
+     */
+    public function getCurrentId(){
+
+        #Return
+        return $this->currentFile->getId();
+
+    }
+
     /**********************************************************************************
      * Directory
      */

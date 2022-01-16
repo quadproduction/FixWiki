@@ -103,6 +103,9 @@ class DriveAction extends ControllerBase implements ControllerInterface{
             # Get html content
             $htmlContent = $this->google_drive->getContentFile();
 
+            # Get id
+            $id = $this->google_drive->getCurrentId();
+
         }catch(Exception $e){
 
             # Message html
@@ -122,6 +125,25 @@ class DriveAction extends ControllerBase implements ControllerInterface{
                     "main"  =>  [
                         # Get content file of current
                         "<div class=\"col s12 markdown\">$htmlContent</div>"
+                    ],
+                    "header"=>  [
+                        "navbar-list"   =>  [
+                            "add"   =>  [
+                                [
+                                    "type"  =>  "nav-button-circle",
+                                    "action"=>  "toggle-info",
+                                    "data"  =>  [
+                                        "url"   =>  "/api/file/drive/$id"
+                                    ],
+                                    "style" =>  [
+                                        "icon"  =>  [
+                                            "class" =>  "material-icons",
+                                            "text"  =>  "info"
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
                     ]
                 ]
             )

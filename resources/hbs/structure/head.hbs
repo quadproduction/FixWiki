@@ -19,10 +19,17 @@
                     <li class="hide-on-med-and-down nav-button-circle">
                         <a class="waves-effect waves-block waves-light toggle-fullscreen"><i class="material-icons">settings_overscan</i></a>
                     </li>
-                    {{!-- Info --}}
-                    <li class="hide-on-med-and-down nav-button-circle">
-                        <a class="waves-effect waves-block waves-light toggle-info"><i class="material-icons">info</i></a>
-                    </li>
+                    {{!-- Check navbar-list.add --}}
+                    {{#each _user_interface.header.navbar-list.add}}
+                        {{!-- Type --}}
+                        <li class="hide-on-med-and-down {{this.type}}">
+                            <a{{#each this.data}} data-{{@key}}="{{this}}"{{/each}} class="waves-effect waves-block waves-light {{this.action}}">
+                                {{#if this.style.icon.class}}
+                                <i class="{{this.style.icon.class}}">{{this.style.icon.text}}</i>
+                                {{/if}}
+                            </a>
+                        </li>
+                    {{/each}}
 
                 </ul>
             </div>

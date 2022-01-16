@@ -18,3 +18,6 @@ import './style/style';
 
 /* Icons */
 import './../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+/* Tippy Js */
+import 'tippy.js/dist/tippy.css';
