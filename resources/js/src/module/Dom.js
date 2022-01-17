@@ -96,9 +96,8 @@ export default class Dom {
     }
 
     /**********************************************************************************
-     * Static function
+     * Static function about events
      */
-
 
     /** Add Events
      * 
@@ -127,5 +126,67 @@ export default class Dom {
 
     }
 
+    /**********************************************************************************
+     * Static function about dom element
+     */
+
+    /** Read dataset on multiple el
+     * @param {object} el
+     * @param {string} name
+     * @param {any}
+     */
+    static readDataSet = (el, name) => {
+
+        // Check el
+        if(el.length && name)
+
+            // Iteration el
+            for(let e of el)
+
+                // Check if name in dataset of current el
+                if(name in e.dataset){
+
+                    // Return data set
+                    return e.dataset[name];
+
+                }
+
+        // Return null
+        return null;
+
+    }
+
+    /**********************************************************************************
+     * Static function about document
+     */
+
+    /** toogleFullScreen
+     * 
+     * 
+     */
+    static toogleFullScreen = () => {
+        if (
+           (document.fullScreenElement && document.fullScreenElement !== null) ||
+           (!document.mozFullScreen && !document.webkitIsFullScreen)
+        ) {
+           if (document.documentElement.requestFullScreen) {
+              document.documentElement.requestFullScreen();
+           } else if (document.documentElement.webkitRequestFullScreen) {
+              document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+           } else if (document.documentElement.msRequestFullscreen) {
+              if (document.msFullscreenElement) {
+                 document.msExitFullscreen();
+              } else {
+                 document.documentElement.msRequestFullscreen();
+              }
+           }
+        } else {
+           if (document.cancelFullScreen) {
+              document.cancelFullScreen();
+           } else if (document.webkitCancelFullScreen) {
+              document.webkitCancelFullScreen();
+           }
+        }
+    }
 
 }

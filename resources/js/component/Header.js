@@ -14,6 +14,7 @@
  */
 import Dom from "./../src/module/Dom";
 import tippy from 'tippy.js';
+import Swal from 'sweetalert2';
 
 /** Page functions
  * 
@@ -40,7 +41,7 @@ export default class Header{
      */
     constructor(){
 
-        console.log("Hello header")
+        console.log("Hello moi")
 
         // Scan the sidenav
         this.scan();
@@ -102,8 +103,8 @@ export default class Header{
 
     }
 
-    /** Action on sidenav tigger
-     * 
+    /** Action on header tigger info
+     * @param {object} dom
      * @returns {void}
      */
     toggleInfoInit = (dom) => {
@@ -112,43 +113,120 @@ export default class Header{
         tippy(
             dom.el,
             {
-                content: 'Chargement...',
-                onShow(instance){
+                offset: [0, 20],
+                content: 'Information',
+            }
+        );
+        
+        // Set action
+        let toggleInfoAction = async e => {
 
-                    // Get url
-                    let url = instance.reference.dataset.url;
+            // Get url
+            let url = e.target.parentNode.dataset.url;
 
-                    // Check url
-                    if(url)
-                    
-                        // Xhr
-                        fetch(
-                            url,
-                            {
-                                method: 'GET',
-                                credentials: 'include',
-                                headers: new Headers({
-                                    'Accept': 'application/json',
-                                    'Access-Control-Allow-Origin':'*',
-                                    'Content-Type': 'application/json',
-                                })
-                            }
-                        // Middleware
-                        ).then(
-                            response => response.json()
-                        // Controller
-                        ).then(
-                            
-                            data => console.log(data)
-                            
-                        ).catch(
-                            error => console.error(error)
-                        );
+            // Check url
+            if(!url)
+                return;
 
+            // Xhr
+            let content = fetch(
+                url,
+                {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin':'*',
+                        'Content-Type': 'application/json',
+                    })
                 }
+            // Middleware
+            ).then(
+                response => response.json()
+            // Controller
+            ).then(
+                
+                data => Swal.update({
+                    html: this.listCreate(data)
+                })
+                
+            // Exception
+            ).catch(
+                error => console.error(error)
+            );
+
+            // Swal
+            await Swal.fire({
+                showCloseButton: false,
+                showConfirmButton: false,
+            });
+
+        }
+
+        // Push action on events
+        this.events.push({
+            el: dom.el,
+            type: 'click',
+            listener: toggleInfoAction,
+        });
+
+    }
+
+    /** Action on header tigger fullscreen
+     * @param {object} dom
+     * @returns {void}
+     */
+    toggleFullscreenInit = (dom) => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+                content: 'Plein écran',
             }
         );
 
+        // Push action on events
+        this.events.push({
+            el: dom.el,
+            type: 'click',
+            listener: Dom.toogleFullScreen(),
+        });
+
+    }
+
+    /**********************************************************************************
+     * Content Constructor
+     */
+
+    /** Create list for tippy
+     * 
+     */
+    listCreate = data => {
+
+        console.log(data);
+        console.log("hello toi");
+
+        // Create ul
+        let ul = document.createElement("ul");
+        ul.classList.add('collection');
+
+            // Create li
+            let li1 = document.createElement('li');
+            li1.classList.add('collection-item');
+            li1.innerText = "Wow";
+            ul.appendChild(li1);
+            
+            // Create li
+            let li2 = document.createElement('li');
+            li2.classList.add('collection-item');
+            li2.innerText = "Noo";
+            ul.appendChild(li2);
+            
+
+        return ul;
+        
     }
 
 }

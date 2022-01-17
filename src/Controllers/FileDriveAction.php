@@ -17,8 +17,9 @@ namespace App\Controllers;
 /** Dependances
  *
  */
-use LuckyPHP\Base\Controller as ControllerBase;
 use LuckyPHP\Interface\Controller as ControllerInterface;
+use LuckyPHP\Base\Controller as ControllerBase;
+use LuckyPHP\Front\Template;
 
 /** Class for manage the workflow of the app
  *
@@ -44,8 +45,30 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
     # Prepare Cookie
     private function action(){
 
+        # Load template
+        $template = new Template();
+
+        # Load layout
+        $content = $template
+            ->loadLayouts([
+                "popup/header"
+            ])
+            ->build()
+        ;
+
+        # New model
+        $this->newModel();
+
+        $this->model
+            ->pushDataInUserInterface([
+                "swal2HtmlContainer"    =>  [
+                    $content
+                ]
+            ])
+        ;
+
         # Push data in model
-        $this->pushData(['hello world']);
+        $this->pushData($this->model->execute());
 
 
     }

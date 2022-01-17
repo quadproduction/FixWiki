@@ -57,9 +57,9 @@ class DriveAction extends ControllerBase implements ControllerInterface{
 
         # Set layouts
         $this->setLayouts([
-            'head',
-            'sidenav',
-            'main',
+            'structure/head',
+            'structure/sidenav',
+            'structure/main',
         ]);
 
     }
@@ -71,9 +71,6 @@ class DriveAction extends ControllerBase implements ControllerInterface{
 
         # New model
         $this->newModel();
-
-        # New google client
-        ;
 
         # New google drive
         $this->google_drive = new GoogleDrive();

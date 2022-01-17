@@ -55,9 +55,9 @@ class HomeAction extends ControllerBase implements ControllerInterface{
 
         # Set layouts
         $this->setLayouts([
-            'head',
-            'sidenav',
-            'home',
+            'structure/head',
+            'structure/sidenav',
+            'page/home',
         ]);
 
     }
