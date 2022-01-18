@@ -147,7 +147,7 @@ export default class Header{
             ).then(
                 
                 data => Swal.update({
-                    html: this.listCreate(data)
+                    html: this.templateCompile(data)
                 })
                 
             // Exception
@@ -159,6 +159,7 @@ export default class Header{
             await Swal.fire({
                 showCloseButton: false,
                 showConfirmButton: false,
+                padding: "0px"
             });
 
         }
@@ -203,29 +204,11 @@ export default class Header{
     /** Create list for tippy
      * 
      */
-    listCreate = data => {
+    templateCompile = data => {
 
-        console.log(data);
-        console.log("hello toi");
+        let response = data._user_interface.swal2HtmlContainer.join();
 
-        // Create ul
-        let ul = document.createElement("ul");
-        ul.classList.add('collection');
-
-            // Create li
-            let li1 = document.createElement('li');
-            li1.classList.add('collection-item');
-            li1.innerText = "Wow";
-            ul.appendChild(li1);
-            
-            // Create li
-            let li2 = document.createElement('li');
-            li2.classList.add('collection-item');
-            li2.innerText = "Noo";
-            ul.appendChild(li2);
-            
-
-        return ul;
+        return response;
         
     }
 
