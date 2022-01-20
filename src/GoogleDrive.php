@@ -316,6 +316,52 @@ class GoogleDrive{
 
     }
 
+    /** Get info by if
+     * @param string $id id of file...
+     * @param array $fields Attributes to read in google drive
+     * @return array
+     */
+    public function getDataInfoById(string $id = "", array $fields = ["id", "name"]):array {
+        
+        # Check id
+        if(!$id)
+
+            # New error
+            throw new Exception("You can't find file in Google Drive with invalid Id", 500);
+
+        # Declare result
+        $result = [
+            "entity" => "file"
+        ];
+
+        # Set result
+        $record = $this->drive->files->get(
+            $id,
+            [
+                'supportsAllDrives' => true, 
+                'fields' => implode(", ", $fields),
+            ]
+        );
+
+        # Iteration fields
+        foreach($fields as $field){
+
+            # Set method name
+            $methodName = "get".ucfirst($field);
+
+            # check method exist in record
+            if(method_exists($record, $methodName))
+
+                # Push value in result
+                $result[$field] = $record->{$methodName}();
+
+        }
+
+        # Return result
+        return $result;
+
+    }
+
     /** Create cache file
      * 
      */

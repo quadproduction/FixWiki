@@ -1,6 +1,7 @@
 {
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
+        "handlebars": "^4.7.7",
         "js-yaml": "^4.1.0",
         "Kmaterialize": "github:kekefreedog/Kmaterialize#advanced",
         "sweetalert2": "^11.3.6",
@@ -24,5 +25,6 @@
         "webpack-build": "webpack --mode production",
         "webpack-watch": "webpack --watch --mode=development --config webpack.dev.js",
         "sass-watch": "rimraf www/css && sass --load-path=resources/scss --watch --style compressed resources/scss/dev/style.scss www/css/css.watch.css"
-    }
+    },
+    "browser": "dist/handlebars.js"
 }

@@ -20,6 +20,8 @@ namespace App\Controllers;
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
 use LuckyPHP\Front\Template;
+use LuckyPHP\Http\Records;
+use App\GoogleDrive;
 
 /** Class for manage the workflow of the app
  *
@@ -42,8 +44,60 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
 
     }
 
-    # Prepare Cookie
+    # Prepare Data
     private function action(){
+
+        # Set id
+        $id = $this->parameters['id'];
+
+        # New model
+        $this->newModel();
+
+        /**
+         *  Push data in model
+         */
+
+        # new google_drive
+        $this->google_drive = new GoogleDrive();
+
+        # Get current record
+        $raw = $this->google_drive->getDataInfoById($id, array_keys(self::FIELDS));
+
+        # Prepare records
+        $record = Records::formatRecord([
+            "id"        =>  $raw['id'],
+            "entity"    =>  $raw['entity'],
+        ]);
+
+        # Iteration raw
+        foreach($raw as $k => $v)
+
+            # Check id isn't id or entity
+            if(
+                !in_array($k, ["id", "entity"]) &&
+                isset(self::FIELDS[$k])
+            ){
+
+                # Prepare current value
+                $valueTemp = self::FIELDS[$k];
+                $valueTemp["attributes"] = [
+                    "value" =>  $k,
+                    "name"  =>  $v,
+                ];
+
+                # Push value in children
+                $record["relationships"]["fields"][] = $valueTemp;
+
+            }
+
+        // Push records
+        $this->model->pushRecords([
+            $record
+        ]);
+
+        /**
+         *  Push template
+         */
 
         # Load template
         $template = new Template();
@@ -51,18 +105,18 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
         # Load layout
         $content = $template
             ->loadLayouts([
-                "popup/header"
+                "popup/header",
+                "popup/main/info"
             ])
             ->build()
         ;
 
-        # New model
-        $this->newModel();
-
         $this->model
             ->pushDataInUserInterface([
-                "swal2HtmlContainer"    =>  [
-                    $content
+                "action"    =>  [
+                    "type"      =>  "hbs",
+                    "target"    =>  "swal2-html-container",
+                    "content"   =>  $content
                 ]
             ])
         ;
@@ -82,4 +136,92 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
         return $this->name;
 
     }
+
+    /** List fields to display
+     * 
+     */
+    private const FIELDS = [
+        "id"                    =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "name"                  =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "createdTime"           =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "modifiedTime"          =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "fileExtension"         =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "size"                  =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "webContentLink"        =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "mimeType"              =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+        "lastModifyingUser"     =>  [
+            "_style"    =>  [
+                "icon"  =>  [
+                    "class" =>  "",
+                    "icon"  =>  ""
+                ],
+                "href"  =>  null,
+            ],
+        ],
+    ];
+
 }

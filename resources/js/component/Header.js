@@ -13,8 +13,9 @@
  * 
  */
 import Dom from "./../src/module/Dom";
-import tippy from 'tippy.js';
+import Handlebars from 'handlebars';
 import Swal from 'sweetalert2';
+import tippy from 'tippy.js';
 
 /** Page functions
  * 
