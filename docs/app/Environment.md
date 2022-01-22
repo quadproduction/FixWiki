@@ -23,3 +23,4 @@ npm install
 ```sh
 chmod -R +rw /Users/kevin/Sites/fixstudio_wiki/
 ```
+- Check particulary the folder `/resources/json/` for avoid google OAuth to repeat infinitely.

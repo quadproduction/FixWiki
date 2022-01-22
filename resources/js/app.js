@@ -12,9 +12,10 @@
 /** Dependances
  * 
  */
+import Action from "./src/module/Action";
+import {Google} from "./module/Google";
 import LuckyJs from "./src/Lucky";
 import {Pdf} from "./module/Pdf";
-import {Google} from "./module/Google";
 
 /** Component
  * 
@@ -88,9 +89,30 @@ class App extends LuckyJs{
         this.Header = (o = {}) => { new Header(o); };
         this.Sidenav = (o = {}) => { new Sidenav(o); };
 
+        /** Set ajax actions of the app
+         * 
+         */
+        this.setAjaxActions();
+
         /** Execute current action
          */
         new this.action(this);
+
+    }
+
+    /** Set up Ajax Action
+     * 
+     */
+    setAjaxActions = () => {
+
+        // List of action
+        let actions = {
+            // Handlebarjs Action
+            hbs: Action.hbs
+        };
+
+        // Create actions instance
+        this.Action = new Action(actions);
 
     }
 

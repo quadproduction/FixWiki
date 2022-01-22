@@ -29,11 +29,6 @@ module.exports = {
         filename: '[name].js',
         path: path.resolve(__dirname, 'www/js'),
     },
-    resolve: {
-        alias: {
-           handlebars: 'handlebars/dist/handlebars.min.js'
-        }
-    },
     module: {
         rules: [
             /* Scss | Css */

@@ -13,7 +13,6 @@
  * 
  */
 import Dom from "./../src/module/Dom";
-import Handlebars from 'handlebars';
 import Swal from 'sweetalert2';
 import tippy from 'tippy.js';
 
