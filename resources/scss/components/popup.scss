@@ -1,0 +1,41 @@
+/**
+ *
+ *      loaderSwalSimple
+ *
+ */
+
+/* Variable */
+$transitionDuration: .1s;
+
+ /* Swall container */
+.swal2-container{
+    /* Popup */
+    .swal2-popup{
+        &.loaderSwalSimplePopup{
+            width: 88px;
+            border-radius: 44px;
+            transition: $transitionDuration;
+            .swal2-html-container{
+                margin: 12px;
+                overflow: initial;
+                transition: $transitionDuration;
+                .spinner-white-only{
+                    border-color: white;
+                }
+                .preloader-logo{
+                    position: absolute;
+                    margin: 15px;
+                    img{
+                        width: 35px;
+                        height: 35px;
+                        object-fit: contain;
+                    }
+                }
+            }
+        }
+    }
+    /* Loader */
+    .loaderSwalSimpleLoader{
+
+    }
+}

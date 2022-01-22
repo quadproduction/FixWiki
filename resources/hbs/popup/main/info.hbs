@@ -13,7 +13,7 @@
         {{!-- Body --}}
         <tbody>
         {{!-- Iteration children --}}
-        {{#if this.relationships.fields}}
+        {{#each this.relationships.fields}}
             <tr>
                 <td>{{this.attributes.value}}</td>
                 <td>{{this.attributes.name}}</td>

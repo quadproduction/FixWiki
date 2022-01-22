@@ -32,8 +32,6 @@ export default class DriveAction {
             this.pageInit
         );
 
-        console.log("hello Drive");
-
     }
 
     /** Init page

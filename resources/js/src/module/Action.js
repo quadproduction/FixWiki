@@ -9,6 +9,13 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
+/** Dependances
+ * 
+ */
+import Handlebars from "handlebars/dist/handlebars.min.js";
+import Swal from 'sweetalert2';
+import Popup from "./Popup";
+
 /** Module Context
  * 
  */
@@ -17,7 +24,7 @@ export default class Action {
     // Default list
     _actionsDefault = {
         // Test
-        test: (event, response) => console.log({event, response})
+        test: (action, response) => console.log({action, response})
     };
 
     // Actions list
@@ -63,7 +70,7 @@ export default class Action {
      _ingestActions = actions => {
 
         // Iteration des actions
-        for(let action of actions)
+        for(let action in actions)
 
             // Push action in _actionsList
             this.push(action, actions[action], true);
@@ -148,27 +155,36 @@ export default class Action {
      * @param {Action} action 
      * @param {callback,null} callback 
      */
-    static scan = (response = {}, action, callback = null) => {
+    static scan = (response = {}, callback = null) => {
 
         // Set result
         let result = [];
+
+        // Set instance
+        let instance = window.App.Action;
 
         // Check _user_interface > actions
         if(response._user_interface.actions)
 
             // Iteration des actions
-            for(let action in response._user_interface.actions)
+            for(let action of response._user_interface.actions)
                 
                 if(action.type){
         
                     // Call action depending of type
-                    let call = action.call(action.type)
+                    let call = instance.call(action.type)
+
+                    // Check call
+                    if(call)
         
-                    // Execute call
-                    result.push({
-                        callResult: call(response._user_interface.action,response),
-                        callName: response._user_interface.action.type
-                    });
+                        // Execute call
+                        result.push({
+                            callResult: call(
+                                action,
+                                response
+                            ),
+                            callName: action.type
+                        });
         
                 }
 
@@ -182,9 +198,25 @@ export default class Action {
      * @param {object} event 
      * @param {object} response 
      */
-    static hbs = (event, response) => {
-        
-        console.log({message:'hbs', event, response});
+    static hbs = (action, response) => {
+
+        // Check content
+        if(action.content == undefined || !action.content)
+            return
+
+        // Compile
+        var template = Handlebars.compile(action.content);
+
+        // Check target
+        if(action.target = "Swal"){
+
+            // Update template
+            Swal.update({
+                html: template(response),
+            });
+
+
+        }
 
     }
 

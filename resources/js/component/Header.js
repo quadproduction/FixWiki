@@ -12,6 +12,8 @@
 /** Dependances
  * 
  */
+import Action from "./../src/module/Action";
+import Popup from "./../src/module/Popup";
 import Dom from "./../src/module/Dom";
 import Swal from 'sweetalert2';
 import tippy from 'tippy.js';
@@ -40,8 +42,6 @@ export default class Header{
      * 
      */
     constructor(){
-
-        console.log("Hello moi")
 
         // Scan the sidenav
         this.scan();
@@ -145,21 +145,30 @@ export default class Header{
                 response => response.json()
             // Controller
             ).then(
-                
-                data => Swal.update({
-                    html: this.templateCompile(data)
-                })
-                
+                data => {
+                    // Scan action
+                    Action.scan(data);
+                }
             // Exception
             ).catch(
                 error => console.error(error)
             );
 
+            // Popup Loader
+            let popupLoader = "loaderSwalSimple";
+
             // Swal
             await Swal.fire({
                 showCloseButton: false,
                 showConfirmButton: false,
-                padding: "0px"
+                padding: "0px",
+                html: Popup[popupLoader](),
+                customClass: {
+                    popup: popupLoader+'Popup gradient-45deg-deep-purple-blue'
+                },
+                didRender: (e) => {
+                    Popup.cleanSwalLoader(popupLoader);
+                } 
             });
 
         }

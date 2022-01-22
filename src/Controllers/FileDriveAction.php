@@ -91,9 +91,7 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
             }
 
         // Push records
-        $this->model->pushRecords([
-            $record
-        ]);
+        $this->model->pushRecords($record);
 
         /**
          *  Push template
@@ -113,10 +111,12 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
 
         $this->model
             ->pushDataInUserInterface([
-                "action"    =>  [
-                    "type"      =>  "hbs",
-                    "target"    =>  "swal2-html-container",
-                    "content"   =>  $content
+                "actions"    =>  [
+                    [
+                        "type"      =>  "hbs",
+                        "target"    =>  "Swal",
+                        "content"   =>  $content
+                    ]
                 ]
             ])
         ;
