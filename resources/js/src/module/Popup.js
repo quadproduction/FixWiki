@@ -139,6 +139,49 @@ export default class Popup {
 
     }
 
+    /** Scan Hooks (add event to query)
+     * @param {event} event
+     * @param {Array} hooks
+     * @returns {void}
+     */
+    static scanHooks = (event = null, hooks = []) => {
 
+        // Check event and hooks
+        if(event === null || !hooks.length)
+            return;
+
+        // Iteration des hooks
+        for(let hook of hooks){
+
+            // Check hook
+            if(
+                (
+                    !hook.query &&
+                    !hook.id
+                ) ||
+                !hook.event || 
+                typeof hook.callback !== "function"
+            )
+                continue;
+
+            // Set els
+            let els = event.querySelectorAll(hook.query ?? hook.id);
+
+            // Check el
+            if(!els || !els.length)
+                continue;
+
+            // Iteration des el
+            for(let el of els)
+
+                // Add event on el
+                el.addEventListener(
+                    hook.event,
+                    hook.callback
+                );
+
+        }
+
+    }
 
 }

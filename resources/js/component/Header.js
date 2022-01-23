@@ -14,6 +14,7 @@
  */
 import Action from "./../src/module/Action";
 import Popup from "./../src/module/Popup";
+import Copy from "./../src/module/Copy";
 import Dom from "./../src/module/Dom";
 import Swal from 'sweetalert2';
 import tippy from 'tippy.js';
@@ -121,6 +122,9 @@ export default class Header{
         // Set action
         let toggleInfoAction = async e => {
 
+            // Set legacy e
+            let eLegacy = e;
+
             // Get url
             let url = e.target.parentNode.dataset.url;
 
@@ -167,7 +171,46 @@ export default class Header{
                     popup: popupLoader+'Popup gradient-45deg-deep-purple-blue'
                 },
                 didRender: (e) => {
+                    // Delete Loader
                     Popup.cleanSwalLoader(popupLoader);
+                    // Set hook
+                    Popup.scanHooks(e, [
+                        // Close
+                        {
+                            query: ".popup-header-content-text-actions-close a",
+                            event: "click",
+                            callback: Swal.close
+                        },
+                        // Refresh
+                        {
+                            query: ".popup-header-content-text-actions-refresh a",
+                            event: "click",
+                            callback: () => {
+                                toggleInfoAction(eLegacy)
+                            }
+                        },
+                        // Copy
+                        {
+                            query: ".copy-data",
+                            event: "click",
+                            callback: () => {
+                                Copy.run({
+                                    container: e,
+                                    el: "a.copy-data",
+                                    callback: (trigger) => trigger.dataset.copyContent ?? ""
+                                });
+                            }
+                        }
+                    ]);
+                    // Set tippy
+                    let a = e.querySelectorAll("a.copy-data");
+                    if(a.length)
+                        for(let b of a)
+                            tippy(b, {
+                                content: b.dataset.dataCopyLabel ?? "Copier l'élément ?",
+                                placement: 'bottom',
+                                delay: [500,0]
+                            });
                 } 
             });
 

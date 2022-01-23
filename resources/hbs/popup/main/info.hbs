@@ -3,12 +3,12 @@
 {{#each records}}
     {{!-- Check children fields --}}
     {{#if this.relationships.fields}}
-    <table>
+    <table class="layout-fixed">
         {{!-- Table Header --}}
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Value</th>
+                <th>Valeur</th>
             </tr>
         </thead>
         {{!-- Body --}}
@@ -16,8 +16,20 @@
         {{!-- Iteration children --}}
         {{#each this.relationships.fields}}
             <tr>
-                <td>{{this.attributes.value}}</td>
-                <td>{{this.attributes.name}}</td>
+                <td><span class="small">{{this.attributes.value}}</span></td>
+                <td>
+                {{#if this.attributes.name.kind}}
+                    <span class="copy-parent">
+                        {{this.attributes.name.displayName}}
+                        <a data-copy-label="Copier la valeur ?" class="copy-data copy-hover" data-copy-content="{{this.attributes.name.emailAddress}}"><i class="material-icons">content_copy</i></a>
+                    </span>
+                {{else}}
+                    <span class="copy-parent">
+                        {{this.attributes.name}}
+                        <a data-copy-label="Copier l'email ?" class="copy-data copy-hover" data-copy-content="{{this.attributes.name}}"><i class="material-icons">content_copy</i></a>
+                    </span>
+                {{/if}}
+                </td>
             </tr>
         {{/each}}
         </tbody>
