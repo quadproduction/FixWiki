@@ -16,15 +16,15 @@
 @import "./../../../node_modules/Kmaterialize/dist/css/vertical-gradient-menu/kmaterial.min";
 @import "./../../css/style";
 
- /* Import component */
- @import "./../miscellaneous/error.scss";
+/* Import component */
+@import "./../miscellaneous/error.scss";
 
- /* Fix */
- @import "./../sidenav/sidenav.scss";
- @import "./../header/header.scss";
+/* Fix */
+@import "./../sidenav/sidenav.scss";
+@import "./../header/header.scss";
 
- /* Markdown Content */
- @import "./../code/code.scss";
+/* Markdown Content */
+@import "./../code/code.scss";
 
 /* Icons */
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
@@ -34,8 +34,9 @@
  @import "./typography/font-size.scss";
 
  /* Components */
- @import "./components/card.scss";
- @import "./components/popup.scss";
+ @import "./components/card";
+ @import "./components/button";
+ @import "./components/popup";
 
  /* Tippy Js */
  @import "./../../../node_modulestippy.js/dist/tippy.css";

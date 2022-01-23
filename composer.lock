@@ -313,7 +313,7 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.229.0",
+            "version": "v0.230.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
@@ -351,7 +351,7 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.229.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.230.0"
             },
             "time": "2021-12-21T12:26:12+00:00"
         },
@@ -740,12 +740,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "a5d1ee95c0e2e38587a118a633f02085af8f8d5a"
+                "reference": "a09c3d2f5c9e7f078d6ffc1d71a1550d5149fd1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/a5d1ee95c0e2e38587a118a633f02085af8f8d5a",
-                "reference": "a5d1ee95c0e2e38587a118a633f02085af8f8d5a",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/a09c3d2f5c9e7f078d6ffc1d71a1550d5149fd1c",
+                "reference": "a09c3d2f5c9e7f078d6ffc1d71a1550d5149fd1c",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
                 "source": "https://github.com/kekefreedog/LuckyPHP/tree/main"
             },
-            "time": "2022-01-20T21:05:57+00:00"
+            "time": "2022-01-20T21:58:46+00:00"
         },
         {
             "name": "mezon/router",
@@ -931,16 +931,16 @@
         },
         {
             "name": "paragonie/constant_time_encoding",
-            "version": "v2.4.0",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/constant_time_encoding.git",
-                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c"
+                "reference": "9229e15f2e6ba772f0c55dd6986c563b937170a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
-                "reference": "f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c",
+                "url": "https://api.github.com/repos/paragonie/constant_time_encoding/zipball/9229e15f2e6ba772f0c55dd6986c563b937170a8",
+                "reference": "9229e15f2e6ba772f0c55dd6986c563b937170a8",
                 "shasum": ""
             },
             "require": {
@@ -994,7 +994,7 @@
                 "issues": "https://github.com/paragonie/constant_time_encoding/issues",
                 "source": "https://github.com/paragonie/constant_time_encoding"
             },
-            "time": "2020-12-06T15:14:20+00:00"
+            "time": "2022-01-17T05:32:27+00:00"
         },
         {
             "name": "paragonie/random_compat",

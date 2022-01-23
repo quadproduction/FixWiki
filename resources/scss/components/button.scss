@@ -1,0 +1,22 @@
+/**
+ *
+ *      btn
+ *
+ */
+a.btn-floating.small{
+    /* Dimension */
+    width: 25px;
+    height: 25px;
+    /* Position */
+    display: flex;
+    align-items: center;
+    /* Children */
+    i{
+        /* Children */
+        &.material-icons{
+            /* Font */
+            font-size: 1.4rem;
+        }
+    }
+
+}

@@ -114,7 +114,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
-                content: 'Information',
+                content: 'Info',
             }
         );
         

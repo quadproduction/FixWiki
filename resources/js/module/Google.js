@@ -46,6 +46,13 @@ export class Google{
 
         }
 
+        // Replace Edit by Preview if google link
+        if(
+            o.webContentLink.includes("docs.google") &&
+            o.webContentLink.includes("edit")
+        )
+        o.webContentLink = o.webContentLink.replace("edit", "preview");
+
         // Create iframe
         let iframeDiv = document.createElement("iframe");
 

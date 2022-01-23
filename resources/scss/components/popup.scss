@@ -1,5 +1,100 @@
 /**
  *
+ *      header
+ *
+ */
+$fontColorNormal: rgb(84, 84, 84);
+$fontColorNormalLight: rgb(107, 111, 130);
+header.popup-header{
+    /* Display */
+    display: flex;
+    /* Dimension */
+    margin-bottom: 8px;
+    /* Children */
+    .popup-header-logo{
+        /* Position */
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        padding: 15px 20px 15px 20px;
+        border-radius: 5px 0 5px 0;
+        /* Children */
+        img{
+            /* Dimension */
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            /* Selection */
+            user-select: none;
+        }
+    }
+    /* Ghost of logo */
+    .popup-header-ghost{
+        /* Dimension */
+        width: 60px;
+    }
+    /* Content */
+    .popup-header-content{
+        /* Dimension */
+        flex-grow: 1;
+        /* Display */
+        display: flex;
+        /* Children */
+        .popup-header-content-media{
+            /* Position */
+            display: flex;
+            align-items: center;
+            /* Children */
+            a{
+                /* Cursor */
+                cursor: default;
+                /* Children */
+                i{
+                    color: $fontColorNormal;
+                }
+            }
+        }
+        .popup-header-content-text{
+            /* Dimension */
+            flex-grow: 1;
+            /* Children */
+            .popup-header-content-text-title{
+                /* Font */
+                font-weight: bold;
+            }
+            .popup-header-content-text-description{
+                /* Font */
+                font-size: small;
+            }
+        }
+    }
+    /* Action */
+    .popup-header-actions{
+        /* Display */
+        display: flex;
+        align-items: center;
+        /* Children */
+        a {
+            margin-left: 5px;
+        }
+    }
+    /* Fix */
+    a{
+        /* Hover */
+        &:hover{
+            /* Color */
+            background-color: unset;
+        }
+        /* Children */
+        i{
+            /* Color */
+            color: $fontColorNormal;
+        }
+    }
+}
+
+/**
+ *
  *      loaderSwalSimple
  *
  */

@@ -8,19 +8,20 @@
  * permission of Kévin Zarshenas @kekefreedog
  *******************************************************/
 
- /* Import component */
- @import "./miscellaneous/error.scss";
+/* Import component */
+@import "./miscellaneous/error.scss";
 
- /* Fix */
- @import "./sidenav/sidenav.scss";
- @import "./header/header.scss";
+/* Fix */
+@import "./sidenav/sidenav.scss";
+@import "./header/header.scss";
 
- /* Markdown Content */
- @import "./code/code.scss";
+/* Markdown Content */
+@import "./code/code.scss";
 
- /* Typography */
- @import "./typography/font-size.scss";
+/* Typography */
+@import "./typography/font-size.scss";
 
- /* Components */
- @import "./components/card.scss";
- @import "./components/popup.scss";
+/* Components */
+@import "./components/card";
+@import "./components/button";
+@import "./components/popup";
