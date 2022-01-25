@@ -114,15 +114,26 @@ export default class Dom {
         if(list.length)
 
             // Iteration des items
-            for(let item of list)
+            for(let item of list){
 
-                // Iteration des el
-                for(let el of item.el)
+                if(Dom.isNode(item.el))
 
-                    el.addEventListener(
+                    item.el.addEventListener(
                         item.type,
                         item.listener
                     );
+
+                else
+
+                    // Iteration des el
+                    for(let el of item.el)
+
+                        el.addEventListener(
+                            item.type,
+                            item.listener
+                        );
+
+            }
 
     }
 
@@ -187,6 +198,25 @@ export default class Dom {
               document.webkitCancelFullScreen();
            }
         }
+    }
+
+    /** Static function about dom object
+     * 
+     */
+    //Returns true if it is a DOM node
+    static isNode = (o) => {
+        return (
+        typeof Node === "object" ? o instanceof Node : 
+        o && typeof o === "object" && typeof o.nodeType === "number" && typeof o.nodeName==="string"
+        );
+    }
+    
+    //Returns true if it is a DOM element    
+    static isElement = (o) =>{
+        return (
+            typeof HTMLElement === "object" ? o instanceof HTMLElement : //DOM2
+            o && typeof o === "object" && o !== null && o.nodeType === 1 && typeof o.nodeName==="string"
+        );
     }
 
 }

@@ -1,4 +1,4 @@
-<div id="main" class="{{_cookies.SIDENAV.STATUS}}  toto {{#ifEquals _cookies.SIDENAV.STATUS "collapse"}}main-full{{/ifEquals}}" data-layout="structure/main">
+<div id="main" class="{{#ifEquals _cookies.SIDENAV.STATUS "expanded"}}{{else}}main-full{{/ifEquals}}" data-layout="structure/main">
     <div class="row container">
         {{!-- Check user interface main --}}
         {{#if _user_interface.main}}

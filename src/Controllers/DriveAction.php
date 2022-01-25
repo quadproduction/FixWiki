@@ -121,7 +121,7 @@ class DriveAction extends ControllerBase implements ControllerInterface{
                 [
                     "main"  =>  [
                         # Get content file of current
-                        "<div class=\"col s12 markdown\">$htmlContent</div>"
+                        "<div class=\"col s12 markdown enable-anchors\">$htmlContent</div>"
                     ],
                     "header"=>  [
                         "navbar-list"   =>  [

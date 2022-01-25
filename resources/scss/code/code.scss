@@ -120,5 +120,58 @@
                 }
             }
         }
+        /* Enable anchor */
+        $colorLight: #9e9e9e;
+        $transitionDuration: .1s;
+        &.enable-anchors{
+
+            /* Cursor */
+            h1,h2{
+                /* Cursor */
+                cursor: pointer;
+            }
+            /* After */
+            h1::after,h2::after{
+                /* Content */
+                content: "#";
+                /* Position */
+                display: inline-block;
+                vertical-align: super;
+                margin-left: 1rem;
+                /* Font */
+                font-size: smaller;
+                font-weight: lighter;
+                /* Color */
+                color: $colorLight;
+                /* Transition */
+                transition: $transitionDuration;
+                /* Opacity */
+                opacity: 0;
+                /* Border */
+                border-bottom: 0;
+            }
+            /* Hover */
+            h1:hover::after,h2:hover::after{
+                /* Transition */
+                transition: $transitionDuration;
+                /* Opacity */
+                opacity: 1;
+            }
+
+            /* Fix */
+            h1{
+                /* Border */
+                border-bottom: 1px solid rgba(128,128,128,.33);
+                /* Dimension */
+                padding-bottom: 15px;
+            }
+            h2{
+                /* Border */
+                border-bottom: 1px solid rgba(128,128,128,.2);
+                /* Dimension */
+                padding-bottom: 10px;
+            }
+    
+        }
 	}
 }

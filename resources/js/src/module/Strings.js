@@ -49,4 +49,49 @@ export default class Strings {
         );
     };
 
+    /** Clean str
+     * @param {string} string String to process
+     * @returns {string} Result clean
+     */
+    static clean = (string = "") => {
+
+        // Check string
+        if(!string)
+            return string;
+
+        // Rules
+        let rules = [
+            [ /[áàâãªä]/ug,     'a' ],
+            [ /[ÁÀÂÃÄ]/ug,      'a' ],
+            [ /[ÍÌÎÏ]/ug,       'i' ],
+            [ /[íìîï]/ug,       'i' ],
+            [ /[éèêë]/ug,       'e' ],
+            [ /[ÉÈÊË]/ug,       'e' ],
+            [ /[óòôõºö]/ug,     'o' ],
+            [ /[ÓÒÔÕÖ]/ug,      'o' ],
+            [ /[úùûü]/ug,       'u' ],
+            [ /[ÚÙÛÜ]/ug,       'u' ],
+            [ /ç/g,             'c' ],
+            [ /Ç/g,             'c' ],
+            [ /ñ/g,             'n' ],
+            [ /Ñ/g,             'n' ],
+            [ /\s+/g,           '_' ],
+            [ /–/g,             '-' ], // UTF-8 hyphen to "normal" hyphen
+            [ /[’‘‹›‚]/ug,      ' ' ], // Literally a single quote
+            [ /[“”«»„]/ug,      ' ' ], // Double quote
+            [ / /g,             ' ' ], // nonbreaking space (equiv. to 0x160),
+            [ /[(]/g,      	    ''  ], // Round brackets
+            [ /[)]/g,      	    ''  ], // Round brackets
+        ];
+
+        // Iteration des rules
+        for(let rule of rules)
+
+            string = string.replaceAll(rule[0], rule[1]);
+
+        // Return string
+        return string.toLowerCase();
+
+    }
+
 }
