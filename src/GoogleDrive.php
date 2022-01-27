@@ -563,5 +563,58 @@ class GoogleDrive{
 
     }
 
+    /**********************************************************************************
+     * Media
+     */
+
+    /** search media
+     * 
+     */
+    public function searchMedia($parameters){
+
+        # Boucle pour les root
+        $i=0;while(isset($parameters["root$i"])){
+
+            # Set current
+            $current = $parameters["root$i"];
+            
+            # Parameters
+            $parameters = array(
+                'includeItemsFromAllDrives' => true,
+                'fields'                    => 'files(id, name, mimeType, parents)',
+                'supportsAllDrives'         => true,
+                'driveId'                   => $this->config['app']['google']['drive']['driveId'],
+                'corpora'                   => 'drive',
+                'q'                         => "trashed=false and name = '$current'",
+            );
+
+            /**
+             * Je devrais plutot recuperer tous les fichiers / dossier 
+             * Puis faire un iteration des elements, parents, enfants... jusqu'à l'élément
+             * Et ne pas omit le dossier media
+             */
+
+            # Get datas
+            $batch = $this->drive->files->listFiles($parameters);
+
+            # Check if result
+            if(count($batch->getFiles()))
+
+                # Iteration des files
+                foreach ($batch->getFiles() as $file){
+
+                    print_r($file->getName());
+
+                }
+
+            exit();
+
+            # Increment i
+            $i++;
+
+        }
+
+    }
+
 
 }
