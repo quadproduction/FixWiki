@@ -569,50 +569,128 @@ class GoogleDrive{
 
     /** search media
      * 
+     * @param string Id of the element
      */
     public function searchMedia($parameters){
 
-        # Boucle pour les root
-        $i=0;while(isset($parameters["root$i"])){
+        # Declare result
+        $result = null;
 
-            # Set current
-            $current = $parameters["root$i"];
-            
-            # Parameters
-            $parameters = array(
-                'includeItemsFromAllDrives' => true,
-                'fields'                    => 'files(id, name, mimeType, parents)',
-                'supportsAllDrives'         => true,
-                'driveId'                   => $this->config['app']['google']['drive']['driveId'],
-                'corpora'                   => 'drive',
-                'q'                         => "trashed=false and name = '$current'",
-            );
+        # Reset conditions folderNameExclude
+        $this->conditions['folderNameExclude'] = [];
 
-            /**
-             * Je devrais plutot recuperer tous les fichiers / dossier 
-             * Puis faire un iteration des elements, parents, enfants... jusqu'à l'élément
-             * Et ne pas omit le dossier media
-             */
+        # Update condition mimeType Allow
+        $this->conditions['mimeTypeAllow']["image/png"] = []; 
 
-            # Get datas
-            $batch = $this->drive->files->listFiles($parameters);
+        # Set data with of all file in drive
+        $this->getAllFileFromSharedDrive();
 
-            # Check if result
-            if(count($batch->getFiles()))
+        # Check data navigation
+        if(!empty($this->data['navigation']))
 
-                # Iteration des files
-                foreach ($batch->getFiles() as $file){
+            # Iteration data navigation
+            foreach($this->data['navigation'] as $navigation){
 
-                    print_r($file->getName());
+                # Check if drive and children
+                if(
+                    $navigation['entity'] !== "drive" ||
+                    !isset($navigation['relationships']) ||
+                    empty($navigation['relationships'])
+                )
+                    continue;
 
-                }
+                # Loop
+                $result = $this->searchMediaLoop($parameters, $navigation['relationships']);
 
-            exit();
+            }
 
-            # Increment i
-            $i++;
+        # Return result
+        return $result;
+
+
+    }
+
+    public function searchMediaLoop($parameters, $relationships, $current = "/drive/", $parametersIndex = 0){
+
+        # Result
+        $result = [
+            "status"    =>  true
+        ];
+
+        # Check current root
+        $root = "root$parametersIndex";
+
+        # Set theroy
+        $theory = isset($parameters[$root]) ?
+            "folder" : 
+                "file";
+
+        # Search file
+        if($theory === "file"){
+
+            # Search file
+            if(isset($relationships['file']) && !empty($relationships['file'])):
+
+                # Iteration file
+                foreach($relationships['file'] as $file):
+                    
+                    # Check name match
+                    if($parameters['name'] === $file['attributes']['name'])
+
+                        # Return value
+                        return $file['id'];
+
+                endforeach;
+
+            endif;
+
+            # Set status
+            $result['status'] = false;
+
+        }else
+        # Search folder
+        if($theory === "folder"){
+
+            # Search folder
+            if(isset($relationships['folder']) && !empty($relationships['folder'])){
+
+                # Iteration folder
+                foreach($relationships['folder'] as $folder):
+
+                    # Get clean name of current folder
+                    $foldername = Strings::clean($folder['attributes']['name']);
+
+                    # Check if name is current root
+                    if($foldername === $parameters[$root]){
+
+                        # Increment parametersIndex
+                        $parametersIndex++;
+
+                        # call loop
+                        return $this->searchMediaLoop(
+                            $parameters, 
+                            $folder['relationships'] ?? [], 
+                            $current.$foldername."/",
+                            $parametersIndex
+                        );
+
+                    }
+
+                endforeach;
+
+            }
+
+            # Set status
+            $result['status'] = false;
 
         }
+
+        # Check status
+        if(!$result['status'])
+
+            # No file found
+            throw new Exception("No file \"".$parameters['name']."\" in \"$current\" in your Drive", 404);
+        
 
     }
 

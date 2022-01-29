@@ -16,7 +16,7 @@ routes:
             - /drive/[a:root0]/[a:root2]/[a:root3]/[a:root4]/media/[a:name]
         methods:
             - get
-        response: json
+        response: data
     -   # Google Drive Page
         name: Drive
         patterns:

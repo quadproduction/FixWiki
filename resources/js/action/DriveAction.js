@@ -57,6 +57,9 @@ export default class DriveAction {
         // Init Anchor
         this.anchorInit();
 
+        // Init Media
+        this.mediaInit();
+
 
     }
 
@@ -206,6 +209,30 @@ export default class DriveAction {
             }
 
         }
+
+    }
+
+    /** Media Init
+     * 
+     */
+    mediaInit = () => {
+
+        // Set container
+        let container = document.querySelector('.markdown');
+
+        // Check container
+        if(container === null)
+            return;
+
+        // Get all img elements
+        let imgs = container.querySelectorAll('img');
+
+        // Check imgs length
+        if(imgs.length)
+
+            // New Materialbox
+            M.Materialbox.init(imgs, {});
+
 
     }
 
