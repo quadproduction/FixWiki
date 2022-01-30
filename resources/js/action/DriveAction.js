@@ -17,6 +17,7 @@ import Arrays from "../src/module/Arrays";
 import Copy from "./../src/module/Copy";
 import Dom from "./../src/module/Dom";
 import Url from "../src/module/Url";
+import tippy from "tippy.js";
 
 /** Home action
  *  
@@ -210,6 +211,28 @@ export default class DriveAction {
 
         }
 
+        /* Generate scollspy */
+        let main = document.createElement('div');
+        main.setAttribute('id', 'scrollspy');
+            let list = document.createElement('ul');
+            list.classList.add('table-of-contents');
+            for(let el of titles){
+                let item = document.createElement('li');
+                    let anchor = document.createElement('a');
+                    let title = el.innerText;
+                    anchor.setAttribute('href', "#"+Strings.clean(title));
+                    anchor.innerText = title;
+                item.appendChild(anchor);
+            list.appendChild(item);
+            }
+        main.appendChild(list);
+        container.appendChild(main);
+
+        /* Scrollspy */
+        M.ScrollSpy.init(titles, {
+
+        });
+
     }
 
     /** Media Init
@@ -228,10 +251,19 @@ export default class DriveAction {
         let imgs = container.querySelectorAll('img');
 
         // Check imgs length
-        if(imgs.length)
+        if(!imgs.length)
+            return;
 
-            // New Materialbox
-            M.Materialbox.init(imgs, {});
+        // New Materialbox
+        M.Materialbox.init(imgs, {
+            caption: (el) => el.getAttribute('title') ?? ""
+        });
+
+        // New tippy
+        tippy(imgs, {
+            content: (el) => el.getAttribute('title') ?? "",
+            placement: "right",
+        });
 
 
     }

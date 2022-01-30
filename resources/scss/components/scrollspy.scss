@@ -1,0 +1,17 @@
+/* Scrollspy */
+#scrollspy{
+    /* Position */
+    position: fixed;
+    top: 75px;
+    right: 25px;
+    /* Children */
+    ul {
+        /* Children */
+        li {
+            /* Children */
+            a {
+                font-weight: bold;
+            }
+        }
+    }
+}

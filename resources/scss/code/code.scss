@@ -98,7 +98,7 @@
             color: #333333;
         }
         /* ul */
-        ul {
+        ul:not(.table-of-contents) {
             margin: 1.2em 0;
             padding-left: 30px;
             li{
