@@ -82,6 +82,7 @@ export default class Strings {
             [ / /g,             ' ' ], // nonbreaking space (equiv. to 0x160),
             [ /[(]/g,      	    ''  ], // Round brackets
             [ /[)]/g,      	    ''  ], // Round brackets
+            [ /(_-_)/g,         '_' ],
         ];
 
         // Iteration des rules

@@ -3,14 +3,31 @@
     /* Position */
     position: fixed;
     top: 75px;
-    right: 25px;
+    //right: 25px;
+    right: -5px;
+    &.card{
+        /* Dimension */
+        border-radius: 6px;
+        /* Children */
+        .table-of-contents{
+            /* Dimension */
+            padding: 0 15px 0 0;
+        }
+    }
     /* Children */
     ul {
         /* Children */
         li {
             /* Children */
             a {
+                /* Font */
                 font-weight: bold;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                /* Display */
+                overflow: hidden;
+                /* Dimension */
+                width: 100%;
             }
         }
     }

@@ -108,6 +108,9 @@ export default class DriveAction {
     anchorEvents = [];
     anchorInit = () => {
 
+        // Set title in url
+        let titleInUrl = false;
+
         // Set container
         let container = document.querySelector('.markdown.enable-anchors');
 
@@ -136,6 +139,9 @@ export default class DriveAction {
 
             // Clean title
             title = Strings.clean(title);
+
+            // Set id in attributes of el
+            titleEl.setAttribute('id', title);
 
             // Prepare value in anchorList
             let temp = {
@@ -207,6 +213,9 @@ export default class DriveAction {
                 // Scroll to el
                 window.scrollTo({top: y, behavior: 'smooth'});
 
+                // Set title in url
+                titleInUrl = result.name;
+
             }
 
         }
@@ -214,6 +223,7 @@ export default class DriveAction {
         /* Generate scollspy */
         let main = document.createElement('div');
         main.setAttribute('id', 'scrollspy');
+        main.classList.add("card");
             let list = document.createElement('ul');
             list.classList.add('table-of-contents');
             for(let el of titles){
@@ -221,16 +231,42 @@ export default class DriveAction {
                     let anchor = document.createElement('a');
                     let title = el.innerText;
                     anchor.setAttribute('href', "#"+Strings.clean(title));
-                    anchor.innerText = title;
+                    anchor.setAttribute('data-text', title);
+                        let icon = document.createElement('i');
+                        icon.classList.add("material-icons");
+                        if(el.tagName == "H1"){
+                            icon.innerText = "book";
+                        }else if(el.tagName == "H2"){
+                            icon.innerText = "tag";
+                        }
+                    anchor.appendChild(icon);
                 item.appendChild(anchor);
+            /* Tippy */
+            tippy(item, {
+                content: (el) => el.querySelector("a").dataset.text ?? "",
+                placement: 'left',
+            });
             list.appendChild(item);
             }
         main.appendChild(list);
         container.appendChild(main);
 
+        /* Prevent default scroll to href */
+        let el = container.querySelectorAll("#scrollspy li a");
+        if(el.length)
+            for(let item of el)
+                item.addEventListener(
+                    'click',
+                    e => {
+                        console.log(e);
+                        if(e.target.parentNode.href)
+                            Url.update(e.target.parentNode.href);
+                    }
+                );
+
         /* Scrollspy */
         M.ScrollSpy.init(titles, {
-
+            scrollOffset: 75
         });
 
     }
