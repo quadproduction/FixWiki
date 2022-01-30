@@ -28,6 +28,11 @@
                 overflow: hidden;
                 /* Dimension */
                 width: 100%;
+                /* Icon */
+                &.material-icons{
+                    /* Font */
+                    font-weight: unset;
+                }
             }
         }
     }

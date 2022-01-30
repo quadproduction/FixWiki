@@ -232,14 +232,11 @@ export default class DriveAction {
                     let title = el.innerText;
                     anchor.setAttribute('href', "#"+Strings.clean(title));
                     anchor.setAttribute('data-text', title);
-                        let icon = document.createElement('i');
-                        icon.classList.add("material-icons");
-                        if(el.tagName == "H1"){
-                            icon.innerText = "book";
-                        }else if(el.tagName == "H2"){
-                            icon.innerText = "tag";
-                        }
-                    anchor.appendChild(icon);
+                    anchor.classList.add("material-icons");
+                    if(el.tagName == "H1")
+                        anchor.innerText = "book";
+                    else if(el.tagName == "H2")
+                        anchor.innerText = "tag";
                 item.appendChild(anchor);
             /* Tippy */
             tippy(item, {
@@ -258,9 +255,8 @@ export default class DriveAction {
                 item.addEventListener(
                     'click',
                     e => {
-                        console.log(e);
-                        if(e.target.parentNode.href)
-                            Url.update(e.target.parentNode.href);
+                        if(e.target.href)
+                            Url.update(e.target.href);
                     }
                 );
 
