@@ -19,8 +19,8 @@ routes:
         patterns:
             - /drive/[a:root0]/media/[a:name]
             - /drive/[a:root0]/[a:root1]/media/[a:name]
-            - /drive/[a:root0]/[a:root2]/[a:root3]/media/[a:name]
-            - /drive/[a:root0]/[a:root2]/[a:root3]/[a:root4]/media/[a:name]
+            - /drive/[a:root0]/[a:root1]/[a:root2]/media/[a:name]
+            - /drive/[a:root0]/[a:root1]/[a:root2]/[a:root3]/media/[a:name]
         methods:
             - get
         response: data

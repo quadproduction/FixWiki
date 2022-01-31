@@ -53,7 +53,7 @@ export default class Context {
     getAction = (name = "", actionRoute = {}) => {
 
         // Set result
-        let result = class{constructor(){console.info("No action associate to this route")}};
+        let result = class{constructor(){console.info("No action associate to this route for \""+name+"\"")}};
 
         // Check name and action route
         if(name && Object.keys(actionRoute).length)
