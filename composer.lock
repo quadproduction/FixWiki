@@ -740,12 +740,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "52310dc8aed88a297a21a02be67f588687ca8c5f"
+                "reference": "8297ee785af93cf1a59725e77b04ebe803abdd8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/52310dc8aed88a297a21a02be67f588687ca8c5f",
-                "reference": "52310dc8aed88a297a21a02be67f588687ca8c5f",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/8297ee785af93cf1a59725e77b04ebe803abdd8d",
+                "reference": "8297ee785af93cf1a59725e77b04ebe803abdd8d",
                 "shasum": ""
             },
             "require": {
@@ -778,7 +778,7 @@
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
                 "source": "https://github.com/kekefreedog/LuckyPHP/tree/main"
             },
-            "time": "2022-01-30T21:08:16+00:00"
+            "time": "2022-01-31T16:20:16+00:00"
         },
         {
             "name": "mezon/router",
@@ -2051,5 +2051,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

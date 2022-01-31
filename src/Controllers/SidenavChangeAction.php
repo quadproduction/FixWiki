@@ -66,6 +66,7 @@ class SidenavChangeAction extends ControllerBase implements ControllerInterface{
             "secure"    =>  false,
         ]);
 
+        # Push cookie in data
         $this->pushData($_COOKIE);
 
 
