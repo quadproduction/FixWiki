@@ -242,6 +242,7 @@ export default class DriveAction {
             tippy(item, {
                 content: (el) => el.querySelector("a").dataset.text ?? "",
                 placement: 'left',
+                followCursor: true,
             });
             list.appendChild(item);
             }
@@ -263,6 +264,15 @@ export default class DriveAction {
         /* Scrollspy */
         M.ScrollSpy.init(titles, {
             scrollOffset: 75
+        });
+
+        /* Tippy on titles */
+        tippy(titles, {
+            content: "Cliquez pour partager le lien",
+            placement: 'bottom-start',
+            delay: [800,0],
+            arrow: false,  
+            offset: [0, -1],
         });
 
     }

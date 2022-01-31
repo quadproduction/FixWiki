@@ -13,6 +13,7 @@
  * 
  */
 import Dom from "./../src/module/Dom";
+import tippy from "tippy.js";
 
 /** Page functions
  * 
@@ -149,6 +150,13 @@ export default class Sidenav{
             el: dom.el,
             type: 'click',
             listener: action,
+        });
+
+        // Add tippy message
+        tippy(dom.el, {
+            content: "Garder ouvert",
+            placement: 'right',
+            delay: [500,0]
         });
 
     }
