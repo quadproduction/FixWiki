@@ -1,10 +1,19 @@
 /* Scrollspy */
+$transitionPosition: .2s;
 #scrollspy{
     /* Position */
     position: fixed;
     top: 75px;
     //right: 25px;
     right: -5px;
+    /* Transition */
+    transition: $transitionPosition;
+    &:hover{
+        /* Position */
+        right: 10px;
+        /* Transition */
+        transition: $transitionPosition;
+    }
     &.card{
         /* Dimension */
         border-radius: 6px;
