@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a98891959f2b7d81c423ffe7ef895bb2",
+    "content-hash": "5fa4aa0227b40decfdd2decec105596a",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -333,12 +333,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Google\\Service\\": "src"
-                },
                 "files": [
                     "autoload.php"
-                ]
+                ],
+                "psr-4": {
+                    "Google\\Service\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -736,16 +736,16 @@
         },
         {
             "name": "kekefreedog/luckyphp",
-            "version": "dev-main",
+            "version": "v0.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "73fcddb0a80df078f8f3da6d45990ad9e2780a8b"
+                "reference": "f0733145ef63b8eff0f06e2d00b94098a748b025"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/73fcddb0a80df078f8f3da6d45990ad9e2780a8b",
-                "reference": "73fcddb0a80df078f8f3da6d45990ad9e2780a8b",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/f0733145ef63b8eff0f06e2d00b94098a748b025",
+                "reference": "f0733145ef63b8eff0f06e2d00b94098a748b025",
                 "shasum": ""
             },
             "require": {
@@ -757,7 +757,6 @@
                 "symfony/yaml": "^5.3",
                 "zordius/lightncandy": "^1.2"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -776,9 +775,9 @@
             "description": "All essential tools in PHP for my own development",
             "support": {
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
-                "source": "https://github.com/kekefreedog/LuckyPHP/tree/main"
+                "source": "https://github.com/kekefreedog/LuckyPHP/tree/v0.6.1"
             },
-            "time": "2022-01-31T22:15:54+00:00"
+            "time": "2022-02-02T22:51:42+00:00"
         },
         {
             "name": "mezon/router",
@@ -2044,9 +2043,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "kekefreedog/luckyphp": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

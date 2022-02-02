@@ -67,8 +67,10 @@ class GoogleDrive{
                     "class" =>  "fas fa-file-alt",
                     "text"  =>  "",
                 ]
-            ]
-        ]
+            ],
+        ],
+        # Position delimiter
+        "positionDelimiter" =>  "__",
     ];
 
     /** Constructor
@@ -121,12 +123,16 @@ class GoogleDrive{
             
         # Parameters
         $parameters = array(
-            'includeItemsFromAllDrives' => true,
-            'fields'                    => 'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser, webContentLink)',
-            'supportsAllDrives'         => true,
-            'driveId'                   => $this->config['app']['google']['drive']['driveId'],
-            'corpora'                   => 'drive',
-            'q'                         => 'trashed=false',
+            'includeItemsFromAllDrives' =>  true,
+            'fields'                    =>  'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser, webContentLink)',
+            'supportsAllDrives'         =>  true,
+            'driveId'                   =>  $this->config['app']['google']['drive']['driveId'],
+            'corpora'                   =>  'drive',
+            /**
+             *  Folder and File Order #4 
+             */
+            'orderBy'                   =>  'name',
+            'q'                         =>  'trashed=false',
         );
 
         # Get datas
@@ -177,7 +183,10 @@ class GoogleDrive{
                         #'instance'  =>  $file,
                         'id'        =>  $file->getId(),
                         'attributes'    =>  [
-                            "name"          =>  $file->getName(),
+                            /**
+                             *  Folder and File Order #4 
+                             */
+                            "name"          =>  preg_replace("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", "", $file->getName()),
                             "mime_type"     =>  $file->getMimeType(),
                             "parents"       =>  $file->getParents(),
                             "size"          =>  $file->getSize(),
@@ -190,6 +199,16 @@ class GoogleDrive{
                                 "class" =>  "material-icons",
                                 "text"  =>  "folder",  
                             ],
+                            /**
+                             *  Hide files beginning by dot #3
+                             */
+                            'hidden'=>  (($file->getName()[0] ?? "") == ".") ? true : false,
+                            /**
+                             *  Folder and File Order #4 
+                             */
+                            "position"  =>  preg_match("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", $file->getName()) ?
+                                explode($this->conditions['positionDelimiter'], $file->getName(), 1)[0] : 
+                                    null,
                             'root'  =>  $rootName.Strings::clean(pathinfo($file->getName(), PATHINFO_FILENAME))."/",
                         ],
                         "entity"    =>  "folder",
@@ -218,7 +237,10 @@ class GoogleDrive{
                         #'instance'  =>  $file,
                         'id'        =>  $file->getId(),
                         'attributes'    =>  [
-                            "name"          =>  $file->getName(),
+                            /**
+                             *  Folder and File Order #4 
+                             */
+                            "name"          =>  preg_replace("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", "", $file->getName()),
                             "mime_type"     =>  $file->getMimeType(),
                             "parents"       =>  $file->getParents(),
                             "size"          =>  $file->getSize(),
@@ -229,7 +251,17 @@ class GoogleDrive{
                         "_user_interface"   => 
                             $this->conditions['mimeTypeAllow'][$file->getMimeType()] +
                             [
-                                'root'  =>  $rootName.Strings::clean(pathinfo($file->getName(), PATHINFO_FILENAME)).'/'
+                                /**
+                                 *  Folder and File Order #4 
+                                 */
+                                "position"  =>  preg_match("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", $file->getName()) ?
+                                    explode($this->conditions['positionDelimiter'], $file->getName(), 1)[0] : 
+                                        null,
+                                'root'      =>  $rootName.Strings::clean(pathinfo($file->getName(), PATHINFO_FILENAME)).'/',
+                                /**
+                                 *  Hide files beginning by dot #3
+                                 */
+                                'hidden'    =>  (($file->getName()[0] ?? "") == ".") ? true : false,
                             ]
                         ,
                         "entity"    =>  "file"

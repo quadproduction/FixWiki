@@ -1,3 +1,8 @@
+{{!-- Sidenav
+
+Hide files beginning by dot #3
+
+ --}}
 <aside id="sidenav" data-layout="structure/sidenav" class="sidenav-main nav-collapsible {{#ifEquals _cookies.SIDENAV.STATUS "expanded"}} nav-lock nav-expanded{{else}} nav-collapsed{{/ifEquals}} sidenav-dark gradient-45deg-deep-purple-blue sidenav-gradient sidenav-active-rounded">
     <div class="brand-sidebar">
         <h1 class="logo-wrapper">
@@ -46,7 +51,7 @@
                 {{!-- Check if folder --}}
                 {{#if this.relationships.folder}}
                     {{!-- Iteration des folders --}}
-                    {{#each this.relationships.folder}}
+                    {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}}
                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                         <a class="collapsible-header waves-effect waves-cyan">
                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
@@ -58,20 +63,20 @@
                                 {{!-- Check if file --}}
                                 {{#if this.relationships.file}}
                                     {{!-- Iteration des files --}}
-                                    {{#each this.relationships.file}}            
+                                    {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}      
                                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                                         <a class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}"  href="{{this._user_interface.root}}">
                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                             <span class="menu-title">{{this.attributes.name}}</span>
                                         </a>
                                     </li>
-                                    {{/each}}
+                                    {{/unless}}{{/each}}
                                 {{/if}}
 
                                 {{!-- Check if folder --}}
                                 {{#if this.relationships.folder}}
                                     {{!-- Iteration des folders --}}
-                                    {{#each this.relationships.folder}}
+                                    {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}}
                                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                                         <a class="collapsible-header waves-effect waves-cyan">
                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
@@ -83,20 +88,20 @@
                                                 {{!-- Check if file --}}
                                                 {{#if this.relationships.file}}
                                                     {{!-- Iteration des files --}}
-                                                    {{#each this.relationships.file}}            
+                                                    {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}            
                                                     <li class="bold">
                                                         <a class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}" href="{{this._user_interface.root}}">
                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                                             <span class="menu-title">{{this.attributes.name}}</span>
                                                         </a>
                                                     </li>
-                                                    {{/each}}
+                                                    {{/unless}}{{/each}}
                                                 {{/if}}
 
                                                 {{!-- Check if folder --}}
                                                 {{#if this.relationships.folder}}
                                                     {{!-- Iteration des folders --}}
-                                                    {{#each this.relationships.folder}}
+                                                    {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}} 
                                                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                                                         <a class="collapsible-header waves-effect waves-cyan">
                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
@@ -108,32 +113,32 @@
                                                                 {{!-- Check if file --}}
                                                                 {{#if this.relationships.file}}
                                                                     {{!-- Iteration des files --}}
-                                                                    {{#each this.relationships.file}}            
+                                                                    {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}      
                                                                     <li class="bold">
                                                                         <a class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}" href="{{this._user_interface.root}}">
                                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
                                                                             <span class="menu-title">{{this.attributes.name}}</span>
                                                                         </a>
                                                                     </li>
-                                                                    {{/each}}
+                                                                    {{/unless}}{{/each}}
                                                                 {{/if}}
                                                                 {{!-- Depth 4 --}}
                                                             </ul>
                                                         </div>
                                                     </li>
-                                                    {{/each}}
+                                                    {{/unless}}{{/each}}
                                                 {{/if}}
                                                 {{!-- Depth 3 --}}
                                             </ul>
                                         </div>
                                     </li>
-                                    {{/each}}
+                                    {{/unless}}{{/each}}
                                 {{/if}}
                                 {{!-- Depth 2 --}}
                             </ul>
                         </div>
                     </li>
-                    {{/each}}
+                    {{/unless}}{{/each}}
                 {{/if}}
 
 
