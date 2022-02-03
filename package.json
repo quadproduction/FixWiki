@@ -4,7 +4,7 @@
         "clipboard": "^2.0.8",
         "handlebars": "^4.7.7",
         "js-yaml": "^4.1.0",
-        "Kmaterialize": "github:kekefreedog/Kmaterialize#advanced",
+        "Kmaterialize": "npm:kmaterialize@^3.0.0",
         "sweetalert2": "^11.3.6",
         "tippy.js": "^6.3.7"
     },

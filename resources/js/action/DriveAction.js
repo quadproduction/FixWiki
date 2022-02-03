@@ -12,6 +12,7 @@
 /** Dependances
  * 
  */
+import PageAction from "../src/base/PageAction";
 import Strings from "../src/module/Strings";
 import Arrays from "../src/module/Arrays";
 import Copy from "./../src/module/Copy";
@@ -22,12 +23,17 @@ import tippy from "tippy.js";
 /** Home action
  *  
  */
-export default class DriveAction {
+export default class DriveAction extends PageAction {
 
     /** Constructor
      * @param {object} app Object of the app
      */
     constructor(app = {}){
+
+        /** PageAction
+         * 
+         */
+        super();
 
         /** Set app
          * 
@@ -61,42 +67,6 @@ export default class DriveAction {
         // Init Media
         this.mediaInit();
 
-
-    }
-
-    /** Component Init
-     * Execute component action depending of structure
-     * 
-     */
-    componentInit = () => {
-
-        // Check componentList and structure layouts
-        if(
-            !Object.keys(this.app.input.componentList).length ||
-            !Object.keys(this.structure.layouts).length
-        )
-            return;
-
-        // Iteration of layouts
-        for(let layoutEl of this.structure.layouts){
-
-            // Get data layout
-            let dataLayout = layoutEl.dataset.layout;
-
-            // Check data layout
-            if(!dataLayout)
-                continue;
-
-            // Get component name
-            let componentName = dataLayout.split('/').pop();
-
-            // Check if componentName is in this.app.input.componentList
-            if(this.app.input.componentList[componentName] !== undefined)
-
-                // Execute this component with dom in parameters
-                new this.app.input.componentList[componentName](layoutEl);
-
-        }
 
     }
 

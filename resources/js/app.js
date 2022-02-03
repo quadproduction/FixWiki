@@ -22,6 +22,7 @@ import {Pdf} from "./module/Pdf";
  */
 import Sidenav from "./component/Sidenav";
 import Header from "./component/Header";
+import Search from "./component/Search";
 
 /** Actions
  * 
@@ -42,7 +43,8 @@ let actionRoute = {
  */
 let componentList = {
     sidenav: Sidenav,
-    head: Header
+    head: Header,
+    search: Search,
 }
 
 /** App Class

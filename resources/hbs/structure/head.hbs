@@ -7,8 +7,8 @@
                     {{!-- Search full --}}
                     <li class="header-search-wrapper hide-on-med-and-down">
                         <i class="material-icons">search</i>
-                        <input class="header-search-input z-depth-2" type="text" name="Search" placeholder="Rechercher"
-                            data-search="template-list">
+                        <input id="search" class="header-search-input z-depth-2" type="text" name="Search" placeholder="Rechercher"
+                            data-search="template-list" data-component="search">
                         <ul class="search-list collection display-none"></ul>
                     </li>
                     {{!-- Search small --}}
@@ -38,7 +38,7 @@
                 <div class="nav-wrapper">
                     <form id="navbarForm">
                         <div class="input-field search-input-sm">
-                            <input class="search-box-sm mb-0" type="search" required="" id="search" placeholder="Rechercher" data-search="template-list">
+                            <input class="search-box-sm mb-0" type="search" required="" id="search" placeholder="Rechercher" data-search="template-list" data-component="search">
                             <label class="label-icon" for="search">
                                 <i class="material-icons search-sm-icon">search</i>
                             </label>

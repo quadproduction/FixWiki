@@ -84,10 +84,42 @@ aside {
 				font-size: 1.1rem;
 			}
 		}
-		.collapsible-body {
-			a {
+		/**
+		 * Have text-indent for subfolder on sidenav #5
+		 */
+		.collapsible-body{
+			.collapsible-sub {
 				i {
+					/* Font */
 					font-size: 0.9rem!important;
+					/* Position */
+					margin: 0 15px 0 5px!important;
+				}
+				/* Children */
+				.collapsible-sub {
+					/* Children */
+					i {
+						/* Position */
+						margin: 0 10px 0 10px!important;
+					}
+					/* Children */
+					.collapsible-sub {
+						/* Children */
+						i {
+							/* Position */
+							margin: 0 5px 0 15px!important;
+						}
+						/* Children */
+						.collapsible-sub {
+							/* Children */
+							i {
+								/* Position */
+								margin: 0 0px 0 20px!important;
+							}
+		
+						}
+	
+					}
 				}
 			}
 		}

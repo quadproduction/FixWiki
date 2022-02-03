@@ -24,10 +24,10 @@ module.exports = {
         "app": './resources/js/app.js',
         "css": './resources/js/css.js',
     },
-    /* Output for www */
+    /* Output for html */
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'www/js'),
+        path: path.resolve(__dirname, 'html/js'),
     },
     module: {
         rules: [
@@ -103,23 +103,23 @@ module.exports = {
         new RemovePlugin({
             before: {
                 include: [
-                    './www/js',
-                    './www/css',
-                    './www/svg',
-                    './www/fonts',
+                    './html/js',
+                    './html/css',
+                    './html/svg',
+                    './html/fonts',
                 ],
             },
             watch: {
                 include: [
-                    './www/js',
-                    './www/css',
-                    './www/svg',
-                    './www/fonts',
+                    './html/js',
+                    './html/css',
+                    './html/svg',
+                    './html/fonts',
                 ],
             },
             after: {
                 include: [
-                    './www/js/css.js'
+                    './html/js/css.js'
                 ]
             }
         })

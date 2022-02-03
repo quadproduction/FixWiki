@@ -23,10 +23,10 @@ module.exports = {
         "bundle": './resources/js/bundle.js',
         "app": './resources/js/app.js',
     },
-    /* Output for www */
+    /* Output for html */
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'www/js'),
+        path: path.resolve(__dirname, 'html/js'),
     },
     module: {
         rules: [
@@ -76,16 +76,16 @@ module.exports = {
         new RemovePlugin({
             before: {
                 include: [
-                    './www/js',
-                    './www/svg',
-                    './www/fonts',
+                    './html/js',
+                    './html/svg',
+                    './html/fonts',
                 ],
             },
             watch: {
                 include: [
-                    './www/js',
-                    './www/svg',
-                    './www/fonts',
+                    './html/js',
+                    './html/svg',
+                    './html/fonts',
                 ],
             },
             after: {
