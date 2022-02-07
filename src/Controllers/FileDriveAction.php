@@ -91,7 +91,7 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
             }
 
         // Push records
-        $this->model->pushRecords($record);
+        $this->model->pushRecords($record, "single");
 
         /**
          *  Push template
