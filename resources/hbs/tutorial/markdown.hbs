@@ -1,0 +1,41 @@
+{{!-- Main --}}
+<div id="main" class="{{#ifEquals _cookies.SIDENAV.STATUS "expanded"}}{{else}}main-full{{/ifEquals}}" data-layout="structure/main">
+    <div class="row container">
+        {{!-- Divider --}}
+        <div class="col s12">
+            <div class="divider mt-2"></div>
+        </div>
+        {{!-- Section title --}}
+        <div class="col s12 m6 offset-m3 center-align">
+            {{!-- Title --}}
+            <h1 class="header"><i class="material-icons mr-1">help_outline</i> Tutoriel</h1>
+        </div>
+        {{!-- Divider --}}
+        <div class="col s12">
+            <div class="divider"></div>
+        </div>
+        {{!-- Collapsible --}}
+        <div class="col s12 mt-1">
+            <ul class="collapsible expandable">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">apps</i>Fonctionnement de l'application</div>
+                    <div class="collapsible-body">
+                        
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="fab fa-markdown"></i>La syntaxe du Markdown</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">share</i>Partager une section</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="fas fa-key"></i>Gestion des permissions</div>
+                    <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
