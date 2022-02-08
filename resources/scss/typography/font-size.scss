@@ -5,6 +5,12 @@ h1 {
             /* Font */
             font-size: 3rem;
         }
+        &.fab, &.fas{
+            /* Font */
+            font-size: 3rem;
+            /* Position */
+            vertical-align: 4px;
+        }
     }
 }
 

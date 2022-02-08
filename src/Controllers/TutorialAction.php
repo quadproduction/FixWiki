@@ -129,7 +129,7 @@ class TutorialAction extends ControllerBase implements ControllerInterface{
                         "root"          =>  "/tutorial/share/"
                     ]
                 ],
-                # Partager
+                # Permission
                 [
                     "entity"        =>  "page",
                     "attributes"    =>  [

@@ -78,9 +78,9 @@ class TutorialSectionAction extends ControllerBase implements ControllerInterfac
 
         # Set layouts
         $this->setLayouts([
-            'structure/head',
-            'structure/sidenav',
-            'tutorial/markdown',
+            "structure/head",
+            "structure/sidenav",
+            "tutorial/$name",
         ]);
 
     }
