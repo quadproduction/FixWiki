@@ -138,7 +138,7 @@ export default class Sidenav{
                 response => response.json()
             // Controller
             ).then(
-                data => console.log(data)
+                data => {/* console.log(data) */}
             ).catch(
                 error => console.error(error)
             );

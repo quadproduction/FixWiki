@@ -62,6 +62,13 @@ routes:
         methods:
             - post
         response: json
+    -   # Theme change
+        name: ThemeChange
+        patterns:
+            - /api/theme/[a:status]/
+        methods:
+            - post
+        response: json
     -   # file / info
         name: FileDrive
         patterns:
