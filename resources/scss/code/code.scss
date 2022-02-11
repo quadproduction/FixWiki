@@ -120,6 +120,53 @@
                 }
             }
         }
+
+        table{
+            /* Dimension */
+            width: initial!important;
+            /* Children */
+            thead{
+                /* Color */
+                background: #eee;
+                /* Border */
+                border-top: 1px solid #cdcdcd;
+                /* Children */
+                th:empty{
+                    /* Dimension */
+                    padding: 0!important;
+                    /* Border */
+                    border-top: none!important;
+                }
+            }
+            tr{
+                /* Border */
+                border-left: 1px solid #dcdcdc;
+                /* Children */
+                td, th{
+                    /* Border */
+                    border-right: 1px solid #dcdcdc;
+                }
+            }
+
+        }
+
+        /* Img */
+        img{
+            /* Dimension */
+            display: block;
+            max-width: 800px;
+            max-height: 500px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            background: #9e9e9e;
+            /* Shadow */
+            -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+            /* Cursor */
+            cursor: zoom-in;
+        }
+
         /* Enable anchor */
         $colorLight: #9e9e9e;
         $transitionDuration: .1s;
@@ -173,18 +220,6 @@
                 border-bottom: 1px solid rgba(128,128,128,.2);
                 /* Dimension */
                 padding-bottom: 10px;
-            }
-
-            /* Img */
-            img{
-                /* Dimension */
-                width: 50%;
-                min-width: 500px;
-                /* Shadow */
-                -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-                box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-                /* Cursor */
-                cursor: zoom-in;
             }
 
         }
