@@ -83,9 +83,71 @@ class TutorialAction extends ControllerBase implements ControllerInterface{
             ->pushDataInUserInterface($this->google_drive->getData())
             ->pushCookies(true)
             ->pushContext()
+            ->pushRecords([
+                # Application
+                [
+                    "entity"        =>  "page",
+                    "attributes"    =>  [
+                        "name"          =>  "Application",
+                        "description"   =>  "Le fonctionnement de l'application"
+                    ],
+                    "_user_interface"=>[
+                        "icon"          =>  [
+                            "class"         =>  "material-icons",
+                            "text"          =>  "apps",
+                        ],
+                        "root"          =>  "/tutorial/application/"
+                    ]
+                ],
+                # Markdown
+                [
+                    "entity"        =>  "page",
+                    "attributes"    =>  [
+                        "name"          =>  "Markdown",
+                        "description"   =>  "La syntaxe du Markdown"
+                    ],
+                    "_user_interface"=>[
+                        "icon"          =>  [
+                            "class"         =>  "fab fa-markdown",
+                            "text"          =>  null,
+                        ],
+                        "root"          =>  "/tutorial/markdown/"
+                    ]
+                ],
+                # Partager
+                [
+                    "entity"        =>  "page",
+                    "attributes"    =>  [
+                        "name"          =>  "Partager",
+                        "description"   =>  "Partager le contenu"
+                    ],
+                    "_user_interface"=>[
+                        "icon"          =>  [
+                            "class"         =>  "material-icons",
+                            "text"          =>  "share",
+                        ],
+                        "root"          =>  "/tutorial/share/"
+                    ]
+                ],
+                # Permission
+                [
+                    "entity"        =>  "page",
+                    "attributes"    =>  [
+                        "name"          =>  "Permission",
+                        "description"   =>  "Gérer les permissions"
+                    ],
+                    "_user_interface"=>[
+                        "icon"          =>  [
+                            "class"         =>  "fas fa-key",
+                            "text"          =>  "",
+                        ],
+                        "root"          =>  "/tutorial/permission/"
+                    ]
+                ],
+            ]);
         ;
 
-        //\LuckyPHP\Front\Console::log($this->model->execute());
+        \LuckyPHP\Front\Console::log($this->model->execute());
 
     }
 

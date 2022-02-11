@@ -54,6 +54,12 @@ class GoogleDrive{
                     "text"  =>  "",
                 ]
             ],
+            "text/plain"     =>  [
+                'icon'  =>  [
+                    "class" =>  "fab fa-markdown",
+                    "text"  =>  "",
+                ]
+            ],
             # Pdf
             "application/pdf"   =>  [
                 'icon'  =>  [
@@ -434,7 +440,7 @@ class GoogleDrive{
     public function getContentFile(){
 
         # If markdown
-        if($this->currentFile->getMimeType() == "text/markdown"){
+        if(in_array($this->currentFile->getMimeType(), ["text/markdown","text/plain"])){
 
             # Get content of file
             $ctx = $this->drive->files->get(
@@ -613,6 +619,8 @@ class GoogleDrive{
 
         # Update condition mimeType Allow
         $this->conditions['mimeTypeAllow']["image/png"] = []; 
+        $this->conditions['mimeTypeAllow']["image/jpg"] = []; 
+        $this->conditions['mimeTypeAllow']["image/jpeg"] = []; 
 
         # Set data with of all file in drive
         $this->getAllFileFromSharedDrive();

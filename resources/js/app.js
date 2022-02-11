@@ -27,15 +27,17 @@ import Search from "./component/Search";
 /** Actions
  * 
  */
-import HomeAction from "./action/HomeAction";
+import TutorialSectionAction from "./action/TutorialSectionAction";
 import DriveAction from "./action/DriveAction";
+import HomeAction from "./action/HomeAction";
 
 /** Action route
  * 
  */
 let actionRoute = {
-    "Home":  HomeAction,
+    "TutorialSection": TutorialSectionAction,
     "Drive": DriveAction,
+    "Home":  HomeAction,
 };
 
 /** Component list
@@ -43,8 +45,8 @@ let actionRoute = {
  */
 let componentList = {
     sidenav: Sidenav,
-    head: Header,
     search: Search,
+    head: Header,
 }
 
 /** App Class

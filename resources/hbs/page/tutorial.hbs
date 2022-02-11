@@ -11,8 +11,30 @@
             <h1 class="header"><i class="material-icons mr-1">help_outline</i> Tutoriel</h1>
         </div>
         {{!-- Divider --}}
-        <div class="col s12">
+        <div class="col s12 mb-1">
             <div class="divider"></div>
         </div>
+        {{!-- Instances --}}
+        {{#each this.records}}
+        <div class="col s12 m6 l3">
+            <a href="{{this._user_interface.root}}">
+                <div class="card card-hover z-depth-0 card-border-gray waves-effect">
+                    <div class="card-content center-align">
+                        <h5 class="three-dots mb-5">
+                            <b>
+                                {{#if this._user_interface.icon.class}}
+                                <i class="{{this._user_interface.icon.class}}">
+                                    {{this._user_interface.icon.text}}
+                                </i> 
+                                {{/if}}
+                                {{this.attributes.name}}
+                            </b>
+                        </h5>
+                        <p class="black-text mb-4">{{this.attributes.description}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{/each}}
     </div>
 </div>

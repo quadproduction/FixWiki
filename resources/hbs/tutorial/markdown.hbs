@@ -1,0 +1,395 @@
+{{!-- Main --}}
+<div id="main" class="{{#ifEquals _cookies.SIDENAV.STATUS "expanded"}}{{else}}main-full{{/ifEquals}}" data-layout="structure/main">
+    <div class="row container">
+        {{!-- Divider --}}
+        <div class="col s12">
+            <div class="divider mt-2"></div>
+        </div>
+        {{!-- Section title --}}
+        <div class="col s12 m6 offset-m3 center-align">
+            {{!-- Title --}}
+            <h1 class="header"><i class="fab fa-markdown mr-1"></i> Markdown</h1>
+        </div>
+        {{!-- Divider --}}
+        <div class="col s12 mb-1">
+            <div class="divider"></div>
+        </div>
+        {{!-- Markdown --}}
+        <div class="col s12">
+            <ul class="collapsible expandable">
+                {{!-- Header --}}
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">title</i>Titre</div>
+                    <div class="collapsible-body">
+                        {{!-- Synthax --}}
+                        <h4 class="bold">Syntaxe</h4 class="bold">
+                        <hr>
+                        <table class="responsive-table highlight">
+                            {{!-- Header --}}
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Markdown</th>
+                                    <th>Résultat</th>
+                                </tr>
+                            </thead>
+                            {{!-- Content --}}
+                            <tbody>
+                                {{!-- Title level 1 --}}
+                                <tr>
+                                    <td>Titre niveau 1</td>
+                                    <td>
+                                        <code># Titre niveau 1</code><br />
+                                        <code>Titre niveau 1<br>==============</code>
+                                    </td>
+                                    <td><h1>Heading level 1</h1></td>
+                                </tr>
+                                {{!-- Title level 2 --}}
+                                <tr>
+                                    <td>Titre niveau 2</td>
+                                    <td>
+                                        <code># Titre niveau 2</code><br />
+                                        <code>Titre niveau 2<br>--------------</code>
+                                    </td>
+                                    <td><h2>Heading level 2</h2></td>
+                                </tr>
+                                {{!-- Title level 3 --}}
+                                <tr>
+                                    <td>Titre niveau 3</td>
+                                    <td>
+                                        <code># Titre niveau 3</code><br />
+                                    </td>
+                                    <td><h3>Heading level 3</h3></td>
+                                </tr>
+                                {{!-- Title level 4 --}}
+                                <tr>
+                                    <td>Titre niveau 4</td>
+                                    <td>
+                                        <code># Titre niveau 4</code><br />
+                                    </td>
+                                    <td><h4>Heading level 4</h4></td>
+                                </tr>
+                                {{!-- Title level 5 --}}
+                                <tr>
+                                    <td>Titre niveau 5</td>
+                                    <td>
+                                        <code># Titre niveau 5</code><br />
+                                    </td>
+                                    <td><h5>Heading level 5</h5></td>
+                                </tr>
+                                {{!-- Title level 6 --}}
+                                <tr>
+                                    <td>Titre niveau 6</td>
+                                    <td>
+                                        <code># Titre niveau 6</code><br />
+                                    </td>
+                                    <td><h6>Heading level 6</h6></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {{!-- Good practice --}}
+                        <h4 class="bold">Bonne pratique</h4 class="bold">
+                        <hr>
+                        <table class="responsive-table highlight">
+                            <thead>
+                                <tr>
+                                    <th>✅  Bien</th>
+                                    <th>❌  Pas bien</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>Try to put a blank line before...<br><br># Heading<br><br>...and after a heading.</code>
+                                    </td>
+                                    <td>
+                                        <code>Without blank lines, this might not look right.<br># Heading<br>Don't do this!</code>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                {{!-- Style --}}
+                <li class="active">
+                    <div class="collapsible-header"><i class="material-icons">text_format</i>Style de texte</div>
+                    <div class="collapsible-body">
+                        {{!-- Synthax --}}
+                        <h4 class="bold">Syntaxe</h4 class="bold">
+                        <hr>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Markdown</th>
+                                    <th>Example</th>
+                                    <th>Résultat</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bold</td>
+                                    <td><code>** **</code> or <code>__ __</code></td>
+                                    <td><code>**This is bold text**</code></td>
+                                    <td><strong>This is bold text</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Italic</td>
+                                    <td><code>* *</code> or <code>_ _</code>     </td>
+                                    <td><code>*This text is italicized*</code></td>
+                                    <td><em>This text is italicized</em></td>
+                                </tr>
+                                <tr>
+                                    <td>Strikethrough</td>
+                                    <td><code>~~ ~~</code></td>
+                                    <td><code>~~This was mistaken text~~</code></td>
+                                    <td><del>This was mistaken text</del></td>
+                                </tr>
+                                <tr>
+                                    <td>Bold and nested italic</td>
+                                    <td><code>** **</code> and <code>_ _</code></td>
+                                    <td><code>**This text is _extremely_ important**</code></td>
+                                    <td><strong>This text is <em>extremely</em> important</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>All bold and italic</td>
+                                    <td><code>*** ***</code></td>
+                                    <td><code>***All this text is important***</code></td>
+                                    <td><strong><em>All this text is important</em></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Blockquotes</td>
+                                    <td><code>> </code></td>
+                                    <td><code>> Dorothy followed her way.</code></td>
+                                    <td><blockquote><p>Dorothy followed her way.</p></blockquote></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {{!-- Good practice --}}
+                        <h4 class="bold">Bonne pratique</h4 class="bold">
+                        <hr>
+                        <table class="responsive-table highlight">
+                            <thead>
+                                <tr>
+                                    <th>✅ Bien</th>
+                                    <th>❌ Pas bien</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>Don't put tabs or spaces in front of your paragraphs.<br><br>Keep lines left-aligned like this.<br><br></code>
+                                    </td>
+                                    <td>
+                                        <code>&nbsp;&nbsp;&nbsp;&nbsp;This can result in unexpectedformatting problems.<br><br>&nbsp;&nbsp;Don't add tabs or spaces in front of paragraphs.</code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                        Love**is**bold
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                        Love__is__bold
+                                        </code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                        A*cat*meow
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                        A_cat_meow
+                                        </code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                            This is really***very***important text.
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                            This is really___very___important text.
+                                        </code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>Try to put a blank line before...<br><br>&gt; This is a blockquote<br><br>...and after a blockquote.</code>
+                                    </td>
+                                    <td>
+                                        <code>Without blank lines, this might not look right.<br>&gt; This is a blockquote<br>Don't do this!</code>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">code</i>Ligne de commande & code</div>
+                    <div class="collapsible-body">
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">link</i>Lien</div>
+                    <div class="collapsible-body"><span>A remplir.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">image</i>Image & Média</div>
+                    <div class="collapsible-body"><span>A remplir.</span></div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>Liste</div>
+                    <div class="collapsible-body">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Markdown</th>
+                                    <th>Rendered Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>
+                                1. First item<br>
+                                2. Second item<br>
+                                3. Third item<br>
+                                4. Fourth item
+                              </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                &lt;ol&gt;<br>
+                                  &nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>
+                                  &nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>
+                                  &nbsp;&nbsp;&lt;li&gt;Third item&lt;/li&gt;<br>
+                                  &nbsp;&nbsp;&lt;li&gt;Fourth item&lt;/li&gt;<br>
+                                &lt;/ol&gt;
+                              </code>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item</li>
+                                            <li>Fourth item</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                  1. First item<br>
+                                  1. Second item<br>
+                                  1. Third item<br>
+                                  1. Fourth item
+                                </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                  &lt;ol&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Third item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Fourth item&lt;/li&gt;<br>
+                                  &lt;/ol&gt;
+                                </code>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item</li>
+                                            <li>Fourth item</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                  1. First item<br>
+                                  8. Second item<br>
+                                  3. Third item<br>
+                                  5. Fourth item
+                                </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                  &lt;ol&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Third item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Fourth item&lt;/li&gt;<br>
+                                  &lt;/ol&gt;
+                                </code>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item</li>
+                                            <li>Fourth item</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                  1. First item<br>
+                                  2. Second item<br>
+                                  3. Third item<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;1. Indented item<br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;2. Indented item<br>
+                                  4. Fourth item
+                                </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                  &lt;ol&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Third item<br>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&lt;ol&gt;<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Indented item&lt;/li&gt;<br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Indented item&lt;/li&gt;<br>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ol&gt;<br>
+                                    &nbsp;&nbsp;&lt;/li&gt;<br>
+                                    &nbsp;&nbsp;&lt;li&gt;Fourth item&lt;/li&gt;<br>
+                                  &lt;/ol&gt;
+                                </code>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item
+                                                <ol>
+                                                    <li>Indented item</li>
+                                                    <li>Indented item</li>
+                                                </ol>
+                                            </li>
+                                            <li>Fourth item</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">task_alt</i>Tâche</div>
+                    <div class="collapsible-body"><span>A remplir.</span></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -3,6 +3,10 @@
         border: solid 1px #e0e0e0;
         border-radius: 8px;
     }
+    &.waves-effect{
+        /* Fix width */
+        width: 100%;
+    }
 }
 
 .card-hover{
