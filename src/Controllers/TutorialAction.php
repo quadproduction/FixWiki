@@ -147,7 +147,7 @@ class TutorialAction extends ControllerBase implements ControllerInterface{
             ]);
         ;
 
-        \LuckyPHP\Front\Console::log($this->model->execute());
+        //\LuckyPHP\Front\Console::log($this->model->execute());
 
     }
 
