@@ -268,12 +268,12 @@ export default class DriveAction extends PageAction {
 
         // New Materialbox
         M.Materialbox.init(imgs, {
-            caption: (el) => el.getAttribute('title') ?? ""
+            caption: (el) => el.getAttribute('title') ?? el.getAttribute('alt') ?? "Média"
         });
 
         // New tippy
         tippy(imgs, {
-            content: (el) => el.getAttribute('title') ?? "",
+            content: (el) => el.getAttribute('title') ?? el.getAttribute('alt') ?? "Média",
             placement: "right",
         });
 
