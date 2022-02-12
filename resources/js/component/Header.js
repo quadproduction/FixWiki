@@ -273,19 +273,37 @@ export default class Header{
         let action = e => {
 
             // Set darkMode
-            this.darkMode = !this.darkMode;
+            let htmlClass = document.documentElement.classList;
+            this.darkMode = htmlClass.contains("dark-theme");
 
             // Switch mode
             document.documentElement.classList.toggle('dark-theme');
 
-            // Change text content
-            let contentText = this.darkMode ? "Mode jour" : "Mode nuit";
+            // Set text content
+            if(!this.darkMode){
+                var contentText = "Mode jour";
+                var contentIconText = "light_mode";
+            }else{
+                var contentText = "Mode nuit";
+                var contentIconText = "dark_mode";
+            }
+
+            // Update _tippy
             if(e.target.hasOwnProperty("_tippy")){
                 e.target.dataset.tippyContent = contentText;
                 e.target._tippy.setContent(contentText);
             }else{
                 e.target.parentElement.dataset.tippyContent = contentText;
                 e.target.parentElement._tippy.setContent(contentText);
+            }
+
+            // Update icon
+            if(e.target.classList.contains("material-icons")){
+                e.target.innerText = contentIconText;
+            }else{
+                let iEl = e.querySelector('i');
+                if(iEl !== null)
+                    iEl.innerText = contentIconText;
             }
 
             // Xhr

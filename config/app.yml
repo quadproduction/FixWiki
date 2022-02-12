@@ -6,6 +6,12 @@ app:
     websiteAlt: ''
     charset: 'utf-8"'
     indexing: 'noindex, nofollow'
+    darkmode:
+        theme: 
+            - light
+            - dark
+        cookie: 
+            mode: THEME_MODE
     admin:
         email: ''
     hosts:

@@ -17,7 +17,14 @@
                     </li>
                     {{!-- Dark mode --}}
                     <li class="hide-on-med-and-down nav-button-circle">
-                        <a class="waves-effect waves-block waves-light toggle-theme-mode" data-tippy-content="Mode nuit"><i class="material-icons">dark_mode</i></a>
+                        <a class="waves-effect waves-block waves-light toggle-theme-mode"
+                            {{#if _cookies.THEME.MODE}}
+                            {{#ifEquals _cookies.THEME.MODE "dark"}} data-tippy-content="Mode jour"><i class="material-icons">light_mode</i{{else}}
+                            data-tippy-content="Mode nuit"><i class="material-icons">dark_mode</i{{/ifEquals}}
+                            {{else}}
+                            data-tippy-content="Mode nuit"><i class="material-icons">dark_mode</i
+                            {{/if}}>
+                        </a>
                     </li>
                     {{!-- Full screen --}}
                     <li class="hide-on-med-and-down nav-button-circle">
