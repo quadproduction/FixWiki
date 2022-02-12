@@ -34,6 +34,10 @@ export default class Header{
             query: ".toggle-info",
             el: null,
         },
+        toggleThemeMode : {
+            query: ".toggle-theme-mode",
+            el: null,
+        }
     };
 
     // Declare events
@@ -245,6 +249,92 @@ export default class Header{
             el: dom.el,
             type: 'click',
             listener: Dom.toogleFullScreen(),
+        });
+
+    }
+    
+    /** Toggle Theme Mode
+     * @param {*} dom 
+     * @returns {void}
+     */
+    toggleThemeModeInit = (dom) => {
+
+        this.darkMode = false;
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+            }
+        );
+
+        // Set action
+        let action = e => {
+
+            // Set darkMode
+            let htmlClass = document.documentElement.classList;
+            this.darkMode = htmlClass.contains("dark-theme");
+
+            // Switch mode
+            document.documentElement.classList.toggle('dark-theme');
+
+            // Set text content
+            if(!this.darkMode){
+                var contentText = "Mode jour";
+                var contentIconText = "light_mode";
+            }else{
+                var contentText = "Mode nuit";
+                var contentIconText = "dark_mode";
+            }
+
+            // Update _tippy
+            if(e.target.hasOwnProperty("_tippy")){
+                e.target.dataset.tippyContent = contentText;
+                e.target._tippy.setContent(contentText);
+            }else{
+                e.target.parentElement.dataset.tippyContent = contentText;
+                e.target.parentElement._tippy.setContent(contentText);
+            }
+
+            // Update icon
+            if(e.target.classList.contains("material-icons")){
+                e.target.innerText = contentIconText;
+            }else{
+                let iEl = e.querySelector('i');
+                if(iEl !== null)
+                    iEl.innerText = contentIconText;
+            }
+
+            // Xhr
+            fetch(
+                "/api/theme/"+(this.darkMode ? "light" : "dark" )+"/",
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin':'*',
+                        'Content-Type': 'application/json',
+                    })
+                }
+            // Middleware
+            ).then(
+                response => response.json()
+            // Controller
+            ).then(
+                data => {/* console.log(data) */}
+            ).catch(
+                error => console.error(error)
+            );
+
+        };
+
+        // Push action on events
+        this.events.push({
+            el: dom.el,
+            type: 'click',
+            listener: action,
         });
 
     }

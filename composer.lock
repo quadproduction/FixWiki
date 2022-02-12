@@ -736,16 +736,16 @@
         },
         {
             "name": "kekefreedog/luckyphp",
-            "version": "v0.6.2",
+            "version": "v0.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "0e0ec6e02cdbc1d5da8b82e07eafe1fcee26d9fd"
+                "reference": "fd3221353b2bbfae7da6b50b500b7abc22a6957e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/0e0ec6e02cdbc1d5da8b82e07eafe1fcee26d9fd",
-                "reference": "0e0ec6e02cdbc1d5da8b82e07eafe1fcee26d9fd",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/fd3221353b2bbfae7da6b50b500b7abc22a6957e",
+                "reference": "fd3221353b2bbfae7da6b50b500b7abc22a6957e",
                 "shasum": ""
             },
             "require": {
@@ -775,9 +775,9 @@
             "description": "All essential tools in PHP for my own development",
             "support": {
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
-                "source": "https://github.com/kekefreedog/LuckyPHP/tree/v0.6.2"
+                "source": "https://github.com/kekefreedog/LuckyPHP/tree/v0.6.3"
             },
-            "time": "2022-02-07T23:02:11+00:00"
+            "time": "2022-02-12T13:16:45+00:00"
         },
         {
             "name": "mezon/router",
