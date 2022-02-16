@@ -313,16 +313,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.234.0",
+            "version": "v0.235.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "a448391ee97d4ee315fcabf023aa27a022ac5c54"
+                "reference": "3aefd2914d9025a881ee93145de16f9e0f82443e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/a448391ee97d4ee315fcabf023aa27a022ac5c54",
-                "reference": "a448391ee97d4ee315fcabf023aa27a022ac5c54",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/3aefd2914d9025a881ee93145de16f9e0f82443e",
+                "reference": "3aefd2914d9025a881ee93145de16f9e0f82443e",
                 "shasum": ""
             },
             "require": {
@@ -351,9 +351,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.234.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.235.0"
             },
-            "time": "2022-02-06T12:23:03+00:00"
+            "time": "2022-02-07T14:04:26+00:00"
         },
         {
             "name": "google/auth",
@@ -455,12 +455,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -736,16 +736,16 @@
         },
         {
             "name": "kekefreedog/luckyphp",
-            "version": "v0.6.3",
+            "version": "v0.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "fd3221353b2bbfae7da6b50b500b7abc22a6957e"
+                "reference": "c5fded16d3347fd66972aa45b8ea554d6208f358"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/fd3221353b2bbfae7da6b50b500b7abc22a6957e",
-                "reference": "fd3221353b2bbfae7da6b50b500b7abc22a6957e",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/c5fded16d3347fd66972aa45b8ea554d6208f358",
+                "reference": "c5fded16d3347fd66972aa45b8ea554d6208f358",
                 "shasum": ""
             },
             "require": {
@@ -775,9 +775,9 @@
             "description": "All essential tools in PHP for my own development",
             "support": {
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
-                "source": "https://github.com/kekefreedog/LuckyPHP/tree/v0.6.3"
+                "source": "https://github.com/kekefreedog/LuckyPHP/tree/v0.6.4"
             },
-            "time": "2022-02-12T13:16:45+00:00"
+            "time": "2022-02-16T11:57:59+00:00"
         },
         {
             "name": "mezon/router",
@@ -1776,12 +1776,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
