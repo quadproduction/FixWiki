@@ -83,6 +83,7 @@ export default class Strings {
             [ /[(]/g,      	    ''  ], // Round brackets
             [ /[)]/g,      	    ''  ], // Round brackets
             [ /(_-_)/g,         '_' ],
+            [ /['"“”‘’„”«»]/g,  ''  ],
         ];
 
         // Iteration des rules
