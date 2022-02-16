@@ -1,6 +1,6 @@
 {
     "require": {
-        "kekefreedog\/luckyphp": "^0.6.1",
+        "kekefreedog\/luckyphp": "^0.6.4",
         "google/apiclient": "^2.12",
         "erusev/parsedown": "^1.7",
         "erusev/parsedown-extra": "^0.8.1"
