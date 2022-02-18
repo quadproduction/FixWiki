@@ -3,7 +3,8 @@
         "kekefreedog\/luckyphp": "^0.6.5",
         "google/apiclient": "^2.12",
         "erusev/parsedown": "^1.7",
-        "erusev/parsedown-extra": "^0.8.1"
+        "erusev/parsedown-extra": "^0.8.1",
+        "cebe/markdown": "~1.2.0"
     },
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup"

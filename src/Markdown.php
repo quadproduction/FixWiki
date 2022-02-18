@@ -17,6 +17,7 @@ namespace App;
 /** Dependances
  * 
  */
+use \cebe\markdown\MarkdownExtra;
 use \ParsedownExtra;
 
 /** Class for manage Google Drive
@@ -61,10 +62,13 @@ class Markdown{
      */
     private function parseContent(){
 
-        # New parser
         $parsdown = new ParsedownExtra();
-
         $this->result = $parsdown->text($this->content);
+
+        /*
+        $markdown = new MarkdownExtra();
+        $this->result = $markdown->parse($this->content);
+        */
 
     }
 
