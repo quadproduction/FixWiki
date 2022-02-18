@@ -177,6 +177,9 @@ class GoogleDrive{
             # Iteration des files
             foreach ($batch->getFiles() as $file){
 
+                # Clean name
+                $cleanName = preg_replace("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", "", $file->getName());
+
                 # Check if folder and not exclude and if file parent is root
                 if(
                     $file->getMimeType() == "application/vnd.google-apps.folder" && 
@@ -192,7 +195,7 @@ class GoogleDrive{
                             /**
                              *  Folder and File Order #4 
                              */
-                            "name"          =>  preg_replace("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", "", $file->getName()),
+                            "name"          =>  $cleanName,
                             "mime_type"     =>  $file->getMimeType(),
                             "parents"       =>  $file->getParents(),
                             "size"          =>  $file->getSize(),
@@ -215,7 +218,7 @@ class GoogleDrive{
                             "position"  =>  preg_match("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", $file->getName()) ?
                                 explode($this->conditions['positionDelimiter'], $file->getName(), 1)[0] : 
                                     null,
-                            'root'  =>  $rootName.Strings::clean(pathinfo($file->getName(), PATHINFO_FILENAME))."/",
+                            'root'  =>  $rootName.Strings::clean(pathinfo($cleanName, PATHINFO_FILENAME))."/",
                         ],
                         "entity"    =>  "folder",
                         "relationships" =>  []
@@ -246,7 +249,7 @@ class GoogleDrive{
                             /**
                              *  Folder and File Order #4 
                              */
-                            "name"          =>  preg_replace("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", "", $file->getName()),
+                            "name"          =>  $cleanName,
                             "mime_type"     =>  $file->getMimeType(),
                             "parents"       =>  $file->getParents(),
                             "size"          =>  $file->getSize(),

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa04a7993b033e0c0b2bbc9badd39f27",
+    "content-hash": "1285bd21414800379e800818c45e4804",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -736,16 +736,16 @@
         },
         {
             "name": "kekefreedog/luckyphp",
-            "version": "v0.6.4",
+            "version": "v0.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kekefreedog/LuckyPHP.git",
-                "reference": "c5fded16d3347fd66972aa45b8ea554d6208f358"
+                "reference": "027351b350dc856b8d70cccfc01c2d3eab701da1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/c5fded16d3347fd66972aa45b8ea554d6208f358",
-                "reference": "c5fded16d3347fd66972aa45b8ea554d6208f358",
+                "url": "https://api.github.com/repos/kekefreedog/LuckyPHP/zipball/027351b350dc856b8d70cccfc01c2d3eab701da1",
+                "reference": "027351b350dc856b8d70cccfc01c2d3eab701da1",
                 "shasum": ""
             },
             "require": {
@@ -775,9 +775,9 @@
             "description": "All essential tools in PHP for my own development",
             "support": {
                 "issues": "https://github.com/kekefreedog/LuckyPHP/issues",
-                "source": "https://github.com/kekefreedog/LuckyPHP/tree/v0.6.4"
+                "source": "https://github.com/kekefreedog/LuckyPHP/tree/v0.6.5"
             },
-            "time": "2022-02-16T11:57:59+00:00"
+            "time": "2022-02-16T14:04:10+00:00"
         },
         {
             "name": "mezon/router",
