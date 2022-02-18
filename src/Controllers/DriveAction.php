@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /*******************************************************
- * Copyright (C) 2019-2021 Kévin Zarshenas
+ * Copyright (C) 2019-2022 Kévin Zarshenas
  * kevin.zarshenas@gmail.com
  *
  * This file is part of LuckyPHP.
