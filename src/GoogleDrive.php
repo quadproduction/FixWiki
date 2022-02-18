@@ -23,6 +23,7 @@ use LuckyPHP\Front\Console;
 use LuckyPHP\Code\Strings;
 use LuckyPHP\Code\Arrays;
 use Google\Service\Drive;
+use LuckyPHP\File\Json;
 use App\Markdown;
 use App\Google;
 
@@ -507,14 +508,27 @@ class GoogleDrive{
             # Set name
             $name = $this->currentFile->getName();
 
+            /**  Get tokken file of adobe
+             *  {
+             *      "name": "Fix Docs",
+             *      "key": "5e88a369cf3e447ea27869b6621595d3",
+             *      "allowedDomain": ["fixstudio.wiki"]
+             *  }
+             */
+            $tokken_adobe = Json::open(__ROOT_APP__."resources/json/adobe_pdf.json");
+
+
             # Check config adobe pdf key
-            if(!isset($this->config['app']['adobe']['pdf']) || empty($this->config['app']['adobe']['pdf']))
+            if(
+                !isset($tokken_adobe['key']) || 
+                empty($tokken_adobe['key'])
+            )
 
                 # Error
                 throw new Exception("If you want read PDF, please fill pdf key in config", 501);
 
             # set key
-            $key = $this->config['app']['adobe']['pdf'];
+            $key = $tokken_adobe['key'];
 
             # Return result
             $result =
