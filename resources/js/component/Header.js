@@ -37,6 +37,18 @@ export default class Header{
         toggleThemeMode : {
             query: ".toggle-theme-mode",
             el: null,
+        },
+        launchRv : {
+            query: ".launch-rv",
+            el: null,
+        },
+        launchSgWizz : {
+            query: ".launch-sg-wizz",
+            el: null,
+        },
+        launchSgLocal : {
+            query: ".launch-sg-local",
+            el: null,
         }
     };
 
@@ -336,6 +348,54 @@ export default class Header{
             type: 'click',
             listener: action,
         });
+
+    }
+
+    /** Laucnh RV
+     * 
+     * @param {*} dom 
+     */
+    launchRvInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+            }
+        );
+
+    }
+
+    /** Laucnh Shotgun Wizz
+     * 
+     * @param {*} dom 
+     */
+    launchSgWizzInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+            }
+        );
+
+    }
+
+    /** Laucnh Shotgun Local
+     * 
+     * @param {*} dom 
+     */
+    launchSgLocalInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+            }
+        );
 
     }
 

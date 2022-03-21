@@ -83,6 +83,13 @@ routes:
         methods:
             - get
         response: data
+    -   # Read ressources
+        name: Ressources
+        patterns:
+            - /media/ressources/[a:media_name]/
+        methods:
+            - get
+        response: data
     -   # Reade file
         name: File
         patterns:
