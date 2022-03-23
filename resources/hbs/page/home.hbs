@@ -10,194 +10,162 @@ Hide files beginning by dot #3
             <div class="divider mt-2"></div>
         </div>
         {{!-- Section title --}}
-        <div class="col s12 m6 offset-m3 center-align">
+        <div class="col s12 m8 offset-m2 center-align">
             {{!-- Title --}}
-            <h1 class="header"><i class="fas fa-book mr-1"></i> Fix Studio <b>Wiki</b></h1>
+            <h1 class="header"><i class="material-icons">chair</i> Intranet de <b>Fix Studio</b></h1>
             {{!-- Description --}}
-            <h4 class="light">Documentation sur les process et<br/>l'organisation du studio</h4>
+            {{!-- <h4 class="light">Bienvenue sur la page d'acceuil de l'Intranetnet, pour te guider au sein du studio</h4> --}}
         </div>
-        {{!-- Section navigation --}}
-        <div class="col 12">
-        {{#each _user_interface.navigation}}
-            {{!-- Divider --}}
-            <div class="divider mt-2"></div>
-            {{!-- Title --}}
-            <h5 class="header center-align mb-1">
-                {{#ifEquals this.entity "drive"}}
-                <i class="fab fa-google-drive"></i> Google Drive
-                {{else}}
-                {{this.entity}}
-                {{/ifEquals}}
-            </h5>
-            {{!-- Card --}}
-            {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}}
-            <div class="col s12 m6 l4">
-                <div class="card card-hover z-depth-0 card-border-gray">
-                    <div class="card-content center-align">
-                        <h5 class="three-dots">
-                            <b>
-                                {{#if this._user_interface.icon.class}}
-                                <i class="{{this._user_interface.icon.class}}">
-                                    {{this._user_interface.icon.text}}
-                                </i> 
-                                {{/if}}
-                                {{this.attributes.name}}
-                            </b>
-                        </h5>
-                        <br/>
-                        <div class="left-align">
-                        {{!-- Iteration des files --}}
-                        {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}
-                        <a href="{{this._user_interface.root}}">
-                            <div class="chip waves-effect">
-                                {{#if this._user_interface.icon.class}}
-                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
-                                {{/if}}
-                                {{this.attributes.name}}
-                            </div>
-                        </a>
-                        {{/unless}}{{/each}}
-                        {{!-- Iteration folder #1 --}}
-                        {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}}
-                            {{!-- Iteration des files #1 --}}
-                            {{#each this.relationships.file}}
-                            <a href="{{this._user_interface.root}}">
-                                <div class="chip waves-effect">
-                                    <span class="grey-text">
-                                    {{#if ../this._user_interface.icon.class}}
-                                    <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
-                                    {{/if}}
-                                    {{../this.attributes.name}} > 
-                                    </span>
-                                    {{#if this._user_interface.icon.class}}
-                                    <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
-                                    {{/if}}
-                                    {{this.attributes.name}}
-                                </div>
+        {{!-- Divider --}}
+        <div class="col s12">
+            <div class="divider mt-1"></div>
+        </div>
+    </div>
+    <div class="row">
+        {{!-- Tutoriel --}}
+        <div class="col s12 m6 l8">
+            <div class="card z-depth-0 card-border-gray height-300 overflow-allow">
+                <div class="card-content">
+                    <h5 class="three-dots mt-0">
+                        <b>
+                            <i class="material-icons">
+                                waving_hand
+                            </i> 
+                            Bienvenue
+                        </b>
+                    </h5>
+                    <p class="flow-text">
+                        L’équipe de Fix te souhaite la bienvenue au sein du studio.
+                        Cette page t’offre la possibilité d’en savoir plus sur le fonctionnement et l’organisation du studio. En explorant la page d’accueil et les articles disponibles à gauche de la page, tu vas acquérir tout le savoir dont tu as besoin pour bien commencer cette nouvelle aventure !
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{!-- Activité --}}
+        <div class="col s12 m6 l4">
+            <div class="card z-depth-0 card-border-gray">
+                <div class="card-content height-300">
+                    <h5 class="three-dots mt-0">
+                        <b>
+                            <i class="material-icons">
+                                local_activity
+                            </i> 
+                            Activité
+                        </b>
+                    </h5>
+                    <div class="collection">
+                        <a href="" class="collection-item">Alvin</a>
+                        <a href="" class="collection-item">Alvin</a>
+                        <a href="" class="collection-item">Alvin</a>
+                        <a href="" class="collection-item">Alvin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- Truc & astuces --}}
+        <div class="col s12 m12 l6">
+            <div class="card z-depth-0 card-border-gray">
+                <div class="card-content center-align height-400 overflow-allow">
+                    <h5 class="three-dots mt-0">
+                        <b>
+                            <i class="material-icons">
+                                folder
+                            </i> 
+                            Trucs & astuces
+                        </b>
+                    </h5>
+                    <div class="icons-grid">
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
                             </a>
-                            {{/each}}
-                            {{!-- Iteration folder #2 --}}
-                            {{#each this.relationships.folder}}
-                                {{!-- Iteration des files #2 --}}
-                                {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}
-                                <a href="{{this._user_interface.root}}">
-                                    <div class="chip waves-effect">
-                                        <span class="grey-text">
-                                        {{#if ../../this._user_interface.icon.class}}
-                                        <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
-                                        {{/if}}
-                                        {{../../this.attributes.name}} > 
-                                        {{#if ../this._user_interface.icon.class}}
-                                        <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
-                                        {{/if}}
-                                        {{../this.attributes.name}} > 
-                                        </span>
-                                        {{#if this._user_interface.icon.class}}
-                                        <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
-                                        {{/if}}
-                                        {{this.attributes.name}}
-                                    </div>
-                                </a>
-                                {{/unless}}{{/each}}
-                                {{!-- Iteration folder #3 --}}
-                                {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}}
-                                    {{!-- Iteration des files #3 --}}
-                                    {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}
-                                    <a href="{{this._user_interface.root}}">
-                                        <div class="chip waves-effect">
-                                            <span class="grey-text">
-                                            {{#if ../../../this._user_interface.icon.class}}
-                                            <i class="{{../../../this._user_interface.icon.class}}">{{../../../this._user_interface.icon.text}}</i> 
-                                            {{/if}}
-                                            {{#if ../../this._user_interface.icon.class}}
-                                            <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
-                                            {{/if}}
-                                            {{../../this.attributes.name}} > 
-                                            {{#if ../this._user_interface.icon.class}}
-                                            <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
-                                            {{/if}}
-                                            {{../this.attributes.name}} > 
-                                            </span>
-                                            {{#if this._user_interface.icon.class}}
-                                            <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
-                                            {{/if}}
-                                            {{this.attributes.name}}
-                                        </div>
-                                    </a>
-                                    {{/unless}}{{/each}}
-                                    {{!-- Iteration folder #4 --}}
-                                    {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}}
-                                        {{!-- Iteration des files #4 --}}
-                                        {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}
-                                        <a href="{{this._user_interface.root}}">
-                                            <div class="chip waves-effect">
-                                                <span class="grey-text">
-                                                {{#if ../../../../this._user_interface.icon.class}}
-                                                <i class="{{../../../../this._user_interface.icon.class}}">{{../../../../this._user_interface.icon.text}}</i> 
-                                                {{/if}}
-                                                {{#if ../../../this._user_interface.icon.class}}
-                                                <i class="{{../../../this._user_interface.icon.class}}">{{../../../this._user_interface.icon.text}}</i> 
-                                                {{/if}}
-                                                {{#if ../../this._user_interface.icon.class}}
-                                                <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
-                                                {{/if}}
-                                                {{../../this.attributes.name}} > 
-                                                {{#if ../this._user_interface.icon.class}}
-                                                <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
-                                                {{/if}}
-                                                {{../this.attributes.name}} > 
-                                                </span>
-                                                {{#if this._user_interface.icon.class}}
-                                                <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
-                                                {{/if}}
-                                                {{this.attributes.name}}
-                                            </div>
-                                        </a>
-                                        {{/unless}}{{/each}}
-                                        {{!-- Iteration folder #5 --}}
-                                        {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}}
-                                            {{!-- Iteration des files #5 --}}
-                                            {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}
-                                            <a href="{{this._user_interface.root}}">
-                                                <div class="chip waves-effect">
-                                                    <span class="grey-text">
-                                                    {{#if ../../../../../this._user_interface.icon.class}}
-                                                    <i class="{{../../../../../this._user_interface.icon.class}}">{{../../../../../this._user_interface.icon.text}}</i> 
-                                                    {{/if}}
-                                                    {{#if ../../../../this._user_interface.icon.class}}
-                                                    <i class="{{../../../../this._user_interface.icon.class}}">{{../../../../this._user_interface.icon.text}}</i> 
-                                                    {{/if}}
-                                                    {{#if ../../../this._user_interface.icon.class}}
-                                                    <i class="{{../../../this._user_interface.icon.class}}">{{../../../this._user_interface.icon.text}}</i> 
-                                                    {{/if}}
-                                                    {{#if ../../this._user_interface.icon.class}}
-                                                    <i class="{{../../this._user_interface.icon.class}}">{{../../this._user_interface.icon.text}}</i> 
-                                                    {{/if}}
-                                                    {{../../this.attributes.name}} > 
-                                                    {{#if ../this._user_interface.icon.class}}
-                                                    <i class="{{../this._user_interface.icon.class}}">{{../this._user_interface.icon.text}}</i> 
-                                                    {{/if}}
-                                                    {{../this.attributes.name}} > 
-                                                    </span>
-                                                    {{#if this._user_interface.icon.class}}
-                                                    <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i> 
-                                                    {{/if}}
-                                                    {{this.attributes.name}}
-                                                </div>
-                                            </a>
-                                            {{/unless}}{{/each}}
-                                        {{/unless}}{{/each}}
-                                    {{/unless}}{{/each}}
-                                {{/unless}}{{/each}}
-                            {{/each}}
-                        {{/unless}}{{/each}}
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
+                        </div>
+                        <div>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
+                                <i class="material-icons left">
+                                    cloud
+                                </i>
+                                button
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            {{/unless}}{{/each}}
-        {{/each}}
         </div>
-        {{!-- Overlay --}}
+        {{!-- Restaurents --}}
+        <div class="col s12 m12 l6">
+            <div class="card google-my-maps z-depth-0 card-border-gray">
+                <div class="card-content center-align">
+                    <h5 class="three-dots mt-0">
+                        <b>
+                            <i class="material-icons">
+                                place
+                            </i> 
+                            Lieux utiles
+                        </b>
+                    </h5>
+                    <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1ucn4PyoHjE6fy2kVVC-fhOKPyPao7hdG&ehbc=2E312F" class="height-400"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

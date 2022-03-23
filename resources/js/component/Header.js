@@ -49,6 +49,10 @@ export default class Header{
         launchSgLocal : {
             query: ".launch-sg-local",
             el: null,
+        },
+        launchRocketchat : {
+            query: ".launch-rocketchat",
+            el: null,
         }
     };
 
@@ -388,6 +392,22 @@ export default class Header{
      * @param {*} dom 
      */
     launchSgLocalInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+            }
+        );
+
+    }
+
+    /** Laucnh Rocket Chat
+     * 
+     * @param {*} dom 
+     */
+    launchRocketchatInit = dom => {
 
         // Tippy
         tippy(

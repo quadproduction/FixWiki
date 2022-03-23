@@ -9,17 +9,20 @@
  *******************************************************/
 
 /* Import component */
-@import "./miscellaneous/error.scss";
+@import "./miscellaneous/error";
+
+/* Code */
+@import "./code/dimension";
 
 /* Fix */
-@import "./sidenav/sidenav.scss";
-@import "./header/header.scss";
+@import "./sidenav/sidenav";
+@import "./header/header";
 
 /* Markdown Content */
-@import "./code/code.scss";
+@import "./code/code";
 
 /* Typography */
-@import "./typography/font-size.scss";
+@import "./typography/font-size";
 
 /* Components */
 @import "./components/card";
@@ -29,4 +32,4 @@
 @import "./components/scrollspy";
 
 /* Theme */
-@import "./theme/dark-mode.scss";
+@import "./theme/dark-mode";

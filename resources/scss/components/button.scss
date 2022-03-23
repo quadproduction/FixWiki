@@ -21,6 +21,30 @@ a.btn-floating.small{
 
 }
 
+/* Large Button M3 */
+a.btn-large-m3{
+
+    /* Dimension */
+    width: 7em;
+    height: 7em;
+
+    /* Border radius */
+    border-radius: 1.5em;
+
+    /* Color */
+    background-color: #ff4081;
+
+    /* Shadow */
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.12),0 1px 5px 0 rgba(0,0,0,.2);
+
+    /* Cursor */
+    cursor: pointer;
+
+    /* Select */
+    user-select: none;
+
+}
+
 /**
  *
  *      Copy

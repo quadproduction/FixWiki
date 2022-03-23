@@ -1,0 +1,6 @@
+/* Height */
+@for $i from 1 through 10 {
+    .height-#{calc($i*100)} {
+        height: calc(100px*$i);
+    }
+}

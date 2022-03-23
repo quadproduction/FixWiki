@@ -1,4 +1,5 @@
 .card{
+
     &.card-border-gray{
         border: solid 1px #e0e0e0;
         border-radius: 8px;
@@ -7,7 +8,83 @@
         /* Fix width */
         width: 100%;
     }
+
+    /* Allow overflow */
+    &.overflow-allow{
+        /* Overflow */
+        overflow-y: scroll;
+    }
+
+    .card-content{
+
+        /* Allow overflow */
+        &.overflow-allow{
+            /* Overflow */
+            overflow-y: scroll;
+            /* Dimension */
+            padding-bottom: 0px;
+        }
+
+    }
+
+    /* Google my maps integration */
+    &.google-my-maps{
+
+        /* background */
+        background: #2e312f;
+
+        /* Children */
+        .card-content{
+
+            /* Dimension */
+            padding: 0px;
+
+            /* Display */
+            display: flex;
+            justify-content: center;
+
+            /* Children */
+            h5{
+                /* Color */
+                color: white;
+                /* Position */
+                position: absolute;
+                display: block;
+                padding-top: 10px;
+                /* Dimension */
+                width: auto;
+            }
+
+            iframe{
+
+                /* Dimension */
+                width: 100%;
+                border-radius: 6px;
+                border: none;
+
+            }
+        }
+
+    }
+
+    /* Children */
+    .icons-grid{
+
+        /* Display */
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+
+        /* Children */
+        >div{
+
+            
+
+        }
+
+    }
+
 }
+
 
 .card-hover{
     &:hover{
