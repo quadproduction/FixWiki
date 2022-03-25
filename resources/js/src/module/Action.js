@@ -188,6 +188,12 @@ export default class Action {
         
                 }
 
+        // Check callback
+        if(typeof callback === "function")
+
+            // Execute callback
+            callback();
+
     }
 
     /****************************************************************
@@ -208,13 +214,27 @@ export default class Action {
         var template = Handlebars.compile(action.content);
 
         // Check target
-        if(action.target = "Swal"){
+        if(action.target == "Swal"){
 
             // Update template
             Swal.update({
                 html: template(response),
             });
 
+
+        }else{
+
+            // Target els
+            let targetEls = document.querySelectorAll(action.target);
+
+            // Check target
+            if(targetEls.length)
+
+                // Iteration
+                for(let targetEl of targetEls)
+
+                    // Update content
+                    targetEl.innerHTML = template(response);
 
         }
 

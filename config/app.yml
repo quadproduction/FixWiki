@@ -49,3 +49,12 @@ app:
             driveId: 0AKnhm_EZNuVfUk9PVA
     adobe:
         pdf: 5e88a369cf3e447ea27869b6621595d3
+    shotgrid:
+        - 
+            name: wizz
+            host: https://wizz.shotgunstudio.com
+            auth:
+                client_id: fix_doc
+                client_secret: pqfFtwmoyimwm(3bgpnldyaoq
+                grant_type: client_credentials
+

@@ -62,6 +62,13 @@ routes:
         methods:
             - post
         response: json
+    -   # SG Projects
+        name: sgProjects
+        patterns:
+            - /api/shotgrid/projects/
+        methods:
+            - get
+        response: json
     -   # Theme change
         name: ThemeChange
         patterns:

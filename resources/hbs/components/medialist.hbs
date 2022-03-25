@@ -1,0 +1,32 @@
+{{!-- Collection --}}
+{{#if records}}
+<ul class="collection collapsible medialist z-depth-0" style="width: 114%;margin-left: -25px;">
+    {{#each records}}
+    {{!-- Item --}}
+    <li class="collection-item poster">
+        {{!-- Header --}}
+        <div class="collapsible-header">
+            <img class="z-depth-1 md-large" src="{{this.attributes.image}}" alt="{{this.attributes.name}}">
+            <span class="title">{{this.attributes.name}}</span>
+            <p>
+                Fix Studio - {{this.attributes.sg_type}}
+            </p>
+        </div>
+        {{!-- Body --}}
+        <div class="collapsible-body">
+            <div class="row ml-1 mt-2">{{{this.attributes.sg_description}}}</div>
+            <div class="row">
+                <a class="waves-effect btn-flat" href="" target="_blank">
+                    <i class="material-icons left">launch</i>
+                    Overview
+                </a>
+                <a class="waves-effect btn-flat" href="" target="_blank">
+                    <i class="material-icons left">groups</i>
+                    Equipe
+                </a>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</ul>
+{{/if}}

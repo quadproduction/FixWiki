@@ -1,6 +1,5 @@
 shortcuts:
-  # Timelogs
-  -
+  - # Timelogs
     name: Timelogs
     description: Créer ton premier timelog !
     icon:
@@ -9,7 +8,9 @@ shortcuts:
     color:
       bg: black
       text: white
-  -
+    action:
+      href: /drive/tools/shotgrid/timelogs/graphistes/
+  - # Système
     name: Système
     description: Problème informatique ?
     icon:
@@ -18,4 +19,45 @@ shortcuts:
     color:
       bg: purple
       text: white
+  - # Tickets
+    name: Tickets
+    description: Envie d'installer un plugin ?
+    icon:
+      class: material-icons
+      text: add_shopping_cart
+    color:
+      bg: orange
+      text: white
+  - # Covid
+    name: Covid
+    description: Quelles sont les mesures sanitaires du studio ?
+    icon:
+      class: material-icons
+      text: coronavirus
+    color:
+      bg: red
+      text: white
+  - # Trombi
+    name: Trombi
+    description: Qui fait quoi au sein du groupe Quad ?
+    icon:
+      class: fa-solid fa-people-group
+      text: 
+    color:
+      bg: red
+      text: white
+    action:
+      href: http://trombi.quad.fr/
+  - # Licences
+    name: Licences
+    description: Je n'ai pas de licence de dispo ?
+    icon:
+      class: fa-solid fa-key
+      text: 
+    color:
+      bg: blue-grey
+      text: white
+    action:
+      href: http://webapps.prs.vfx.int/licenses/
+
     

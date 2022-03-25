@@ -43,21 +43,17 @@ Hide files beginning by dot #3
         </div>
         {{!-- Activité --}}
         <div class="col s12 m6 l4">
-            <div class="card z-depth-0 card-border-gray">
+            <div class="card z-depth-0 card-border-gray overflow-allow" style="overflow-x: hidden;">
                 <div class="card-content height-300">
                     <h5 class="three-dots mt-0">
                         <b>
                             <i class="material-icons">
                                 local_activity
                             </i> 
-                            Activité
+                            Activités
                         </b>
                     </h5>
-                    <div class="collection">
-                        <a href="" class="collection-item">Alvin</a>
-                        <a href="" class="collection-item">Alvin</a>
-                        <a href="" class="collection-item">Alvin</a>
-                        <a href="" class="collection-item">Alvin</a>
+                    <div id="sg-projects">
                     </div>
                 </div>
             </div>
@@ -65,7 +61,7 @@ Hide files beginning by dot #3
         {{!-- Truc & astuces --}}
         <div class="col s12 m12 l6">
             <div id="shortcuts" class="card z-depth-0 card-border-gray">
-                <div class="card-content center-align height-400 overflow-allow">
+                <div class="card-content height-400 overflow-allow">
                     <h5 class="three-dots mt-0">
                         <b>
                             <i class="material-icons">
@@ -78,7 +74,7 @@ Hide files beginning by dot #3
                     <div class="icons-grid">
                         {{#each _user_interface.shortcuts}}
                         <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5{{#if this.color.bg}} {{this.color.bg}}{{/if}}{{#if this.color.text}} {{colorText this.color.text}}{{/if}}" {{#if this.description}}data-tippy-content="{{this.description}}"{{/if}}>
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5{{#if this.color.bg}} {{this.color.bg}}{{/if}}{{#if this.color.text}} {{colorText this.color.text}}{{/if}}" {{#if this.description}}data-tippy-content="{{this.description}}"{{/if}}{{#if this.action.href}} href="{{this.action.href}}" target="_blank"{{/if}}>
                                 {{#if this.icon}}<i class="{{#if this.icon.class}}{{this.icon.class}}{{/if}}">{{#if this.icon.text}}{{this.icon.text}}{{/if}}</i>{{/if}}
                                 {{#if this.name}}<span>{{this.name}}</span>{{/if}}
                             </a>
