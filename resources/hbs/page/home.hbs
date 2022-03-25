@@ -64,7 +64,7 @@ Hide files beginning by dot #3
         </div>
         {{!-- Truc & astuces --}}
         <div class="col s12 m12 l6">
-            <div class="card z-depth-0 card-border-gray">
+            <div id="shortcuts" class="card z-depth-0 card-border-gray">
                 <div class="card-content center-align height-400 overflow-allow">
                     <h5 class="three-dots mt-0">
                         <b>
@@ -74,80 +74,18 @@ Hide files beginning by dot #3
                             Trucs & astuces
                         </b>
                     </h5>
+                    {{#if _user_interface.shortcuts}}
                     <div class="icons-grid">
+                        {{#each _user_interface.shortcuts}}
                         <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
+                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5{{#if this.color.bg}} {{this.color.bg}}{{/if}}{{#if this.color.text}} {{colorText this.color.text}}{{/if}}" {{#if this.description}}data-tippy-content="{{this.description}}"{{/if}}>
+                                {{#if this.icon}}<i class="{{#if this.icon.class}}{{this.icon.class}}{{/if}}">{{#if this.icon.text}}{{this.icon.text}}{{/if}}</i>{{/if}}
+                                {{#if this.name}}<span>{{this.name}}</span>{{/if}}
                             </a>
                         </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
-                        <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5">
-                                <i class="material-icons left">
-                                    cloud
-                                </i>
-                                button
-                            </a>
-                        </div>
+                        {{/each}}
                     </div>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -160,7 +98,7 @@ Hide files beginning by dot #3
                             <i class="material-icons">
                                 place
                             </i> 
-                            Lieux utiles
+                            Adresses utiles
                         </b>
                     </h5>
                     <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1ucn4PyoHjE6fy2kVVC-fhOKPyPao7hdG&ehbc=2E312F" class="height-400"></iframe>

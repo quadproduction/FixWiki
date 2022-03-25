@@ -19,6 +19,7 @@ namespace App\Controllers;
  */
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
+use LuckyPHP\Server\Config;
 use App\GoogleDrive;
 
 /** Class for manage the workflow of the app
@@ -81,11 +82,14 @@ class HomeAction extends ControllerBase implements ControllerInterface{
             ->loadConfig('app')
             ->setFrameworkExtra()
             ->pushDataInUserInterface($this->google_drive->getData())
+            ->pushDataInUserInterface([
+                "shortcuts" => Config::read('/resources/yaml/home_shortcuts.yml')['shortcuts'],
+            ])
             ->pushCookies(true)
             ->pushContext()
         ;
 
-        //\LuckyPHP\Front\Console::log($this->model->execute());
+        \LuckyPHP\Front\Console::log($this->model->execute());
 
     }
 
@@ -98,5 +102,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         return $this->name;
 
     }
+
+    /* Constant */
 
 }

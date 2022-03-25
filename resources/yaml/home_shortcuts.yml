@@ -1,0 +1,21 @@
+shortcuts:
+  # Timelogs
+  -
+    name: Timelogs
+    description: Créer ton premier timelog !
+    icon:
+      class: material-icons
+      text: more_time
+    color:
+      bg: black
+      text: white
+  -
+    name: Système
+    description: Problème informatique ?
+    icon:
+      class: material-icons
+      text: bug_report
+    color:
+      bg: purple
+      text: white
+    

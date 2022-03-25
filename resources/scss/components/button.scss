@@ -28,6 +28,12 @@ a.btn-large-m3{
     width: 7em;
     height: 7em;
 
+    /* Position */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     /* Border radius */
     border-radius: 1.5em;
 
@@ -42,6 +48,47 @@ a.btn-large-m3{
 
     /* Select */
     user-select: none;
+
+    /* Children */
+    >i{
+
+        /* Position */
+        margin: 0 0 10px 0;
+
+        /* Color */
+        color: white;
+        
+
+        /* Icons variantes */
+        &.fab{
+
+            /* Font */
+            font-size: 2.2em;
+
+        }
+
+        &.material-icons{
+
+            /* Font */
+            font-size: 2.2em;
+
+        }
+
+    }
+
+    >span{
+
+        /* Position */
+        position: absolute;
+        bottom: 0.5em;
+
+        /* Color */
+        color: white;
+
+        /* Font */
+        font-weight: bold;
+
+    }
 
 }
 
