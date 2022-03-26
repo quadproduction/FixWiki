@@ -12,9 +12,10 @@
 /** Dependances
  * 
  */
-import Handlebars from "handlebars/dist/handlebars.min.js";
 import PageAction from "../src/base/PageAction";
+import Popup from "./../src/module/Popup";
 import Action from "../src/module/Action";
+import Swal from 'sweetalert2';
 import tippy from 'tippy.js';
 
 /** Home action
@@ -157,8 +158,6 @@ export default class HomeAction extends PageAction {
                     // Get Collapsible
                     let collapsibleEl = sgProjectsEl.querySelector('.collapsible');
 
-                    console.log(collapsibleEl);
-
                     // Check collapsible
                     if(collapsibleEl !== null)
 
@@ -167,11 +166,123 @@ export default class HomeAction extends PageAction {
 
                         });
 
+                    // Get toggle team
+                    let toggleTeamEls = sgProjectsEl.querySelectorAll('.toggle-team');
+
+                    // Check toggle team
+                    if(toggleTeamEls.length)
+
+                        // Iteration toggleTeamEls
+                        for(let toggleTeamEl of toggleTeamEls)
+
+                            // Add event on click
+                            toggleTeamEl.addEventListener(
+                                'click',
+                                this.teamPopupInit
+                            );
+
                 });
             }
         ).catch(
             error => console.error(error)
         );
+
+    }
+
+    /** Team popup init
+     * 
+     */
+    teamPopupInit = async e => {
+
+        // Set legacy e
+        let eLegacy = e;
+
+        // Check data-sg-id
+        let id = e.target.dataset.sgId ?? null;
+
+        // Check id
+        if(id)
+
+            // Xhr
+            fetch(
+                "/api/shotgrid/team/"+id,
+                {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: new Headers({
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin':'*',
+                        'Content-Type': 'application/json',
+                    })
+                }
+            // Middleware
+            ).then(
+                response => response.json()
+            // Controller
+            ).then(
+                data => {
+                    // Scan action
+                    Action.scan(data);
+                }
+            ).catch(
+                error => console.error(error)
+            );
+
+            // Popup Loader
+            let popupLoader = "loaderSwalSimple";
+
+            // Swal
+            await Swal.fire({
+                showCloseButton: false,
+                showConfirmButton: false,
+                padding: "0px",
+                html: Popup[popupLoader](),
+                customClass: {
+                    popup: popupLoader+'Popup gradient-45deg-deep-purple-blue'
+                },
+                didRender: (e) => {
+                    // Delete Loader
+                    Popup.cleanSwalLoader(popupLoader);
+                    // Set hook
+                    Popup.scanHooks(e, [
+                        // Close
+                        {
+                            query: ".popup-header-content-text-actions-close a",
+                            event: "click",
+                            callback: Swal.close
+                        },
+                        // Refresh
+                        {
+                            query: ".popup-header-content-text-actions-refresh a",
+                            event: "click",
+                            callback: () => {
+                                this.teamPopupInit(eLegacy)
+                            }
+                        },
+                        // Copy
+                        {
+                            query: ".copy-data",
+                            event: "click",
+                            callback: () => {
+                                Copy.run({
+                                    container: e,
+                                    el: "a.copy-data",
+                                    callback: (trigger) => trigger.dataset.copyContent ?? ""
+                                });
+                            }
+                        }
+                    ]);
+                    // Set tippy
+                    let a = e.querySelectorAll("a.copy-data");
+                    if(a.length)
+                        for(let b of a)
+                            tippy(b, {
+                                content: b.dataset.dataCopyLabel ?? "Copier l'élément ?",
+                                placement: 'bottom',
+                                delay: [500,0]
+                            });
+                } 
+            });
 
     }
 

@@ -69,6 +69,13 @@ routes:
         methods:
             - get
         response: json
+    -   # SG Team
+        name: sgTeam
+        patterns:
+            - /api/shotgrid/team/[a:id]/
+        methods:
+            - get
+        response: json
     -   # Theme change
         name: ThemeChange
         patterns:

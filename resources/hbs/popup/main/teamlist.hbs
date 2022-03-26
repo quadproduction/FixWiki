@@ -1,0 +1,93 @@
+<div class="row" data-layout="popup/main/teamlist">
+{{!-- Iteration records --}}
+{{#each records}}
+    {{!-- Check sg_producers_1 --}}
+    {{#if this.relationships.sg_producers_1.data}}
+    <div class="col s12 pr-0 pl-0 pt-0 pb-4">
+        <h6>Post producteur</h6>
+        {{#each this.relationships.sg_producers_1.data}}
+        <div class="card-id border-id mt-4 yellow lighten-4">
+            {{!-- Image --}}
+            <img src="{{#if this.attributes.image}}{{this.attributes.image}}{{else}}/media/logo/logo_f_large_black/{{/if}}" alt="{{this.attributes.name}}" class="circle">
+            <div>
+                {{!-- Name --}}
+                <span class="name">{{this.attributes.name}} <small><i>@{{this.attributes.login}}</i></small></span>
+                {{!-- Description --}}
+                <span class="description mt-1">Post producteur{{#if this.attributes.sg_speciality}} | {{this.attributes.sg_speciality}}{{/if}}</span>
+                {{#if this.relationships.department.data}}
+                <span class="extra mt-1">Département : {{this.relationships.department.data.name}}</span>
+                {{/if}}
+            </div>
+        </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{!-- Check sg_supervisors_1 --}}
+    {{#if this.relationships.sg_supervisors_1.data}}
+    <div class="col s12 pr-0 pl-0 pt-0 pb-4">
+        <h6>Superviseurs</h6>
+        {{#each this.relationships.sg_supervisors_1.data}}
+        <div class="card-id border-id mt-4 light-blue lighten-4">
+            {{!-- Image --}}
+            <img src="{{#if this.attributes.image}}{{this.attributes.image}}{{else}}/media/logo/logo_f_large_black/{{/if}}" alt="{{this.attributes.name}}" class="circle">
+            <div>
+                {{!-- Name --}}
+                <span class="name">{{this.attributes.name}} <small><i>@{{this.attributes.login}}</i></small></span>
+                {{!-- Description --}}
+                <span class="description mt-1">Superviseur{{#if this.attributes.sg_speciality}} | {{this.attributes.sg_speciality}}{{/if}}</span>
+                {{#if this.relationships.department.data}}
+                <span class="extra mt-1">Département : {{this.relationships.department.data.name}}</span>
+                {{/if}}
+            </div>
+        </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{!-- Check sg_fix_coordinators --}}
+    {{#if this.relationships.sg_fix_coordinators.data}}
+    <div class="col s12 pr-0 pl-0 pt-0 pb-4">
+        <h6>Coordinateurs</h6>
+        {{#each this.relationships.sg_fix_coordinators.data}}
+        <div class="card-id border-id mt-4 light-green lighten-4">
+            {{!-- Image --}}
+            <img src="{{#if this.attributes.image}}{{this.attributes.image}}{{else}}/media/logo/logo_f_large_black/{{/if}}" alt="{{this.attributes.name}}" class="circle">
+            <div>
+                {{!-- Name --}}
+                <span class="name">{{this.attributes.name}} <small><i>@{{this.attributes.login}}</i></small></span>
+                {{!-- Description --}}
+                <span class="description mt-1">Coordinateur{{#if this.attributes.sg_speciality}} | {{this.attributes.sg_speciality}}{{/if}}</span>
+                {{#if this.relationships.department.data}}
+                <span class="extra mt-1">Département : {{this.relationships.department.data.name}}</span>
+                {{/if}}
+            </div>
+        </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{!-- Check users --}}
+    {{#if this.relationships.users.data}}
+    <div class="col s12 pr-0 pl-0 pt-0 pb-4">
+        <h6>Equipe</h6>
+        {{#each this.relationships.users.data}}
+        <div class="card-id border-id mt-4">
+            {{!-- Image --}}
+            <img src="{{#if this.attributes.image}}{{this.attributes.image}}{{else}}/media/logo/logo_f_large_black/{{/if}}" alt="{{this.attributes.name}}" class="circle">
+            <div>
+                {{!-- Name --}}
+                <span class="name">{{this.attributes.name}} <small><i>@{{this.attributes.login}}</i></small></span>
+                {{!-- Description --}}
+                <span class="description mt-1">{{#if this.attributes.sg_speciality}}{{this.attributes.sg_speciality}}{{/if}}</span>
+                {{#if this.relationships.department.data}}
+                <span class="extra mt-1">Département : {{this.relationships.department.data.name}}</span>
+                {{/if}}
+            </div>
+        </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+{{/each}}
+</div>

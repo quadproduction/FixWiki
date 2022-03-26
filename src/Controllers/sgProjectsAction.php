@@ -77,7 +77,7 @@ class sgProjectsAction extends ControllerBase implements ControllerInterface{
                 ],
                 # Fields
                 "fields"    =>  [
-                    "name", "sg_type", "sg_description", "users", "sg_producers_1", "sg_supervisors_1", "sg_fix_coordinators", "image"
+                    "name", "sg_type", "sg_description", "image", "sg_fix_project_overview"
                 ],
                 # Sort
                 "sort"      =>  "-created_at"

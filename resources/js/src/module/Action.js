@@ -208,7 +208,7 @@ export default class Action {
 
         // Check content
         if(action.content == undefined || !action.content)
-            return
+            return;
 
         // Compile
         var template = Handlebars.compile(action.content);

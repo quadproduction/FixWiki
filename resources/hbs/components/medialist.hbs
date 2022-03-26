@@ -1,6 +1,6 @@
 {{!-- Collection --}}
 {{#if records}}
-<ul class="collection collapsible medialist z-depth-0" style="width: 114%;margin-left: -25px;">
+<ul class="collection collapsible medialist z-depth-0 mb-0" style="width: 114%;margin-left: -25px;">
     {{#each records}}
     {{!-- Item --}}
     <li class="collection-item poster">
@@ -16,11 +16,11 @@
         <div class="collapsible-body">
             <div class="row ml-1 mt-2">{{{this.attributes.sg_description}}}</div>
             <div class="row">
-                <a class="waves-effect btn-flat" href="" target="_blank">
+                <a class="waves-effect btn-flat" href="{{this.attributes.sg_fix_project_overview}}" target="_blank">
                     <i class="material-icons left">launch</i>
                     Overview
                 </a>
-                <a class="waves-effect btn-flat" href="" target="_blank">
+                <a class="waves-effect btn-flat toggle-team" data-sg-id="{{this.id}}">
                     <i class="material-icons left">groups</i>
                     Equipe
                 </a>

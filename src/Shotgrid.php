@@ -107,7 +107,7 @@ class Shotgrid{
     /** Get header
      * @return array|null
      */
-    public function getHeader($flag):array|null {
+    public function getHeader(string $flag = ""):array|null {
 
         # Tokken access
         $tokkenAccess = $this->instances[$this->currentInstance]['tokken']['access_token'] ?? null;
@@ -136,6 +136,52 @@ class Shotgrid{
                 ];
 
             endif;
+
+        # Return result
+        return $result;
+
+    }
+
+    /** Read All Records
+     * 
+     */
+    public function readOneRecord(
+        string $entity = "",
+        int $id = 0,
+        array $body = [],
+    ){
+
+        # Set result
+        $result = [];
+
+        # Check entity & id
+        if(!$entity && !$id)
+
+            # Return result
+            return $result;
+
+        # New client
+        $client = new Client();
+        
+        try {
+            $response = $client->request(
+                'GET',
+                $this->instances[$this->currentInstance]['host'] ."/api/v1/entity/$entity/$id", 
+                [
+                    'headers' => $this->getHeader("search"),
+                    'json' => $body,
+                ]
+            );
+
+                # Set result
+                $result = $response->getBody()->getContents();
+        }
+        catch (BadResponseException $e) {
+
+            # Set result
+            $result = $e->getMessage();
+
+        }
 
         # Return result
         return $result;
@@ -190,6 +236,53 @@ class Shotgrid{
     public function test(){
 
         return $this->instances;
+
+    }
+
+    /** Read Record Relationship
+     * 
+     */
+    public function readRecordRelationship(
+        string $entity = "",
+        int $id = 0,
+        string $relationfield = "",
+        array $body = [],
+    ){
+
+        # Set result
+        $result = [];
+
+        # Check entity & id & relationfield
+        if(!$entity && !$id && !$relationfield)
+
+            # Return result
+            return $result;
+
+        # New client
+        $client = new Client();
+        
+        try {
+            $response = $client->request(
+                'GET',
+                $this->instances[$this->currentInstance]['host'] ."/api/v1/entity/$entity/$id/relationships/$relationfield/", 
+                [
+                    'headers' => $this->getHeader(),
+                    'json' => $body,
+                ]
+            );
+
+                # Set result
+                $result = $response->getBody()->getContents();
+        }
+        catch (BadResponseException $e) {
+
+            # Set result
+            $result = $e->getMessage();
+
+        }
+
+        # Return result
+        return $result;
 
     }
 
