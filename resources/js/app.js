@@ -28,6 +28,7 @@ import Search from "./component/Search";
  * 
  */
 import TutorialSectionAction from "./action/TutorialSectionAction";
+import TutorialAction from "./action/TutorialAction";
 import DriveAction from "./action/DriveAction";
 import HomeAction from "./action/HomeAction";
 
@@ -36,6 +37,7 @@ import HomeAction from "./action/HomeAction";
  */
 let actionRoute = {
     "TutorialSection": TutorialSectionAction,
+    "Tutorial":  TutorialAction,
     "Drive": DriveAction,
     "Home":  HomeAction,
 };

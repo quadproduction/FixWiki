@@ -138,7 +138,7 @@ class sgTeamAction extends ControllerBase implements ControllerInterface{
             [
                 # Fields
                 "fields"    =>  [
-                    "sg_supervisors_1", "sg_fix_coordinators", "sg_producers_1", "users", "name"
+                    "sg_supervisors_1", "sg_fix_coordinators", "sg_producers_1", "users", "name", "image"
                 ]
             ]
         );
@@ -207,13 +207,32 @@ class sgTeamAction extends ControllerBase implements ControllerInterface{
         $this->model->pushRecords([$response['data']]);
 
         # Push layouts
-        $this->model->pushDataInUserInterface(["actions"  => [
-            [
-                "type"      =>  "hbs",
-                "target"    =>  "Swal",
-                "content"   =>  file_get_contents(__ROOT_APP__."/resources/hbs/popup/header.hbs").file_get_contents(__ROOT_APP__."/resources/hbs/popup/main/teamlist.hbs")
+        $this->model->pushDataInUserInterface([
+            "actions"  => [
+                [
+                    "type"      =>  "hbs",
+                    "target"    =>  "Swal",
+                    "content"   =>  file_get_contents(__ROOT_APP__."/resources/hbs/popup/header.hbs").file_get_contents(__ROOT_APP__."/resources/hbs/popup/main/teamlist.hbs")
+                ]
+            ],
+            "popup" => [
+                "header"    =>  [
+                    "logo"      =>  true,
+                    "content"   =>  [
+                        "icon"      =>  [
+                            "class"     =>  "material-icons",
+                            "text"      =>  "groups"
+                        ],
+                        "text"          =>  $project['data']['attributes']['name'],
+                        "description"   =>  "Liste de l'équipe"
+                    ],
+                    "actions"   =>  [
+                        "refresh"   =>  true,
+                        "close"     =>  true
+                    ]
+                ]
             ]
-        ]]);
+        ]);
 
         # Set model data in data
         $this->setData($this->model->execute());

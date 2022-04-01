@@ -19,6 +19,7 @@ import Copy from "./../src/module/Copy";
 import Dom from "./../src/module/Dom";
 import Url from "../src/module/Url";
 import tippy from "tippy.js";
+import Plyr from 'plyr';
 
 /** Home action
  *  
@@ -67,6 +68,8 @@ export default class DriveAction extends PageAction {
         // Init Media
         this.mediaInit();
 
+        // Init Movie
+        this.movieInit();
 
     }
 
@@ -277,6 +280,87 @@ export default class DriveAction extends PageAction {
             placement: "right",
         });
 
+
+    }
+
+    /* Movie Init */
+    movieInit = () => {
+
+        // Get movie player
+        let moviePlayerEl = document.getElementById('movie-player');
+
+        // Get main el
+        let mainEl = document.getElementById("main")
+
+        // Check movie player
+        if(moviePlayerEl === null || mainEl === null)
+            return;
+
+        // Create div
+        let divEl = document.createElement('div');
+        divEl.classList.add("movie-player-container", "blue-grey", "darken-4");
+            // Div player container
+            let div2El = document.createElement('div');
+                div2El.classList.add('z-depth-1');
+                // Append movie player El
+                div2El.append(moviePlayerEl);
+            divEl.append(div2El);
+
+        // Push in main
+        mainEl.append(divEl);
+
+        // New player
+        const player = new Plyr(moviePlayerEl);
+
+        // Largeur auto
+        let autoWidth = function (divEl, div2El, player) {
+
+            /**
+             * b = a x y / x;
+             */
+
+            // Get usefull values
+            let x = player.elements.container.offsetWidth;
+
+            let y = player.elements.container.offsetHeight;
+            let b = divEl.offsetHeight;
+
+            let c = divEl.offsetWidth;
+
+            // Calcule a
+            let a = b * x / y;
+
+            if(a > c)
+                a = c;
+
+            // Update a
+            div2El.style.width = a+"px";
+
+        }
+
+        // Auto width
+
+        autoWidth(divEl, div2El, player);
+        window.addEventListener('resize', () => {
+
+            autoWidth(divEl, div2El, player);
+
+        });
+        player.on('ready', () => {
+
+            autoWidth(divEl, div2El, player);
+
+        });
+        player.on('play', () => {
+
+            autoWidth(divEl, div2El, player);
+
+        });
+        player.on('exitfullscreen', () => {
+
+            autoWidth(divEl, div2El, player);
+
+        });
 
     }
 

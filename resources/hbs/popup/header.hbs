@@ -1,40 +1,63 @@
+{{!-- Popup Header --}}
 <header class="popup-header" data-layout="popup/header">
-    <div class="popup-header-logo gradient-45deg-deep-purple-blue">
-        <img src="/media/logo/logo_f_small_white/">
+    {{!-- Logo --}}
+    {{#if _user_interface.popup.header.logo}}
+    <div class="popup-header-logo {{#if _user_interface.popup.header.logo.color}}{{_user_interface.popup.header.logo.color}}{{else}}gradient-45deg-deep-purple-blue{{/if}}">
+        {{!-- Image --}}
+        <img src="{{#if _user_interface.popup.header.logo.img}}{{_user_interface.popup.header.logo.img}}{{else}}/media/logo/logo_f_small_white/{{/if}}">
     </div>
+    {{/if}}
+    {{!-- Ghost --}}
     <div class="popup-header-ghost">
 
     </div>
+    {{!-- Content --}}
     <div class="popup-header-content">
+        {{#if _user_interface.popup.header.content.icon}}
         <div class="popup-header-content-media">
             <a class="btn-floating btn-flat waves-effect">
-                <i class="material-icons">info</i>
+                <i class="{{_user_interface.popup.header.content.icon.class}}">{{_user_interface.popup.header.content.icon.text}}</i>
             </a>
         </div>
+        {{/if}}
         <div class="popup-header-content-text">
             <div class="popup-header-content-text-title">
-                <span>Info</span>
+                <span>{{#if _user_interface.popup.header.content.text}}{{_user_interface.popup.header.content.text}}{{else}}Popup{{/if}}</span>
             </div>
+            {{#if _user_interface.popup.header.content.description}}
             <div class="popup-header-content-text-description">
-                <span>Nom du document</span>
+                <span>{{_user_interface.popup.header.content.description}}</span>
             </div>
+            {{/if}}
         </div>
     </div>
-    <div class="popup-header-actions">   
+    {{#if _user_interface.popup.header.actions}}
+    {{!-- Actions --}}
+    <div class="popup-header-actions">
+        {{!-- Refresh --}}
+        {{#if _user_interface.popup.header.actions.refresh}}
         <div class="popup-header-content-text-actions-refresh">
             <a class="btn-floating btn-flat small waves-effect orange">
                 <i class="material-icons white-text white-text">refresh</i>
             </a>
         </div>
-        {{!-- <div class="popup-header-content-text-actions-options">
+        {{/if}}
+        {{!-- Options --}}
+        {{#if _user_interface.popup.header.actions.options}}
+        <div class="popup-header-content-text-actions-options">
             <a class="btn-floating btn-flat small waves-effect green">
                 <i class="material-icons white-text">more_vert</i>
             </a>
-        </div> --}}
+        </div>
+        {{/if}}
+        {{!-- Fermer --}}
+        {{#if _user_interface.popup.header.actions.refresh}}
         <div class="popup-header-content-text-actions-close">
             <a class="btn-floating btn-flat small waves-effect red">
                 <i class="material-icons white-text">close</i>
             </a>
         </div>
+        {{/if}}
     </div>
+    {{/if}}
 </header>

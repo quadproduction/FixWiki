@@ -75,6 +75,17 @@ class GoogleDrive{
                     "text"  =>  "",
                 ]
             ],
+            # Movies
+            "video/quicktime"   =>  [
+                'icon'  =>  [
+                    "class" =>  "fa-solid fa-film",
+                ]
+            ],
+            "video/mp4"   =>  [
+                'icon'  =>  [
+                    "class" =>  "fa-solid fa-film",
+                ]
+            ]
         ],
         # Position delimiter
         "positionDelimiter" =>  "__",
@@ -541,7 +552,21 @@ class GoogleDrive{
             return $result ?? "";
 
 
+        }else
+        # Movie
+        if(in_array($this->currentFile->getMimeType(), ['video/mp4', 'video/quicktime'])){
+
+            # Set id
+            $id = $this->currentFile->getId();
+
+            # Set name
+            $name = $this->currentFile->getName();
+
+            # Return result
+            return '<video src="/api/file/drive/id/'.$id.'/" id="movie-player" data-plyr-config=\'{"title":"'.$name.'"}\'></video>';
+
         }
+
 
     }
 

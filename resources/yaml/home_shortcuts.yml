@@ -19,6 +19,8 @@ shortcuts:
     color:
       bg: purple
       text: white
+    action:
+      href: /drive/workflow/it/contacter_les_its/
   - # Tickets
     name: Tickets
     description: Envie d'installer un plugin ?
@@ -28,6 +30,18 @@ shortcuts:
     color:
       bg: orange
       text: white
+    action:
+      href: /drive/workflow/dev/nouveau_ticket/
+  - # Wiki
+    name: Wiki
+    description: C'est quoi les outils et les workflows dans le studio ?
+    icon:
+      class: fa-solid fa-book
+    color:
+      bg: blue
+      text: white
+    action:
+      href: /tutorial/
   - # Covid
     name: Covid
     description: Quelles sont les mesures sanitaires du studio ?
@@ -37,6 +51,9 @@ shortcuts:
     color:
       bg: red
       text: white
+    action:
+      # href: /drive/internal/covid/mesures_sanitaires/
+      href: /drive/internal/covid/confinement/
   - # Trombi
     name: Trombi
     description: Qui fait quoi au sein du groupe Quad ?
@@ -59,5 +76,16 @@ shortcuts:
       text: white
     action:
       href: http://webapps.prs.vfx.int/licenses/
+  - # Colorspace
+    name: OCIO
+    description: Tu penses qu’un spectre lumineux est le fantôme d’Aristote errant dans les couloirs de Fix Studio… Clique tout de suite ici !
+    icon:
+      class: material-icons
+      text: color_lens
+    color:
+      bg: yellow darken-2
+      text: white
+    action:
+      href: /drive/workflow/coordo/colorspace/ocio/
 
     

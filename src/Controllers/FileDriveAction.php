@@ -117,6 +117,23 @@ class FileDriveAction extends ControllerBase implements ControllerInterface{
                         "target"    =>  "Swal",
                         "content"   =>  $content
                     ]
+                ],
+                "popup" => [
+                    "header"    =>  [
+                        "logo"      =>  true,
+                        "content"   =>  [
+                            "icon"      =>  [
+                                "class"     =>  "material-icons",
+                                "text"      =>  "info"
+                            ],
+                            "text"          =>  "Info",
+                            "description"   =>  ""
+                        ],
+                        "actions"   =>  [
+                            "refresh"   =>  true,
+                            "close"     =>  true
+                        ]
+                    ]
                 ]
             ])
         ;

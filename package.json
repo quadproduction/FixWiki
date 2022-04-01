@@ -5,6 +5,7 @@
         "handlebars": "^4.7.7",
         "js-yaml": "^4.1.0",
         "Kmaterialize": "npm:kmaterialize@^3.0.0",
+        "plyr": "^3.6.12",
         "sweetalert2": "^11.3.6",
         "tippy.js": "^6.3.7"
     },

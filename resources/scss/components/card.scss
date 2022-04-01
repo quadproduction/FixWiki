@@ -173,3 +173,30 @@
     }
 
 }
+
+/* Movie player container */
+$marginY: 0px;
+$marginX: 0px;
+.movie-player-container{
+
+    /* Dimension */
+    height: calc(100vh - 64px - calc(2 * $marginY));
+    width: calc(100% - calc(2 * $marginY));
+
+    /* Margin */
+    margin: $marginX $marginY;
+
+    /* Display */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    >div {
+
+        /* Dimension */
+        width: 25%;
+
+    }
+
+}
