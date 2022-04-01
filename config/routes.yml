@@ -48,7 +48,7 @@ routes:
         methods:
             - get
         response: html
-    # - # Google Drive Page
+    # - # Login
     #     name: Login
     #     patterns:
     #         - /login/
@@ -70,14 +70,14 @@ routes:
             - post
         response: json
     -   # SG Projects
-        name: sgProjects
+        name: SgProjects
         patterns:
             - /api/shotgrid/projects/
         methods:
             - get
         response: json
     -   # SG Team
-        name: sgTeam
+        name: SgTeam
         patterns:
             - /api/shotgrid/team/[a:id]/
         methods:

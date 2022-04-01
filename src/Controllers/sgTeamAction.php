@@ -24,7 +24,7 @@ use App\Shotgrid;
 /** Class for manage the workflow of the app
  *
  */
-class sgTeamAction extends ControllerBase implements ControllerInterface{
+class SgTeamAction extends ControllerBase implements ControllerInterface{
 
     # Conditions
     private $conditions = [

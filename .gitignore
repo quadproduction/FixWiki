@@ -1,5 +1,7 @@
 # Ignore Vendors
+package-lock.json
 node_modules/*
+composer.lock
 vendor/*
 
 # Ignore sensible files
