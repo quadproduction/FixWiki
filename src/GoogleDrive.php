@@ -663,6 +663,7 @@ class GoogleDrive{
         $this->conditions['mimeTypeAllow']["image/png"] = []; 
         $this->conditions['mimeTypeAllow']["image/jpg"] = []; 
         $this->conditions['mimeTypeAllow']["image/jpeg"] = []; 
+        $this->conditions['mimeTypeAllow']["image/gif"] = [];
 
         # Set data with of all file in drive
         $this->getAllFileFromSharedDrive();
