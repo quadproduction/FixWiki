@@ -167,6 +167,16 @@
             cursor: zoom-in;
         }
 
+        /* Checkbox #12 */
+        i.checkbox{
+            /* Position */
+            vertical-align: -0.45rem;
+            /* Selection */
+            user-select: none;
+            /* Color */
+            color: #757575;
+        }
+
         /* Enable anchor */
         $colorLight: #9e9e9e;
         $transitionDuration: .1s;
