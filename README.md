@@ -1,10 +1,12 @@
-# fixstudio_wiki
+# Fix Studio Wiki
 Wiki of Fix Studio
 
 ## Dependance for Docker
 
 PHP 8.1
+
 COMPOSER 2
+
 GIT 2
 
 ## Installation
