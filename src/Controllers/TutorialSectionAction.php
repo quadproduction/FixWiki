@@ -31,6 +31,11 @@ class TutorialSectionAction extends ControllerBase implements ControllerInterfac
     # Google Drive
     private $google_drive;
 
+    # Redirection
+    private $redirection = [
+        'markdown'  =>  '/drive/tools/fixwiki/markdown/'
+    ];
+
     /** Constructor
      *
      */
@@ -69,6 +74,17 @@ class TutorialSectionAction extends ControllerBase implements ControllerInterfac
 
         # Template extension
         $ext = Config::read("app")['app']['template']['extension'] ?? "";
+
+        # Check if redirection
+        if(array_key_exists($name, $this->redirection)):
+
+            # Set redirect header
+            header('Location: '.$this->redirection[$name]);
+
+            # Stop script
+            exit;
+
+        endif;
 
         # Check name and file name exists
         if(!$this->parameters['name'] || !file_exists(__ROOT_APP__."/resources/$ext/tutorial/$name.$ext"))
