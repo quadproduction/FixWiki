@@ -30,15 +30,14 @@ class ParsedownCustom extends ParsedownExtra{
         parent::__construct();
 
         # Checkbox
-        $this->InlineTypes['['][]= 'Checkbox';
-        $this->inlineMarkerList .= '[';
+        $this->InlineTypes['['][]= 'CheckboxOrIframe';
 
     }
 
     /**
      *  ADD CHECKBOX #12
      */
-    protected function inlineCheckbox($excerpt){
+    protected function inlineCheckboxOrIframe($excerpt){
 
         if (preg_match('/\[ ]|\[x]/', $excerpt['text'], $matches)){
 
@@ -57,10 +56,38 @@ class ParsedownCustom extends ParsedownExtra{
 
             );
         }
+        /**
+         *  ADD CHECKBOX #12 | END
+         */
+
+
+        /**
+         *  ADD IFRAME #8
+         */
+        else if (preg_match('/\[\[\[.*?\]\]\]/', $excerpt['text'], $matches)){
+
+            return array(
+
+                // How many characters to advance the Parsedown's
+                // cursor after being done processing this tag.
+                'extent' => strlen($matches[0]),
+                'element' => [
+                    'name'  => 'iframe',
+                    'text'  =>  '',
+                    'attributes' => [
+                        "src"       =>  trim(str_replace(["[[[", "]]]"], "", $matches[0])),
+                        "class"     =>  "extract"
+                    ]
+                ],
+
+            );
+        }
+        /**
+         *  ADD IFRAME #8 | END
+         */
+
     }
-    /**
-     *  ADD CHECKBOX #12 | END
-     */
+
 
 }
 

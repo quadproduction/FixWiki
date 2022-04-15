@@ -22,6 +22,8 @@ use LuckyPHP\Base\Controller as ControllerBase;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Front\Console;
 use App\GoogleDrive;
+use DOMDocument;
+use LuckyPHP\Code\Strings;
 
 /** Class for manage the workflow of the app
  *
@@ -55,12 +57,27 @@ class DriveAction extends ControllerBase implements ControllerInterface{
      */
     private function setupLayouts(){
 
+        # If clean in get value
+        if(isset($_GET['clean'])):
+
+            # Simple layout
+            $layouts = [
+                'structure/main',
+            ];
+
+        else:
+
+            # Full layout
+            $layouts = [
+                'structure/head',
+                'structure/sidenav',
+                'structure/main',
+            ];
+
+        endif;
+
         # Set layouts
-        $this->setLayouts([
-            'structure/head',
-            'structure/sidenav',
-            'structure/main',
-        ]);
+        $this->setLayouts($layouts);
 
     }
 
@@ -110,6 +127,12 @@ class DriveAction extends ControllerBase implements ControllerInterface{
 
         }
 
+        # Ig get have article
+        if(isset($_GET['extract']) && $_GET['extract'])
+
+            # Clean htmlContent
+            $htmlContent = $this->extractHtmlContent($htmlContent);
+
         # Load app config
         $this->model
             ->loadConfig('app')
@@ -149,6 +172,92 @@ class DriveAction extends ControllerBase implements ControllerInterface{
         ;
 
         //\LuckyPHP\Front\Console::log($this->model->execute());
+
+    }
+
+    /** Get specific article of wiki
+     * 
+     */
+    private function extractHtmlContent(string $content= ""):string{
+
+        # Declare result
+        $result = $content;
+
+        #New DOMDocument
+        $doc = new DOMDocument();
+
+        # Get value of extract cleaned
+        $extractGetValue = Strings::clean($_GET['extract']);
+
+        # Load html
+        $doc->loadHTML("<?xml encoding=\”utf-8\">$content");
+
+        /* Prepare doc extract */
+
+            # New doc
+            $docExtract = new DOMDocument();
+
+            # Load html
+            $docExtract->loadHTML($content);
+
+            # Get body
+            $bodyExtract = $docExtract->getElementsByTagName("body")->item(0);
+
+            # Delete all child nodes
+            while($bodyExtract->childNodes->length > 0)
+
+                # Delete child
+                $bodyExtract->removeChild($bodyExtract->childNodes->item(0));
+
+        /* End prepare doc extract */
+
+        # ExtractStatus
+        $extractStatus = false;
+
+        # Get body
+        $body = $doc->getElementsByTagName("body")->item(0);
+
+        # check childNodes of body
+        if($body->hasChildNodes())
+
+            # Iteration dom elements
+            foreach($body->childNodes as $node){
+
+                # Set tagname
+                $tagName = $node->tagName ?? null;
+
+                # Check tag name
+                if(!$tagName)
+                    continue;
+
+                # Check if h1 or h2
+                if(in_array($tagName, ['h1','h2']))
+
+                    # Check if node content is extract get value
+                    if(Strings::clean($node->textContent) == $extractGetValue)
+
+                        # Enable extra status
+                        $extractStatus = $tagName;
+
+                    # Check if it's the end of extraction
+                    elseif($extractStatus == $tagName)
+
+                        # Disable extra status 
+                        $extractStatus = false;
+
+                # Check extraction status
+                if($extractStatus)
+
+                    # Push nodes in doc result
+                    $bodyExtract->appendChild($docExtract->importNode($node, true));
+
+            }
+
+        # Set result
+        $result = $docExtract->saveHTML();
+
+        # Return result
+        return $result;
 
     }
 

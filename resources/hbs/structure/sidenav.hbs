@@ -122,6 +122,37 @@ Hide files beginning by dot #3
                                                                     </li>
                                                                     {{/unless}}{{/each}}
                                                                 {{/if}}
+
+                                                                {{!-- Check if folder --}}
+                                                                {{#if this.relationships.folder}}
+                                                                    {{!-- Iteration des folders --}}
+                                                                    {{#each this.relationships.folder}}{{#unless this._user_interface.hidden}} 
+                                                                    <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
+                                                                        <a class="collapsible-header waves-effect waves-cyan">
+                                                                            <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
+                                                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                                                        </a>
+                                                                        <div class="collapsible-body">
+                                                                            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                                                                                {{!-- Depth 5 --}}
+                                                                                {{!-- Check if file --}}
+                                                                                {{#if this.relationships.file}}
+                                                                                    {{!-- Iteration des files --}}
+                                                                                    {{#each this.relationships.file}}{{#unless this._user_interface.hidden}}      
+                                                                                    <li class="bold">
+                                                                                        <a class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}" href="{{this._user_interface.root}}">
+                                                                                            <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
+                                                                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    {{/unless}}{{/each}}
+                                                                                {{/if}}
+                                                                                {{!-- Depth 5 --}}
+                                                                            </ul>
+                                                                        </div>
+                                                                    </li>
+                                                                    {{/unless}}{{/each}}
+                                                                {{/if}}
                                                                 {{!-- Depth 4 --}}
                                                             </ul>
                                                         </div>

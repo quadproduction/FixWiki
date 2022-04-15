@@ -7,7 +7,7 @@ page:
                 -
                     tag: meta
                     attributes:
-                        charset: '{{app.charset}}'
+                        charset: 'utf-8'
                 -
                     tag: meta
                     attributes:

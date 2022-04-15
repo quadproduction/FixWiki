@@ -121,6 +121,20 @@
             }
         }
 
+        /* Iframe */
+        iframe.extract{
+
+            /* Dimension */
+            width: 100%;
+            height: 500px;
+
+            /* Border */
+            border: 1px dashed #757575;
+            border-radius: 6px;
+
+        }
+
+        /* Table */
         table{
             /* Dimension */
             width: initial!important;
