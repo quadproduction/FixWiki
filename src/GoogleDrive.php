@@ -146,6 +146,7 @@ class GoogleDrive{
             'supportsAllDrives'         =>  true,
             'driveId'                   =>  $this->config['app']['google']['drive']['driveId'],
             'corpora'                   =>  'drive',
+            'pageSize'                  =>  1000,
             /**
              *  Folder and File Order #4 
              */
