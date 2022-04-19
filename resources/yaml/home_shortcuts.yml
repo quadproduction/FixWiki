@@ -31,7 +31,7 @@ shortcuts:
       bg: orange
       text: white
     action:
-      href: /drive/workflow/dev/nouveau_ticket/
+      href: /drive/workflow/dev/nouvelle_demande/
   - # Wiki
     name: Wiki
     description: C'est quoi les outils et les workflows dans le studio ?
