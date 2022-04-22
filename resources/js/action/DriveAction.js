@@ -70,6 +70,9 @@ export default class DriveAction extends PageAction {
         // Init Anchor
         this.anchorInit();
 
+        // Init pre Code
+        this.preCodeInit();
+
         // Init Media
         this.mediaInit();
 
@@ -390,5 +393,93 @@ export default class DriveAction extends PageAction {
             Iframe.autoHeight(iframes);
 
     }
+
+    /** Precode init
+     * 
+     */
+    preCodeInit = () => {
+
+        // Set container
+        let container = document.querySelector('.markdown');
+
+        // Check markdown enable-anchors
+        if(container === null)
+            return;
+
+        /* Get els */
+        //let preEls = container.querySelectorAll("pre:has(> code)")
+        let preEls = container.querySelectorAll("pre")
+
+        /* Check preEls */
+        if(preEls.length)
+
+            /* Iteration */
+            for(let preEl of preEls){
+
+                if(preEl.querySelector('code') === null)
+                    continue;
+
+                /* Create elements */
+                let preCopyContainerEl = document.createElement('div');
+                preCopyContainerEl.classList.add("pre-copy-container");
+
+                    let preCopyItemEl = document.createElement('div');
+                    preCopyItemEl.classList.add('pre-copy-item', 'waves-effect', 'waves-light');
+                    preCopyItemEl.dataset.tippyContent = "Copier le contenu";
+
+                        let preCopyItemIEl = document.createElement('i');
+                        preCopyItemIEl.classList.add("material-icons");
+                        preCopyItemIEl.innerText = "content_copy";
+
+                    preCopyItemEl.append(preCopyItemIEl);
+
+                preCopyContainerEl.append(preCopyItemEl);
+                /* End Create elements */
+
+                /* Push in preEls */
+                preEl.append(preCopyContainerEl);
+
+                /* Init tippy */
+                let tippyEls = preEl.querySelectorAll('.pre-copy-item');
+
+                /* Check tippy */
+                if(tippyEls.length)
+
+                    /* Iteration */
+                    for(let tippyEl of tippyEls){
+
+                        /* check data set content for tippy */
+                        if(tippyEl.dataset.tippyContent)
+
+                            /* Tippy init */
+                            tippy(
+                                tippyEl,
+                                {
+                                    placement: 'bottom',
+                                }
+                            );
+
+                        // Copy action
+                        Copy.run({
+                            el: tippyEl,
+                            callback: () => {
+                                
+                                /* Get pre */
+                                let preEl = tippyEl.parentElement.parentElement;
+
+                                /* Get code */
+                                let codeEl = preEl.querySelector('code');
+
+                                /* Return html */
+                                return codeEl.innerHTML;
+
+                            }
+                        });
+
+                    }
+
+            }
+
+    } 
 
 }
