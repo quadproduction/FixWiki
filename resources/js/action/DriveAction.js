@@ -13,6 +13,7 @@
  * 
  */
 import PageAction from "../src/base/PageAction";
+import Iframe from "../src/utilities/Iframe";
 import Strings from "../src/module/Strings";
 import Arrays from "../src/module/Arrays";
 import Copy from "./../src/module/Copy";
@@ -61,6 +62,10 @@ export default class DriveAction extends PageAction {
 
         // Init component
         this.componentInit();
+
+        // Init Iframe
+        // Fix #24
+        this.iframeInit();
 
         // Init Anchor
         this.anchorInit();
@@ -361,6 +366,28 @@ export default class DriveAction extends PageAction {
             autoWidth(divEl, div2El, player);
 
         });
+
+    }
+
+    /** Init Iframe
+     * Fix #24
+     */
+    iframeInit = () => {
+
+        // Set container
+        let container = document.querySelector('.markdown');
+
+        // Check markdown enable-anchors
+        if(container === null)
+            return;
+
+        // Get all iframe extract
+        let iframes = container.querySelectorAll("iframe.extract");
+
+        // Check iframes
+        if(iframes.length)
+
+            Iframe.autoHeight(iframes);
 
     }
 
