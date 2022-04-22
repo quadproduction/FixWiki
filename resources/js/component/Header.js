@@ -53,6 +53,10 @@ export default class Header{
         launchRocketchat : {
             query: ".launch-rocketchat",
             el: null,
+        },
+        launchFixplay : {
+            query: ".launch-fixplay",
+            el:null,
         }
     };
 
@@ -355,7 +359,7 @@ export default class Header{
 
     }
 
-    /** Laucnh RV
+    /** Launch RV
      * 
      * @param {*} dom 
      */
@@ -371,7 +375,7 @@ export default class Header{
 
     }
 
-    /** Laucnh Shotgun Wizz
+    /** Launch Shotgun Wizz
      * 
      * @param {*} dom 
      */
@@ -387,7 +391,7 @@ export default class Header{
 
     }
 
-    /** Laucnh Shotgun Local
+    /** Launch Shotgun Local
      * 
      * @param {*} dom 
      */
@@ -403,11 +407,27 @@ export default class Header{
 
     }
 
-    /** Laucnh Rocket Chat
+    /** Launch Rocket Chat
      * 
      * @param {*} dom 
      */
     launchRocketchatInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+            }
+        );
+
+    }
+
+    /** Launch Fix Play
+     * 
+     * @param {*} dom 
+     */
+    launchFixplayInit = dom => {
 
         // Tippy
         tippy(
