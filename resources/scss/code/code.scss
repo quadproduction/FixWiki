@@ -172,8 +172,15 @@
         }
         /* ul */
         ul:not(.table-of-contents) {
+
+            /* Dimension */
             margin: 1.2em 0;
+            line-height: 1.75!important;
+
+            /* Position */
             padding-left: 30px;
+
+            /* Children */
             li{
                 list-style-type: disc;
                 color: #333333;
