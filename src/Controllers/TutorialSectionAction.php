@@ -113,7 +113,7 @@ class TutorialSectionAction extends ControllerBase implements ControllerInterfac
         $this->google_drive = new GoogleDrive();
 
         # Get all data
-        $this->google_drive->getAllFileFromSharedDrive();
+        $this->google_drive->getAllFileFromSharedDrive(true);
 
         # Load app config
         $this->model

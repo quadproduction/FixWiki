@@ -17,6 +17,9 @@ namespace App;
 /** Dependances
  * 
  */
+use Google\Service\DriveActivity\QueryDriveActivityRequest;
+use Symfony\Component\Finder\Finder;
+use Google\Service\DriveActivity;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Server\Config;
 use LuckyPHP\Front\Console;
@@ -43,6 +46,9 @@ class GoogleDrive{
 
     # Directory (annuaire)
     private $directory = [];
+
+    # LAst update
+    private $lastUpdate = null;
 
     # conditions
     private $conditions = [
@@ -103,6 +109,9 @@ class GoogleDrive{
         # Get config
         $this->getConfig();
 
+        # Last update
+        $this->getLastActivity();
+
     }
 
     /** New drive service
@@ -128,7 +137,23 @@ class GoogleDrive{
     /** Get All files in Shared Drive
      * @source https://developers.google.com/resources/api-libraries/documentation/drive/v3/php/latest/class-Google_Service_Drive_DriveFile.html
      */
-    public function getAllFileFromSharedDrive(){
+    public function getAllFileFromSharedDrive($tigger = false, $custom = ""){
+
+        # File cache
+        $templateFolder = __ROOT_APP__."/cache/drive/";
+        $templateFile = "navigation_".($custom ? $custom."_" : "");
+        $fileCache = $templateFolder.$templateFile.$this->lastUpdate.".php";
+
+        # Check lastUpdate
+        if($this->lastUpdate && is_file($fileCache) && $tigger){
+
+            # Read cache
+            list($this->data["navigation"], $this->directory) = require($fileCache);
+
+            # Return 
+            return;
+
+        }
 
         # Check if google drive driveId
         if(
@@ -169,6 +194,35 @@ class GoogleDrive{
 
         # Push in global data
         $this->data["navigation"][] = $data;
+
+        # check tigger
+        if($tigger):
+
+            # Delete old caches
+            $finder = new Finder();
+            $finder
+                ->files()
+                ->in($templateFolder)
+                ->name("$templateFile*");
+
+            # Check files
+            if($finder->hasResults())
+                # Iteration des fichiers
+                foreach($finder as $file)
+                    unlink($file->getRealPath());
+
+            # File put content in cache
+            file_put_contents(
+                $fileCache,
+                '<?php return ' . var_export([
+                    0 => $this->data["navigation"],
+                    1 => $this->directory
+                ],
+                true
+                ) . ';'
+            );
+
+        endif;
 
     }
 
@@ -212,7 +266,7 @@ class GoogleDrive{
                             "mime_type"     =>  $file->getMimeType(),
                             "parents"       =>  $file->getParents(),
                             "size"          =>  $file->getSize(),
-                            "lastModifyingUser"=>$file->getLastModifyingUser(),
+                            //"lastModifyingUser"=>$file->getLastModifyingUser(),
                             "created_time"  =>  $file->getCreatedTime(),
                             "modified_time" =>  $file->getModifiedTime(),
                         ],
@@ -266,7 +320,7 @@ class GoogleDrive{
                             "mime_type"     =>  $file->getMimeType(),
                             "parents"       =>  $file->getParents(),
                             "size"          =>  $file->getSize(),
-                            "lastModifyingUser"=>$file->getLastModifyingUser(),
+                            //"lastModifyingUser"=>$file->getLastModifyingUser(),
                             "created_time"  =>  $file->getCreatedTime(),
                             "modified_time" =>  $file->getModifiedTime(),
                         ],
@@ -295,7 +349,7 @@ class GoogleDrive{
                     # Push current result in directory
                     $this->pushDirectory(
                         $currentResult['_user_interface']['root'],
-                        $file
+                        $file->getId()
                     );
 
                 }
@@ -347,7 +401,7 @@ class GoogleDrive{
     /** Set current file
      * 
      */
-    public function setCurrentfileById(string $id = ""){
+    public function setCurrentfileById(string $id = "", $media = true){
         
         # Check id
         if(!$id)
@@ -355,14 +409,20 @@ class GoogleDrive{
             # New error
             throw new Exception("You can't find file in Google Drive with invalid Id", 500);
 
+        # Declare parameters
+        $parameter = [
+            'supportsAllDrives' => true, 
+            'fields' => 'webContentLink, mimeType, name, id',
+        ];
+
+        # If $media
+        if($media)
+            $parameter['alt'] = 'media';
+
         # Set result
         $result = $this->drive->files->get(
             $id,
-            [
-                'supportsAllDrives' => true, 
-                'fields' => 'webContentLink, mimeType, name, id',
-                'alt' => 'media',
-            ]
+            $parameter
         );
 
         # Set current file
@@ -588,12 +648,12 @@ class GoogleDrive{
     /** push directory
      * 
      */
-    private function pushDirectory(string $root, $file):void{
+    private function pushDirectory(string $root, $id):void{
 
         # Push value in directory
         $this->directory[] = [
             'root'  =>  $root,
-            'file'  =>  $file
+            'id'  =>  $id
         ];
 
     }
@@ -667,7 +727,7 @@ class GoogleDrive{
         $this->conditions['mimeTypeAllow']["image/gif"] = [];
 
         # Set data with of all file in drive
-        $this->getAllFileFromSharedDrive();
+        $this->getAllFileFromSharedDrive(true, "media");
 
         # Check data navigation
         if(!empty($this->data['navigation']))
@@ -778,5 +838,53 @@ class GoogleDrive{
 
     }
 
+    /** Get last activity time
+     * 
+     */
+    private function getLastActivity(){
+
+        # Set result
+        $result = null;
+
+        # New drive activity
+        $this->driveActivity = new DriveActivity($this->client);
+
+        # New request
+        $request = new QueryDriveActivityRequest();
+
+        # Set folder
+        $request->setAncestorName("items/".$this->config['app']['google']['drive']['driveId']);
+
+        # Set pahe size
+        $request->setPageSize(1);
+
+        # Get results
+        $results = $this->driveActivity->activity->query($request);
+
+        # Get activity of the first value of results
+        $activity = $results->getActivities()[0] ?? null;
+
+        # Check activity
+        if(!$activity)
+            return;
+
+        # Get time info
+        $this->lastUpdate = str_replace(["-","T",".",":","Z"], "", $this->getTimeInfo($activity));
+
+    }
+
+    /** Get time info from activity
+     * 
+     */
+    private function getTimeInfo($activity){
+
+        if ($activity->getTimestamp() != null) {
+            return $activity->getTimestamp();
+        }
+        if ($activity->getTimeRange() != null) {
+            return $activity->getTimeRange()->getEndTime();
+        }
+        return null;
+    }
 
 }

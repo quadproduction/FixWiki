@@ -18,6 +18,7 @@ namespace App;
  * 
  */
 use Symfony\Component\Finder\Finder;
+use Google\Service\DriveActivity;
 use LuckyPHP\Server\Exception;
 use Google\Service\Drive;
 use Google\Client;
@@ -89,7 +90,7 @@ class Google{
         # New client
         $this->client = new Client();
         $this->client->setApplicationName('Fixstudio Wiki');
-        $this->client->setScopes(Drive::DRIVE_READONLY);
+        $this->client->setScopes([Drive::DRIVE_READONLY, DriveActivity::DRIVE_ACTIVITY_READONLY]);
         $this->client->setAuthConfig($this->pathJson);
         $this->client->setAccessType('offline');
         $this->client->setPrompt('select_account consent');

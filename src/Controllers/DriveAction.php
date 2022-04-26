@@ -93,7 +93,7 @@ class DriveAction extends ControllerBase implements ControllerInterface{
         $this->google_drive = new GoogleDrive();
 
         # Get all data
-        $this->google_drive->getAllFileFromSharedDrive();
+        $this->google_drive->getAllFileFromSharedDrive(true);
 
         # Set Root
         $root = "/drive/".implode("/", $this->parameters)."/";
@@ -110,7 +110,7 @@ class DriveAction extends ControllerBase implements ControllerInterface{
         }
 
         # Set current file in google drive
-        $this->google_drive->setCurrentfile($result['file']);
+        $this->google_drive->setCurrentfileById($result['id'], false);
 
         try{
 

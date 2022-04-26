@@ -5,14 +5,15 @@
         "erusev/parsedown": "^1.7",
         "erusev/parsedown-extra": "^0.8.1",
         "cebe/markdown": "~1.2.0",
-        "guzzlehttp/guzzle": "^7.4"
+        "guzzlehttp/guzzle": "^7.4",
+        "symfony/finder": "^6.0"
     },
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
     },
     "extra": {
         "google/apiclient-services": [
-            "Drive"
+            "Drive", "DriveActivity"
         ]
     },
     "autoload": {
