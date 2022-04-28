@@ -6,7 +6,8 @@
         "erusev/parsedown-extra": "^0.8.1",
         "cebe/markdown": "~1.2.0",
         "guzzlehttp/guzzle": "^7.4",
-        "symfony/finder": "^6.0"
+        "symfony/finder": "^6.0",
+        "atdev/rocket-chat": "^1.0"
     },
     "scripts": {
         "pre-autoload-dump": "Google\\Task\\Composer::cleanup"

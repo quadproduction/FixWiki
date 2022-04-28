@@ -64,6 +64,13 @@ routes:
         methods:
             - get
         response: json
+    -   # Rocket Chay
+        name: Rocketchat
+        patterns:
+            - /api/rocketchat/
+        methods:
+            - get
+        response: json
     -   # Sidenav change
         name: SidenavChange
         patterns:

@@ -79,6 +79,9 @@ export default class DriveAction extends PageAction {
         // Init Movie
         this.movieInit();
 
+        // Init Rocket Chat
+        this.rocketChatInit();
+
     }
 
     /** Anchor Init
@@ -480,6 +483,111 @@ export default class DriveAction extends PageAction {
 
             }
 
-    } 
+    }
+
+    /* RocketChatInit */
+    rocketChatInit = () => {
+
+        // Regex expression to catch word starting by at sign
+        let regexExpression =  /^([\w\-]+)@|(?<=\s)\@\w+/g ;
+
+        // chains of regex to analyse
+        let regexChain = "";
+
+        // Get markdown box
+        let markdownEl = document.querySelector(".markdown");
+
+        // Check markdown el
+        if(markdownEl === null)
+            return;
+
+        //Get all p, blockquote elements
+        let targetEls = markdownEl.querySelectorAll('p, blockquote, li');
+
+        // check targetEls
+        if(!targetEls.length)
+            return;
+
+        // Iteration des targetEls
+        for(let el of targetEls)
+
+            // Check text
+            if(el.innerText)
+
+                // Push text in regexChain
+                regexChain += " "+el.innerText.trim();
+
+        // Check chain
+        if(!regexChain)
+            return;
+
+        // Regex execution
+        let regexCollection = regexChain.match(regexExpression);
+
+        // Check collection
+        if(!regexCollection || !regexCollection.length)
+            return;
+
+        // Clean duplicate
+        regexCollection = regexCollection.filter(function (value, index, array) { 
+            return array.indexOf(value) === index;
+        });
+        
+        let value = "";
+
+        // Prepare value
+        for(let item of regexCollection)
+
+            // Add item to value
+            value += (value ? "&" : "") + item;
+
+        // Xhr
+        fetch(
+            "/api/rocketchat/?"+value,
+            {
+                method: 'GET',
+                credentials: 'include',
+                headers: new Headers({
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin':'*',
+                    'Content-Type': 'application/json',
+                })
+            }
+        // Middleware
+        ).then(
+            response => response.json()
+        // Controller
+        ).then(
+            data => {
+
+                // Check records
+                if(data.records.length)
+
+                        // Iteration des el
+                        for(let el of targetEls)
+
+                            // Iteration des records
+                            for(let record of data.records){
+
+                                // Set username
+                                let arobaseUsername = "@"+record.username;
+
+                                // Get html
+                                if(el.innerHTML.includes(arobaseUsername));
+
+                                // Replace
+                                el.innerHTML = el.innerHTML.replaceAll(
+                                    arobaseUsername, 
+                                    "<a class=\"rocketchat-"+record.username+"\" target=\"_blank\" href=\"https://chat.fixstudio.com/direct/"+record.username+"\">"+record.name+"</a>"
+                                );
+
+                            }
+            
+            }
+        ).catch(
+            error => console.error(error)
+        );
+
+    }
 
 }

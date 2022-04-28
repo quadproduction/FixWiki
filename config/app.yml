@@ -57,4 +57,7 @@ app:
                 client_id: fix_doc
                 client_secret: pqfFtwmoyimwm(3bgpnldyaoq
                 grant_type: client_credentials
-
+    rocketchat:
+        url: https://chat.fixstudio.com
+        login: kzarshenas
+        password: Fixstudio33
