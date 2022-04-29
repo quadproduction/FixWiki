@@ -58,14 +58,22 @@ class DriveAction extends ControllerBase implements ControllerInterface{
     private function setupLayouts(){
 
         # If clean in get value
-        if(isset($_GET['clean'])):
+        if(isset($_GET['clean'])){
 
             # Simple layout
             $layouts = [
                 'structure/main',
             ];
 
-        else:
+            # Check if options is set
+            if(isset($_GET['options'])){
+
+                # Push options
+                $layouts[] = 'structure/options';
+
+            }
+
+        }else{
 
             # Full layout
             $layouts = [
@@ -74,7 +82,7 @@ class DriveAction extends ControllerBase implements ControllerInterface{
                 'structure/main',
             ];
 
-        endif;
+        };
 
         # Set layouts
         $this->setLayouts($layouts);

@@ -200,3 +200,50 @@ $marginX: 0px;
     }
 
 }
+
+/* Children */
+.options-container{
+
+    /* Display */
+    display: flex;
+
+    /* Position */
+    position: absolute;
+    right: 0px;
+    top: 9px;
+
+    /* Transition */
+    transition: opacity .2s;
+
+    /* Children */
+    .options-container-item{
+
+        /* Color */
+        //background-color: #424242;
+        background-color: white;
+
+        /* Dimension */
+        padding: 5px;
+        border-radius: 3px;
+        margin-right: 10px;
+
+        /* Cursor */
+        cursor: pointer;
+
+        /* Hover */
+        &:hover{
+            
+            /* Color */
+            background-color: #e0e0e0;
+
+        }
+
+        /* Children */
+        i{
+            /* Colors */
+            color: #212121
+        }
+
+    }
+
+}

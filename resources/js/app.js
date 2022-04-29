@@ -21,6 +21,7 @@ import {Pdf} from "./module/Pdf";
  * 
  */
 import Sidenav from "./component/Sidenav";
+import Options from "./component/Options";
 import Header from "./component/Header";
 import Search from "./component/Search";
 
@@ -49,6 +50,7 @@ let componentList = {
     sidenav: Sidenav,
     search: Search,
     head: Header,
+    options: Options,
 }
 
 /** App Class
