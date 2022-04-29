@@ -28,7 +28,7 @@ export default class Iframe {
         for(let iframe of list)
 
             /* Check iframe */
-            if(iframe.nodeName == "IFRAME")
+            if(iframe.nodeName == "IFRAME"){
 
                 /* Event on loaded */
                 iframe.addEventListener(
@@ -40,6 +40,8 @@ export default class Iframe {
                         
                     }
                 );
+            
+            }
 
     }
 

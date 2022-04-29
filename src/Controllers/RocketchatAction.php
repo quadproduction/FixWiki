@@ -15,7 +15,7 @@
 namespace App\Controllers;
 
 /** Hide errors
- * 
+ * USe for hide depprecated message due to PHP8.1
  */
 ini_set('display_errors', 0);
 

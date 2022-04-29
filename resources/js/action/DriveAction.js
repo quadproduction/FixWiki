@@ -63,10 +63,6 @@ export default class DriveAction extends PageAction {
         // Init component
         this.componentInit();
 
-        // Init Iframe
-        // Fix #24
-        this.iframeInit();
-
         // Init Anchor
         this.anchorInit();
 
@@ -78,6 +74,10 @@ export default class DriveAction extends PageAction {
 
         // Init Movie
         this.movieInit();
+
+        // Init Iframe
+        // Fix #24
+        this.iframeInit();
 
         // Init Rocket Chat
         this.rocketChatInit();
@@ -203,6 +203,10 @@ export default class DriveAction extends PageAction {
             }
 
         }
+
+        // check if not in Iframe
+        if(window.frameElement)
+            return;
 
         /* Generate scollspy */
         let main = document.createElement('div');
@@ -388,7 +392,7 @@ export default class DriveAction extends PageAction {
             return;
 
         // Get all iframe extract
-        let iframes = container.querySelectorAll("iframe.extract");
+        let iframes = container.querySelectorAll(".markdown iframe.extract");
 
         // Check iframes
         if(iframes.length)
@@ -560,6 +564,9 @@ export default class DriveAction extends PageAction {
         ).then(
             data => {
 
+                // Iframe Script Tigger (fix iframe autosize issue)
+                let iframeScriptTigger = false;
+
                 // Check records
                 if(data.records.length)
 
@@ -571,9 +578,6 @@ export default class DriveAction extends PageAction {
 
                                 // Set username
                                 let arobaseUsername = "@"+record.username;
-
-                                // Get html
-                                if(el.innerHTML.includes(arobaseUsername));
 
                                 // Replace
                                 el.innerHTML = el.innerHTML.replaceAll(
@@ -593,7 +597,19 @@ export default class DriveAction extends PageAction {
                                     }
                                 );
 
+                                // Check iframe (fix)
+                                if(el.getElementsByTagName('iframe') !== null)
+
+                                    // Switch iframeScriptTigger
+                                    iframeScriptTigger = true;
+
                             }
+
+                // Check iframeScriptTigger
+                if(iframeScriptTigger)
+
+                    // Execute iframe script
+                    this.iframeInit();
             
             }
         ).catch(
