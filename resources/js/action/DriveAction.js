@@ -578,7 +578,19 @@ export default class DriveAction extends PageAction {
                                 // Replace
                                 el.innerHTML = el.innerHTML.replaceAll(
                                     arobaseUsername, 
-                                    "<a class=\"rocketchat-"+record.username+"\" target=\"_blank\" href=\"https://chat.fixstudio.com/direct/"+record.username+"\">"+record.name+"</a>"
+                                    "<a class=\"rocketchat-"+record.username+"\">"+arobaseUsername+"</a>"
+                                );
+
+                                // New tippy instance
+                                tippy(
+                                    ".rocketchat-"+record.username,
+                                    {
+                                        content: "<span><span>"+record.name+"</span> | <a href=\"https://chat.fixstudio.com/direct/"+record.username+"\" target=\"_blank\"><i class=\"fa-brands fa-rocketchat\" style=\"font-size:14;\"></i></a></span>",
+                                        allowHTML: true,
+                                        placement: "bottom",
+                                        delay: 150,
+                                        interactive: true,
+                                    }
                                 );
 
                             }

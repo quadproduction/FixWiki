@@ -27,6 +27,7 @@ use LuckyPHP\Base\Controller as ControllerBase;
 use ATDev\RocketChat\Chat as Chat;
 use ATDev\RocketChat\Users\User;
 use LuckyPHP\Server\Config;
+use LuckyPHP\File\Json;
 
 /** Class for manage the workflow of the app
  *
@@ -85,15 +86,16 @@ class RocketchatAction extends ControllerBase implements ControllerInterface{
             $result = new User($cleanUser);
 
             # Check user
-            if($result):
+            if(!$result || !$result->info() || !is_object($result) )
 
-                # Clean result
-                $cleanResult = array_filter(json_decode(json_encode($result->info()), true));
+                # Contineu iteration
+                continue;
 
-                # Push user
-                $records[] = $cleanResult;
+            # Clean result
+            $cleanResult = array_filter(json_decode(json_encode($result->info()), true));
 
-            endif;
+            # Push user
+            $records[] = $cleanResult;
 
         }
 
