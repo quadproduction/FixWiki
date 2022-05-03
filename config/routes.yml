@@ -39,6 +39,13 @@ routes:
         methods:
             - get
         response: data
+    -   # Reade file from id
+        name: DriveSearch
+        patterns:
+            - /api/file/drive/search/[a:name]
+        methods:
+            - get
+        response: json
     -   # Google Drive Page
         name: Drive
         patterns:

@@ -93,6 +93,16 @@ class GoogleDrive{
                 ]
             ]
         ],
+        # Mime type allow search
+        "searchMimeTypeAllowed" =>  [
+            "application/vnd.google-apps.folder", 
+            "video/mp4", 
+            "video/quicktime", 
+            "application/vnd.google-apps.document", 
+            "application/pdf", 
+            "text/plain", 
+            "text/markdown"
+        ],
         # Position delimiter
         "positionDelimiter" =>  "__",
     ];
@@ -641,6 +651,164 @@ class GoogleDrive{
 
     }
 
+    /** Search file by name
+     * 
+     */
+    public function searchFile(string $need = ""){
+
+        # Result
+        $result = [];
+
+        # clean need
+        $need = addslashes(trim($need));
+
+        # Check need
+        if(!$need)
+            return $result;
+
+        # Get content of file
+        $parameters = [
+            'includeItemsFromAllDrives' =>  true,
+            'fields'                    =>  'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser, webContentLink)',
+            'supportsAllDrives'         =>  true,
+            'driveId'                   =>  $this->config['app']['google']['drive']['driveId'],
+            'corpora'                   =>  'drive',
+            'pageSize'                  =>  1000,
+            'q'                         =>  "trashed = false and (name contains '$need' or fullText contains '$need')",
+        ];
+
+        # Get datas
+        $batch = $this->drive->files->listFiles($parameters);
+
+        # Data
+        $result = [
+            'id'        =>  $this->config['app']['google']['drive']['driveId'],
+            "entity"    =>  "drive",
+            "relationships" =>  [],
+        ];
+
+        # Set mimeTypeAllow
+        $mimeTypeAllow = $this->conditions["searchMimeTypeAllowed"];
+
+        //$result['raw'] = $batch->getFiles();
+
+        # Check if result
+        if(count($batch->getFiles()))
+
+            # Iteration des files
+            foreach ($batch->getFiles() as $file){
+
+                # Check mime type
+                if(!in_array($file->getMimeType(), $mimeTypeAllow))
+                    
+                    # Continue
+                    continue;
+
+                # Developpe folder
+                if($file->getMimeType() === "application/vnd.google-apps.folder"):
+
+                    # Extract folder
+                    $this->searchFileInFolder($file->getId(), $result);
+
+                    # continue
+                    continue;
+
+                endif;
+
+                # size
+                $size = $file->getSize();
+
+                # Item
+                $item = [
+                    "name"      =>  $file->getName(),
+                    "id"        =>  $file->getId(),
+                    "mimeType"  =>  $file->getMimeType(),
+                    "parents"   =>  $file->getParents(),
+                    "size"      =>  $this->formatBytes(intval($size)),
+                ];
+
+                # Push item in result
+                $result['relationships'][] = $item;
+
+            }
+
+        # Return result
+        return $result;
+
+    }
+
+    /** Search file in folder
+     * 
+     */
+    private function searchFileInFolder($id, &$data){
+
+        # Get content of file
+        $parameters = [
+            'includeItemsFromAllDrives' =>  true,
+            'fields'                    =>  'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser, webContentLink)',
+            'supportsAllDrives'         =>  true,
+            'driveId'                   =>  $this->config['app']['google']['drive']['driveId'],
+            'corpora'                   =>  'drive',
+            'pageSize'                  =>  1000,
+            'q'                         =>  "trashed = false and '$id' in parents",
+        ];
+
+        # Get datas
+        $batch = $this->drive->files->listFiles($parameters);
+
+        # Data
+        $result = [
+            'id'        =>  $this->config['app']['google']['drive']['driveId'],
+            "entity"    =>  "drive",
+            "relationships" =>  []
+        ];
+        
+        # Set mimeTypeAllow
+        $mimeTypeAllow = $this->conditions["searchMimeTypeAllowed"];
+
+        # Push item in result
+        //$data['raw'] = array_merge($data['raw'], $batch->getFiles());
+
+        # Check if result
+        if(count($batch->getFiles()))
+
+            # Iteration des files
+            foreach ($batch->getFiles() as $file){
+
+                # Check mime type
+                if(!in_array($file->getMimeType(), $mimeTypeAllow))
+                    continue;
+
+                # Developpe folder
+                if($file->getMimeType() === "application/vnd.google-apps.folder"):
+                    
+                    # Extract folder
+                    $this->searchFileInFolder($file->getId(), $data);
+
+                    # continue
+                    continue;
+
+                endif;
+
+                # size
+                $size = $file->getSize();
+
+                # Item
+                $item = [
+                    "name"      =>  $file->getName(),
+                    "id"        =>  $file->getId(),
+                    "mimeType"  =>  $file->getMimeType(),
+                    "parents"   =>  $file->getParents(),
+                    "size"      =>  $this->formatBytes(intval($size)),
+                ];
+
+                # Push item in result
+                $data['relationships'][] = $item;
+
+            }
+
+    }
+
     /**********************************************************************************
      * Directory
      */
@@ -885,6 +1053,34 @@ class GoogleDrive{
             return $activity->getTimeRange()->getEndTime();
         }
         return null;
+    }
+
+    /** Convert byte to mb / kb / ...
+     * @source https://stackoverflow.com/questions/2510434/format-bytes-to-kilobytes-megabytes-gigabytes
+     **/
+    public function formatBytes(int $size = 0, int $precision = 2):string {
+
+        # Check size
+        if(!$size)
+            return "";
+
+        # Base
+        $base = log($size, 1024);
+
+        # Suffixe
+        $suffixes = ['', 'k', 'm', 'g', 't'];
+
+        # Return
+        return 
+            round(
+                pow(1024, $base - floor($base)), 
+                $precision
+            )
+            .
+            $suffixes[floor($base)].
+            'b'
+        ;
+
     }
 
 }

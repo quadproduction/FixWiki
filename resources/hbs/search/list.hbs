@@ -1,0 +1,40 @@
+{{!-- Search result --}}
+{{#each records}}
+<li class="auto-suggestion-title">
+    <a class="collection-item">
+        <h6 class="search-title" style="text-transform: uppercase;">{{entity}}</h6>
+    </a>
+</li>
+    {{!-- Relationships --}}
+    {{#if relationships}}
+        {{#each relationships}}
+        <li class="auto-suggestion">
+            <a data-drive-id="{{id}}" class="collection-item">
+                <div class="display-flex">
+                    <div class="display-flex align-item-center flex-grow-1">
+                        {{!-- Icons --}}
+                        <div class="avatar">
+                            <i class="material-icons" style="position: initial;">description</i>
+                        </div>
+                        <div class="member-info display-flex flex-column">
+                            {{!-- Name --}}
+                            <span class="black-text">{{name}}</span>
+                            {{!-- Description --}}
+                            <small class="grey-text">{{mimeType}}</small>
+                        </div>
+                    </div>
+                    <div class="status"><small class="grey-text">{{size}}</small></div>
+                </div>
+            </a>
+        </li>
+        {{/each}}
+    {{else}}
+    {{!-- Empty result --}}
+    <li class="auto-suggestion">
+        <a class="collection-item display-flex align-items-center">
+            <span class="material-icons">error_outline</span>
+            <span class="member-info">No results found.</span>
+        </a>
+    </li>
+    {{/if}}
+{{/each}}

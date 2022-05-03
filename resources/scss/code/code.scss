@@ -6,8 +6,13 @@
     */
 	.markdown {
 
-        /* Padding bootom */
-        padding-bottom: 40px;
+        // If not empty
+        &:not(:empty){
+
+            /* Padding bootom */
+            padding-bottom: 40px;
+
+        }
 
         /* Children */
 		code:not([class*="language-"]) {

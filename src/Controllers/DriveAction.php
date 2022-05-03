@@ -21,9 +21,9 @@ use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
 use LuckyPHP\Server\Exception;
 use LuckyPHP\Front\Console;
+use LuckyPHP\Code\Strings;
 use App\GoogleDrive;
 use DOMDocument;
-use LuckyPHP\Code\Strings;
 
 /** Class for manage the workflow of the app
  *

@@ -208,6 +208,9 @@ export default class DriveAction extends PageAction {
         if(window.frameElement)
             return;
 
+        // Create temp value
+        let temp = null;
+
         /* Generate scollspy */
         let main = document.createElement('div');
         main.setAttribute('id', 'scrollspy');
@@ -227,10 +230,27 @@ export default class DriveAction extends PageAction {
                         anchor.innerText = "tag";
                 item.appendChild(anchor);
             /* Tippy */
+            temp = tippy(item, {
+                content: (el) => el.querySelector("a").dataset.text ?? "",
+                placement: 'left',
+                trigger: "click",
+                delay: [0,0],
+                offset: [0, 20]
+            });
+            main.addEventListener(
+                'mouseout',
+                () => {
+                    temp.hide();
+                }
+            );
             tippy(item, {
                 content: (el) => el.querySelector("a").dataset.text ?? "",
                 placement: 'left',
-                followCursor: true,
+                triggerTarget: main,
+                offset: [0, 20],
+                onCreate: () => {
+                    temp.hide();
+                },
             });
             list.appendChild(item);
             }
@@ -606,11 +626,16 @@ export default class DriveAction extends PageAction {
                             }
 
                 // Check iframeScriptTigger
-                if(iframeScriptTigger)
+                if(iframeScriptTigger){
 
                     // Execute iframe script
                     this.iframeInit();
+
+                    // Media Init
+                    this.mediaInit();
             
+                }
+
             }
         ).catch(
             error => console.error(error)

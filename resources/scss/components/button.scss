@@ -140,3 +140,18 @@ $transitionDurationOpacity: opacity .5s;
         }
     }
 }
+
+/* Rotate infinite */
+.rotate-infinite {
+    animation: rotation 2s infinite linear;
+}
+  
+/* Rotate Animtation */
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}

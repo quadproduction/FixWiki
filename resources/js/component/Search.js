@@ -12,6 +12,7 @@
 /** Dependances
  * 
  */
+import Handlebars from "handlebars/dist/handlebars.min.js";
 
 /** Page functions
  * 
@@ -34,7 +35,11 @@ export default class Search{
         // Generate content overlay
         this.contentOverlayInit();
 
+        // Legacy function
         this.legacy();
+
+        // Hook for search
+        //this.hookSearch();
 
     }
 
@@ -66,6 +71,49 @@ export default class Search{
             this.dom.contentOverlay.el = main;
 
         }
+
+    }
+
+    /** Hook search
+     * @source https://attacomsian.com/blog/javascript-detect-user-stops-typing
+     */
+    hookSearch = () => {
+        
+        // Listen for `keyup` event
+        const input = document.querySelector('header #search');
+
+        // check input
+        if(input === null)
+            return;
+
+        let timer;              // Timer identifier
+        const waitTime = 500;   // Wait time in milliseconds 
+        
+        // Search function
+        const search = (text) => {
+
+            // check text
+            text = text.trim();
+
+            // check text
+            if(!text)
+                return;
+            
+            console.log(text);
+
+        };
+
+        input.addEventListener('keyup', (e) => {
+            const text = e.currentTarget.value;
+        
+            // Clear timer
+            clearTimeout(timer);
+        
+            // Wait for X ms and then process the request
+            timer = setTimeout(() => {
+                search(text);
+            }, waitTime);
+        });
 
     }
 
@@ -156,6 +204,21 @@ export default class Search{
             searchBoxSm.val("");
             searchList.addClass("display-none");
             $(".search-input-sm .search-box-sm, .header-search-input").val("");
+
+            // Get icon
+            let searchEl = document.querySelector('header .navbar .header-search-wrapper i.material-icons');
+
+            // Check search
+            if(searchEl !== null){
+
+                // Update class
+                searchEl.classList.remove('rotate-infinite');
+
+                // Change icon
+                searchEl.innerText = "search";
+
+            }
+
         });
 
         // Search filter
@@ -172,67 +235,108 @@ export default class Search{
                 // Define variables
                 var value = $(this)
                     .val()
+                    .trim()
                     .toLowerCase(), //get values of inout on keyup
                     liList = $("ul.search-list li"); // get all the list items of the search
                 liList.remove();
                 // If input value is blank
                 if (value != "") {
-                    var $startList = "",
-                    $otherList = "",
-                    $htmlList = "",
-                    $activeItemClass = "",
-                    a = 0;
-                    // getting json data from file for search results
-                    $.getJSON("../../../app-assets/data/" + $filename + ".json", function (data) {
-                    for (var i = 0; i < data.listItems.length; i++) {
-                        // Search list item start with entered letters and create list
-                        if (
-                            (data.listItems[i].name.toLowerCase().indexOf(value) == 0 && a < 4) ||
-                            (!(data.listItems[i].name.toLowerCase().indexOf(value) == 0) &&
-                                data.listItems[i].name.toLowerCase().indexOf(value) > -1 &&
-                                a < 4)
-                        ) {
-                            if (a === 0) {
-                                $activeItemClass = "current_item";
-                            } else {
-                                $activeItemClass = "";
-                            }
-                            $startList +=
-                                '<li class="auto-suggestion ' +
-                                $activeItemClass +
-                                '">' +
-                                '<a class="collection-item" href=' +
-                                data.listItems[i].url +
-                                ">" +
-                                '<div class="display-flex">' +
-                                '<div class="display-flex align-item-center flex-grow-1">' +
-                                '<span class="material-icons" data-icon="' +
-                                data.listItems[i].icon +
-                                '">' +
-                                data.listItems[i].icon +
-                                "</span>" +
-                                '<div class="member-info display-flex flex-column"><span class="black-text">' +
-                                data.listItems[i].name +
-                                '</span><small class="grey-text">' +
-                                data.listItems[i].category +
-                                "</small>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</a>" +
-                                "</li>";
-                            a++;
-                        }
-                    }
-                    if ($startList == "" && $otherList == "") {
-                        $otherList = $("#search-not-found").html();
-                    }
-                    var $mainPage = $("#page-search-title").html();
-                    var defaultList = $("#default-search-main").html();
 
-                    $htmlList = $mainPage.concat($startList, $otherList, defaultList); // merging start with and other list
-                    $("ul.search-list").html($htmlList); // Appending list to <ul>
+                    // Get icon
+                    let searchEl = document.querySelector('header .navbar .header-search-wrapper i.material-icons');
+
+                    // Check search
+                    if(searchEl !== null){
+
+                        // Change icon
+                        searchEl.innerText = "autorenew";
+
+                        // Update class
+                        searchEl.classList.add('rotate-infinite');
+
+                    }
+                    // getting json data from file for search results
+                    
+                    $.getJSON("/api/file/drive/search/" + value, data => {
+
+                        // Get search-list
+                        let searchListEls = document.querySelectorAll('.search-list.collection');
+
+                        // Check searchListEl
+                        if(!searchListEls.length){
+
+                            // Check search
+                            if(searchEl !== null){
+
+                                // Change icon
+                                searchEl.innerText = "search";
+
+                                // Update class
+                                searchEl.classList.remove('rotate-infinite');
+
+                            }
+
+                            return;
+
+                        }
+
+                        // Clean search list
+                        searchListEls[0].innerHTML = "";
+
+                        // check data
+                        if(data.records.length && data._user_interface.list.template){
+
+                            // Compile
+                            var template = Handlebars.compile(data._user_interface.list.template);
+
+                            // Push result of compilation
+                            searchListEls[0].innerHTML = template(data);
+
+                            // Searsh all data-drive-id
+                            let targetsEls = searchListEls[0].querySelectorAll("a[data-drive-id]");
+
+                            // Check targetEls
+                            if(targetsEls.length)
+
+                                // Iteration
+                                for(let targetEl of targetsEls){
+
+                                    // Get drive id
+                                    let idTarget = targetEl.dataset.driveId;
+
+                                    // check 
+                                    if(!idTarget)
+                                        continue;
+
+                                    // Get source
+                                    let sourceEl = document.querySelector("aside a[data-drive-id=\""+idTarget+"\"]");
+
+                                    // Check source
+                                    if(sourceEl !== null && sourceEl.dataset.driveId){
+
+                                        // Set attributes
+                                        targetEl.setAttribute("href", sourceEl.href);
+
+                                    }
+
+
+                                }
+                            
+                        }
+
+                        // Check search
+                        if(searchEl !== null){
+
+                            // Change icon
+                            searchEl.innerText = "search";
+
+                            // Update class
+                            searchEl.classList.remove('rotate-infinite');
+
+                        }
+
                     });
+                    
                 } else {
                     // if search input blank, hide overlay
                     if (contentOverlay.hasClass("show")) {
