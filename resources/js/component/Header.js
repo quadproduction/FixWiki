@@ -57,6 +57,10 @@ export default class Header{
         launchFixplay : {
             query: ".launch-fixplay",
             el:null,
+        },
+        launchMovinmotion : {
+            query: ".launch-movinmotion",
+            el:null,
         }
     };
 
@@ -428,6 +432,22 @@ export default class Header{
      * @param {*} dom 
      */
     launchFixplayInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+            }
+        );
+
+    }
+
+    /** Launch Movin Motion
+     * 
+     * @param {*} dom 
+     */
+    launchMovinmotionInit = dom => {
 
         // Tippy
         tippy(
