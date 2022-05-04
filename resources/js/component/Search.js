@@ -222,48 +222,114 @@ export default class Search{
         });
 
         // Search filter
+        var timer;
         $(".header-search-wrapper .header-search-input, .search-input-sm .search-box-sm").on("keyup", function (e) {
-            contentOverlay.addClass("show");
-            searchList.removeClass("display-none");
-            var $this = $(this);
-            if (e.keyCode !== 38 && e.keyCode !== 40 && e.keyCode !== 13) {
-                if (e.keyCode == 27) {
-                    contentOverlay.removeClass("show");
-                    $this.val("");
-                    $this.blur();
-                }
-                // Define variables
-                var value = $(this)
-                    .val()
-                    .trim()
-                    .toLowerCase(), //get values of inout on keyup
-                    liList = $("ul.search-list li"); // get all the list items of the search
-                liList.remove();
-                // If input value is blank
-                if (value != "") {
 
-                    // Get icon
-                    let searchEl = document.querySelector('header .navbar .header-search-wrapper i.material-icons');
+            timer && clearTimeout(timer);
+            
+            timer = setTimeout(
+                () => {
 
-                    // Check search
-                    if(searchEl !== null){
-
-                        // Change icon
-                        searchEl.innerText = "autorenew";
-
-                        // Update class
-                        searchEl.classList.add('rotate-infinite');
-
+                contentOverlay.addClass("show");
+                searchList.removeClass("display-none");
+                var $this = $(this);
+                if (e.keyCode !== 38 && e.keyCode !== 40 && e.keyCode !== 13) {
+                    if (e.keyCode == 27) {
+                        contentOverlay.removeClass("show");
+                        $this.val("");
+                        $this.blur();
                     }
-                    // getting json data from file for search results
-                    
-                    $.getJSON("/api/file/drive/search/" + value, data => {
+                    // Define variables
+                    var value = $(this)
+                        .val()
+                        .trim()
+                        .toLowerCase(), //get values of inout on keyup
+                        liList = $("ul.search-list li"); // get all the list items of the search
+                    liList.remove();
+                    // If input value is blank
+                    if (value != "") {
 
-                        // Get search-list
-                        let searchListEls = document.querySelectorAll('.search-list.collection');
+                        // Get icon
+                        let searchEl = document.querySelector('header .navbar .header-search-wrapper i.material-icons');
 
-                        // Check searchListEl
-                        if(!searchListEls.length){
+                        // Check search
+                        if(searchEl !== null){
+
+                            // Change icon
+                            searchEl.innerText = "autorenew";
+
+                            // Update class
+                            searchEl.classList.add('rotate-infinite');
+
+                        }
+                        // getting json data from file for search results
+                        
+                        $.getJSON("/api/file/drive/search/" + value, data => {
+
+                            // Get search-list
+                            let searchListEls = document.querySelectorAll('.search-list.collection');
+
+                            // Check searchListEl
+                            if(!searchListEls.length){
+
+                                // Check search
+                                if(searchEl !== null){
+
+                                    // Change icon
+                                    searchEl.innerText = "search";
+
+                                    // Update class
+                                    searchEl.classList.remove('rotate-infinite');
+
+                                }
+
+                                return;
+
+                            }
+
+                            // Clean search list
+                            searchListEls[0].innerHTML = "";
+
+                            // check data
+                            if(data.records.length && data._user_interface.list.template){
+
+                                // Compile
+                                var template = Handlebars.compile(data._user_interface.list.template);
+
+                                // Push result of compilation
+                                searchListEls[0].innerHTML = template(data);
+
+                                // Searsh all data-drive-id
+                                let targetsEls = searchListEls[0].querySelectorAll("a[data-drive-id]");
+
+                                // Check targetEls
+                                if(targetsEls.length)
+
+                                    // Iteration
+                                    for(let targetEl of targetsEls){
+
+                                        // Get drive id
+                                        let idTarget = targetEl.dataset.driveId;
+
+                                        // check 
+                                        if(!idTarget)
+                                            continue;
+
+                                        // Get source
+                                        let sourceEl = document.querySelector("aside a[data-drive-id=\""+idTarget+"\"]");
+
+                                        // Check source
+                                        if(sourceEl !== null && sourceEl.dataset.driveId){
+
+                                            // Set attributes
+                                            targetEl.setAttribute("href", sourceEl.href);
+
+                                        }
+
+
+                                    }
+                                
+                            }
 
                             // Check search
                             if(searchEl !== null){
@@ -276,85 +342,29 @@ export default class Search{
 
                             }
 
-                            return;
-
+                        });
+                        
+                    } else {
+                        // if search input blank, hide overlay
+                        if (contentOverlay.hasClass("show")) {
+                        contentOverlay.removeClass("show");
+                        searchList.addClass("display-none");
                         }
-
-                        // Clean search list
-                        searchListEls[0].innerHTML = "";
-
-                        // check data
-                        if(data.records.length && data._user_interface.list.template){
-
-                            // Compile
-                            var template = Handlebars.compile(data._user_interface.list.template);
-
-                            // Push result of compilation
-                            searchListEls[0].innerHTML = template(data);
-
-                            // Searsh all data-drive-id
-                            let targetsEls = searchListEls[0].querySelectorAll("a[data-drive-id]");
-
-                            // Check targetEls
-                            if(targetsEls.length)
-
-                                // Iteration
-                                for(let targetEl of targetsEls){
-
-                                    // Get drive id
-                                    let idTarget = targetEl.dataset.driveId;
-
-                                    // check 
-                                    if(!idTarget)
-                                        continue;
-
-                                    // Get source
-                                    let sourceEl = document.querySelector("aside a[data-drive-id=\""+idTarget+"\"]");
-
-                                    // Check source
-                                    if(sourceEl !== null && sourceEl.dataset.driveId){
-
-                                        // Set attributes
-                                        targetEl.setAttribute("href", sourceEl.href);
-
-                                    }
-
-
-                                }
-                            
-                        }
-
-                        // Check search
-                        if(searchEl !== null){
-
-                            // Change icon
-                            searchEl.innerText = "search";
-
-                            // Update class
-                            searchEl.classList.remove('rotate-infinite');
-
-                        }
-
-                    });
-                    
-                } else {
-                    // if search input blank, hide overlay
-                    if (contentOverlay.hasClass("show")) {
-                    contentOverlay.removeClass("show");
-                    searchList.addClass("display-none");
                     }
                 }
-            }
-            // for large screen search list
-            if ($(".header-search-wrapper .current_item").length) {
-                searchList.scrollTop(0);
-                searchList.scrollTop($('.search-list .current_item:first').offset().top - searchList.height());
-            }
-            // for small screen search list 
-            if ($(".search-input-sm .current_item").length) {
-                searchListSm.scrollTop(0);
-                searchListSm.scrollTop($('.search-list-sm .current_item:first').offset().top - searchListSm.height());
-            }
+                // for large screen search list
+                if ($(".header-search-wrapper .current_item").length) {
+                    searchList.scrollTop(0);
+                    searchList.scrollTop($('.search-list .current_item:first').offset().top - searchList.height());
+                }
+                // for small screen search list 
+                if ($(".search-input-sm .current_item").length) {
+                    searchListSm.scrollTop(0);
+                    searchListSm.scrollTop($('.search-list-sm .current_item:first').offset().top - searchListSm.height());
+                }
+
+            }, 300);
+
         });
 
         // small screen search box form submit prevent

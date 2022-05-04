@@ -178,12 +178,12 @@
         /* ul */
         ul:not(.table-of-contents) {
 
-            /* Dimension */
-            margin: 1.2em 0;
-            line-height: 1.75!important;
-
             /* Position */
+            margin: 1.2em 0;
             padding-left: 30px;
+            
+            /* Dimension */
+            line-height: 1.75!important;
 
             /* Children */
             li{
@@ -196,8 +196,15 @@
         }
         /* ol */
         ol {
+
+            /* Position */
             margin: 1.2em 0;
             padding-left: 30px;
+
+            /* Dimension */
+            line-height: 1.75!important;
+
+            /* Children */
             li{
                 color: #333333;
                 &::marker{
