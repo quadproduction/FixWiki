@@ -341,3 +341,22 @@
         }
 	}
 }
+
+#pdf-viewer-default{
+
+    /* Position */
+    margin-right: -67px;
+    margin-left: -23px;
+    margin-bottom: -40px;
+
+    /* Children */
+    embed{
+
+        /* Dimension */
+        width: 100%;
+
+        height: calc(100vh - 64px);
+
+    }
+
+}

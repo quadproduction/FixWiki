@@ -545,7 +545,7 @@ class GoogleDrive{
             return $result->execute();
 
         }else
-        # Pdf
+        # Google Drive document
         if($this->currentFile->getMimeType() == "application/vnd.google-apps.document"){
 
             # Get content of file
@@ -590,6 +590,12 @@ class GoogleDrive{
             # Set name
             $name = $this->currentFile->getName();
 
+            /** With default pdf viewer
+             * 
+             */
+            # Return result
+            $result = '<div id="pdf-viewer-default"><embed src="/media/file?id='.$id.'" /></div>';
+
             /**  Get tokken file of adobe
              *  {
              *      "name": "Fix Docs",
@@ -597,6 +603,7 @@ class GoogleDrive{
              *      "allowedDomain": ["fixstudio.wiki"]
              *  }
              */
+            /*
             $tokken_adobe = Json::open(__ROOT_APP__."resources/json/adobe_pdf.json");
 
 
@@ -618,6 +625,7 @@ class GoogleDrive{
                 '<script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>'.
                 '<script type="text/javascript">document.addEventListener("adobe_dc_view_sdk.ready", function(){var adobeDCView = new AdobeDC.View({clientId: "'.$key.'",divId: "main"});adobeDCView.previewFile({content:{location: {url: "/media/file?id='.$id.'"}},metaData:{fileName: "'.$name.'"}}, {dockPageControls: false});App.Pdf();});</script>'
             ;
+            */
 
             # Return result
             return $result ?? "";
