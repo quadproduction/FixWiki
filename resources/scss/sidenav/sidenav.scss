@@ -65,8 +65,15 @@ aside {
 }
 /* Icon fontawsome */
 .sidenav {
+	/* Children */
 	li {
+		/* Children */
 		>a {
+			/* Font */
+			/* Fix #27 */
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			/* Children */
 			>i.fab {
 				margin: 0 20px 0 0;
 				height: 44px;
