@@ -42,7 +42,7 @@ Hide files beginning by dot #3
                     <li class="bold">
                         <a data-drive-id="{{this.id}}" class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}" href="{{this._user_interface.root}}">
                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                            <span class="menu-title">{{this.attributes.name}}</span>
+                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                         </a>
                     </li>
                     {{/each}}
@@ -56,7 +56,7 @@ Hide files beginning by dot #3
                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}}{{#ifEquals @root._cookies.SIDENAV.STATUS "expanded"}} active {{else}} close {{/ifEquals}}{{/ifEquals}}{{/each}}">
                         <a class="collapsible-header waves-effect waves-cyan">
                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                            <span class="menu-title">{{this.attributes.name}}</span>
+                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                         </a>
                         <div class="collapsible-body">
                             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
@@ -68,7 +68,7 @@ Hide files beginning by dot #3
                                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                                         <a data-drive-id="{{this.id}}" class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}"  href="{{this._user_interface.root}}">
                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                                         </a>
                                     </li>
                                     {{/unless}}{{/each}}
@@ -81,7 +81,7 @@ Hide files beginning by dot #3
                                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                                         <a class="collapsible-header waves-effect waves-cyan">
                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                                         </a>
                                         <div class="collapsible-body">
                                             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
@@ -93,7 +93,7 @@ Hide files beginning by dot #3
                                                     <li class="bold">
                                                         <a data-drive-id="{{this.id}}" class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}" href="{{this._user_interface.root}}">
                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                                                         </a>
                                                     </li>
                                                     {{/unless}}{{/each}}
@@ -106,7 +106,7 @@ Hide files beginning by dot #3
                                                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                                                         <a class="collapsible-header waves-effect waves-cyan">
                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                                                         </a>
                                                         <div class="collapsible-body">
                                                             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
@@ -118,7 +118,7 @@ Hide files beginning by dot #3
                                                                     <li class="bold">
                                                                         <a data-drive-id="{{this.id}}" class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}" href="{{this._user_interface.root}}">
                                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                                                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                                                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                                                                         </a>
                                                                     </li>
                                                                     {{/unless}}{{/each}}
@@ -131,7 +131,7 @@ Hide files beginning by dot #3
                                                                     <li class="bold{{#each @root._context.route.parents}}{{#ifEquals this ../this._user_interface.root}} active{{/ifEquals}}{{/each}}">
                                                                         <a class="collapsible-header waves-effect waves-cyan">
                                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                                                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                                                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                                                                         </a>
                                                                         <div class="collapsible-body">
                                                                             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
@@ -143,7 +143,7 @@ Hide files beginning by dot #3
                                                                                     <li class="bold">
                                                                                         <a data-drive-id="{{this.id}}" class="waves-effect waves-cyan{{#ifEquals @root._context.route.current this._user_interface.root}} active{{/ifEquals}}" href="{{this._user_interface.root}}">
                                                                                             <i class="{{this._user_interface.icon.class}}">{{this._user_interface.icon.text}}</i>
-                                                                                            <span class="menu-title">{{this.attributes.name}}</span>
+                                                                                            <span class="menu-title" title="{{this.attributes.name}}">{{this.attributes.name}}</span>
                                                                                         </a>
                                                                                     </li>
                                                                                     {{/unless}}{{/each}}
