@@ -211,6 +211,18 @@ export default class DriveAction extends PageAction {
         // Create temp value
         let temp = null;
 
+        // Check scrollspy already exists
+        let scrollspys = container.querySelectorAll('#scrollspy');
+
+        // Check scollspy
+        if(scrollspys.length)
+
+            // Iteration des scrollspy
+            for(let scrollspy of scrollspys)
+
+                // Remove current item
+                scrollspy.remove();
+
         /* Generate scollspy */
         let main = document.createElement('div');
         main.setAttribute('id', 'scrollspy');
@@ -219,39 +231,38 @@ export default class DriveAction extends PageAction {
             list.classList.add('table-of-contents');
             for(let el of titles){
                 let item = document.createElement('li');
+                    /* Anchor */
                     let anchor = document.createElement('a');
                     let title = el.innerText;
                     anchor.setAttribute('href', "#"+Strings.clean(title));
                     anchor.setAttribute('data-text', title);
-                    anchor.classList.add("material-icons");
-                    if(el.tagName == "H1")
-                        anchor.innerText = "book";
-                    else if(el.tagName == "H2")
-                        anchor.innerText = "tag";
+                    anchor.classList.add('scrollspy-body');
+                        /* Icon */
+                        let iconA = document.createElement('a');
+                        iconA.classList.add("scrollspy-icon", "btn-floating", "btn-flat", "waves-effect");
+                            let icon = document.createElement('i');
+                            icon.classList.add("material-icons");
+                            if(el.tagName == "H1")
+                                icon.innerText = "book";
+                            else if(el.tagName == "H2")
+                                icon.innerText = "tag";
+                        iconA.appendChild(icon);
+                        /* Text */
+                        let text = document.createElement('span');
+                        text.setAttribute('data-text', title);
+                        text.innerText = title;
+                    anchor.appendChild(iconA);
+                    anchor.appendChild(text);
+                    /* Option */
+                    let option = document.createElement('a');
+                    option.classList.add("scrollspy-option", "btn-floating", "btn-flat", "waves-effect");
+                        /* Icon option */
+                        let iconOption = document.createElement('i');
+                        iconOption.classList.add("material-icons");
+                        iconOption.innerText = "code";
+                    option.appendChild(iconOption);
                 item.appendChild(anchor);
-            /* Tippy */
-            temp = tippy(item, {
-                content: (el) => el.querySelector("a").dataset.text ?? "",
-                placement: 'left',
-                trigger: "click",
-                delay: [0,0],
-                offset: [0, 20]
-            });
-            main.addEventListener(
-                'mouseout',
-                () => {
-                    temp.hide();
-                }
-            );
-            tippy(item, {
-                content: (el) => el.querySelector("a").dataset.text ?? "",
-                placement: 'left',
-                triggerTarget: main,
-                offset: [0, 20],
-                onCreate: () => {
-                    temp.hide();
-                },
-            });
+                item.appendChild(option);
             list.appendChild(item);
             }
         main.appendChild(list);
@@ -510,7 +521,7 @@ export default class DriveAction extends PageAction {
     }
 
     /* RocketChatInit */
-    rocketChatInit = () => {
+    rocketChatInit = (callback = null) => {
 
         // Regex expression to catch word starting by at sign
         let regexExpression =  /^([\w\-]+)@|(?<=\s)\@\w+/g ;
@@ -628,11 +639,24 @@ export default class DriveAction extends PageAction {
                 // Check iframeScriptTigger
                 if(iframeScriptTigger){
 
-                    // Execute iframe script
-                    this.iframeInit();
-
-                    // Media Init
+                    // Init component
+                    this.componentInit();
+            
+                    // Init Anchor
+                    this.anchorInit();
+            
+                    // Init pre Code
+                    this.preCodeInit();
+            
+                    // Init Media
                     this.mediaInit();
+            
+                    // Init Movie
+                    this.movieInit();
+            
+                    // Init Iframe
+                    // Fix #24
+                    this.iframeInit();
             
                 }
 

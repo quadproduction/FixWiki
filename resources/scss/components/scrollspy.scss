@@ -4,6 +4,7 @@ $transitionPosition: .2s;
     /* Position */
     position: fixed;
     top: 75px;
+    z-index: 2;
     //right: 25px;
     right: -5px;
     /* Transition */
@@ -27,20 +28,61 @@ $transitionPosition: .2s;
     ul {
         /* Children */
         li {
+            /* Display */
+            display: flex;
+            align-items: center;
             /* Children */
-            a {
+            a.scrollspy-body {
+                /* Position */
+                display: flex;
+                align-items: center;
                 /* Font */
-                font-weight: bold;
+                font-weight: 500;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 /* Display */
                 overflow: hidden;
                 /* Dimension */
                 width: 100%;
+                height: initial!important;
                 /* Icon */
                 &.material-icons{
                     /* Font */
                     font-weight: unset;
+                }
+                /* On hover */
+                &:hover{
+                    border: none!important;
+                }
+            }
+            a.scrollspy-icon{
+                margin-right: 8px;
+            }
+            a.scrollspy-option, a.scrollspy-icon{
+                /* Dimension */
+                height: 30px;
+                width: 30px;
+                /* Position */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-left: 0;
+                /* Color */
+                color: #757575;
+                background-color: white;
+                /* Hover */
+                &:hover{
+                    background-color: white;
+                }
+                /* Children */
+                i.material-icons{
+                    /* Font */
+                    color: #757575;
+                    font-size: 20px;
+                }
+                /* On hover */
+                &:hover{
+                    border: none!important;
                 }
             }
         }
