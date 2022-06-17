@@ -280,6 +280,45 @@ export default class DriveAction extends PageAction {
                     }
                 );
 
+        /* Offset of scrollspy */
+        let elBis = container.querySelector("#scrollspy");
+        if(elBis !== null){
+            // Get width
+            var widthLarge = elBis.offsetWidth + 20;
+            var widthSmall = 47 + 13 + 22 ;
+            var currentTransform = 20;
+            // New Transform
+            var newTransform = -1 * ( widthLarge - widthSmall );
+            // Set new right
+            elBis.style.right = newTransform;
+
+
+        }
+              
+        /* Tippy */
+        let scrollspyOptionEl = container.querySelectorAll(".scrollspy-option");
+        if(scrollspyOptionEl.length)
+        for(let el of scrollspyOptionEl){
+
+            /* Tippy on titles */
+            tippy(titles, {
+                content: "Intégrer l'article",
+                placement: 'top',
+            });
+
+            // Copy action
+            Copy.run({
+                el: el,
+                callback: () => {
+                    
+                    /* Get pre */
+                    console.log(el);
+
+                }
+            });
+
+        }
+
         /* Scrollspy */
         M.ScrollSpy.init(titles, {
             scrollOffset: 75

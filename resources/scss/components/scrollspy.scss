@@ -1,19 +1,25 @@
 /* Scrollspy */
 $transitionPosition: .2s;
+$transitionOpacity: .05s;
 #scrollspy{
     /* Position */
     position: fixed;
     top: 75px;
     z-index: 2;
-    //right: 25px;
-    right: -5px;
-    /* Transition */
+    right: 20px;
+    // right: 25px;
+    /* right: -5px; */
+    //Transition
     transition: $transitionPosition;
     &:hover{
-        /* Position */
-        right: 10px;
-        /* Transition */
+        // Position
+        right: 20px!important;
+        // Transition
         transition: $transitionPosition;
+        /* Children */
+        span{
+            color: initial;
+        }
     }
     &.card{
         /* Dimension */
@@ -25,6 +31,9 @@ $transitionPosition: .2s;
         }
     }
     /* Children */
+    span{
+        color: transparent;
+    }
     ul {
         /* Children */
         li {
@@ -36,6 +45,8 @@ $transitionPosition: .2s;
                 /* Position */
                 display: flex;
                 align-items: center;
+                /* border-left: 2px solid transparent; */
+                padding-left: 17px;
                 /* Font */
                 font-weight: 500;
                 white-space: nowrap;
@@ -51,8 +62,9 @@ $transitionPosition: .2s;
                     font-weight: unset;
                 }
                 /* On hover */
-                &:hover{
-                    border: none!important;
+                &:hover:not(.active){
+                    border-left: 2px solid #90caf9;
+                    padding-left: 15px;
                 }
             }
             a.scrollspy-icon{
