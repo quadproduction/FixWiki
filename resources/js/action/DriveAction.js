@@ -149,7 +149,10 @@ export default class DriveAction extends PageAction {
                     // Set result
                     let result = url+"#"+title;
                     // update url
-                    Url.update(result);
+                    Url.update(
+                        result,
+                        this._updateScrollSpy
+                    );
                     // Return result
                     return result;
                 }
@@ -269,14 +272,18 @@ export default class DriveAction extends PageAction {
         container.appendChild(main);
 
         /* Prevent default scroll to href */
-        let el = container.querySelectorAll("#scrollspy li a");
+        let el = container.querySelectorAll("#scrollspy li > a");
         if(el.length)
             for(let item of el)
                 item.addEventListener(
                     'click',
                     e => {
-                        if(e.target.href)
-                            Url.update(e.target.href);
+                        if(item.href){
+                            Url.update(
+                                item.href,
+                                this._updateScrollSpy
+                            );
+                        }
                     }
                 );
 
@@ -332,6 +339,9 @@ export default class DriveAction extends PageAction {
             arrow: false,  
             offset: [0, -1],
         });
+
+        // Update scroll spy
+        this._updateScrollSpy();
 
     }
 
@@ -703,6 +713,58 @@ export default class DriveAction extends PageAction {
         ).catch(
             error => console.error(error)
         );
+
+    }
+
+    /** Update scrollspy
+     * 
+     */
+    _updateScrollSpy(url = window.location) {
+
+        // Get scrollspy
+        let scrollspyEl = document.getElementById("scrollspy");
+
+        // Check url and scrollspy
+        if(!url || scrollspyEl === null)
+
+            // Stop function
+            return;
+
+        // Extract #content of url 
+        let fragment = Url.extractFragment(url);
+
+        // Get scrollspyBodyEl
+        let scrollspyBodyEl = scrollspyEl.querySelectorAll(".scrollspy-body");
+
+        // Check scrollspyBodyEl
+        if(scrollspyBodyEl.length)
+
+            // Iteration des scrollspyBodyEl
+            for(let el of scrollspyBodyEl){
+
+                // Get fragement of href
+                let currentFragment = Url.extractFragment(el.href);
+
+                // Get scrollspy icon
+                let scrollspyIconEl = el.querySelector(".scrollspy-icon");
+
+                // Check el
+                if(scrollspyIconEl === null)
+                    contine;
+
+                // Check if equal
+                if(fragment == currentFragment){
+
+                    scrollspyIconEl.classList.add('active');
+
+                }else{
+
+                    scrollspyIconEl.classList.remove('active');
+
+                }
+
+            }
+
 
     }
 

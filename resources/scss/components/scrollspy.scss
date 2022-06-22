@@ -69,6 +69,18 @@ $transitionOpacity: .05s;
             }
             a.scrollspy-icon{
                 margin-right: 8px;
+                /* Subclass */
+                &.active {
+                    /* Border */
+                    border-left: none;
+                    /* Background */
+                    background: #42a5f5;
+                    /* Children */
+                    i {
+                        /* Color */
+                        color: white!important;
+                    }
+                }
             }
             a.scrollspy-option, a.scrollspy-icon{
                 /* Dimension */
