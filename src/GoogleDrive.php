@@ -343,7 +343,7 @@ class GoogleDrive{
                                 "position"  =>  preg_match("/^[0-9]+(".$this->conditions['positionDelimiter'].")/", $file->getName()) ?
                                     explode($this->conditions['positionDelimiter'], $file->getName(), 1)[0] : 
                                         null,
-                                'root'      =>  $rootName.Strings::clean(pathinfo($file->getName(), PATHINFO_FILENAME)).'/',
+                                'root'      =>  $rootName.Strings::clean(pathinfo($cleanName, PATHINFO_FILENAME)).'/',
                                 /**
                                  *  Hide files beginning by dot #3
                                  */

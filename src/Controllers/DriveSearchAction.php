@@ -21,11 +21,12 @@ ini_set('display_errors', 1);
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
 use App\GoogleDrive;
+use LuckyPHP\Front\Console;
 
 /** Class for manage the workflow of the app
  *
  */
-class DriveSearchAction extends ControllerBase implements ControllerInterface{
+class DriveSearchAction extends ControllerBase implements ControllerInterface {
 
     /** Constructor
      *
@@ -62,6 +63,30 @@ class DriveSearchAction extends ControllerBase implements ControllerInterface{
 
         # Get all data
         $records = $this->google_drive->searchFile($name);
+
+        # Check relationships
+        if(!empty($records["relationships"]))
+
+            # Iteration
+            foreach($records["relationships"] as $k => $v){
+
+                /* Check position pattern in file name */
+
+                # Check if two first character are "__"
+                if(strlen($v['name']) >= 3 && substr($v['name'], 1, 2) == "__")
+
+                    # Remove three first character
+                    $records["relationships"][$k]['name'] = substr($v['name'], 3);
+
+                /* Check not hide file */
+
+                # Check first character is .
+                if(strlen($v['name']) > 1 && $v['name'][0] == ".")
+
+                    # Remove item
+                    unset($records["relationships"][$k]);
+
+            }
 
         # Push records
         $this->model->pushRecords([$records]);
