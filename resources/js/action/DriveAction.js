@@ -308,8 +308,8 @@ export default class DriveAction extends PageAction {
         for(let el of scrollspyOptionEl){
 
             /* Tippy on titles */
-            tippy(titles, {
-                content: "Intégrer l'article",
+            tippy(el, {
+                content: "Intégrer l'article dans un tuto",
                 placement: 'top',
             });
 
@@ -317,9 +317,34 @@ export default class DriveAction extends PageAction {
             Copy.run({
                 el: el,
                 callback: () => {
+
+                    let result = "";
                     
                     /* Get pre */
-                    console.log(el);
+                    let href = el.parentElement.children[0].href ?? null;
+
+                    /* Check href */
+                    if(href === null){
+
+                        // Warning
+                        M.toast({html:'Problème lors de la copie... contacter @kzarshenas'})
+
+                        // Stop function
+                        return;
+
+                    }
+
+                    // Set href
+                    let fragment = Url.extractFragment(href);
+
+                    // Ger url
+                    let url = new URL(href);
+
+                    // Update result
+                    result = url.host + url.pathname + "?extract=" + fragment.replace("#", "") + "&clean";
+
+                    // Return result
+                    return result;
 
                 }
             });
