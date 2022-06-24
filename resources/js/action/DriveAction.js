@@ -149,7 +149,10 @@ export default class DriveAction extends PageAction {
                     // Set result
                     let result = url+"#"+title;
                     // update url
-                    Url.update(result);
+                    Url.update(
+                        result,
+                        this._updateScrollSpy
+                    );
                     // Return result
                     return result;
                 }
@@ -211,6 +214,18 @@ export default class DriveAction extends PageAction {
         // Create temp value
         let temp = null;
 
+        // Check scrollspy already exists
+        let scrollspys = container.querySelectorAll('#scrollspy');
+
+        // Check scollspy
+        if(scrollspys.length)
+
+            // Iteration des scrollspy
+            for(let scrollspy of scrollspys)
+
+                // Remove current item
+                scrollspy.remove();
+
         /* Generate scollspy */
         let main = document.createElement('div');
         main.setAttribute('id', 'scrollspy');
@@ -219,55 +234,122 @@ export default class DriveAction extends PageAction {
             list.classList.add('table-of-contents');
             for(let el of titles){
                 let item = document.createElement('li');
+                    /* Anchor */
                     let anchor = document.createElement('a');
                     let title = el.innerText;
                     anchor.setAttribute('href', "#"+Strings.clean(title));
                     anchor.setAttribute('data-text', title);
-                    anchor.classList.add("material-icons");
-                    if(el.tagName == "H1")
-                        anchor.innerText = "book";
-                    else if(el.tagName == "H2")
-                        anchor.innerText = "tag";
+                    anchor.classList.add('scrollspy-body');
+                        /* Icon */
+                        let iconA = document.createElement('a');
+                        iconA.classList.add("scrollspy-icon", "btn-floating", "btn-flat", "waves-effect");
+                            let icon = document.createElement('i');
+                            icon.classList.add("material-icons");
+                            if(el.tagName == "H1")
+                                icon.innerText = "book";
+                            else if(el.tagName == "H2")
+                                icon.innerText = "tag";
+                        iconA.appendChild(icon);
+                        /* Text */
+                        let text = document.createElement('span');
+                        text.setAttribute('data-text', title);
+                        text.innerText = title;
+                    anchor.appendChild(iconA);
+                    anchor.appendChild(text);
+                    /* Option */
+                    let option = document.createElement('a');
+                    option.classList.add("scrollspy-option", "btn-floating", "btn-flat", "waves-effect");
+                        /* Icon option */
+                        let iconOption = document.createElement('i');
+                        iconOption.classList.add("material-icons");
+                        iconOption.innerText = "code";
+                    option.appendChild(iconOption);
                 item.appendChild(anchor);
-            /* Tippy */
-            temp = tippy(item, {
-                content: (el) => el.querySelector("a").dataset.text ?? "",
-                placement: 'left',
-                trigger: "click",
-                delay: [0,0],
-                offset: [0, 20]
-            });
-            main.addEventListener(
-                'mouseout',
-                () => {
-                    temp.hide();
-                }
-            );
-            tippy(item, {
-                content: (el) => el.querySelector("a").dataset.text ?? "",
-                placement: 'left',
-                triggerTarget: main,
-                offset: [0, 20],
-                onCreate: () => {
-                    temp.hide();
-                },
-            });
+                item.appendChild(option);
             list.appendChild(item);
             }
         main.appendChild(list);
         container.appendChild(main);
 
         /* Prevent default scroll to href */
-        let el = container.querySelectorAll("#scrollspy li a");
+        let el = container.querySelectorAll("#scrollspy li > a");
         if(el.length)
             for(let item of el)
                 item.addEventListener(
                     'click',
                     e => {
-                        if(e.target.href)
-                            Url.update(e.target.href);
+                        if(item.href){
+                            Url.update(
+                                item.href,
+                                this._updateScrollSpy
+                            );
+                        }
                     }
                 );
+
+        /* Offset of scrollspy */
+        let elBis = container.querySelector("#scrollspy");
+        if(elBis !== null){
+            // Get width
+            var widthLarge = elBis.offsetWidth + 20;
+            var widthSmall = 47 + 13 + 22 ;
+            var currentTransform = 20;
+            // New Transform
+            var newTransform = -1 * ( widthLarge - widthSmall );
+            // Set new right
+            elBis.style.right = newTransform;
+
+
+        }
+              
+        /* Tippy */
+        let scrollspyOptionEl = container.querySelectorAll(".scrollspy-option");
+        if(scrollspyOptionEl.length)
+        for(let el of scrollspyOptionEl){
+
+            /* Tippy on titles */
+            tippy(el, {
+                content: "Intégrer l'article dans un tuto",
+                placement: 'top',
+            });
+
+            // Copy action
+            Copy.run({
+                el: el,
+                callback: () => {
+
+                    let result = "";
+                    
+                    /* Get pre */
+                    let href = el.parentElement.children[0].href ?? null;
+
+                    /* Check href */
+                    if(href === null){
+
+                        // Warning
+                        M.toast({html:'Problème lors de la copie... contacter @kzarshenas'})
+
+                        // Stop function
+                        return;
+
+                    }
+
+                    // Set href
+                    let fragment = Url.extractFragment(href);
+
+                    // Ger url
+                    let url = new URL(href);
+
+                    // Update result
+                    result = url.host + url.pathname + "?extract=" + fragment.replace("#", "") + "&clean";
+
+                    // Return result
+                    return result;
+
+                }
+            });
+
+        }
 
         /* Scrollspy */
         M.ScrollSpy.init(titles, {
@@ -282,6 +364,9 @@ export default class DriveAction extends PageAction {
             arrow: false,  
             offset: [0, -1],
         });
+
+        // Update scroll spy
+        this._updateScrollSpy();
 
     }
 
@@ -510,7 +595,7 @@ export default class DriveAction extends PageAction {
     }
 
     /* RocketChatInit */
-    rocketChatInit = () => {
+    rocketChatInit = (callback = null) => {
 
         // Regex expression to catch word starting by at sign
         let regexExpression =  /^([\w\-]+)@|(?<=\s)\@\w+/g ;
@@ -628,11 +713,24 @@ export default class DriveAction extends PageAction {
                 // Check iframeScriptTigger
                 if(iframeScriptTigger){
 
-                    // Execute iframe script
-                    this.iframeInit();
-
-                    // Media Init
+                    // Init component
+                    this.componentInit();
+            
+                    // Init Anchor
+                    this.anchorInit();
+            
+                    // Init pre Code
+                    this.preCodeInit();
+            
+                    // Init Media
                     this.mediaInit();
+            
+                    // Init Movie
+                    this.movieInit();
+            
+                    // Init Iframe
+                    // Fix #24
+                    this.iframeInit();
             
                 }
 
@@ -640,6 +738,58 @@ export default class DriveAction extends PageAction {
         ).catch(
             error => console.error(error)
         );
+
+    }
+
+    /** Update scrollspy
+     * 
+     */
+    _updateScrollSpy(url = window.location) {
+
+        // Get scrollspy
+        let scrollspyEl = document.getElementById("scrollspy");
+
+        // Check url and scrollspy
+        if(!url || scrollspyEl === null)
+
+            // Stop function
+            return;
+
+        // Extract #content of url 
+        let fragment = Url.extractFragment(url);
+
+        // Get scrollspyBodyEl
+        let scrollspyBodyEl = scrollspyEl.querySelectorAll(".scrollspy-body");
+
+        // Check scrollspyBodyEl
+        if(scrollspyBodyEl.length)
+
+            // Iteration des scrollspyBodyEl
+            for(let el of scrollspyBodyEl){
+
+                // Get fragement of href
+                let currentFragment = Url.extractFragment(el.href);
+
+                // Get scrollspy icon
+                let scrollspyIconEl = el.querySelector(".scrollspy-icon");
+
+                // Check el
+                if(scrollspyIconEl === null)
+                    contine;
+
+                // Check if equal
+                if(fragment == currentFragment){
+
+                    scrollspyIconEl.classList.add('active');
+
+                }else{
+
+                    scrollspyIconEl.classList.remove('active');
+
+                }
+
+            }
+
 
     }
 
