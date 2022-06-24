@@ -82,6 +82,9 @@ export default class DriveAction extends PageAction {
         // Init Rocket Chat
         this.rocketChatInit();
 
+        // Check box init
+        this.checkBoxInit();
+
     }
 
     /** Anchor Init
@@ -731,6 +734,9 @@ export default class DriveAction extends PageAction {
                     // Init Iframe
                     // Fix #24
                     this.iframeInit();
+
+                    // Checkbox init
+                    this.checkBoxInit();
             
                 }
 
@@ -790,6 +796,53 @@ export default class DriveAction extends PageAction {
 
             }
 
+
+    }
+
+    /** Check box init
+     * 
+     */
+    checkBoxInit = () => {
+
+        // Set container
+        let container = document.querySelector('.markdown');
+
+        // Check container
+        if(container === null)
+
+            // Stop function
+            return;
+
+        // Get all checkbox material-icons
+        let checkboxes = container.querySelectorAll("i.checkbox.material-icons");
+
+        // Delcare event
+         function event(e) {
+
+            // Check innert text
+            if(e.target.innerText == "check_box_outline_blank")
+
+                // Update innert text
+                e.target.innerText = "check_box";
+
+            else if(e.target.innerText == "check_box")
+
+                // Update innert text
+                e.target.innerText = "check_box_outline_blank";
+
+        }
+
+        // Check checkboxes
+        if(checkboxes.length)
+
+            // Iteration des checkboxes
+            for(let checkbox of checkboxes)
+
+                // attach event to checkbox
+                checkbox.addEventListener(
+                    "click",
+                    event
+                );
 
     }
 
