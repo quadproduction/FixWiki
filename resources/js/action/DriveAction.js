@@ -585,8 +585,16 @@ export default class DriveAction extends PageAction {
                                 /* Get code */
                                 let codeEl = preEl.querySelector('code');
 
+                                /* Get value */
+                                let result = codeEl.innerHTML;
+
+                                /* Decode html character */
+                                /* Fix #31 */
+                                result = Strings.decodeHtml(result);
+                                /* End Fix #31 */
+
                                 /* Return html */
-                                return codeEl.innerHTML;
+                                return result;
 
                             }
                         });
