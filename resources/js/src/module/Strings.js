@@ -96,4 +96,80 @@ export default class Strings {
 
     }
 
+    /* Fix #31 */
+
+    /**
+     * Encode Html
+     * 
+     * Convert utf8 string to html character encoded string
+     * 
+     * @source https://stackoverflow.com/questions/1787322/what-is-the-htmlspecialchars-equivalent-in-javascript
+     * 
+     * @param {string} input Input to encode
+     * @returns string
+     */
+    static encodeHtml = (input = "") => {
+      
+        /* Declare result */
+        let result = "";
+
+        /* Check input */
+        if(!input)
+            return result;
+
+        /* Declare map */
+        var map = {
+          '&' : '&amp;',
+          '<' : '&lt;',
+          '>' : '&gt;',
+          '"' : '&quot;',
+          "'" : '&#039;'
+        };
+      
+        /* Set result */
+        result = input.replace(/[&<>"']/g, function(m) {return map[m];});
+
+        /* Resturn result */
+        return result;
+
+      }
+      
+      /**
+       * Decode Html
+       * 
+       * Convert html character encoded string to utf8 string 
+       * 
+       * @source https://stackoverflow.com/questions/1787322/what-is-the-htmlspecialchars-equivalent-in-javascript
+       * 
+       * @param {string} input Input to decode
+       * @returns string
+       */
+      static decodeHtml = (input = "") => {
+      
+        /* Declare result */
+        let result = "";
+
+        /* Check input */
+        if(!input)
+            return result;
+
+        /* Declare map */
+        var map = {
+          '&amp;': '&',
+          '&lt;': '<',
+          '&gt;': '>',
+          '&quot;': '"',
+          '&#039;': "'"
+        };
+      
+        /* Set result */
+        result = input.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function(m) {return map[m];});
+
+        /* Resturn result */
+        return result;
+
+      }
+
+      /* End Fix #31 */
+
 }
