@@ -16,6 +16,7 @@ require('Kmaterialize/src/js/plugins.js');
 require("Kmaterialize/src/js/search.js");
 
 /* Import Prism */
+/* Fix #33 */
 require('prismjs');
 require('prismjs/components/prism-c');
 require('prismjs/components/prism-cpp');
@@ -37,7 +38,6 @@ require('prismjs/components/prism-xml-doc');
 require('prismjs/components/');
 const loadLanguages = require('prismjs/components/');
 window.Prism.manual = true;
-// THE FOLLOWING BLOCK CHANGED:
 jQuery(function () {
     // Wrap the code inside the required <code> tag, when needed:
     jQuery('pre[class*="language-"], pre[class*="lang-"]').each(function () {
@@ -49,3 +49,4 @@ jQuery(function () {
     // Highlight code, when the page finished loading (using jQuery here)
     Prism.highlightAll()
 });
+/* End Fix #33 */
