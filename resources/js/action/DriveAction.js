@@ -586,7 +586,7 @@ export default class DriveAction extends PageAction {
                                 let codeEl = preEl.querySelector('code');
 
                                 /* Get value */
-                                let result = codeEl.innerHTML;
+                                let result = codeEl.innerText;
 
                                 /* Decode html character */
                                 /* Fix #31 */
