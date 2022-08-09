@@ -382,6 +382,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -398,6 +399,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -414,6 +416,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -430,6 +433,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -446,6 +450,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -462,6 +467,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -478,6 +484,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -556,6 +563,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
