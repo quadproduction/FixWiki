@@ -66,4 +66,41 @@ page:
                     tag: link
                     attributes:
                         rel: manifest
-                        href: manifest.json
+                        href: /manifest.json
+                # Favicon
+                -
+                    tag: link
+                    attributes:
+                        rel: apple-touch-icon
+                        sizes: 180x180
+                        href: /media/favicon/apple-touch-icon
+                -
+                    tag: link
+                    attributes:
+                        rel: icon
+                        type: image/png
+                        sizes: 32x32
+                        href: /media/favicon/favicon-32x32
+                -
+                    tag: link
+                    attributes:
+                        rel: icon
+                        type: image/png
+                        sizes: 16x16
+                        href: /media/favicon/favicon-16x16
+                -
+                    tag: link
+                    attributes:
+                        rel: mask-icon
+                        href: /media/favicon/safari-pinned-tab
+                        color: "#5bbad5"
+                -
+                    tag: meta
+                    attributes:
+                        name: msapplication-TileColor
+                        content: "#000000"
+                -
+                    tag: meta
+                    attributes:
+                        name: theme-color
+                        content: "#ffffff"
