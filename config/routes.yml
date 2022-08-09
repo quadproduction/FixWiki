@@ -120,6 +120,13 @@ routes:
         methods:
             - get
         response: data
+    -   # Read favicon
+        name: Favicon
+        patterns:
+            - /media/favicon/[a:favicon_name]/
+        methods:
+            - get
+        response: data
     -   # Read ressources
         name: Ressources
         patterns:
