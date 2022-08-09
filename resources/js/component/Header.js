@@ -54,12 +54,20 @@ export default class Header{
             query: ".launch-rocketchat",
             el: null,
         },
+        launchGitlab : {
+            query: ".launch-gitlab",
+            el: null,
+        },
         launchFixplay : {
             query: ".launch-fixplay",
             el:null,
         },
         launchMovinmotion : {
             query: ".launch-movinmotion",
+            el:null,
+        },
+        launchHdr : {
+            query: ".launch-hdr",
             el:null,
         }
     };
@@ -374,6 +382,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -390,6 +399,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -406,6 +416,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -422,6 +433,24 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
+            }
+        );
+
+    }
+
+    /** Launch Git Lab
+     * 
+     * @param {*} dom 
+     */
+    launchGitlabInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -438,6 +467,7 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
             }
         );
 
@@ -454,6 +484,86 @@ export default class Header{
             dom.el,
             {
                 offset: [0, 20],
+                allowHTML: true,
+            }
+        );
+
+    }
+
+    /** Launch Hdr Library
+     * 
+     * @param {*} dom 
+     */
+     launchHdrInit = dom => {
+
+        // Declare pattern
+        let pattern = "";
+        let shortcut = "CTRL";
+
+        // Get os
+        let os = navigator.platform ?? null;
+
+        // Process os
+        os = os.toLowerCase();
+
+        // Check if linux
+        if(os.includes("linux"))
+
+            // Fill pattern
+            pattern = "prod/prod2/Projets";
+
+
+        else 
+        // Check if windows
+        if(os.includes("win"))
+
+            // Fill pattern
+            pattern = "L:";
+
+        else
+        // Check if mac
+        if(os.includes("mac")){
+        
+            // Fill pattern
+            pattern = "Volumes/prod2/Projets";
+            shortcut = "CMD";
+
+        // Else remove el
+        }else{
+
+            // Remove parent El
+            dom.el.parentElement.remove();
+
+            // Stop function
+            return;
+
+        }
+
+        // Fill href
+        let a = document.querySelector(dom.query);
+
+        // Check a
+        if(a === null)
+            return;
+            
+        // Set href
+        a.href = `file:///${pattern}/RESSOURCES/_LIB/2D/_texture/EnvMap/0_hdr_previews/previews.html`;
+
+        // Copy
+        Copy.run({
+            el: `a${dom.query}`,
+            callback: (trigger) => {
+                M.toast({html: `Coller le lien dans un nouvel onglet !<br>(${shortcut} + T puis ${shortcut} + V)`})
+                return trigger.href;
+            }
+        });
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+                allowHTML: true,
             }
         );
 
