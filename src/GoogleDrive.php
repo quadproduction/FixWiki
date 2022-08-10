@@ -659,6 +659,16 @@ class GoogleDrive{
 
     }
 
+    /** Get name of current file
+     * 
+     */
+    public function getName(){
+
+        #Return
+        return $this->currentFile->getName();
+
+    }
+
     /** Search file by name
      * 
      */

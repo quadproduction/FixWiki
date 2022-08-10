@@ -38,7 +38,7 @@ class TutorialAction extends ControllerBase implements ControllerInterface{
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="TutorialAction";
+        $this->name="Tutoriel";
 
         # Setup layouts
         $this->setupLayouts();

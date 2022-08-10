@@ -141,6 +141,9 @@ class DriveAction extends ControllerBase implements ControllerInterface{
             # Clean htmlContent
             $htmlContent = $this->extractHtmlContent($htmlContent);
 
+        # Set name
+        $this->name = pathinfo($this->google_drive->getName(), PATHINFO_FILENAME);
+
         # Load app config
         $this->model
             ->loadConfig('app')

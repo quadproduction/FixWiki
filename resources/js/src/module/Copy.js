@@ -43,10 +43,16 @@ export default class Copy{
         // New instance
         var clipboard = new ClipboardJS(input.el, parameters);
 
+        // Check displayMessage
+        if(input.hasOwnProperty('displayMessage') && input.displayMessage == false)
+
+            // Stop function
+            return;
+
         // Success
         clipboard.on(
             'success', 
-            (e) => {
+            () => {
                 M.toast({html: 'Copié'})
             }
         );

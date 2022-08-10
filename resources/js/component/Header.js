@@ -499,6 +499,7 @@ export default class Header{
         // Declare pattern
         let pattern = "";
         let shortcut = "CTRL";
+        let enter = "Entrée";
 
         // Get os
         let os = navigator.platform ?? null;
@@ -527,6 +528,7 @@ export default class Header{
             // Fill pattern
             pattern = "Volumes/prod2/Projets";
             shortcut = "CMD";
+            enter = "Return ↩"
 
         // Else remove el
         }else{
@@ -553,9 +555,13 @@ export default class Header{
         Copy.run({
             el: `a${dom.query}`,
             callback: (trigger) => {
-                M.toast({html: `Coller le lien dans un nouvel onglet !<br>(${shortcut} + T puis ${shortcut} + V)`})
+                M.toast({
+                    html: `<p style='text-align:center;margin:0;'>Lien copié dans le presse papier, faite :<br>${shortcut} + T puis ${shortcut} + V et ${enter}</p>`,
+                    allowHTML: true,
+                })
                 return trigger.href;
-            }
+            },
+            displayMessage: false
         });
 
         // Tippy

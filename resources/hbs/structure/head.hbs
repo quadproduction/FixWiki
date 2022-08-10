@@ -29,6 +29,13 @@
                             <img alt="RV Player" src="/media/ressources/shotgun_local/" />
                         </a>
                     </li>
+                    {{!-- Fix Play --}}
+                    {{!-- #23 --}}
+                    <li class="hide-on-med-and-down nav-button-circle">
+                        <a class="waves-effect waves-block waves-light launch-fixplay {{!-- grey darken-1 --}}" target="_blank" {{!-- Issue #37 --}}href="http://fixplay.fixstudio.com/"{{!-- http://fixplaydev.quad.fr/ Issue #37 End --}} data-tippy-content="<p style='text-align:center;margin:0;'>Fix Play<br><small>Media manager de Fix Studio</small></p>" style="background: #333333; padding: 5px">
+                            <i class="material-icons grey-text text-lighten-5">slideshow</i>
+                        </a>
+                    </li>
                     {{!-- Divider --}}
                     <li class="hide-on-med-and-down  divider"></li>
                     {{!-- Rocket Chat --}}
@@ -56,13 +63,6 @@
                         {{!-- https://knowledge.autodesk.com/support/shotgrid/learn-explore/caas/CloudHelp/cloudhelp/ENU/SG-RV/files/rv-knowledge-base/SG-RV-rv-knowledge-base-rv-link-urls-html-html.html --}}
                         <a class="waves-effect waves-block waves-light launch-rv" href="rvlink://" data-tippy-content="<p style='text-align:center;margin:0;'>RV Player<br><small>Meilleur lecteur vidéo</small></p>">
                             <img alt="RV Player" src="/media/ressources/rv_player/" />
-                        </a>
-                    </li>
-                    {{!-- Fix Play --}}
-                    {{!-- #23 --}}
-                    <li class="hide-on-med-and-down nav-button-circle">
-                        <a class="waves-effect waves-block waves-light launch-fixplay grey darken-1" target="_blank" {{!-- Issue #37 --}}href="http://fixplay.fixstudio.com/"{{!-- http://fixplaydev.quad.fr/ Issue #37 End --}} data-tippy-content="<p style='text-align:center;margin:0;'>Fix Play<br><small>Media manager de Fix Studio</small></p>">
-                            <i class="material-icons grey-text text-lighten-5">slideshow</i>
                         </a>
                     </li>
                     {{!-- Hdri --}}
