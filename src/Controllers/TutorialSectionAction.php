@@ -72,6 +72,9 @@ class TutorialSectionAction extends ControllerBase implements ControllerInterfac
         # Get name 
         $name = $this->parameters['name'];
 
+        # Set name of page
+        $this->name = ucfirst(str_replace("share", "partager", $name));
+
         # Template extension
         $ext = Config::read("app")['app']['template']['extension'] ?? "";
 

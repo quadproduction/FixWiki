@@ -39,7 +39,7 @@ class HomeAction extends ControllerBase implements ControllerInterface{
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="HomeAction";
+        $this->name="";
 
         # Setup layouts
         $this->setupLayouts();
