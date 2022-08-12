@@ -141,8 +141,13 @@ class DriveAction extends ControllerBase implements ControllerInterface{
             # Clean htmlContent
             $htmlContent = $this->extractHtmlContent($htmlContent);
 
+        /* #44 */
+
+        # Explode name of current document (for hide position prefix in name)
+        $explode = explode("__", pathinfo($this->google_drive->getName(), PATHINFO_FILENAME), 2);
+
         # Set name
-        $this->name = pathinfo($this->google_drive->getName(), PATHINFO_FILENAME);
+        $this->name = array_pop($explode);
 
         # Load app config
         $this->model
