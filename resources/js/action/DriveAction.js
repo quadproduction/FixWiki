@@ -833,7 +833,8 @@ export default class DriveAction extends PageAction {
                 // Update innert text
                 e.target.innerText = "check_box";
 
-            else if(e.target.innerText == "check_box")
+            // #43
+            else if(e.target.innerText == "check_box" || e.target.innerText == "indeterminate_check_box")
 
                 // Update innert text
                 e.target.innerText = "check_box_outline_blank";
