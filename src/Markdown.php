@@ -39,22 +39,30 @@ class ParsedownCustom extends ParsedownExtra{
      */
     protected function inlineCheckboxOrIframe($excerpt){
 
-        if (preg_match('/\[ ]|\[x]/', $excerpt['text'], $matches)){
+        if (preg_match('/\[ ]|\[x]|\[-]/', $excerpt['text'], $matches)){
 
-            return array(
+            # Set text
+            # #43
+            $text = match($matches[0]){
+                "[x]"   =>  "check_box",
+                "[ ]"   =>  "check_box_outline_blank",
+                "[-]"   =>  "indeterminate_check_box"
+            };
 
+            # return
+            return [
                 // How many characters to advance the Parsedown's
                 // cursor after being done processing this tag.
                 'extent' => 3, 
                 'element' => [
                     'name' => 'i',
-                    'text' => $matches[0] == "[x]" ? "check_box" : "check_box_outline_blank",
+                    'text' => $text,
                     'attributes' => [
                         "class"     =>  "checkbox material-icons"
                     ] 
                 ],
 
-            );
+            ];
         }
         /**
          *  ADD CHECKBOX #12 | END
