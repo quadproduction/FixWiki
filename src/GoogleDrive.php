@@ -205,8 +205,6 @@ class GoogleDrive{
             # Increment pagetoken
             $pageToken = $response->nextPageToken;
 
-            Console::log($pageToken);
-
         } while ($pageToken != null);
 
         # Data
