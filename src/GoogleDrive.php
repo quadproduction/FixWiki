@@ -153,6 +153,9 @@ class GoogleDrive{
         $templateFolder = __ROOT_APP__."/cache/drive/";
         $templateFile = "navigation_".($custom ? $custom."_" : "");
         $fileCache = $templateFolder.$templateFile.$this->lastUpdate.".php";
+        /* Fix #49 */ 
+        $pageToken = null;
+        $batch = new Batch();
 
         # Check lastUpdate
         if($this->lastUpdate && is_file($fileCache) && $tigger){
@@ -173,24 +176,38 @@ class GoogleDrive{
 
             # Error
             throw new Exception('Id of the google drive shared is missing in config file.', 401);
-            
-        # Parameters
-        $parameters = array(
-            'includeItemsFromAllDrives' =>  true,
-            'fields'                    =>  'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser, webContentLink)',
-            'supportsAllDrives'         =>  true,
-            'driveId'                   =>  $this->config['app']['google']['drive']['driveId'],
-            'corpora'                   =>  'drive',
-            'pageSize'                  =>  1000,
-            /**
-             *  Folder and File Order #4 
-             */
-            'orderBy'                   =>  'name',
-            'q'                         =>  'trashed=false',
-        );
 
-        # Get datas
-        $batch = $this->drive->files->listFiles($parameters);
+        /* #49 */
+        do {
+            
+            # Parameters
+            $parameters = array(
+                'includeItemsFromAllDrives' =>  true,
+                'fields'                    =>  'nextPageToken, files(id, name, mimeType, parents, size, createdTime, modifiedTime, lastModifyingUser, webContentLink)',
+                'supportsAllDrives'         =>  true,
+                'driveId'                   =>  $this->config['app']['google']['drive']['driveId'],
+                'corpora'                   =>  'drive',
+                'pageSize'                  =>  1000,
+                'pageToken'                 =>  $pageToken,
+                /**
+                 *  Folder and File Order #4 
+                 */
+                'orderBy'                   =>  'name',
+                'q'                         =>  'trashed=false',
+            );
+            
+            # Get response
+            $response = $this->drive->files->listFiles($parameters);
+
+            # Push files in batch
+            $batch->addFiles($response);
+
+            # Increment pagetoken
+            $pageToken = $response->nextPageToken;
+
+            Console::log($pageToken);
+
+        } while ($pageToken != null);
 
         # Data
         $data = [
@@ -1098,6 +1115,40 @@ class GoogleDrive{
             $suffixes[floor($base)].
             'b'
         ;
+
+    }
+
+}
+
+/** Class for used for imitate batch of google drive api
+ * #49
+ */
+class Batch{
+
+    /* Parameters */
+
+    # File List
+    private $fileList = [];
+
+    /* Methods */
+
+    /**
+     * Return files
+     */
+    public function getFiles():array {
+
+        # Return files 
+        return $this->fileList;
+
+    }
+
+    /**
+     * Add one or multiple files
+     */
+    public function addFiles($batch):void {
+
+        # Merge new files
+        $this->fileList = array_merge($this->fileList, $batch->getFiles());
 
     }
 
