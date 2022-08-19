@@ -386,7 +386,7 @@ export default class DriveAction extends PageAction {
             return;
 
         // Get all img elements
-        let imgs = container.querySelectorAll('img');
+        let imgs = container.querySelectorAll('img:not([style])');
 
         // Check imgs length
         if(!imgs.length)
