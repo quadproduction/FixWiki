@@ -553,8 +553,23 @@ class GoogleDrive{
                 ]
             );
 
+            # Content
+            $content = $ctx->getBody()->getContents();
+
+            # Check if password
+            $pageNeedPassword = !$this->_passwordCheck($content);
+
+            # Check password
+            if($pageNeedPassword)
+
+                # Check pageNeedPassword
+                $content = file_get_contents(__ROOT_APP__."/resources/hbs/components/password.hbs");
+
+            # Clean comment tag
+            $content = preg_replace('/<!--[\s\S]*?-->/', '', $content);
+
             # Set result
-            $result = New Markdown($ctx->getBody()->getContents());
+            $result = New Markdown($content);
 
             # Return result
             return $result->execute();
@@ -1113,6 +1128,53 @@ class GoogleDrive{
             $suffixes[floor($base)].
             'b'
         ;
+
+    }
+
+    /**
+     * Check if password in content
+     * 
+     * @param string $content Content of html/markdown to analyse
+     * @return bool
+     */
+    private function _passwordCheck(string $content = ""):bool {
+
+        # Set result
+        $result = true;
+
+        # Check content
+        if(!$content)
+
+            # Stop function
+            return $result;
+
+        # Check <!-- Password = anyWord --> is in content
+        if(!preg_match("/\bPassword\s*=\s*(\s\S+)\s*/", $content, $matches))
+
+            # Return result
+            return $result;
+
+        # Get password
+        $password = $_GET['password'] ?? null;
+
+        # Check password
+        if(!$password){
+
+            # Set result
+            $result = false;
+
+            # Return result
+            return $result;
+
+        }
+
+        # Check password
+        $result = (trim($password) == trim($matches[1])) ? 
+            true : 
+                false;
+
+        # Return result
+        return $result;
 
     }
 
