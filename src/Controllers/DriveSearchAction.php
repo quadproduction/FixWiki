@@ -61,6 +61,9 @@ class DriveSearchAction extends ControllerBase implements ControllerInterface {
         # Get search name
         $name = $this->parameters["name"];
 
+        # Replace %20 by " "
+        $name = str_replace("%20", " ", $name);
+
         # Get all data
         $records = $this->google_drive->searchFile($name);
 

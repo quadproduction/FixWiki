@@ -42,7 +42,7 @@ routes:
     -   # Reade file from id
         name: DriveSearch
         patterns:
-            - /api/file/drive/search/[a:name]
+            - /api/file/drive/search/[s:name]
         methods:
             - get
         response: json
