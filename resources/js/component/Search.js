@@ -386,9 +386,7 @@ export default class Search{
                 $current = $prev.addClass("current_item");
             }
             if (e.keyCode === 13 && $(".search-list li.current_item").length > 0) {
-                var selected_item = $("li.current_item a");
-                window.location = $("li.current_item a").attr("href");
-                $(selected_item).trigger("click");
+                e.preventDefault();
             }
         });
 
