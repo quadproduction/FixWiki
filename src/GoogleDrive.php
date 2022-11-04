@@ -55,6 +55,12 @@ class GoogleDrive{
         "folderNameExclude" =>  ["media"],
         "mimeTypeAllow"     =>  [
             # Markdown
+            "text/html"     =>  [
+                'icon'  =>  [
+                    "class" =>  "fab fa-markdown",
+                    "text"  =>  "",
+                ]
+            ],
             "text/markdown"     =>  [
                 'icon'  =>  [
                     "class" =>  "fab fa-markdown",
@@ -101,7 +107,8 @@ class GoogleDrive{
             "application/vnd.google-apps.document", 
             "application/pdf", 
             "text/plain", 
-            "text/markdown"
+            "text/markdown",
+            "text/html",
         ],
         # Position delimiter
         "positionDelimiter" =>  "__",
@@ -541,7 +548,7 @@ class GoogleDrive{
     public function getContentFile(){
 
         # If markdown
-        if(in_array($this->currentFile->getMimeType(), ["text/markdown","text/plain"])){
+        if(in_array($this->currentFile->getMimeType(), ["text/markdown","text/plain","text/html"])){
 
             # Get content of file
             $ctx = $this->drive->files->get(
