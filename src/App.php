@@ -89,7 +89,7 @@ class App extends Kernel{
          */
         $this->controller = new Controller(
             $this->config,
-            $this->cache,
+            $this->cache
         );
 
         /** Get view

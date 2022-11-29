@@ -324,6 +324,19 @@ export default class Search{
                                             // Set attributes
                                             targetEl.setAttribute("href", sourceEl.href);
 
+                                            // Get span
+                                            let smallEl = targetEl.querySelector("small");
+
+                                            console.log(smallEl);
+
+                                            // Check smallEl
+                                            if(smallEl !== null){
+
+                                                // Set content of span
+                                                smallEl.innerText += " ● " + sourceEl.href.slice(0, -1).replace(window.location.origin + "/drive/", "").replaceAll("/", " > ");
+
+                                            }
+
                                         }
 
 
