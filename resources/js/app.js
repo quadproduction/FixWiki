@@ -97,6 +97,11 @@ class App extends LuckyJs{
         this.Header = (o = {}) => { new Header(o); };
         this.Sidenav = (o = {}) => { new Sidenav(o); };
 
+        /** Check browser
+         *  
+         */
+        this.checkEs6();
+
         /** Set ajax actions of the app
          * 
          */
@@ -106,6 +111,40 @@ class App extends LuckyJs{
          */
         new this.action(this);
 
+    }
+
+    /**
+     * Check Es6
+     * 
+     * @return boolean
+     */
+    checkEs6 = () => {
+
+        // Declare result
+        let result = false;
+
+        // Try feature not available before es6
+        try{
+            Function("() => {};");
+            result = true;
+        }catch(exception){
+            result = false;
+        }
+
+        // Check result
+        if(!result)
+
+            // Add dom content loaded
+            document.addEventListener("DOMContentLoaded", function() {
+
+                // Display error message
+                M.toast({html: '⚠️ Votre navigateur est obsolète !<br>Demandez au système une mise à jour.', classes: 'red center-align', displayLength:Infinity});
+
+            });
+
+        // Return
+        return result;
+        
     }
 
     /** Set up Ajax Action
