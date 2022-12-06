@@ -111,6 +111,11 @@ class App extends LuckyJs{
          */
         new this.action(this);
 
+        /** Add on top button
+         *
+         */
+        this.addOnTopBtn();
+
     }
 
     /**
@@ -145,6 +150,33 @@ class App extends LuckyJs{
         // Return
         return result;
         
+    }
+
+    /**
+     * Add On Top Button
+     */
+    addOnTopBtn = () => {
+
+        // Html Template
+        let htmlContent = `
+            <div class="fixed-action-btn">
+                <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+                </a>
+            </div>
+        `;
+
+        // Add dom content loaded
+        document.addEventListener("DOMContentLoaded", function() {
+
+            // Add html composant
+            document.body.insertAdjacentHTML( 
+                'beforeend', 
+                htmlContent
+            );
+
+        });
+
     }
 
     /** Set up Ajax Action
