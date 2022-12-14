@@ -11,6 +11,7 @@
 /* Import JS */
 window.$ = window.jQuery = require('jquery/dist/jquery.js');
 window.PerfectScrollbar = require('perfect-scrollbar').default;
+window.hljs = require("highlight.js");
 require('materialize-css/dist/js/materialize.js')
 require('Kmaterialize/src/js/plugins.js');
 require("Kmaterialize/src/js/search.js");

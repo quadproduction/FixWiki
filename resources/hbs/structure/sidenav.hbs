@@ -30,7 +30,7 @@ Hide files beginning by dot #3
                 {{!-- Check if entity is drive --}}
                 {{#ifEquals this.entity "drive"}}
                 <li class="navigation-header">
-                    <a class="navigation-header-text">Google Drive </a>
+                    <a class="navigation-header-text">Documentation </a>
                     <i class="navigation-header-icon material-icons">more_horiz</i>
                 </li>
                 {{/ifEquals}}
@@ -176,6 +176,15 @@ Hide files beginning by dot #3
 
             {{/each}}
         {{/if}}
+
+        {{!-- Support --}}
+        <li class="navigation-header"><a class="navigation-header-text">Support  </a><i class="navigation-header-icon material-icons">more_horiz</i>
+        </li>
+
+        {{!-- Ticket --}}
+        <li class="bold">
+            <a class="waves-effect waves-cyan{{#ifEquals _context.route.current "/ticket/"}} active{{/ifEquals}}" href="/ticket/"><i class="material-icons">bug_report</i><span class="menu-title">Ticket</span></a>
+        </li>
 
         {{!-- Divers --}}
         <li class="navigation-header"><a class="navigation-header-text">Divers </a><i class="navigation-header-icon material-icons">more_horiz</i>

@@ -141,6 +141,13 @@ routes:
         methods:
             - get
         response: data
+    -   # Ticket
+        name: Ticket
+        patterns:
+            - /ticket/
+        methods:
+            - get
+        response: html
     -   # All others pages
         name: 'Page not found'
         patterns:
