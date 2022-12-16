@@ -14,6 +14,7 @@
  */
 import PageAction from "../src/base/PageAction";
 import "highlight.js/styles/github-dark.css";
+import showdown from "showdown"
 import Quill from "quill";
 
 /** Home action
@@ -21,8 +22,8 @@ import Quill from "quill";
  */
 export default class TicketAction extends PageAction {
 
-    /** @var editorInsance Quill editor instance */
-    editorInsance = null;
+    /** @var editorInstance Quill editor instance */
+    editorInstance = null;
 
     /** Constructor
      * @param {object} app Object of the app
@@ -80,6 +81,9 @@ export default class TicketAction extends PageAction {
         // Quill init
         this.quillInit();
 
+        // From Init
+        this.formInit();
+
     }
 
     /** Quill Init
@@ -112,7 +116,7 @@ export default class TicketAction extends PageAction {
             });
 
             // New quill instance
-            this.editorInsance = new Quill(
+            this.editorInstance = new Quill(
                 elEditor,
                 {
                     modules: {
@@ -125,10 +129,137 @@ export default class TicketAction extends PageAction {
                 }
             );
 
-            this.editorInsance.root.innerHTML = `<blockquote>From Kevin</blockquote><p><br></p><h2>Problem</h2><p><br></p><p>Python error</p><p><br></p><h2>How get error</h2><p><br></p><ul><li>Open Maya</li><li>Take note</li></ul><p><br></p><h2>Log</h2><p><br></p><pre class="ql-syntax" spellcheck="false">console.<span class="hljs-built_in">log</span>(<span class="hljs-string">"hello"</span>);</pre><p><br></p><h2>Ressources</h2>`;
+            /* Template */
+            this.editorInstance.root.innerHTML = `<blockquote>From Kevin</blockquote><p><br></p><h2>Problem</h2><p><br></p><p>Python error</p><p><br></p><h2>How get error</h2><p><br></p><ul><li>Open Maya</li><li>Take note</li></ul><p><br></p><h2>Log</h2><p><br></p><pre class="ql-syntax" spellcheck="false">console.<span class="hljs-built_in">log</span>(<span class="hljs-string">"hello"</span>);</pre><p><br></p><h2>Ressources</h2>`;
 
 
         }
+
+    }
+
+    /** Forme Init
+     * 
+     */
+    formInit = () => {
+
+        // Get form
+        let elForm = document.getElementById("ticket-form");
+
+        // Check el
+        if(elForm === null)
+
+            // Return
+            return;
+
+        // Add event
+        elForm.addEventListener(
+            "submit",
+            e => e.preventDefault()
+        );
+
+        // Style required for select
+        $('select[required]').css({
+            position: 'absolute',
+            display: 'inline',
+            height: 0,
+            padding: 0,
+            border: '1px solid rgba(255,255,255,0)',
+            width: 0
+        }); 	
+        
+        /* Set Default */
+        $.validator.setDefaults({
+
+            /* Submit handler */
+            submitHandler: function(form) {
+
+                // New Form Data
+                var formData = new FormData(form);
+
+                // Get editor el
+                let elEditor = document.querySelector("#rich-text-editor .ql-editor");
+
+                // Check editor
+                if(elEditor !== null){
+
+                    // Get Text
+                    var htmlText = elEditor.innerHTML.replaceAll("<p><br></p>", "");
+
+                    // New converter
+                    var converter = new showdown.Converter();
+
+                    // Get markdown and remove extra break lines
+                    var markdownText = converter.makeMarkdown(htmlText);
+
+                    // Push message in formdata
+                    formData.append("message", markdownText);
+
+                };
+                
+                // Request
+                fetch('/ticket/send/', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Error:', error)
+
+                    // Toast
+                    M.toast({
+                        html: '⚠️ Someting went wrong...',
+                        classes: 'red white-text'
+                    })
+
+                })
+                .then(response => {
+
+                    console.log('Success:', JSON.stringify(response))
+
+                    // Toast
+                    M.toast({
+                        html: '✅ Ticket sent !'
+                    })
+
+                    // Scroll on top
+                    window.scrollTo({top: 0, behavior: 'smooth'});
+
+                })
+
+            }
+        });
+
+        // Validate configuration
+        $(elForm).validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                entity: {
+                    required: true,
+                },
+                tool: {
+                    required: false,
+                },
+            },
+            //For custom messages
+            messages: {
+                email: {
+                    required: "Enter your email adress",
+                },
+                entity: "Choose your entity",
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
 
     }
 

@@ -1,13 +1,61 @@
 <div id="main" class="{{#ifEquals _cookies.SIDENAV.STATUS "expanded"}}{{else}}main-full{{/ifEquals}}" data-layout="structure/main">
     <div class="row container">
         {{!-- Divider --}}
-        <div class="col s6 offset-s3 center-align">
+        <form id="ticket-form" class="col s12 m8 offset-m2 l6 offset-l3 center-align">
+            {{!-- Title --}}
             <h1>New Ticket</h1>
-            <blockquote>Feature in developpment...</blockquote>
+            {{!-- Form --}}
+            <div class="row">
+                {{!-- Title --}}
+                <div class="input-field col s12 m12 l12">
+                    <input id="title" name="title" type="text" class="validate  center-align" value="Bug :: Describe your bug" required>
+                    <label for="title">Title</label>
+                </div>
+                {{!-- Email --}}
+                <div class="input-field col s12 m6 l4">
+                    <input id="email" name="email" type="email" class="validate" required>
+                    <label for="email">Email</label>
+                </div>
+                {{!-- Entity --}}
+                <div class="input-field col s12 m6 l4">
+                    <select name="entity" class="validate" required>
+                    {{#each _config.ticket.form.entities}}
+                        <optgroup label="{{@key}}">
+                        {{#each this}}
+                            <option value="{{this.value}}"{{#if this.img}} data-icon="{{this.img}}"{{/if}}>{{this.name}}</option>
+                        {{/each}}
+                        </optgroup>
+                    {{/each}}
+                    </select>
+                    <label>Entity</label>
+                </div>
+                {{!-- Tool --}}
+                <div class="input-field col s12 m6 offset-m3 l4">
+                    <select name="tool" class="validate">
+                    {{#each _config.ticket.form.tools}}
+                            <option value="" disabled selected>Choose your tool</option>
+                        <optgroup label="{{@key}}">
+                            {{#each this}}
+                            <option value="{{this.value}}"{{#if this.img}} data-icon="{{this.img}}"{{/if}}>{{this.name}}</option>
+                            {{/each}}
+                        </optgroup>
+                    {{/each}}
+                    </select>
+                    <label>Tools</label>
+                </div>
+            </div>
+            {{!-- Content --}}
             <div class="card">
                 <div id="rich-text-editor"></div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col s12">
+                    <button class="btn waves-effect waves-light" type="submit">Send
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
     

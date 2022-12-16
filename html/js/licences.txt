@@ -12,6 +12,8 @@
  * Licensed MIT © Zeno Rocha
  */
 
+/*! showdown v 2.1.0 - 21-04-2022 */
+
 /**!
 
  @license
@@ -69,6 +71,15 @@ THE SOFTWARE.
  * https://jquery.org/license
  *
  * Date: 2021-03-02T17:08Z
+ */
+
+/*!
+ * jQuery Validation Plugin v1.19.5
+ *
+ * https://jqueryvalidation.org/
+ *
+ * Copyright (c) 2022 Jörn Zaefferer
+ * Released under the MIT license
  */
 
 /*!

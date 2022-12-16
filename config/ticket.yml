@@ -1,0 +1,43 @@
+# Ticket
+ticket:
+  form:
+    entities:
+      Quad Group:
+        - name: Fix Studio
+          value: Company::FIX
+          img: /media/icon/fixstudio
+        - name: Wizz
+          value: Company::WIZZ
+          img: /media/icon/wizz
+        - name: Rolex
+          value: Company::ROLEX
+          img: /media/icon/rolex
+        - name: Quad Prod
+          value: Company::QUADPROD
+          img: /media/icon/quad
+    tools:
+      Softwares:
+        - name: Maya
+          value: Soft::Maya
+          img: /media/icon/maya
+        - name: Nuke
+          value: Soft::Nuke
+          img: /media/icon/nuke
+        - name: Flame
+          value: Soft::Flame
+          img: /media/icon/flame
+        - name: PS
+          value: Soft::Photoshop
+          img: /media/icon/photoshop
+        - name: Houdini
+          value: Soft::Houdini
+          img: /media/icon/houdini
+        - name: Hiero
+          value: Soft::Hiero
+          img: /media/icon/hiero
+        - name: RV Player
+          value: Soft::RV
+          img: /media/icon/rv
+        - name: Muster
+          value: Soft::Muster
+          img: /media/icon/muster
