@@ -19,16 +19,12 @@ namespace App\Controllers;
  */
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Base\Controller as ControllerBase;
-use LuckyPHP\Server\Config;
-use App\GoogleDrive;
+use LuckyPHP\Server\Exception;
 
-/** Class for manage the workflow of the app
+/** Class for manage logo
  *
  */
-class TicketAction extends ControllerBase implements ControllerInterface {
-
-    # Google Drive
-    private $google_drive;
+class IconAction extends ControllerBase implements ControllerInterface{
 
     /** Constructor
      *
@@ -39,27 +35,10 @@ class TicketAction extends ControllerBase implements ControllerInterface {
         parent::__construct(...$arguments);
 
         # Set name
-        $this->name="";
-
-        # Setup layouts
-        $this->setupLayouts();
+        $this->name="Icon";
 
         # Model action
         $this->modelAction();
-
-    }
-
-    /** Setup layouts
-     * 
-     */
-    private function setupLayouts(){
-
-        # Set layouts
-        $this->setLayouts([
-            'structure/head',
-            'structure/sidenav',
-            'page/ticket',
-        ]);
 
     }
 
@@ -71,22 +50,20 @@ class TicketAction extends ControllerBase implements ControllerInterface {
         # New model
         $this->newModel();
 
-        # New google drive
-        $this->google_drive = new GoogleDrive();
+        # Get logo name
+        $mediaName = $this->parameters['media_name'];
 
-        # Get all data
-        $this->google_drive->getAllFileFromSharedDrive(true);
+        try{
 
-        # Load app config
-        $this->model
-            ->loadConfig(['app','config/ticket.yml'])
-            ->setFrameworkExtra()
-            ->pushDataInUserInterface($this->google_drive->getData())
-            ->pushCookies(true)
-            ->pushContext()
-        ;
+            # Search file in "/resources/png/logo/"
+            $this->model->getFile($mediaName, __ROOT_APP__."resources/", ["jpg", "png"], true);
 
-        //\LuckyPHP\Front\Console::log($this->model->execute());
+        }catch(Exception $e){
+
+            # Message html
+            $e->getHtml();
+
+        }
 
     }
 
@@ -99,7 +76,4 @@ class TicketAction extends ControllerBase implements ControllerInterface {
         return $this->name;
 
     }
-
-    /* Constant */
-
 }

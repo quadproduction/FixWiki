@@ -134,6 +134,13 @@ routes:
         methods:
             - get
         response: data
+    -   # Read icon
+        name: Icon
+        patterns:
+            - /media/icon/[a:media_name]/
+        methods:
+            - get
+        response: data
     -   # Reade file
         name: File
         patterns:
@@ -148,6 +155,13 @@ routes:
         methods:
             - get
         response: html
+    -   # Ticket
+        name: TicketSend
+        patterns:
+            - /ticket/send/
+        methods:
+            - post
+        response: json
     -   # All others pages
         name: 'Page not found'
         patterns:

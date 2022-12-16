@@ -37,13 +37,6 @@ app:
         extension: hbs
     auth:
         type: Kauth
-    database:
-        engine: pdo
-        name: 'kevinzar_{{app_name}}'
-        user: null
-        password: null
-        host: 127.0.0.1
-        port: '5432'
     google:
         drive:
             driveId: 0AKnhm_EZNuVfUk9PVA
