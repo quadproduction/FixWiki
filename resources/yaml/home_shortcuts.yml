@@ -99,7 +99,7 @@ shortcuts:
     action:
       href: http://lepipeline.org/pages/glossaire.html
   - # Asset Library
-    name: 3D library
+    name: Librairie 3D
     description: Librairie d'assets, HDRIs & de textures gratuite
     icon:
       class: fa-solid fa-cube
