@@ -75,8 +75,8 @@ Hide files beginning by dot #3
                         {{#each _user_interface.shortcuts}}
                         <div>
                             <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5{{#if this.color.bg}} {{this.color.bg}}{{/if}}{{#if this.color.text}} {{colorText this.color.text}}{{/if}}" {{#if this.description}}data-tippy-content="{{this.description}}"{{/if}}{{#if this.action.href}} href="{{this.action.href}}" target="_blank"{{/if}}>
-                                {{#if this.icon}}<i class="{{#if this.icon.class}}{{this.icon.class}}{{/if}}">{{#if this.icon.text}}{{this.icon.text}}{{/if}}</i>{{/if}}
-                                {{#if this.name}}<span>{{this.name}}</span>{{/if}}
+                                {{#if this.icon}}<i class="{{#if this.icon.class}}{{this.icon.class}}{{/if}}{{#if this.color.text}} {{colorText this.color.text}}{{/if}}">{{#if this.icon.text}}{{this.icon.text}}{{/if}}</i>{{/if}}
+                                {{#if this.name}}<span class="{{#if this.color.text}}{{colorText this.color.text}}{{/if}}">{{this.name}}</span>{{/if}}
                             </a>
                         </div>
                         {{/each}}

@@ -83,9 +83,51 @@ shortcuts:
       class: material-icons
       text: color_lens
     color:
-      bg: yellow darken-2
+      bg: lime darken-4
       text: white
     action:
       href: /drive/workflow/coordo/colorspace/ocio/
+  - # Glossaire
+    name: Glossaire
+    description: Définition des différents termes liés à l'industrie CG & VFX
+    icon:
+      class: material-icons
+      text: lightbulb
+    color: 
+      bg: yellow darken-2
+      text: white
+    action:
+      href: http://lepipeline.org/pages/glossaire.html
+  - # Asset Library
+    name: Librairie 3D
+    description: Librairie d'assets, HDRIs & de textures gratuite
+    icon:
+      class: fa-solid fa-cube
+    color: 
+      bg: pink
+      text: white
+    action:
+      href: https://polyhaven.com/
+  - # Photo Editor
+    name: Photopea
+    description: Éditeur en ligne gratuit prenant en charge les formats PSD, XCF... (Adobe Photoshop, GIMP...)
+    icon:
+      class: material-icons
+      text: photo_camera
+    color: 
+      bg: blue darken-4
+      text: white
+    action:
+      href: https://www.photopea.com/
+  - # Text Editor
+    name: Text editor
+    description: Éditeur en ligne de texte et de code
+    icon:
+      class: fa-solid fa-font
+    color: 
+      bg: blue-grey darken-4
+      text: wite
+    action:
+      href: https://vscode.dev/
 
     
