@@ -225,6 +225,15 @@ export default class TicketAction extends PageAction {
             /* Submit handler */
             submitHandler: function(form) {
 
+                // Get submit tool
+                let submitEl = form.querySelector("button[type=\"submit\"]");
+
+                // Check submit El
+                if(submitEl !== null)
+
+                    // Disable it
+                    submitEl.disabled = true;
+
                 // New Form Data
                 var formData = new FormData(form);
 
@@ -255,6 +264,16 @@ export default class TicketAction extends PageAction {
                 })
                 .then(response => response.json())
                 .catch(error => {
+
+                    // Get submit tool
+                    let submitEl = form.querySelector("button[type=\"submit\"]");
+
+                        // Check submit El
+                        if(submitEl !== null)
+
+                            // Disable it
+                            submitEl.disabled = false;
+
                     console.error('Error:', error)
 
                     // Toast
