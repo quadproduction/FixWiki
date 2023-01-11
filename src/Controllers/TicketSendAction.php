@@ -214,6 +214,7 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
         $mail->Body = $result["message"];
         $mail->AltBody = $markdown;
 
+
         # Send email
         if($mail->send()){
 
@@ -378,6 +379,14 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
 
         # Search image in message
         preg_match_all('/<img src="data:(.*?)" alt="">/', $message, $matches);
+
+        # Alternative
+        if(empty($matches[0])){
+
+            # Search image in message
+            preg_match_all('/<img src="data:(.*?)">/', $message, $matches);
+
+        }
 
         # Check matches
         if(!empty($matches[1]))
