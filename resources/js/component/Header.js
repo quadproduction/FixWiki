@@ -46,6 +46,14 @@ export default class Header{
             query: ".launch-sg-wizz",
             el: null,
         },
+        launchFtrack : {
+            query: ".launch-sg-ftrack",
+            el: null,
+        },
+        launchSgWizz : {
+            query: ".launch-sg-wizz",
+            el: null,
+        },
         launchSgLocal : {
             query: ".launch-sg-local",
             el: null,
@@ -393,6 +401,23 @@ export default class Header{
      * @param {*} dom 
      */
     launchSgWizzInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+                allowHTML: true,
+            }
+        );
+
+    }
+
+    /** Launch Ftrack
+     * 
+     * @param {*} dom 
+     */
+    launchFtrackInit = dom => {
 
         // Tippy
         tippy(
