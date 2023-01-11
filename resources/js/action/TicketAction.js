@@ -285,6 +285,15 @@ export default class TicketAction extends PageAction {
                 })
                 .then(response => {
 
+                    // Get submit tool
+                    let submitEl = form.querySelector("button[type=\"submit\"]");
+
+                        // Check submit El
+                        if(submitEl !== null)
+
+                            // Disable it
+                            submitEl.disabled = false;
+
                     console.log('Success:', JSON.stringify(response))
 
                     // Toast
