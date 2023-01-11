@@ -16,6 +16,17 @@
                     <input id="email" name="email" type="email" class="validate" required>
                     <label for="email">Email</label>
                 </div>
+                {{!-- Type --}}
+                <div class="input-field col s12 m6 l4 pt-2">
+                    <div class="switch">
+                        <label>
+                            Bug
+                            <input name="type" type="checkbox">
+                            <span class="lever"></span>
+                            New features
+                        </label>
+                    </div>
+                </div>
                 {{!-- Entity --}}
                 <div class="input-field col s12 m6 l4">
                     <select name="entity" class="validate" required>
@@ -29,11 +40,11 @@
                     </select>
                     <label>Entity</label>
                 </div>
-                {{!-- Tool --}}
-                <div class="input-field col s12 m6 offset-m3 l4">
+                {{!-- Tools --}}
+                <div class="input-field col s12 m6 l6">
                     <select name="tool" class="validate">
+                    <option value="" disabled selected>Choose your tool</option>
                     {{#each _config.ticket.form.tools}}
-                            <option value="" disabled selected>Choose your tool</option>
                         <optgroup label="{{@key}}">
                             {{#each this}}
                             <option value="{{this.value}}"{{#if this.img}} data-icon="{{this.img}}"{{/if}}>{{this.name}}</option>
@@ -41,7 +52,21 @@
                         </optgroup>
                     {{/each}}
                     </select>
-                    <label>Tools</label>
+                    <label>Tool</label>
+                </div>
+                {{!-- Software --}}
+                <div class="input-field col s12 m6 l6">
+                    <select name="software" class="validate">
+                    <option value="" disabled selected>Choose your software</option>
+                    {{#each _config.ticket.form.software}}
+                        <optgroup label="{{@key}}">
+                            {{#each this}}
+                            <option value="{{this.value}}"{{#if this.img}} data-icon="{{this.img}}"{{/if}}>{{this.name}}</option>
+                            {{/each}}
+                        </optgroup>
+                    {{/each}}
+                    </select>
+                    <label>Software</label>
                 </div>
             </div>
             {{!-- Content --}}
@@ -58,5 +83,11 @@
         </form>
     </div>
 </div>
-    
+
+{{!-- Template --}}
+{{#each _config.ticket.mail.Body}}
+<template id="template-{{@key}}">{{{this}}}</template>
+{{/each}}
+
+{{!-- Dependances --}}
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>

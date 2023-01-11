@@ -15,11 +15,15 @@ ticket:
         - name: Quad Prod
           value: Company::QUADPROD
           img: /media/icon/quad
-    tools:
-      Softwares:
+    software:
+      3D:
         - name: Maya
           value: Soft::Maya
           img: /media/icon/maya
+        - name: Houdini
+          value: Soft::Houdini
+          img: /media/icon/houdini
+      2D:
         - name: Nuke
           value: Soft::Nuke
           img: /media/icon/nuke
@@ -29,15 +33,65 @@ ticket:
         - name: PS
           value: Soft::Photoshop
           img: /media/icon/photoshop
-        - name: Houdini
-          value: Soft::Houdini
-          img: /media/icon/houdini
+      Editing:
         - name: Hiero
           value: Soft::Hiero
           img: /media/icon/hiero
+      Player:
         - name: RV Player
           value: Soft::RV
           img: /media/icon/rv
+      Render:
         - name: Muster
           value: Soft::Muster
           img: /media/icon/muster
+    tools:
+      Pipeline:
+        - name: OpenPype
+          value: ticket+quad-openpype-openpype-9-issue-@fixstudio.com
+          software: true
+        - name: Shotgun
+          value: ticket+quad-fix-pipeline-studio-15-issue-@fixstudio.com
+          software: true
+      Quad:
+        - name: Matos Manager
+          value: ticket+quad-quadprod-matosmanager-77-issue-@fixstudio.com
+        - name: Reel Play
+          value: ticket+quad-quadprod-reelplay-75-issue-@fixstudio.com
+        - name: BDD Quad
+          value: ticket+quad-quadprod-bddquad-76-issue-@fixstudio.com
+      General:
+        - name: Other
+          value: ticket+quad-issue-triage-61-issue-@fixstudio.com
+  mail:
+    settings: /resources/json/mail_settings.json
+    from: 
+      - mail: "{post.email}"
+        name: null # If null generate the name from the mail
+    to: {}
+    cc: 
+      - mail: kevin.zarshenas@fixstudio.com
+        name: Kevin Zarshenas
+    bcc: {}
+    subject: "Bug :: Describe your bug"
+    isHtml: true
+    Body: 
+      issue: >
+        <blockquote>From...</blockquote>
+        <h2>Problem</h2>
+        <p>Describe error...</p>
+        <h2>How get error</h2>
+        <p>- Open Maya</p>
+        <p>- Take note</p>
+        </ul>
+        <h2>Log</h2>
+        <pre>console.log("hello");</pre>
+        <h2>Ressources</h2>
+      new_feature: >
+        <blockquote>From...</blockquote>
+        <h2>Need</h2>
+        <p>Feature to install...</p>
+        <h2>To do</h2>
+        <p>- Open Maya</p>
+        <p>- Take note</p>
+    

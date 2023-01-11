@@ -14,6 +14,7 @@
  */
 import PageAction from "../src/base/PageAction";
 import "highlight.js/styles/github-dark.css";
+import Swal from 'sweetalert2';
 import showdown from "showdown"
 import Quill from "quill";
 
@@ -63,6 +64,9 @@ export default class TicketAction extends PageAction {
         
         // Init main content
         this.mainInit();
+
+        // Type Init
+        this.typeInit();
 
     }
 
@@ -129,10 +133,58 @@ export default class TicketAction extends PageAction {
                 }
             );
 
-            /* Template */
-            this.editorInstance.root.innerHTML = `<blockquote>From Kevin</blockquote><p><br></p><h2>Problem</h2><p><br></p><p>Python error</p><p><br></p><h2>How get error</h2><p><br></p><ul><li>Open Maya</li><li>Take note</li></ul><p><br></p><h2>Log</h2><p><br></p><pre class="ql-syntax" spellcheck="false">console.<span class="hljs-built_in">log</span>(<span class="hljs-string">"hello"</span>);</pre><p><br></p><h2>Ressources</h2>`;
+            // Set template
+            this.setTemplate("issue");
+
+            // Add event for text changing
+            this.editorInstance.on(
+                'text-change', 
+                () => {
+
+                    let current = this.editorInstance.getText().replaceAll(/[\n\r]/g,' ').replaceAll(/\s\s+/g, " ").trim();
+
+                    // let templates
+                    let templates = [];
+
+                    // Get all template
+                    let templatesEls = document.querySelectorAll("template");
+
+                    // Check template
+                    if(templatesEls.length)
+
+                        // Iteration of templates
+                        for(let template of templatesEls)
+
+                            // Push text in templates
+                            templates.push(template.content.textContent.replaceAll(/[\n\r]/g,' ').replaceAll(/\s\s+/g, " ").trim());
+
+                    // Check if current is template
+                    if(!templates.includes(current)){        
+                        
+                        // Get type input
+                        let el = document.querySelector(`input[name="type"]`);
+                
+                        // Check el
+                        if(el === null)
+                
+                            // Stop function
+                            return;
+
+                        // Check editor has changed
+                        if(!("already-modified" in el.classList.keys())){
+
+                            // Set parameter
+                            el.classList.add("already-modified")
 
 
+                        }
+
+                    }
+
+                }
+
+            );
+              
         }
 
     }
@@ -189,7 +241,7 @@ export default class TicketAction extends PageAction {
                     var converter = new showdown.Converter();
 
                     // Get markdown and remove extra break lines
-                    var markdownText = converter.makeMarkdown(htmlText);
+                    var markdownText = htmlText;//.makeMarkdown(htmlText);
 
                     // Push message in formdata
                     formData.append("message", markdownText);
@@ -260,6 +312,121 @@ export default class TicketAction extends PageAction {
                 }
             }
         });
+
+    }
+
+    /** Set Template
+     * 
+     */
+    setTemplate = (name = "") => {
+
+        // Check name
+        if(!name)
+
+            // New error
+            throw new Error(`Template name given is empty...`);
+
+        // Get template given
+        let template = document.getElementById(`template-${name}`);
+
+        // Check template exists
+        if(template === null)
+
+            // New error
+            throw new Error(`Template for "${name}" doesn't exist...`);
+
+        // Clone template
+        let cloneTemplate = template.content.cloneNode(true);
+
+        // Search all pre tag
+        let preEls = cloneTemplate.querySelectorAll("pre");
+
+        // Check tag pre
+        if(preEls.length)
+
+            // Iteration of tags
+            for(let preEl of preEls)
+
+                // Set class
+                preEl.classList.add("ql-syntax");
+
+        console.log(cloneTemplate);
+
+        // Set template
+        this.editorInstance.root.replaceChildren(cloneTemplate);
+
+        // Get type input
+        let el = document.querySelector(`input[name="type"]`);
+
+        // Check el
+        if(el === null)
+
+            // Stop function
+            return;
+
+        // Check editor has changed
+        if(el.className.includes("already-modified"))
+
+            // Remove class
+            el.classList.remove("already-modified");
+
+    }
+
+    /** Type init
+     * 
+     */
+    typeInit = () => {
+
+        // Get type input
+        let el = document.querySelector(`input[name="type"]`);
+
+        // Check el
+        if(el === null)
+
+            // Stop function
+            return;
+
+        // Catch when update
+        el.addEventListener(
+            "change",
+            e => {
+
+                // Get value
+                let value = e.target.checked;
+
+                // Check editor has changed
+                if(e.target.className.includes("already-modified")){
+
+                    // Warning
+                    Swal.fire({
+                        title: 'Do you want replace the text you already wrote ?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes !',
+                        cancelButtonText: 'No...',
+                        reverseButtons: true
+                    }).then((result) => {
+
+                        // Check result
+                        if(result.isConfirmed){
+
+                            // Update content
+                            this.setTemplate(value ? "new_feature" : "issue");
+
+                        }
+
+                    })
+
+                }else
+
+                    // Update content
+                    this.setTemplate(value ? "new_feature" : "issue");
+
+            }
+        );
 
     }
 
