@@ -45,7 +45,7 @@ ticket:
         - name: Muster
           value: Soft::Muster
           img: /media/icon/muster
-    tools:
+    plateform:
       Pipeline:
         - name: OpenPype
           value: ticket+quad-openpype-openpype-9-issue-@fixstudio.com
