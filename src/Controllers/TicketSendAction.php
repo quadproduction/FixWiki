@@ -151,11 +151,11 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
 
             }
 
-        # Check post tool
-        if(isset($_POST["tool"]) && filter_var($_POST["tool"], FILTER_VALIDATE_EMAIL))
+        # Check post plateform
+        if(isset($_POST["plateform"]) && filter_var($_POST["plateform"], FILTER_VALIDATE_EMAIL))
 
             # Set address
-            $mail->addAddress($_POST["tool"]);
+            $mail->addAddress($_POST["plateform"]);
 
         ## Cc
 

@@ -247,3 +247,13 @@ $marginX: 0px;
     }
 
 }
+
+/* Fix error message */
+div#email-error.error {
+
+    /* Position */
+    position: absolute;
+    top: 46;
+    right: 0;
+    
+}

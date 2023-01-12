@@ -23,7 +23,7 @@
                             Bug
                             <input name="type" type="checkbox">
                             <span class="lever"></span>
-                            New features
+                            New feature
                         </label>
                     </div>
                 </div>
@@ -40,11 +40,11 @@
                     </select>
                     <label>Entity</label>
                 </div>
-                {{!-- Tools --}}
+                {{!-- Plateform --}}
                 <div class="input-field col s12 m6 l6">
-                    <select name="tool" class="validate">
-                    <option value="" disabled selected>Choose your tool</option>
-                    {{#each _config.ticket.form.tools}}
+                    <select name="plateform" class="validate">
+                    <option value="" disabled selected>Choose your plateform</option>
+                    {{#each _config.ticket.form.plateform}}
                         <optgroup label="{{@key}}">
                             {{#each this}}
                             <option value="{{this.value}}"{{#if this.img}} data-icon="{{this.img}}"{{/if}}>{{this.name}}</option>
@@ -52,7 +52,7 @@
                         </optgroup>
                     {{/each}}
                     </select>
-                    <label>Tool</label>
+                    <label>Plateform</label>
                 </div>
                 {{!-- Software --}}
                 <div class="input-field col s12 m6 l6">

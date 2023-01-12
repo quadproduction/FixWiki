@@ -453,6 +453,18 @@ export default class TicketAction extends PageAction {
                     // Update content
                     this.setTemplate(value ? "new_feature" : "issue");
 
+                // Update value of title
+                let titleEl = document.querySelector("input#title");
+
+                // Check title
+                if(titleEl !== null)
+
+                    // Replace value
+                    titleEl.value = value ?
+                        titleEl.value.replaceAll("Bug", "New feature") :
+                            titleEl.value.replaceAll("New feature", "Bug");
+
+
             }
         );
 
