@@ -364,3 +364,15 @@
     }
 
 }
+
+.bottom-fixed {
+
+    /* Position */
+    position: fixed;
+    bottom: 0;
+    padding-right: 1.5rem;
+
+    /* Dimension */
+    width: inherit;
+
+}

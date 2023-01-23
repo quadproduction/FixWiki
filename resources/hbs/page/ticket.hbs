@@ -56,7 +56,7 @@
                 </div>
                 {{!-- Software --}}
                 <div class="input-field col s12 m6 l6">
-                    <select name="software" class="validate">
+                    <select name="software[]" class="validate" multiple>
                     <option value="" disabled selected>Choose your software</option>
                     {{#each _config.ticket.form.software}}
                         <optgroup label="{{@key}}">
@@ -73,13 +73,15 @@
             <div class="card">
                 <div id="rich-text-editor"></div>
             </div>
-            <div class="row">
-                <div class="col s12">
+
+            <div class="row bottom-fixed">
+                <div class="col s12 pt-1 pb-2">
                     <button class="btn waves-effect waves-light" type="submit">Send
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
             </div>
+
         </form>
     </div>
 </div>
