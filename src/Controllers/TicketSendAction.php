@@ -19,6 +19,7 @@ namespace App\Controllers;
  */
 
 use Error;
+use Google\Service\DriveActivity\Post;
 use LuckyPHP\Interface\Controller as ControllerInterface;
 use LuckyPHP\Server\Exception as CrazyException;
 use LuckyPHP\Base\Controller as ControllerBase;
@@ -132,8 +133,13 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
         $mail->SMTPSecure = $this->mailConfig["SMTPSecure"];
         $mail->Port = $this->mailConfig["Port"];
 
+        # How sent email
+        $fromEmail = $_POST["email"];
+        $fromName = $this->parseNameFromEmail($_POST["email"]);
+
         # Recipients
-        $mail->setFrom($_POST["email"], $this->parseNameFromEmail($_POST["email"]));
+        $mail->setFrom($fromEmail, $fromName);
+        $mail->addCC($fromEmail, $fromName);
 
         ## To
 
@@ -200,7 +206,13 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
 
         # Content
         $mail->isHTML(true);
-        $mail->Subject = $_POST["title"];
+
+        # Title
+        $subjectPrefix = $this->getSubjectPrefix();
+        $mail->Subject = $subjectPrefix ? $subjectPrefix . " :: " . $_POST["title"] : $_POST["title"];
+
+        # Get label strings
+        $labelStrings = $this->getLabelsStrings();
 
         # Body
         $converter = new HtmlConverter([
@@ -208,12 +220,11 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
         ]);
 
         # Prepare markdown
-        $markdown = $converter->convert($result["message"]); 
+        $markdown = $converter->convert($result["message"] . $labelStrings["description"]); 
         $markdown = $this->cleanMarkdown($markdown);
 
-        $mail->Body = $result["message"];
-        $mail->AltBody = $markdown;
-
+        $mail->Body = $result["message"]. $labelStrings["description"];
+        $mail->AltBody = $markdown . $labelStrings["action"];
 
         # Send email
         if($mail->send()){
@@ -500,6 +511,166 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
                 );
 
             }
+
+        # Return result
+        return $result;
+
+    }
+
+    /**
+     * Get Label String
+     * 
+     * Convert software and plateform to "/labe..."
+     * 
+     * @param array $data content of post
+     * @return array [ "action" => "/labels ~" , "description" => "Software supported..." ]
+     */
+    private function getLabelsStrings():array {
+
+        # Set result
+        $result = [
+            'action'        =>  "",  
+            'description'   =>  ""
+        ];
+
+        # Set list of label
+        $labels = [];
+
+        # Check software in post > software
+        if(isset($_POST["software"]) && !empty($_POST["software"]))
+
+            # Iteration software
+            foreach($_POST["software"] as $label)
+
+                # Push value in labels
+                $labels[] = [
+                    "value" =>  $label,
+                    "name"  =>  strpos($label, "::") !== false ? 
+                        array_pop(explode("::", $label)) :
+                            $label 
+                ];
+
+        # Check entity
+        if(isset($_POST["entity"])){
+
+            # Push label of plateform
+            $entityLabel = [
+                "value" =>  $_POST["entity"],
+                "name"  =>  strpos($label, "::") !== false ? 
+                    array_pop(explode("::", $label)) :
+                        $label 
+            ];
+
+            # Check case of name
+            $entityLabel["name"] = ucwords(strtolower($entityLabel["name"]));
+
+            # Push labels
+            $labels[] = $entityLabel;
+
+        }
+            
+
+        # Check labels
+        if(!empty($labels)){
+
+            # New line
+            $result["action"] .= PHP_EOL.PHP_EOL;
+            $result["description"] .= PHP_EOL.PHP_EOL;
+
+            # Push action
+            $result["action"] .= '/labels ~"';
+
+            # Push title of description
+            $result["description"] .= count($labels) > 1 ? "<h2>Softwares concerned</h2>" : "<h2>Software concerned</h2>".PHP_EOL.PHP_EOL."<p>";
+
+            # Push labels (reverse because Gitlab supports only one scope label in same issue...)
+            $result["action"] .= implode('" ~"', array_reverse(array_column($labels, "value")));
+
+            # Push description
+            $result["description"] .= implode(", ", array_column($labels, "name"));
+
+            # Push end of action
+            $result["action"] .= '"';
+            
+            # Push end of description
+            $result["description"] .= '</p>';
+
+        }
+
+        # Return result
+        return $result;
+
+    }
+
+    /**
+     * Get Subject Prefix
+     * 
+     * @return string
+     */
+    private function getSubjectPrefix():string {
+
+        # Set result
+        $result = "";
+
+        $currentPlateformName = "";
+
+        # Get entityLabel
+        $entityLabel = $_POST["entity"] ?? "";
+
+        # Get plateform
+        $platformEmail = $_POST["plateform"] ?? "";
+
+        # Check plateform email
+        if(!$platformEmail && !$entityLabel)
+
+            # Stop function
+            return $result;
+
+        # Check entity isset and not empty
+        if(isset($this->ticketConfig["ticket"]["form"]["entities"]) && !empty($this->ticketConfig["ticket"]["form"]["entities"]))
+
+            # Iteration of plateform
+            foreach($this->ticketConfig["ticket"]["form"]["entities"] as $group)
+
+                # Iteration of group
+                foreach($group as $entity)
+
+                    # Check if email is equal to platformEmail
+                    if($entity["value"] == $entityLabel){
+
+                        # Set currentPlateformName
+                        $currentPlateformName .= $entity["name"];
+
+                        # Break loop
+                        break 2;
+
+                    }
+
+        # Check plateform isset and not empty
+        if(isset($this->ticketConfig["ticket"]["form"]["plateform"]) && !empty($this->ticketConfig["ticket"]["form"]["plateform"]))
+
+            # Iteration of plateform
+            foreach($this->ticketConfig["ticket"]["form"]["plateform"] as $group)
+
+                # Iteration of group
+                foreach($group as $plateform)
+
+                    # Check if email is equal to platformEmail
+                    if($plateform["value"] == $platformEmail){
+
+                        # Set currentPlateformName
+                        $currentPlateformName .= $currentPlateformName ? " :: " . $plateform["name"] : $plateform["name"];
+
+                        # Break loop
+                        break 2;
+
+                    }
+
+        # Check $currentPlateformNam
+        if($currentPlateformName)
+
+            # Set result
+            $result = $currentPlateformName;
 
         # Return result
         return $result;

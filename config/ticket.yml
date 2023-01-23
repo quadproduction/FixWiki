@@ -15,6 +15,24 @@ ticket:
         - name: Quad Prod
           value: Company::QUADPROD
           img: /media/icon/quad
+    plateform:
+      Pipeline:
+        - name: OpenPype
+          value: ticket+quad-openpype-openpype-9-issue-@fixstudio.com
+          software: true
+        - name: Shotgun
+          value: ticket+quad-fix-pipeline-studio-15-issue-@fixstudio.com
+          software: true
+      Quad:
+        - name: Matos Manager
+          value: ticket+quad-quadprod-matosmanager-77-issue-@fixstudio.com
+        - name: Reel Play
+          value: ticket+quad-quadprod-reelplay-75-issue-@fixstudio.com
+        - name: BDD Quad
+          value: ticket+quad-quadprod-bddquad-76-issue-@fixstudio.com
+      General:
+        - name: Other
+          value: ticket+quad-issue-triage-61-issue-@fixstudio.com
     software:
       3D:
         - name: Maya
@@ -45,24 +63,17 @@ ticket:
         - name: Muster
           value: Soft::Muster
           img: /media/icon/muster
-    plateform:
       Pipeline:
-        - name: OpenPype
-          value: ticket+quad-openpype-openpype-9-issue-@fixstudio.com
-          software: true
-        - name: Shotgun
-          value: ticket+quad-fix-pipeline-studio-15-issue-@fixstudio.com
-          software: true
-      Quad:
-        - name: Matos Manager
-          value: ticket+quad-quadprod-matosmanager-77-issue-@fixstudio.com
-        - name: Reel Play
-          value: ticket+quad-quadprod-reelplay-75-issue-@fixstudio.com
-        - name: BDD Quad
-          value: ticket+quad-quadprod-bddquad-76-issue-@fixstudio.com
-      General:
-        - name: Other
-          value: ticket+quad-issue-triage-61-issue-@fixstudio.com
+        - name: OpenPYPE
+          value: Soft::OpenPYPE
+          img: /media/ressources/openpype_splash/
+      Prod:
+        - name: ShotGrid
+          value: Soft::Shotgun
+          img: /media/ressources/shotgun_wizz/
+        - name: Ftrack
+          value: Soft::Ftrack
+          img: /media/ressources/ftrack_round/
   mail:
     settings: /resources/json/mail_settings.json
     from: 
