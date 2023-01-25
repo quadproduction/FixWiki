@@ -1,4 +1,4 @@
-.card{
+.card {
 
     &.card-border-gray{
         border: solid 1px #e0e0e0;
@@ -86,6 +86,24 @@
             }
 
         }
+
+    }
+
+    /* #67 */
+    .ql-editor, .ql-editor h1, .ql-editor h2, .ql-editor p, .ql-editor blockquote, .ql-editor span {
+
+        font-family: Helvetica, Arial, sans-serif!important;
+
+        strong {
+
+            font-weight: bold!important;
+
+        }
+        
+    }
+    .ql-editor strong {
+
+        font-weight: bold!important;
 
     }
 
