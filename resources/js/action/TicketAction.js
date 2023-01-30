@@ -317,7 +317,7 @@ export default class TicketAction extends PageAction {
                         }
 
                     // Check error
-                    if(response.errors.length)
+                    if("errors" in response && response.errors.length)
 
                         // Iteration errors
                         for(let error of response.errors)
