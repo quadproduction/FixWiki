@@ -19,18 +19,26 @@ ticket:
       Pipeline:
         - name: OpenPype
           value: ticket+quad-openpype-openpype-9-issue-@fixstudio.com
+          img: /media/ressources/openpype_splash/
           software: true
         - name: Shotgun
           value: ticket+quad-fix-pipeline-studio-15-issue-@fixstudio.com
+          img: /media/ressources/shotgun_wizz/
           software: true
       Quad:
         - name: Matos Manager
           value: ticket+quad-quadprod-matosmanager-77-issue-@fixstudio.com
+          img: /media/icon/quad
         - name: Reel Play
           value: ticket+quad-quadprod-reelplay-75-issue-@fixstudio.com
+          img: /media/icon/quad
         - name: BDD Quad
           value: ticket+quad-quadprod-bddquad-76-issue-@fixstudio.com
+          img: /media/icon/quad
       General:
+        - name: Gitlab
+          value: ticket+quad-issue-triage-61-issue-@fixstudio.com
+          img: /media/icon/gitlab
         - name: Other
           value: ticket+quad-issue-triage-61-issue-@fixstudio.com
     software:
@@ -41,6 +49,9 @@ ticket:
         - name: Houdini
           value: Soft::Houdini
           img: /media/icon/houdini
+        - name: Blender
+          value: Soft::Blender
+          img: /media/icon/blender
       2D:
         - name: Nuke
           value: Soft::Nuke
@@ -74,6 +85,10 @@ ticket:
         - name: Ftrack
           value: Soft::Ftrack
           img: /media/ressources/ftrack_round/
+      Wiki:
+        - name: FixWiki
+          value: Soft::FixWiki
+          img: /media/ressources/fixwiki_favicon/
   mail:
     settings: /resources/json/mail_settings.json
     from: 

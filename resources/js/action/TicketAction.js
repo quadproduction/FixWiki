@@ -229,10 +229,18 @@ export default class TicketAction extends PageAction {
                 let submitEl = form.querySelector("button[type=\"submit\"]");
 
                 // Check submit El
-                if(submitEl !== null)
+                if(submitEl !== null){
 
                     // Disable it
                     submitEl.disabled = true;
+
+                    // Remove gradient
+                    submitEl.classList.remove("gradient-45deg-red-pink");
+
+                    // Add grey
+                    submitEl.classList.add("grey");
+
+                }
 
                 // New Form Data
                 var formData = new FormData(form);
@@ -269,12 +277,18 @@ export default class TicketAction extends PageAction {
                     let submitEl = form.querySelector("button[type=\"submit\"]");
 
                         // Check submit El
-                        if(submitEl !== null)
+                        if(submitEl !== null){
 
                             // Disable it
                             submitEl.disabled = false;
 
-                    console.error('Error:', error)
+                            // Remove grey
+                            submitEl.classList.remove("grey");
+
+                            // Add gradient
+                            submitEl.classList.add("gradient-45deg-red-pink");
+
+                        }
 
                     // Toast
                     M.toast({
@@ -289,17 +303,37 @@ export default class TicketAction extends PageAction {
                     let submitEl = form.querySelector("button[type=\"submit\"]");
 
                         // Check submit El
-                        if(submitEl !== null)
+                        if(submitEl !== null){
 
                             // Disable it
                             submitEl.disabled = false;
 
-                    console.log('Success:', JSON.stringify(response))
+                            // Remove grey
+                            submitEl.classList.remove("grey");
 
-                    // Toast
-                    M.toast({
-                        html: '✅ Ticket sent !'
-                    })
+                            // Add gradient
+                            submitEl.classList.add("gradient-45deg-red-pink");
+
+                        }
+
+                    // Check error
+                    if(response.errors.length)
+
+                        // Iteration errors
+                        for(let error of response.errors)
+
+                            // Toast
+                            M.toast({
+                                html: `⚠️ ${error.detail ?? "Someting went wrong..."}`,
+                                classes: 'red white-text'
+                            })
+
+                    else
+
+                        // Toast
+                        M.toast({
+                            html: '✅ Ticket sent !'
+                        })
 
                     // Scroll on top
                     window.scrollTo({top: 0, behavior: 'smooth'});

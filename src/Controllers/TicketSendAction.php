@@ -157,6 +157,24 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
 
             }
 
+        # Check plateform
+        if(!isset($_POST["plateform"]) || empty(isset($_POST["plateform"]))){
+
+            # Set result
+            echo json_encode([
+                "errors"    =>  [
+                    [
+                        "code"  =>  400,
+                        "type"  =>  "warn",
+                        "detail"=>  "Please select a plateform and retry..."
+                    ]
+                ]
+            ]);
+
+            exit;
+
+        }
+
         # Check post plateform
         if(isset($_POST["plateform"]) && filter_var($_POST["plateform"], FILTER_VALIDATE_EMAIL))
 
@@ -537,7 +555,7 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
         $labels = [];
 
         # Check software in post > software
-        if(isset($_POST["software"]) && !empty($_POST["software"]))
+        if(isset($_POST["software"]) && !empty($_POST["software"] ?? false)){
 
             # Iteration software
             foreach($_POST["software"] as $label)
@@ -550,15 +568,17 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
                             $label 
                 ];
 
+            }
+
         # Check entity
-        if(isset($_POST["entity"])){
+        if(isset($_POST["entity"]) && !empty($_POST["entity"])){
 
             # Push label of plateform
             $entityLabel = [
                 "value" =>  $_POST["entity"],
-                "name"  =>  strpos($label, "::") !== false ? 
-                    array_pop(explode("::", $label)) :
-                        $label 
+                "name"  =>  strpos($_POST["entity"], "::") !== false ? 
+                    array_pop(explode("::", $_POST["entity"])) :
+                        $_POST["entity"] 
             ];
 
             # Check case of name
@@ -568,7 +588,6 @@ class TicketSendAction extends ControllerBase implements ControllerInterface{
             $labels[] = $entityLabel;
 
         }
-            
 
         # Check labels
         if(!empty($labels)){
