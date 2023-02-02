@@ -12,7 +12,7 @@ Hide files beginning by dot #3
         {{!-- Section title --}}
         <div class="col s12 m8 offset-m2 center-align">
             {{!-- Title --}}
-            <h1 class="header"><i class="material-icons">chair</i> Intranet de <b>Fix Studio</b></h1>
+            <h1 class="header"><span class="font-cursive">Bienvenue chez</span> <b>Fix Studio</b></h1>
             {{!-- Description --}}
             {{!-- <h4 class="light">Bienvenue sur la page d'acceuil de l'Intranetnet, pour te guider au sein du studio</h4> --}}
         </div>
@@ -24,59 +24,39 @@ Hide files beginning by dot #3
     <div class="row">
         {{!-- Tutoriel --}}
         <div class="col s12 m6 l8">
-            <div class="card z-depth-0 card-border-gray height-300 overflow-allow">
+            <div class="card z-depth-0 card-border-gray height-300 xl-height-300 overflow-allow">
                 <div class="card-content">
-                    <h5 class="three-dots mt-0">
-                        <b>
-                            <i class="material-icons">
-                                waving_hand
-                            </i> 
-                            Bienvenue
-                        </b>
-                    </h5>
-                    <p class="flow-text">
-                        L’équipe de Fix te souhaite la bienvenue au sein du studio.
-                        Cette page t’offre la possibilité d’en savoir plus sur le fonctionnement et l’organisation du studio. En explorant la page d’accueil et les articles disponibles à gauche de la page, tu vas acquérir tout le savoir dont tu as besoin pour bien commencer cette nouvelle aventure !
+                    <p class="flow-text xl-flow-text flex-align-vertical">
+                        <span class="lettrine">N</span>ous sommes fiers de vous accueillir dans notre studio. Cette page est votre porte d'entrée pour découvrir tout ce qu'il y a à savoir sur le <strong><i>fonctionnement et l'organisation du studio</i></strong>. En explorant la page d'accueil et les <strong><i>articles dédiés aux techniques de VFX</i></strong> sur la gauche, vous découvrirez toutes les clés pour commencer votre nouvelle aventure avec confiance et enthousiasme. Nous sommes impatients de vous aider à atteindre vos objectifs artistiques les plus ambitieux. Prêt à vous lancer dans l'aventure Fix ? C'est parti !
                     </p>
                 </div>
             </div>
         </div>
-        {{!-- Activité --}}
-        <div class="col s12 m6 l4">
-            <div class="card z-depth-0 card-border-gray overflow-allow" style="overflow-x: hidden;">
-                <div class="card-content height-300">
-                    <h5 class="three-dots mt-0">
-                        <b>
-                            <i class="material-icons">
-                                local_activity
-                            </i> 
-                            Activités
-                        </b>
+        {{!-- Restaurents --}}
+        <div class="col s12 m12 l4">
+            <div class="card google-my-maps z-depth-0 card-border-gray">
+                <div class="card-content center-align">
+                    <h5 class="three-dots mt-0 xl-h5">
+                        <b>🗺 Adresses utiles</b>
                     </h5>
-                    <div id="sg-projects">
-                    </div>
+                    <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1ucn4PyoHjE6fy2kVVC-fhOKPyPao7hdG&ehbc=2E312F" class="height-300 xl-height-300"></iframe>
                 </div>
             </div>
         </div>
         {{!-- Truc & astuces --}}
         <div class="col s12 m12 l6">
             <div id="shortcuts" class="card z-depth-0 card-border-gray">
-                <div class="card-content height-400 overflow-allow">
-                    <h5 class="three-dots mt-0">
-                        <b>
-                            <i class="material-icons">
-                                folder
-                            </i> 
-                            Trucs & astuces
-                        </b>
+                <div class="card-content height-400 xl-height-400 overflow-allow">
+                    <h5 class="three-dots mt-0 xl-h5">
+                        <b>💡 Trucs & astuces</b>
                     </h5>
                     {{#if _user_interface.shortcuts}}
                     <div class="icons-grid">
                         {{#each _user_interface.shortcuts}}
                         <div>
-                            <a class="waves-effect waves-light btn-large-m3 mt-5 mb-5{{#if this.color.bg}} {{this.color.bg}}{{/if}}{{#if this.color.text}} {{colorText this.color.text}}{{/if}}" {{#if this.description}}data-tippy-content="{{this.description}}"{{/if}}{{#if this.action.href}} href="{{this.action.href}}" target="_blank"{{/if}}>
-                                {{#if this.icon}}<i class="{{#if this.icon.class}}{{this.icon.class}}{{/if}}{{#if this.color.text}} {{colorText this.color.text}}{{/if}}">{{#if this.icon.text}}{{this.icon.text}}{{/if}}</i>{{/if}}
-                                {{#if this.name}}<span class="{{#if this.color.text}}{{colorText this.color.text}}{{/if}}">{{this.name}}</span>{{/if}}
+                            <a class="z-depth-0 waves-effect btn-large-m3 mt-5 mb-5 transparent{{#if this.color.bg}} {{colorText this.color.bg}}{{/if}}" {{#if this.description}}data-tippy-content="{{this.description}}"{{/if}}{{#if this.action.href}} href="{{this.action.href}}" target="_blank"{{/if}}>
+                                {{#if this.icon}}<i class="{{#if this.icon.class}}{{this.icon.class}}{{/if}}{{#if this.color.bg}} {{colorText this.color.bg}}{{/if}}">{{#if this.icon.text}}{{this.icon.text}}{{/if}}</i>{{/if}}
+                                {{#if this.name}}<span class="{{#if this.color.bg}}{{colorText this.color.bg}}{{/if}}">{{this.name}}</span>{{/if}}
                             </a>
                         </div>
                         {{/each}}
@@ -85,19 +65,15 @@ Hide files beginning by dot #3
                 </div>
             </div>
         </div>
-        {{!-- Restaurents --}}
-        <div class="col s12 m12 l6">
-            <div class="card google-my-maps z-depth-0 card-border-gray">
-                <div class="card-content center-align">
-                    <h5 class="three-dots mt-0">
-                        <b>
-                            <i class="material-icons">
-                                place
-                            </i> 
-                            Adresses utiles
-                        </b>
+        {{!-- Activité --}}
+        <div class="col s12 m6 l6">
+            <div class="card z-depth-0 card-border-gray overflow-allow" style="overflow-x: hidden;">
+                <div class="card-content height-400 xl-height-400">
+                    <h5 class="three-dots mt-0 xl-h5">
+                        <b>🎟 Activités</b>
                     </h5>
-                    <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1ucn4PyoHjE6fy2kVVC-fhOKPyPao7hdG&ehbc=2E312F" class="height-400"></iframe>
+                    <div id="sg-projects">
+                    </div>
                 </div>
             </div>
         </div>

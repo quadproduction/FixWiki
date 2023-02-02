@@ -12,7 +12,7 @@
     /* Allow overflow */
     &.overflow-allow{
         /* Overflow */
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     .card-content{
@@ -20,7 +20,7 @@
         /* Allow overflow */
         &.overflow-allow{
             /* Overflow */
-            overflow-y: scroll;
+            overflow-y: auto;
             /* Dimension */
             padding-bottom: 0px;
         }
@@ -274,4 +274,8 @@ div#email-error.error {
     top: 46;
     right: 0;
     
+}
+
+.flex-align-vertical {
+
 }

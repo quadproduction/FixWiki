@@ -1,9 +1,9 @@
 {{!-- Collection --}}
 {{#if records}}
-<ul class="collection collapsible medialist z-depth-0 mb-0" style="width: 114%;margin-left: -25px;">
+<ul class="collection collapsible expandable medialist z-depth-0 mb-0" style="width: 114%;margin-left: -25px;">
     {{#each records}}
     {{!-- Item --}}
-    <li class="collection-item poster">
+    <li class="collection-item poster active">
         {{!-- Header --}}
         <div class="collapsible-header">
             <img class="z-depth-1 md-large" src="{{this.attributes.image}}" alt="{{this.attributes.name}}">
@@ -18,11 +18,11 @@
             <div class="row">
                 <a class="waves-effect btn-flat" href="{{this.attributes.sg_fix_project_overview}}" target="_blank">
                     <i class="material-icons left">launch</i>
-                    Overview
+                    Aller sur le projet ShotGrid
                 </a>
                 <a class="waves-effect btn-flat toggle-team" data-sg-id="{{this.id}}">
                     <i class="material-icons left">groups</i>
-                    Equipe
+                    Découvrir l'équipe
                 </a>
             </div>
         </div>
