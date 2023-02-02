@@ -99,13 +99,64 @@ export default class HomeAction extends PageAction {
      */
     confettiInit = () => {
 
-        const jsConfetti = new JSConfetti();
+        // Declare value
+        let value = true;
 
-        jsConfetti.addConfetti({
-            emojis: ['🌈', '⚡️', '💥', '🦄', '🎬', '🍔'],
-            emojiSize: 40,
-            confettiNumber: 50
-        });
+        // Check localstorage in window
+        if("localStorage" in window){
+
+            // Check if localstorage exists
+            value = localStorage["fixwiki_confetti"] || true;
+
+        }
+
+        // Check value
+        if(value !== "disable"){
+
+            // New confetti
+            const jsConfetti = new JSConfetti();
+
+            // Add Confetti
+            jsConfetti.addConfetti({
+                emojis: ['🌈', '⚡️', '💥', '🦄', '🎬', '🍔'],
+                emojiSize: 40,
+                confettiNumber: 50
+            });
+
+            // Check localstorage in window
+            if("localStorage" in window){
+
+                // Set local value
+                localStorage["fixwiki_confetti"] = "disable";
+
+            }
+
+        }
+
+        // Get header
+        let headerEl = document.querySelector("h1.header")
+
+            // Check header el
+            if(headerEl !== null){
+
+                headerEl.addEventListener(
+                    "dblclick",
+                    (e) => {
+
+                        // New confetti
+                        const jsConfettiBis = new JSConfetti();
+            
+                        // Add Confetti
+                        jsConfettiBis.addConfetti({
+                            emojis: ['🌈', '⚡️', '💥', '🦄', '🎬', '🍔'],
+                            emojiSize: 40,
+                            confettiNumber: 50
+                        });
+
+                    }
+                )
+
+            }
 
     }
     
