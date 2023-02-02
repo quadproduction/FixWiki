@@ -3,4 +3,19 @@
     .height-#{calc($i*100)} {
         height: calc(100px*$i);
     }
+    @media screen and (min-height: 1080px) and (min-width: 1920px) {
+        .xl-height-#{calc($i*100)} {
+            height: calc(100px*$i*1.5);
+        }
+    }
+}
+
+/* Font Size */
+@media screen and (min-height: 1081px) and (min-width: 1921px) {
+    .xl-flow-text {
+        font-size: 2rem;
+    }
+    .xl-h5 {
+        font-size: 2.2rem;
+    }
 }

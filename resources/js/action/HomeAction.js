@@ -15,6 +15,8 @@
 import PageAction from "../src/base/PageAction";
 import Popup from "./../src/module/Popup";
 import Action from "../src/module/Action";
+import { annotate } from "rough-notation";
+import JSConfetti from "js-confetti";
 import Swal from 'sweetalert2';
 import tippy from 'tippy.js';
 
@@ -62,6 +64,12 @@ export default class HomeAction extends PageAction {
         // Init main content
         this.mainInit();
 
+        // Confeti ini
+        this.confettiInit();
+
+        // Annotate Init
+        this.annotateInit();
+
     }
 
     /** MainInit 
@@ -81,6 +89,23 @@ export default class HomeAction extends PageAction {
 
         // Init SG
         this.sgProjectsInit()
+
+    }
+
+    /**
+     * confetti Init
+     * 
+     * @return void
+     */
+    confettiInit = () => {
+
+        const jsConfetti = new JSConfetti();
+
+        jsConfetti.addConfetti({
+            emojis: ['🌈', '⚡️', '💥', '🦄', '🎬', '🍔'],
+            emojiSize: 40,
+            confettiNumber: 50
+        });
 
     }
     
@@ -163,7 +188,7 @@ export default class HomeAction extends PageAction {
 
                         // Init collapsible
                         M.Collapsible.init(collapsibleEl, {
-
+                            accordion: false
                         });
 
                     // Get toggle team
@@ -283,6 +308,58 @@ export default class HomeAction extends PageAction {
                             });
                 } 
             });
+
+    }
+
+    /**
+     * Init anotate
+     */
+    annotateInit = () => {
+
+        // Types
+        let types = {
+            underline : "#f44336",
+            box : "#2196f3",
+            circle : "green",
+            highlight : "yellow",
+            bracket : "grey"
+        };
+        
+        let options;
+
+        // Iteration type
+        for(let type in types){
+
+            // Get marker el
+            let elsCircle = document.querySelectorAll(`.marker-${type}`)
+
+                // Check el
+                if(elsCircle.length)
+
+                    // Iteration el
+                    for(let el of elsCircle){
+
+                        // Prepare options
+                        options = {
+                            type: type,
+                            color: types[type]
+                        };
+
+                        // Check if bracket
+                        if(type == "bracket")
+
+                            // Set brackets
+                            options.brackets = ["left", "right"];
+
+                        // New annotate
+                        let annotation = annotate(el, options);
+
+                        // Shpw
+                        annotation.show();
+
+                    }
+
+        }
 
     }
 

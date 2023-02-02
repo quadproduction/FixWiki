@@ -5,10 +5,12 @@
         "handlebars": "^4.7.7",
         "highlight.js": "^11.7.0",
         "jquery-validation": "^1.19.5",
+        "js-confetti": "^0.11.0",
         "js-yaml": "^4.1.0",
         "Kmaterialize": "npm:kmaterialize@^3.0.0",
         "plyr": "^3.6.12",
         "quill": "^1.3.7",
+        "rough-notation": "^0.5.1",
         "showdown": "^2.1.0",
         "sweetalert2": "^11.3.6",
         "tippy.js": "^6.3.7"

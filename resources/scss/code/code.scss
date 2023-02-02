@@ -374,3 +374,22 @@
     bottom: 0;
 
 }
+
+.lettrine {
+    font-size: 75px;
+    float: left;
+    height: 60px;
+    margin-top: -15;
+    display: block;
+}
+@media screen and (min-height: 1081px) and (min-width: 1921px) {
+    .lettrine {
+        height: 70px;
+        font-size: 95px;
+        margin-top: -22px;
+    }
+}
+
+.font-cursive {
+    font-family: 'Caveat', cursive!important;
+}
