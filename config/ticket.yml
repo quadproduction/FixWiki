@@ -28,6 +28,10 @@ ticket:
         - name: PK20
           value: ticket+quad-rolex-issue-triage-91-issue-@fixstudio.com
           img: /media/ressources/shotgun_local/
+      FixStudio:
+        - name: FixPlay
+          value: ticket+quad-fix-fix-play-54-issue-@fixstudio.com
+          img: /media/logo/logo_f_small_white/
       Quad:
         - name: Matos Manager
           value: ticket+quad-quadprod-matosmanager-77-issue-@fixstudio.com
