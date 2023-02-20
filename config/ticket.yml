@@ -69,6 +69,9 @@ ticket:
         - name: PS
           value: Soft::Photoshop
           img: /media/icon/photoshop
+        - name: TVPaint
+          value: Soft::TvPaint
+          img: /media/icon/tvpaint
       Editing:
         - name: Hiero
           value: Soft::Hiero
