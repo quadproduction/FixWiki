@@ -66,6 +66,10 @@ export default class Header{
             query: ".launch-gitlab",
             el: null,
         },
+        launchGithub : {
+            query: ".launch-github",
+            el: null,
+        },
         launchFixplay : {
             query: ".launch-fixplay",
             el:null,
@@ -469,6 +473,23 @@ export default class Header{
      * @param {*} dom 
      */
     launchGitlabInit = dom => {
+
+        // Tippy
+        tippy(
+            dom.el,
+            {
+                offset: [0, 20],
+                allowHTML: true,
+            }
+        );
+
+    }
+
+    /** Launch Git Hub
+     * 
+     * @param {*} dom 
+     */
+    launchGithubInit = dom => {
 
         // Tippy
         tippy(
