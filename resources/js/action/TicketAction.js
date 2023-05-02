@@ -16,6 +16,7 @@ import PageAction from "../src/base/PageAction";
 import "highlight.js/styles/github-dark.css";
 import Swal from 'sweetalert2';
 import showdown from "showdown"
+import tippy from "tippy.js";
 import Quill from "quill";
 
 /** Home action
@@ -67,6 +68,9 @@ export default class TicketAction extends PageAction {
 
         // Type Init
         this.typeInit();
+
+        // Overlay Init
+        this.overlayInit();
 
     }
 
@@ -217,7 +221,7 @@ export default class TicketAction extends PageAction {
             padding: 0,
             border: '1px solid rgba(255,255,255,0)',
             width: 0
-        }); 	
+        });
         
         /* Set Default */
         $.validator.setDefaults({
@@ -501,6 +505,86 @@ export default class TicketAction extends PageAction {
 
             }
         );
+
+    }
+
+    /**
+     * Overlay init
+     * 
+     * Exemple display github warning whenopenpype is selected
+     */
+    overlayInit = () => {
+
+        // Get form
+        let elForm = document.getElementById("ticket-form");
+
+        // Test
+        elForm.addEventListener('change', e => {
+
+            // Check if select
+            if(
+                "target" in e &&
+                "nodeName" in e.target &&
+                e.target.nodeName === "SELECT"
+            ){
+
+                // Get selected options
+                let selectedOptions = e.target.selectedOptions;
+
+                // Check selectedOptions
+                if(selectedOptions.length)
+
+                    // Iteration selectedOptions
+                    for(let selectedOption of selectedOptions){
+
+                        // Check redirect
+                        if(
+                            "dataset" in selectedOption &&
+                            "redirection" in selectedOption.dataset && 
+                            !(
+                                ["false", "disabled"].includes(selectedOption.dataset.redirection)
+                            )
+                        ){
+
+                            // Alert
+                            Swal.fire({
+                                title: 'Warning',
+                                icon: 'warning',
+                                html:
+                                    selectedOption.dataset.redirectionDescription +
+                                    '<div class="mt-4 mb-6"> ' +
+                                        `<a id="ticket-alert-message" class="btn-floating btn-large waves-effect waves-light pulse" style="background:${selectedOption.dataset.redirectionIconColor};" href="${selectedOption.dataset.redirectionUrl}" data-tippy-content="Click here to open the external url.">` +
+                                            `<i class="${selectedOption.dataset.redirectionIconClass}">` +
+                                                selectedOption.dataset.redirectionIconText +
+                                            '</i>' +
+                                        '</a>' +
+                                    '</div>',
+                                showCloseButton: true,
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                didRender: e => {
+                                    
+                                    // Get element
+                                    let alertEl = e.querySelector("#ticket-alert-message");
+
+                                    // Check alert el
+                                    if(alertEl !== null)
+
+                                        // Tippy warning
+                                        tippy(alertEl, {
+                                            placement: "bottom"
+                                        });
+
+                                }
+                            });
+
+                        }
+
+                    }
+
+            }
+
+        });
 
     }
 

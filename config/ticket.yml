@@ -21,6 +21,12 @@ ticket:
           value: ticket+quad-openpype-openpype-9-issue-@fixstudio.com
           img: /media/ressources/openpype_splash/
           software: true
+          redirection: &github
+            url: https://github.com/quadproduction/OpenPype/issues/new/choose
+            description: If you have any request on OpenPype,<br>please use the link below.
+            icon-text: ""
+            icon-class: fa-brands fa-github
+            icon-color: "#161b22"
         - name: Shotgun
           value: ticket+quad-fix-pipeline-studio-15-issue-@fixstudio.com
           img: /media/ressources/shotgun_wizz/
@@ -88,6 +94,7 @@ ticket:
         - name: OpenPYPE
           value: Soft::OpenPYPE
           img: /media/ressources/openpype_splash/
+          redirection: *github
       Prod:
         - name: ShotGrid
           value: Soft::Shotgun
