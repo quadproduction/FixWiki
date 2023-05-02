@@ -47,7 +47,20 @@
                     {{#each _config.ticket.form.plateform}}
                         <optgroup label="{{@key}}">
                             {{#each this}}
-                            <option value="{{this.value}}"{{#if this.img}} data-icon="{{this.img}}"{{/if}}>{{this.name}}</option>
+                            <option 
+                                value="{{this.value}}"
+                                {{#if this.img}} data-icon="{{this.img}}"{{/if}}
+                                {{#if this.redirection}}
+                                    data-redirection
+                                    {{#each this.redirection}}
+                                        {{#if @key}}
+                                            data-redirection-{{@key}}="{{this}}"
+                                        {{/if}}
+                                    {{/each}}
+                                {{/if}}
+                            >
+                                {{this.name}}
+                            </option>
                             {{/each}}
                         </optgroup>
                     {{/each}}
@@ -61,7 +74,20 @@
                     {{#each _config.ticket.form.software}}
                         <optgroup label="{{@key}}">
                             {{#each this}}
-                            <option value="{{this.value}}"{{#if this.img}} data-icon="{{this.img}}"{{/if}}>{{this.name}}</option>
+                            <option
+                                value="{{this.value}}"
+                                {{#if this.img}}data-icon="{{this.img}}"{{/if}}
+                                {{#if this.redirection}}
+                                    data-redirection
+                                    {{#each this.redirection}}
+                                        {{#if @key}}
+                                            data-redirection-{{@key}}="{{this}}"
+                                        {{/if}}
+                                    {{/each}}
+                                {{/if}}
+                            >
+                                {{this.name}}
+                            </option>
                             {{/each}}
                         </optgroup>
                     {{/each}}
