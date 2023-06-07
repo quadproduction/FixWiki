@@ -29,6 +29,7 @@ use Google\Service\Drive;
 use LuckyPHP\File\Json;
 use App\Markdown;
 use App\Google;
+use Error;
 
 /** Class for manage Google Drive
  * 
@@ -148,6 +149,21 @@ class GoogleDrive{
 
         # Get app config
         $this->config = Config::read('app');
+
+        # Open 
+        $googleDriveId = "./../resources/json/shared_drive.json";
+
+        # Check shotgrid config exits
+        if(!file_exists($googleDriveId))
+
+            # Error
+            throw new Error("Drive ID (shared_drive) json file doesn't exists");
+
+        # Drive ID
+        $driveId = json_decode(file_get_contents($googleDriveId), true);
+
+        # Set drive id
+        $this->config['app']['google']['drive'] = $driveId;
 
     }
 

@@ -17,9 +17,11 @@ namespace App;
 /** Dependances
  * 
  */
+
 use GuzzleHttp\Exception\BadResponseException;
 use LuckyPHP\Server\Config;
 use GuzzleHttp\Client;
+use Error;
 
 /** Class for manage Shotgrid
  * 
@@ -295,14 +297,23 @@ class Shotgrid{
      */
     private function configRead(){
 
-        # Get config
-        $config = Config::read('app');
+        # Check file exists
+        $shotGridConfigPath = "./../resources/json/shotgrid.json";
+
+        # Check shotgrid config exits
+        if(!file_exists($shotGridConfigPath))
+
+            # Error
+            throw new Error("ShotGrid json file doesn't exists");
+
+        # Shotgrid config
+        $shotGridConfig = json_decode(file_get_contents($shotGridConfigPath), true);
 
         # Check shotgrid is in config app
-        if(isset($config['app']['shotgrid']) && !empty($config['app']['shotgrid']))
+        if(!empty($shotGridConfig))
 
             # Iteration of config
-            foreach($config['app']['shotgrid'] as $sg_instance)
+            foreach($shotGridConfig as $sg_instance)
 
                 # Push data in instances
                 $this->instances[] = $sg_instance;
