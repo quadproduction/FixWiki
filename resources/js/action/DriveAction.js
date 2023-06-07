@@ -312,7 +312,7 @@ export default class DriveAction extends PageAction {
 
             /* Tippy on titles */
             tippy(el, {
-                content: "Intégrer l'article dans un tuto",
+                content: "Intégrer ou imprimer le lien",
                 placement: 'top',
             });
 
@@ -343,8 +343,22 @@ export default class DriveAction extends PageAction {
                     // Ger url
                     let url = new URL(href);
 
+                    // Check password
+                    const searchParams = new URLSearchParams(url.search);
+
+                    // Declare password
+                    let password = "";
+
+                    // Check password
+                    if(searchParams.has("password")){
+
+                        // Set password
+                        password = `&password=${searchParams.get('password')}`
+
+                    }
+
                     // Update result
-                    result = url.host + url.pathname + "?extract=" + fragment.replace("#", "") + "&clean";
+                    result = url.host + url.pathname + "?extract=" + fragment.replace("#", "") + "&clean" + password;
 
                     // Return result
                     return result;
