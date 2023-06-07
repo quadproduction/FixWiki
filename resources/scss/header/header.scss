@@ -2,6 +2,20 @@ html{
     scroll-padding-top: 70px;
 }
 
+/* Github laucnher */
+a.launch-github {
+    i {
+        color: black!important;
+    }
+}
+html.dark-theme {
+    a.launch-github {
+        i {
+            color: white!important;
+        }
+    }
+}
+
 #header {
     
     &.page-topbar{

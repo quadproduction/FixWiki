@@ -28,6 +28,7 @@ use ATDev\RocketChat\Chat as Chat;
 use ATDev\RocketChat\Users\User;
 use LuckyPHP\Server\Config;
 use LuckyPHP\File\Json;
+use Error;
 
 /** Class for manage the workflow of the app
  *
@@ -67,10 +68,20 @@ class RocketchatAction extends ControllerBase implements ControllerInterface{
         # Set config
         $config = Config::read('app');
 
-        # Connection
-        Chat::setUrl($config['app']['rocketchat']['url']);
-        Chat::login($config['app']['rocketchat']['login'], $config['app']['rocketchat']['password']);
+        # Set rocket chat config file
+        $rocketChatConfigPath = "./../resources/json/rocketchat.json";
 
+        # Check rocket chat exits
+        if(!file_exists($rocketChatConfigPath))
+
+            # Error
+            throw new Error("Rocketchat json file doesn't exists");
+
+        $rocketChatConfig = json_decode(file_get_contents($rocketChatConfigPath), true);
+
+        # Connection
+        Chat::setUrl($rocketChatConfig['url']);
+        Chat::login($rocketChatConfig['login'], $rocketChatConfig['password']);
 
         # Iteration des get
         foreach($_GET as $user => $empty){
