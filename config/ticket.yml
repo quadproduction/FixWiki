@@ -113,8 +113,8 @@ ticket:
         name: null # If null generate the name from the mail
     to: {}
     cc: 
-      - mail: kevin.zarshenas@fixstudio.com
-        name: Kevin Zarshenas
+      - mail: louise.paris@fixstudio.com
+        name: Louise Paris
     bcc: {}
     subject: "Bug :: Describe your bug"
     isHtml: true
