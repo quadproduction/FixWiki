@@ -121,7 +121,7 @@ ticket:
     Body: 
       issue: >
         <blockquote>From...</blockquote>
-        <h2>Problem</h2>
+        <h2>Problem E</h2>
         <p>Describe error...</p>
         <h2>How get error</h2>
         <p>- Open Maya</p>
