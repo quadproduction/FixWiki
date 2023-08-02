@@ -37,11 +37,8 @@ app:
         extension: hbs
     auth:
         type: Kauth
-    google:
-        drive:
-            driveId: 0AKnhm_EZNuVfUk9PVA
     adobe:
-        pdf: 5e88a369cf3e447ea27869b6621595d3
+        pdf: 0f361e250c4d4582b09f36f0dbc5d7d3
     shotgrid:
         - 
             name: wizz

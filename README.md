@@ -13,4 +13,8 @@ PHP 8.1, COMPOSER 2, GIT 2 and DOCKER (optional)
 4. Please check `/resources/json/`, `/cache/`, `/cache/drive/` & `/cache/router/` is not Read Only permission !!!
 5. First time you connect to the app, connect to Google with a Fix Studio Google account.
 
+## Docker
+
+Execute the command `docker-compose up -d` to start FIX_WIKI in local (port 80)
+
 Voilà :)
