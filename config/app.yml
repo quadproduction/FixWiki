@@ -38,4 +38,16 @@ app:
     auth:
         type: Kauth
     adobe:
-        pdf: 5e88a369cf3e447ea27869b6621595d3
+        pdf: 0f361e250c4d4582b09f36f0dbc5d7d3
+    shotgrid:
+        - 
+            name: wizz
+            host: https://wizz.shotgunstudio.com
+            auth:
+                client_id: fix_doc
+                client_secret: pqfFtwmoyimwm(3bgpnldyaoq
+                grant_type: client_credentials
+    rocketchat:
+        url: https://chat.fixstudio.com
+        login: kzarshenas
+        password: Fixstudio33
